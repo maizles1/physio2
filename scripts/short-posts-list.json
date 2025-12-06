@@ -1,0 +1,415 @@
+[
+  {
+    "id": "77",
+    "slug": "joint-replacement-recovery-guide",
+    "title": "החלפת מפרק ירך או ברך? המדריך לשיקום מוצלח וחזרה לעצמאות",
+    "currentWords": 478,
+    "neededWords": 522
+  },
+  {
+    "id": "76",
+    "slug": "ergonomics-work-computer-sitting-guide",
+    "title": "יושבים מול המחשב כל היום? המדריך המלא לארגונומיה נכונה (ואיך לסיים את יום העבודה ללא כאב)",
+    "currentWords": 656,
+    "neededWords": 344
+  },
+  {
+    "id": "73",
+    "slug": "running-injuries-complete-guide",
+    "title": "רצים בטיילת באשדוד? המדריך המקיף לפציעות ריצה, מניעה וטיפול",
+    "currentWords": 653,
+    "neededWords": 347
+  },
+  {
+    "id": "1",
+    "slug": "physiotherapy-for-shoulder-pain",
+    "title": "פיזיותרפיה לכתף - טיפול מקצועי בכאבי כתף",
+    "currentWords": 128,
+    "neededWords": 872
+  },
+  {
+    "id": "2",
+    "slug": "shoulder-exercises",
+    "title": "תרגילי פיזיותרפיה לכתף - מדריך מקיף",
+    "currentWords": 121,
+    "neededWords": 879
+  },
+  {
+    "id": "3",
+    "slug": "knee-physiotherapy",
+    "title": "פיזיותרפיה לברך - שיקום מקיף לבעיות ברך",
+    "currentWords": 94,
+    "neededWords": 906
+  },
+  {
+    "id": "4",
+    "slug": "knee-exercises",
+    "title": "תרגילי פיזיותרפיה לברך - חיזוק ושיקום",
+    "currentWords": 117,
+    "neededWords": 883
+  },
+  {
+    "id": "5",
+    "slug": "back-exercises",
+    "title": "תרגילי פיזיותרפיה לגב - הקלה בכאבי גב",
+    "currentWords": 71,
+    "neededWords": 929
+  },
+  {
+    "id": "6",
+    "slug": "ankle-fracture-rehabilitation",
+    "title": "תרגילי פיזיותרפיה אחרי שבר בקרסול",
+    "currentWords": 140,
+    "neededWords": 860
+  },
+  {
+    "id": "7",
+    "slug": "vestibular-physiotherapy",
+    "title": "פיזיותרפיה וסטיבולרית - טיפול בסחרחורות",
+    "currentWords": 130,
+    "neededWords": 870
+  },
+  {
+    "id": "8",
+    "slug": "vertigo-treatment",
+    "title": "טיפול בורטיגו - הפסקת הסחרחורות",
+    "currentWords": 137,
+    "neededWords": 863
+  },
+  {
+    "id": "10",
+    "slug": "tmj-prevention",
+    "title": "דרכי מניעה לכאבי לסת",
+    "currentWords": 368,
+    "neededWords": 632
+  },
+  {
+    "id": "11",
+    "slug": "tmj-stress-connection",
+    "title": "הקשר בין מתח לכאבי לסת",
+    "currentWords": 400,
+    "neededWords": 600
+  },
+  {
+    "id": "13",
+    "slug": "balance-exercises-home",
+    "title": "תרגילי שיווי משקל לבית",
+    "currentWords": 511,
+    "neededWords": 489
+  },
+  {
+    "id": "14",
+    "slug": "when-vestibular-therapy",
+    "title": "מתי לפנות לפיזיותרפיה וסטיבולרית?",
+    "currentWords": 507,
+    "neededWords": 493
+  },
+  {
+    "id": "16",
+    "slug": "rotator-cuff-surgery-rehab",
+    "title": "שיקום לאחר ניתוח מסובב הכתף",
+    "currentWords": 230,
+    "neededWords": 770
+  },
+  {
+    "id": "17",
+    "slug": "pre-surgery-preparation",
+    "title": "מה לקחת בחשבון לפני ניתוח אורטופדי",
+    "currentWords": 163,
+    "neededWords": 837
+  },
+  {
+    "id": "19",
+    "slug": "proper-posture-at-work",
+    "title": "כיצד לשמור על יציבה נכונה בעבודה",
+    "currentWords": 95,
+    "neededWords": 905
+  },
+  {
+    "id": "20",
+    "slug": "rest-vs-movement-pain",
+    "title": "מתי לנוח ומתי לזוז בכאב?",
+    "currentWords": 106,
+    "neededWords": 894
+  },
+  {
+    "id": "21",
+    "slug": "physio-vs-other-therapists",
+    "title": "ההבדל בין פיזיותרפיה למטפלים אחרים",
+    "currentWords": 92,
+    "neededWords": 908
+  },
+  {
+    "id": "22",
+    "slug": "questions-first-visit",
+    "title": "מה לשאול בפיזיותרפיסט בפגישה הראשונה",
+    "currentWords": 75,
+    "neededWords": 925
+  },
+  {
+    "id": "23",
+    "slug": "neck-pain-comprehensive-guide",
+    "title": "טיפול בכאבי צוואר - מדריך מקיף",
+    "currentWords": 122,
+    "neededWords": 878
+  },
+  {
+    "id": "25",
+    "slug": "when-to-see-physiotherapist-shoulder-pain",
+    "title": "מתי לפנות לפיזיותרפיסט פרטי באשדוד לכאבי כתף?",
+    "currentWords": 216,
+    "neededWords": 784
+  },
+  {
+    "id": "26",
+    "slug": "how-to-treat-shoulder-pain-physiotherapy",
+    "title": "איך מטפלים בכאבי כתף בפיזיותרפיה? - מכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 220,
+    "neededWords": 780
+  },
+  {
+    "id": "27",
+    "slug": "tendinitis-shoulder-treatment",
+    "title": "דלקות גידים בכתף - טיפול מקצועי במכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 277,
+    "neededWords": 723
+  },
+  {
+    "id": "28",
+    "slug": "rotator-cuff-injury-rehabilitation",
+    "title": "פציעות מסובב הכתף - שיקום מקצועי במכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 310,
+    "neededWords": 690
+  },
+  {
+    "id": "29",
+    "slug": "preventing-shoulder-pain-tips",
+    "title": "מניעת כאבי כתף - טיפים מפיזיותרפיסט מומלץ באשדוד",
+    "currentWords": 297,
+    "neededWords": 703
+  },
+  {
+    "id": "31",
+    "slug": "when-to-see-physiotherapist-back-pain",
+    "title": "מתי לפנות למכון פיזיותרפיה פרטי באשדוד לכאבי גב?",
+    "currentWords": 263,
+    "neededWords": 737
+  },
+  {
+    "id": "32",
+    "slug": "how-to-treat-back-pain-physiotherapy",
+    "title": "איך מטפלים בכאבי גב בפיזיותרפיה? - מכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 262,
+    "neededWords": 738
+  },
+  {
+    "id": "33",
+    "slug": "disc-problems-back-pain-treatment",
+    "title": "בעיות דיסק - טיפול מקצועי במכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 304,
+    "neededWords": 696
+  },
+  {
+    "id": "34",
+    "slug": "upper-back-pain-rehabilitation",
+    "title": "כאבי גב עליון - שיקום מקצועי במכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 332,
+    "neededWords": 668
+  },
+  {
+    "id": "35",
+    "slug": "preventing-back-pain-tips",
+    "title": "מניעת כאבי גב - טיפים מפיזיותרפיסט מומלץ באשדוד",
+    "currentWords": 298,
+    "neededWords": 702
+  },
+  {
+    "id": "37",
+    "slug": "when-to-see-physiotherapist-knee-pain",
+    "title": "מתי לפנות לפיזיותרפיסט פרטי באשדוד לכאבי ברך?",
+    "currentWords": 222,
+    "neededWords": 778
+  },
+  {
+    "id": "38",
+    "slug": "how-to-treat-knee-pain-physiotherapy",
+    "title": "איך מטפלים בכאבי ברך בפיזיותרפיה? - מכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 221,
+    "neededWords": 779
+  },
+  {
+    "id": "39",
+    "slug": "meniscus-problems-knee-treatment",
+    "title": "בעיות מניסקוס - טיפול מקצועי במכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 250,
+    "neededWords": 750
+  },
+  {
+    "id": "40",
+    "slug": "tendinitis-knee-treatment",
+    "title": "דלקות בגידים בברך - שיקום מקצועי במכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 266,
+    "neededWords": 734
+  },
+  {
+    "id": "41",
+    "slug": "preventing-knee-injuries-tips",
+    "title": "מניעת פציעות ברך - טיפים מפיזיותרפיסט מומלץ באשדוד",
+    "currentWords": 241,
+    "neededWords": 759
+  },
+  {
+    "id": "43",
+    "slug": "when-to-see-physiotherapist-neck-pain",
+    "title": "מתי לפנות למכון פיזיותרפיה פרטי באשדוד לכאבי צוואר?",
+    "currentWords": 191,
+    "neededWords": 809
+  },
+  {
+    "id": "44",
+    "slug": "how-to-treat-neck-pain-physiotherapy",
+    "title": "איך מטפלים בכאבי צוואר בפיזיותרפיה? - מכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 193,
+    "neededWords": 807
+  },
+  {
+    "id": "45",
+    "slug": "posture-neck-pain-treatment",
+    "title": "בעיות יציבה וצוואר - טיפול מקצועי במכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 213,
+    "neededWords": 787
+  },
+  {
+    "id": "46",
+    "slug": "chronic-neck-pain-rehabilitation",
+    "title": "כאבי צוואר כרוניים - שיקום מקצועי במכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 169,
+    "neededWords": 831
+  },
+  {
+    "id": "47",
+    "slug": "preventing-neck-pain-tips",
+    "title": "מניעת כאבי צוואר - טיפים מפיזיותרפיסט מומלץ באשדוד",
+    "currentWords": 151,
+    "neededWords": 849
+  },
+  {
+    "id": "49",
+    "slug": "knee-surgery-rehabilitation-ashdod",
+    "title": "שיקום לאחר ניתוח ברך - טיפול מקצועי במכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 90,
+    "neededWords": 910
+  },
+  {
+    "id": "50",
+    "slug": "shoulder-surgery-rehabilitation-ashdod",
+    "title": "שיקום לאחר ניתוח כתף - מכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 77,
+    "neededWords": 923
+  },
+  {
+    "id": "51",
+    "slug": "spine-surgery-rehabilitation-ashdod",
+    "title": "שיקום לאחר ניתוח עמוד שדרה - פיזיותרפיסט מומלץ באשדוד",
+    "currentWords": 79,
+    "neededWords": 921
+  },
+  {
+    "id": "52",
+    "slug": "importance-professional-rehabilitation-surgery",
+    "title": "חשיבות השיקום המקצועי לאחר ניתוחים - מכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 91,
+    "neededWords": 909
+  },
+  {
+    "id": "54",
+    "slug": "professional-vestibular-rehabilitation-ashdod",
+    "title": "שיקום וסטיבולרי מקצועי - מכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 89,
+    "neededWords": 911
+  },
+  {
+    "id": "55",
+    "slug": "vertigo-treatment-ashdod",
+    "title": "טיפול בורטיגו - פיזיותרפיסט מומלץ באשדוד",
+    "currentWords": 82,
+    "neededWords": 918
+  },
+  {
+    "id": "57",
+    "slug": "tmj-jaw-treatment-ashdod",
+    "title": "טיפול במפרק הלסת - פיזיותרפיסט פרטי באשדוד",
+    "currentWords": 56,
+    "neededWords": 944
+  },
+  {
+    "id": "58",
+    "slug": "jaw-lock-chewing-difficulties",
+    "title": "כאבי לסת ונעילת לסת - טיפול מקצועי במכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 56,
+    "neededWords": 944
+  },
+  {
+    "id": "59",
+    "slug": "chewing-difficulties-rehabilitation",
+    "title": "קשיי לעיסה - שיקום באשדוד",
+    "currentWords": 51,
+    "neededWords": 949
+  },
+  {
+    "id": "60",
+    "slug": "preventing-tmj-problems-tips",
+    "title": "מניעת בעיות מפרק הלסת - טיפים מפיזיותרפיסט מומלץ באשדוד",
+    "currentWords": 63,
+    "neededWords": 937
+  },
+  {
+    "id": "62",
+    "slug": "core-strengthening-exercises-ashdod",
+    "title": "תרגילי חיזוק ליבה - מכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 64,
+    "neededWords": 936
+  },
+  {
+    "id": "63",
+    "slug": "stretching-exercises-flexibility",
+    "title": "תרגילי מתיחה לשיפור גמישות - פיזיותרפיסט פרטי באשדוד",
+    "currentWords": 58,
+    "neededWords": 942
+  },
+  {
+    "id": "64",
+    "slug": "balance-exercises-ashdod",
+    "title": "תרגילי שיווי משקל - פיזיותרפיסט פרטי באשדוד",
+    "currentWords": 66,
+    "neededWords": 934
+  },
+  {
+    "id": "65",
+    "slug": "how-to-perform-physiotherapy-exercises-correctly",
+    "title": "איך לבצע תרגילי פיזיותרפיה נכון? - מכון פיזיותרפיה פרטי באשדוד",
+    "currentWords": 70,
+    "neededWords": 930
+  },
+  {
+    "id": "68",
+    "slug": "physiotherapy-consultation-before-surgery",
+    "title": "ייעוץ עם פיזיותרפיסט לפני ניתוח - למה זה חשוב?",
+    "currentWords": 192,
+    "neededWords": 808
+  },
+  {
+    "id": "69",
+    "slug": "left-shoulder-pain-treatment",
+    "title": "כאבים בכתף שמאל - אבחון וטיפול מקצועי",
+    "currentWords": 189,
+    "neededWords": 811
+  },
+  {
+    "id": "70",
+    "slug": "ankle-fracture-physiotherapy-exercises",
+    "title": "תרגילי פיזיותרפיה אחרי שבר בקרסול - מדריך שיקום",
+    "currentWords": 217,
+    "neededWords": 783
+  }
+]

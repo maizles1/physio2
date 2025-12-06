@@ -1,0 +1,57 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="vestibularGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2080C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#40C0F0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#vestibularGradient)"/>
+  
+  <!-- Balance platform/exercise area -->
+  <ellipse cx="400" cy="350" rx="120" ry="80" fill="#ffffff" opacity="0.2"/>
+  
+  <!-- Person standing (balance exercise) -->
+  <!-- Head -->
+  <ellipse cx="400" cy="250" rx="30" ry="25" fill="#f4d1ae"/>
+  
+  <!-- Body -->
+  <rect x="385" y="275" width="30" height="100" rx="5" fill="#e2e8f0"/>
+  
+  <!-- Arms extended for balance -->
+  <line x1="360" y1="300" x2="330" y2="280" stroke="#f4d1ae" stroke-width="8" stroke-linecap="round"/>
+  <line x1="440" y1="300" x2="470" y2="280" stroke="#f4d1ae" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="330" cy="280" r="12" fill="#f4d1ae"/>
+  <circle cx="470" cy="280" r="12" fill="#f4d1ae"/>
+  
+  <!-- Legs -->
+  <line x1="390" y1="375" x2="380" y2="420" stroke="#4a5568" stroke-width="10" stroke-linecap="round"/>
+  <line x1="410" y1="375" x2="420" y2="420" stroke="#4a5568" stroke-width="10" stroke-linecap="round"/>
+  
+  <!-- Balance indicator (showing slight movement) -->
+  <path d="M 380 420 Q 400 425 420 420" stroke="#40C0F0" stroke-width="4" fill="none" opacity="0.6">
+    <animate attributeName="d" values="M 380 420 Q 400 425 420 420;M 385 418 Q 400 428 415 418;M 380 420 Q 400 425 420 420" dur="2s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Vestibular system visualization (inner ear) -->
+  <g transform="translate(550, 200)">
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
+    <path d="M -30 -10 Q -20 0 -30 10 Q -20 20 0 20 Q 20 20 30 10 Q 20 0 30 -10 Q 20 -20 0 -20 Q -20 -20 -30 -10" 
+          fill="none" stroke="#40C0F0" stroke-width="2" opacity="0.8"/>
+    <circle cx="0" cy="0" r="8" fill="#40C0F0" opacity="0.7">
+      <animate attributeName="cx" values="0;-5;5;0" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="0;5;-5;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Balance waves/energy -->
+  <circle cx="400" cy="350" r="100" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.3">
+    <animate attributeName="r" values="80;120;80" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Text overlay -->
+  <text x="400" y="520" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle" opacity="0.9">שיקום וסטיבולרי</text>
+  <text x="400" y="560" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle" opacity="0.8">טיפול בסחרחורות וורטיגו</text>
+</svg>

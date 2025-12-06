@@ -1,0 +1,41 @@
+# https://www.robotstxt.org/robotstxt.html
+# Robots.txt for פיזיותרפיה.פלוס
+
+# Allow all search engines
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow important pages
+Allow: /
+Allow: /about
+Allow: /services
+Allow: /blog
+Allow: /contact
+Allow: /faq
+Allow: /testimonials
+
+# Allow blog posts
+Allow: /blog/*
+
+# Crawl delay (optional - helps prevent server overload)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://physiotherapy.plus/sitemap.xml
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+

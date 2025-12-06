@@ -1,0 +1,52 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="surgeryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2A3080;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#004080;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#surgeryGradient)"/>
+  
+  <!-- Rehabilitation equipment/exercise area -->
+  <rect x="200" y="150" width="400" height="300" rx="15" fill="#ffffff" opacity="0.15"/>
+  
+  <!-- Person standing (rehabilitation) -->
+  <!-- Head -->
+  <ellipse cx="400" cy="200" rx="30" ry="25" fill="#f4d1ae"/>
+  
+  <!-- Body -->
+  <rect x="375" y="225" width="50" height="120" rx="5" fill="#e2e8f0"/>
+  
+  <!-- Legs (one with support/brace) -->
+  <rect x="380" y="345" width="15" height="80" rx="3" fill="#4a5568"/>
+  <rect x="405" y="345" width="15" height="80" rx="3" fill="#4a5568"/>
+  
+  <!-- Knee brace on left leg -->
+  <rect x="378" y="370" width="19" height="30" rx="2" fill="#2A3080" opacity="0.7"/>
+  <circle cx="387.5" cy="385" r="3" fill="#40C0F0"/>
+  
+  <!-- Support bars (parallel bars for rehabilitation) -->
+  <line x1="300" y1="250" x2="300" y2="400" stroke="#ffffff" stroke-width="8" opacity="0.6"/>
+  <line x1="500" y1="250" x2="500" y2="400" stroke="#ffffff" stroke-width="8" opacity="0.6"/>
+  
+  <!-- Hands on support bars -->
+  <circle cx="300" cy="280" r="15" fill="#f4d1ae"/>
+  <circle cx="500" cy="280" r="15" fill="#f4d1ae"/>
+  
+  <!-- Progress/recovery indicator -->
+  <path d="M 350 450 Q 400 420 450 450" stroke="#40C0F0" stroke-width="4" fill="none" opacity="0.7" stroke-dasharray="10,5">
+    <animate attributeName="stroke-dashoffset" values="0;-30" dur="2s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Recovery/healing effect -->
+  <circle cx="400" cy="300" r="120" fill="none" stroke="#40C0F0" stroke-width="2" opacity="0.3">
+    <animate attributeName="r" values="100;140;100" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;0.1;0.3" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Text overlay -->
+  <text x="400" y="500" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle" opacity="0.9">שיקום לאחר ניתוחים</text>
+  <text x="400" y="540" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle" opacity="0.8">תוכניות שיקום מותאמות אישית</text>
+</svg>
