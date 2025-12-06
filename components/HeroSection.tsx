@@ -40,7 +40,7 @@ export default function HeroSection() {
         </div>
         <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg">
           <Image
-            src="/images/insurance/ministry-of-defense-logo.svg"
+            src="/images/insurance/Ministry-of-defense-logo.svg.png"
             alt="משרד הביטחון"
             width={40}
             height={20}
