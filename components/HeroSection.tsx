@@ -20,7 +20,7 @@ export default function HeroSection() {
       <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 flex flex-col gap-2 sm:gap-3">
         <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg">
           <Image
-            src="/images/insurance/Clalit-Logo.svg.png"
+            src="/images/insurance/Clalit-Logo.png"
             alt="כללית"
             width={40}
             height={20}
