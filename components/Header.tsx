@@ -26,7 +26,8 @@ export default function Header() {
       dropdown: [
         { name: 'טיפול בכאבי גב', href: '/services#back-pain' },
         { name: 'טיפול בכאבי כתף', href: '/services#shoulder-pain' },
-        { name: 'טיפול בכאבי צוואר וברך', href: '/services#neck-knee-pain' },
+        { name: 'טיפול בכאבי צוואר', href: '/services#neck-pain' },
+        { name: 'טיפול בכאבי ברך', href: '/services#knee-pain' },
         { name: 'שיקום לאחר ניתוחים', href: '/services#post-surgery' },
         { name: 'שיקום וסטיבולרי - טיפול בסחרחורות', href: '/services#vestibular' },
         { name: 'טיפול במפרק הלסת (TMJ)', href: '/services#tmj' },

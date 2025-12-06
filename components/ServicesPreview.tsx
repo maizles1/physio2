@@ -27,16 +27,28 @@ const services = [
     imagePath: '/images/services/shoulder-pain/service-image.jpg',
   },
   {
-    title: 'טיפול בכאבי צוואר וברך',
-    description: 'טיפול מקיף בכאבי צוואר וברך, כולל בעיות מפרקים, שרירים ורקמות רכות',
+    title: 'טיפול בכאבי צוואר',
+    description: 'טיפול מקצועי ומקיף בכאבי צוואר, בעיות מפרק הצוואר, שרירים ורקמות רכות',
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
-    href: '/services#neck-knee-pain',
+    href: '/services#neck-pain',
     color: 'from-[#004080] to-[#2080C0]',
-    imagePath: '/images/services/neck-knee-pain/service-image.jpg',
+    imagePath: '/images/services/neck-pain/service-image.jpg',
+  },
+  {
+    title: 'טיפול בכאבי ברך',
+    description: 'טיפול מקצועי ומקיף בכאבי ברך, בעיות מפרק הברך, פציעות ודלקות',
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    href: '/services#knee-pain',
+    color: 'from-[#2080C0] to-[#40C0F0]',
+    imagePath: '/images/services/knee-pain/service-image.jpg',
   },
   {
     title: 'שיקום לאחר ניתוחים',

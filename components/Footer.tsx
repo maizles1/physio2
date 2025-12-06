@@ -86,8 +86,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/services#neck-knee-pain" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
-                  טיפול בכאבי צוואר וברך
+                <Link href="/services#neck-pain" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                  טיפול בכאבי צוואר
+                </Link>
+              </li>
+              <li>
+                <Link href="/services#knee-pain" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                  טיפול בכאבי ברך
                 </Link>
               </li>
               <li>

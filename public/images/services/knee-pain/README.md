@@ -1,14 +1,14 @@
-# 📸 העלאת תמונה לשירות: טיפול בכאבי צוואר וברך
+# 📸 העלאת תמונה לשירות: טיפול בכאבי ברך
 
 ## 🎯 מיקום העלאה
 
-**תיקייה:** `public/images/services/neck-knee-pain/`
+**תיקייה:** `public/images/services/knee-pain/`
 
 **שם קובץ:** `service-image.jpg`
 
 **נתיב מלא:**
 ```
-/Users/andrey/Documents/physio2/public/images/services/neck-knee-pain/service-image.jpg
+/Users/andrey/Documents/physio2/public/images/services/knee-pain/service-image.jpg
 ```
 
 ---
@@ -27,11 +27,11 @@
 ### דרך Finder (Mac)
 1. פתח Finder
 2. לחץ `Cmd+Shift+G`
-3. הדבק: `/Users/andrey/Documents/physio2/public/images/services/neck-knee-pain/`
+3. הדבק: `/Users/andrey/Documents/physio2/public/images/services/knee-pain/`
 4. העתק את התמונה ושנה את השם ל: `service-image.jpg`
 
 ### דרך Cursor/VS Code
-1. פתח את התיקייה `public/images/services/neck-knee-pain/` בפרויקט
+1. פתח את התיקייה `public/images/services/knee-pain/` בפרויקט
 2. גרור את התמונה לתיקייה
 3. שנה את השם ל: `service-image.jpg`
 
@@ -42,18 +42,16 @@
 לאחר העלאה:
 1. רענן את הדפדפן (Cmd+R)
 2. לך לדף השירותים: `http://localhost:3000/services`
-3. התמונה אמורה להופיע ליד "טיפול בכאבי צוואר וברך"
+3. התמונה אמורה להופיע ליד "טיפול בכאבי ברך"
 
 ---
 
 ## 💡 טיפים
 
-- בחר תמונה שמתאימה לשירות (למשל: תמונת צוואר או ברך, תרגילי פיזיותרפיה)
+- בחר תמונה שמתאימה לשירות (למשל: תמונת ברך, תרגילי פיזיותרפיה)
 - השתמש בתמונות איכותיות וחדות
 - JPG הוא בדרך כלל הפורמט הטוב ביותר (קבצים קטנים)
 
 ---
 
 📖 **מדריך כללי:** ראה `SERVICES-IMAGES-UPLOAD-GUIDE.md` בשורש הפרויקט
-
-

@@ -6,7 +6,8 @@
 |-------|--------|---------|
 | **טיפול בכאבי גב** | `public/images/services/back-pain/` | `service-image.jpg` |
 | **טיפול בכאבי כתף** | `public/images/services/shoulder-pain/` | `service-image.jpg` |
-| **טיפול בכאבי צוואר וברך** | `public/images/services/neck-knee-pain/` | `service-image.jpg` |
+| **טיפול בכאבי צוואר** | `public/images/services/neck-pain/` | `service-image.jpg` |
+| **טיפול בכאבי ברך** | `public/images/services/knee-pain/` | `service-image.jpg` |
 | **שיקום לאחר ניתוחים** | `public/images/services/post-surgery/` | `service-image.jpg` |
 | **שיקום וסטיבולרי** | `public/images/services/vestibular/` | `service-image.jpg` |
 | **טיפול במפרק הלסת (TMJ)** | `public/images/services/tmj/` | `service-image.jpg` |
@@ -25,22 +26,27 @@
 /Users/andrey/Documents/physio2/public/images/services/shoulder-pain/service-image.jpg
 ```
 
-### 3. טיפול בכאבי צוואר וברך
+### 3. טיפול בכאבי צוואר
 ```
-/Users/andrey/Documents/physio2/public/images/services/neck-knee-pain/service-image.jpg
+/Users/andrey/Documents/physio2/public/images/services/neck-pain/service-image.jpg
 ```
 
-### 4. שיקום לאחר ניתוחים
+### 4. טיפול בכאבי ברך
+```
+/Users/andrey/Documents/physio2/public/images/services/knee-pain/service-image.jpg
+```
+
+### 5. שיקום לאחר ניתוחים
 ```
 /Users/andrey/Documents/physio2/public/images/services/post-surgery/service-image.jpg
 ```
 
-### 5. שיקום וסטיבולרי - טיפול בסחרחורות
+### 6. שיקום וסטיבולרי - טיפול בסחרחורות
 ```
 /Users/andrey/Documents/physio2/public/images/services/vestibular/service-image.jpg
 ```
 
-### 6. טיפול במפרק הלסת (TMJ)
+### 7. טיפול במפרק הלסת (TMJ)
 ```
 /Users/andrey/Documents/physio2/public/images/services/tmj/service-image.jpg
 ```

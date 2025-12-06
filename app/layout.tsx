@@ -164,8 +164,16 @@ const structuredData = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'טיפול בכאבי צוואר וברך',
-          url: 'https://physiotherapy.plus/services#neck-knee-pain',
+          name: 'טיפול בכאבי צוואר',
+          url: 'https://physiotherapy.plus/services#neck-pain',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'טיפול בכאבי ברך',
+          url: 'https://physiotherapy.plus/services#knee-pain',
         },
       },
       {
