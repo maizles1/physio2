@@ -1,0 +1,47 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shoulderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#40C0F0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2080C0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#shoulderGradient)"/>
+  
+  <!-- Person sitting (side view) -->
+  <!-- Head -->
+  <ellipse cx="400" cy="180" rx="40" ry="35" fill="#f4d1ae"/>
+  
+  <!-- Neck -->
+  <rect x="385" y="215" width="30" height="40" rx="5" fill="#f4d1ae"/>
+  
+  <!-- Shoulder area highlighted -->
+  <ellipse cx="450" cy="260" rx="60" ry="50" fill="#ffffff" opacity="0.3"/>
+  
+  <!-- Body -->
+  <rect x="350" y="255" width="120" height="180" rx="10" fill="#e2e8f0"/>
+  
+  <!-- Affected shoulder (left) -->
+  <ellipse cx="420" cy="270" rx="35" ry="30" fill="#f4d1ae"/>
+  <path d="M 420 270 Q 450 300 480 280" stroke="#4a5568" stroke-width="6" fill="none"/>
+  
+  <!-- Therapist hand on shoulder -->
+  <circle cx="430" cy="275" r="25" fill="#f4d1ae" opacity="0.9"/>
+  <ellipse cx="445" cy="290" rx="20" ry="35" fill="#f4d1ae" opacity="0.8"/>
+  
+  <!-- Treatment motion -->
+  <path d="M 410 265 Q 430 275 450 265" stroke="#40C0F0" stroke-width="4" fill="none" opacity="0.7" stroke-dasharray="5,5">
+    <animate attributeName="d" values="M 410 265 Q 430 275 450 265;M 415 270 Q 430 280 445 270;M 410 265 Q 430 275 450 265" dur="2s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Healing effect around shoulder -->
+  <circle cx="430" cy="275" r="70" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.4">
+    <animate attributeName="r" values="60;90;60" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Text overlay -->
+  <text x="400" y="500" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle" opacity="0.9">טיפול בכאבי כתף</text>
+  <text x="400" y="540" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle" opacity="0.8">שיקום וטיפול מקצועי</text>
+</svg>

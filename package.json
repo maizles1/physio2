@@ -1,0 +1,40 @@
+{
+  "name": "physio2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "check-reviews": "node scripts/check-google-reviews.js",
+    "find-place-id": "node scripts/find-place-id.js",
+    "seo-audit": "node scripts/seo-audit.js",
+    "seo-report": "node scripts/seo-email-report.js",
+    "seo-monitor": "node scripts/seo-audit.js && node scripts/seo-email-report.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "next": "16.0.7",
+    "openai": "^4.104.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "replicate": "^0.25.2",
+    "lighthouse": "^12.0.0",
+    "chrome-launcher": "^1.1.0",
+    "nodemailer": "^6.9.8",
+    "node-fetch": "^2.7.0",
+    "cheerio": "^1.0.0-rc.12",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.7",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

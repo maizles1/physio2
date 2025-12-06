@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  /* צבעים לפי הלוגו PhysioTherapyPlus */
+  --primary-dark: #2A3080;      /* כחול כהה - מסגרת הלוגו */
+  --primary: #2080C0;            /* כחול בינוני */
+  --primary-light: #40C0F0;      /* כחול בהיר */
+  --primary-darker: #004080;     /* כחול כהה יותר */
+  --secondary: #10b981;
+  --secondary-dark: #059669;
+  --accent: #f59e0b;
+  --text: #1f2937;
+  --text-light: #6b7280;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-primary-darker: var(--primary-darker);
+  --color-secondary: var(--secondary);
+  --color-secondary-dark: var(--secondary-dark);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Assistant', var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Hebrew", Arial, sans-serif;
+  direction: rtl;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+/* Typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+p {
+  line-height: 1.8;
+  color: var(--text);
+}
+
+a {
+  transition: all 0.2s ease;
+}
+
+/* Improve readability */
+.text-content {
+  max-width: 65ch;
+  line-height: 1.8;
+}
+
+/* Professional spacing */
+.section-spacing {
+  padding: 4rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-spacing {
+    padding: 2.5rem 0;
+  }
+  
+  h1 {
+    font-size: 1.875rem; /* 30px */
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 1.5rem; /* 24px */
+    line-height: 1.3;
+  }
+  
+  h3 {
+    font-size: 1.25rem; /* 20px */
+  }
+  
+  /* Ensure buttons are touch-friendly (min 48x48px) */
+  button, 
+  a[role="button"],
+  a.button,
+  .btn {
+    min-height: 48px;
+    min-width: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Improve text readability on mobile */
+  p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}

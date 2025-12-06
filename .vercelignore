@@ -1,0 +1,12 @@
+# Ignore files that shouldn't be deployed
+node_modules
+.next
+.env.local
+.env*.local
+.vercel
+*.log
+.DS_Store
+scripts/
+analysis/
+*.md
+!README.md

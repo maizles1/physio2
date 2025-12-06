@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 100" width="240" height="100">
+  <!-- כללית - ירוק עם כוכב -->
+  <rect width="240" height="100" fill="#00AA44" rx="10"/>
+  <!-- כוכב כללית -->
+  <g transform="translate(40, 50)">
+    <polygon points="0,-25 7,-7 25,-7 12,3 19,21 0,8 -19,21 -12,3 -25,-7 -7,-7" fill="white"/>
+  </g>
+  <text x="140" y="40" font-family="'Arial', 'Assistant', sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">שירותי בריאות</text>
+  <text x="140" y="65" font-family="'Arial', 'Assistant', sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">כללית</text>
+</svg>
