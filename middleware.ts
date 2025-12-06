@@ -5,7 +5,6 @@ import {
   getClientIdentifier,
   validateApiKeyFromRequest,
   createRateLimitResponse,
-  extractApiKey,
 } from '@/lib/security'
 import { getRateLimitConfig, securityConfig } from '@/config/security.config'
 
@@ -60,7 +59,6 @@ export function middleware(request: NextRequest) {
     const isPublicEndpoint = pathname === '/api/reviews' && !securityConfig.apiAuth.enabled
 
     if (!isPublicEndpoint && securityConfig.apiAuth.enabled) {
-      const apiKey = extractApiKey(headers, searchParams)
       const isValid = validateApiKeyFromRequest(headers, searchParams)
 
       if (!isValid) {
