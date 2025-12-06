@@ -249,7 +249,7 @@ export default function ServicesPage() {
                       src={service.imagePath}
                       fallbackSrc={service.fallbackImagePath}
                       alt={service.title}
-                      className="object-cover opacity-90"
+                      className="object-contain opacity-90"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                     <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 pointer-events-none`} aria-hidden="true"></div>

@@ -24,7 +24,7 @@ export default function HeroSection() {
             alt="כללית"
             width={40}
             height={20}
-            className="h-4 sm:h-5 w-auto object-contain opacity-90"
+            className="h-6 sm:h-8 w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
@@ -34,7 +34,7 @@ export default function HeroSection() {
             alt="מאוחדת"
             width={40}
             height={20}
-            className="h-4 sm:h-5 w-auto object-contain opacity-90"
+            className="h-6 sm:h-8 w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
@@ -44,7 +44,7 @@ export default function HeroSection() {
             alt="משרד הביטחון"
             width={40}
             height={20}
-            className="h-4 sm:h-5 w-auto object-contain opacity-90"
+            className="h-6 sm:h-8 w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
@@ -88,16 +88,15 @@ export default function HeroSection() {
             
             {/* Title and Description */}
             <div className="flex-1 text-center lg:text-right order-1 lg:order-2">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 leading-tight px-2">
-                פיזיותרפיה.פלוס<br />
-                <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-blue-50 font-semibold">מקצוענות שמרגישים בגוף</span>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 leading-tight px-2 text-white">
+                לגוף שלך מגיע טיפול של אלופים
               </h1>
               <div className="max-w-2xl mx-auto lg:mr-0 mt-4 sm:mt-6 px-2">
-                <p className="text-base sm:text-lg md:text-xl text-blue-50 leading-relaxed mb-3 sm:mb-4">
-                  אנדריי מייזלס - פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג&apos;ודו, עם ניסיון עשיר בטיפול ושיקום. מתמחה בטיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי וטיפול במפרק הלסת.
+                <p className="text-base sm:text-lg md:text-xl font-bold mb-3 sm:mb-4 text-white leading-relaxed">
+                  לא צריך להיות אולימפי כדי לקבל יחס של ספורטאי אולימפי
                 </p>
-                <p className="text-sm sm:text-base md:text-lg text-blue-100 leading-relaxed">
-                  עם גישה מקצועית ומותאמת אישית, אני מסייע למטופליי להשיג שיפור משמעותי בתפקוד ואיכות החיים. כל טיפול מותאם אישית למטופל ומבוצע בצורה מקצועית וקפדנית.
+                <p className="text-sm sm:text-base md:text-lg text-white leading-relaxed">
+                  אבחון מדויק, טיפול שורש ושיקום מקצועי בסטנדרט של נבחרת ישראל – ממש כאן באשדוד. כפיזיותרפיסט נבחרת הג&apos;ודו לשעבר, אני מזמין אותך לבנות יחד תוכנית שיקום שתחזיר אותך לתפקוד מלא, ללא פשרות.
                 </p>
               </div>
             </div>
