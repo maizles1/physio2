@@ -16,6 +16,40 @@ export default function HeroSection() {
         />
       </div>
 
+      {/* Insurance Logos - Top Left */}
+      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 flex flex-col gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg">
+          <Image
+            src="/images/insurance/Clalit-Logo.svg.png"
+            alt="כללית"
+            width={40}
+            height={20}
+            className="h-4 sm:h-5 w-auto object-contain opacity-90"
+            unoptimized
+          />
+        </div>
+        <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg">
+          <Image
+            src="/images/insurance/Meuhedet-Logo.png"
+            alt="מאוחדת"
+            width={40}
+            height={20}
+            className="h-4 sm:h-5 w-auto object-contain opacity-90"
+            unoptimized
+          />
+        </div>
+        <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg">
+          <Image
+            src="/images/insurance/Ministry-of-defense-logo.svg.png"
+            alt="משרד הביטחון"
+            width={40}
+            height={20}
+            className="h-4 sm:h-5 w-auto object-contain opacity-90"
+            unoptimized
+          />
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20 lg:py-24 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Header with Image and Title */}
