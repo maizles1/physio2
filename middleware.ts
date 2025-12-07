@@ -82,38 +82,43 @@ export function middleware(request: NextRequest) {
     if (!origin) {
       isAllowedOrigin = true // No origin header (same-origin request)
     } else {
-      // Exact match check first
-      if (securityConfig.cors.allowedOrigins.includes(origin)) {
-        isAllowedOrigin = true
-      } else {
-        // For subdomain matching, ensure it's a valid subdomain (not prefix spoofing)
-        // Example: "https://physiotherapy.plus" allows "https://www.physiotherapy.plus"
-        // But NOT "https://evil-physiotherapy.plus"
-        const originUrl = new URL(origin)
-        const originHostname = originUrl.hostname
-        
-        isAllowedOrigin = securityConfig.cors.allowedOrigins.some((allowed) => {
-          try {
-            const allowedUrl = new URL(allowed)
-            const allowedHostname = allowedUrl.hostname
-            
-            // Exact match
-            if (originHostname === allowedHostname) {
-              return true
+      try {
+        // Exact match check first
+        if (securityConfig.cors.allowedOrigins.includes(origin)) {
+          isAllowedOrigin = true
+        } else {
+          // For subdomain matching, ensure it's a valid subdomain (not prefix spoofing)
+          // Example: "https://physiotherapy.plus" allows "https://www.physiotherapy.plus"
+          // But NOT "https://evil-physiotherapy.plus"
+          const originUrl = new URL(origin)
+          const originHostname = originUrl.hostname
+          
+          isAllowedOrigin = securityConfig.cors.allowedOrigins.some((allowed) => {
+            try {
+              const allowedUrl = new URL(allowed)
+              const allowedHostname = allowedUrl.hostname
+              
+              // Exact match
+              if (originHostname === allowedHostname) {
+                return true
+              }
+              
+              // Subdomain check: origin must end with .allowedHostname
+              // e.g., "www.physiotherapy.plus" ends with ".physiotherapy.plus"
+              if (originHostname.endsWith('.' + allowedHostname)) {
+                return true
+              }
+              
+              return false
+            } catch {
+              // Invalid URL in allowed origins - skip
+              return false
             }
-            
-            // Subdomain check: origin must end with .allowedHostname
-            // e.g., "www.physiotherapy.plus" ends with ".physiotherapy.plus"
-            if (originHostname.endsWith('.' + allowedHostname)) {
-              return true
-            }
-            
-            return false
-          } catch {
-            // Invalid URL in allowed origins - skip
-            return false
-          }
-        })
+          })
+        }
+      } catch (error) {
+        // Invalid origin URL - reject
+        isAllowedOrigin = false
       }
     }
 
