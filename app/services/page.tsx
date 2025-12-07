@@ -210,7 +210,6 @@ export default function ServicesPage() {
                 className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 items-center`}
               >
                 <div className="flex-1">
-                  <div className="text-5xl sm:text-6xl mb-4">{service.icon}</div>
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ color: '#2A3080' }}>
                     {service.title}
                   </h2>
@@ -249,7 +248,7 @@ export default function ServicesPage() {
                       src={service.imagePath}
                       fallbackSrc={service.fallbackImagePath}
                       alt={service.title}
-                      className="object-contain opacity-90"
+                      className="object-cover opacity-90"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                     <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 pointer-events-none`} aria-hidden="true"></div>

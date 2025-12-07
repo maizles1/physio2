@@ -279,3 +279,4 @@ import ReadingTime from '@/components/ReadingTime'
 - `config/seo.config.ts` - כל ההגדרות
 
 
+

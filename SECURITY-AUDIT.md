@@ -220,3 +220,4 @@ curl https://physiotherapy.plus/api/reviews
 - [SECURITY.md](./SECURITY.md) - מדיניות אבטחה מפורטת
 - [env.example](./env.example) - Template למשתני סביבה
 - [Next.js Security Docs](https://nextjs.org/docs/app/building-your-application/configuring/security-headers)
+

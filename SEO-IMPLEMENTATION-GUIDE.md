@@ -271,3 +271,4 @@ import SocialSharing from '@/components/SocialSharing'
 - `components/SEO.tsx` - פונקציות עזר
 
 
+

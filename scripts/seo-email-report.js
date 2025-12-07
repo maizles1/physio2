@@ -420,3 +420,4 @@ if (require.main === module) {
 module.exports = { generateHTMLReport, sendEmailReport, main }
 
 
+

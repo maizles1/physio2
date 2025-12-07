@@ -17,7 +17,7 @@ export default function HeroSection() {
       </div>
 
       {/* Insurance Logos - Top Left */}
-      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 flex flex-col gap-2 sm:gap-3">
+      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 flex flex-col gap-2 sm:gap-3 hidden sm:flex">
         <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg">
           <Image
             src="/images/insurance/Clalit-Logo.png"
@@ -44,13 +44,13 @@ export default function HeroSection() {
             alt="משרד הביטחון"
             width={40}
             height={20}
-            className="h-6 sm:h-8 w-auto object-contain opacity-90"
+            className="h-10 sm:h-12 w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20 lg:py-24 relative z-10">
+      <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20 lg:py-24 relative z-10 pt-20 sm:pt-12">
         <div className="max-w-6xl mx-auto">
           {/* Header with Image and Title */}
           <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 mb-8 sm:mb-12">

@@ -19,7 +19,7 @@ export default function FloatingButtons() {
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleWhatsAppClick}
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#20BA5A] text-white p-4 sm:p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all hover:scale-110 flex items-center justify-center group animate-pulse sm:animate-none"
+        className="fixed bottom-6 right-6 z-50 bg-white/10 backdrop-blur-md border border-white/20 text-white p-4 sm:p-5 rounded-full shadow-lg hover:bg-white/20 transition-all hover:scale-110 flex items-center justify-center group"
         aria-label="שלח הודעת WhatsApp"
       >
         <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -32,7 +32,7 @@ export default function FloatingButtons() {
       <a
         href={`tel:${phoneNumber}`}
         onClick={() => gtag.clickToCall(phoneNumber)}
-        className="fixed bottom-6 left-6 z-50 bg-[#2080C0] hover:bg-[#004080] text-white p-4 sm:p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all hover:scale-110 flex items-center justify-center group"
+        className="fixed bottom-6 left-6 z-50 bg-white/10 backdrop-blur-md border border-white/20 text-white p-4 sm:p-5 rounded-full shadow-lg hover:bg-white/20 transition-all hover:scale-110 flex items-center justify-center group"
         aria-label={`התקשר אלינו: ${phoneNumber}`}
       >
         <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

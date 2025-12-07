@@ -44,3 +44,4 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 else
     echo -e "${YELLOW}ℹ️  השינויים נשמרו מקומית. להעלות מאוחר יותר, הרץ: git push${NC}"
 fi
+

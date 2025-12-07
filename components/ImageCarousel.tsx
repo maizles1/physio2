@@ -14,9 +14,9 @@ const images: CarouselImage[] = [
   { src: '/images/carousel/clinic-3.jpeg', alt: 'חדר טיפול בקליניקה' },
   { src: '/images/carousel/clinic-4.jpeg', alt: 'אזור המתנה בקליניקה' },
   { src: '/images/carousel/clinic-5.jpg', alt: 'פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד' },
-  { src: '/images/carousel/clinic-6.jpg', alt: 'תמונת קליניקה נוספת' },
-  { src: '/images/carousel/clinic-7.jpg', alt: 'תמונת קליניקה נוספת' },
-  { src: '/images/carousel/clinic-8.jpg', alt: 'תמונת קליניקה נוספת' },
+  { src: '/images/carousel/clinic-6.jpg', alt: 'חלל טיפול נוסף בקליניקה' },
+  { src: '/images/carousel/clinic-7.jpg', alt: 'אזור טיפול בקליניקה' },
+  { src: '/images/carousel/clinic-8.jpg', alt: 'קליניקת פיזיותרפיה.פלוס - חלל מקצועי' },
 ]
 
 const AUTO_PLAY_INTERVAL = 5000 // 5 seconds

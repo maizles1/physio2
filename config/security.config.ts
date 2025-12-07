@@ -108,3 +108,4 @@ export function getRateLimitConfig(route: string): {
       : securityConfig.rateLimiting.maxRequests,
   }
 }
+

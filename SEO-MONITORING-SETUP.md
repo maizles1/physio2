@@ -337,3 +337,4 @@ sudo apt-get install google-chrome-stable
 **תאריך עדכון**: ינואר 2025
 
 
+
