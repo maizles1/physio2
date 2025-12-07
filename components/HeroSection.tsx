@@ -88,17 +88,27 @@ export default function HeroSection() {
             
             {/* Title and Description */}
             <div className="flex-1 text-center lg:text-right order-1 lg:order-2">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 leading-tight px-2" style={{ color: 'white' }}>
-                לגוף שלך מגיע טיפול של אלופים
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 leading-tight px-2 text-white">
+                סטנדרט אולימפי. יחס של בית.
               </h1>
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 text-white px-2">
+                הידיים שטיפלו בנבחרת ישראל בג&apos;ודו – עכשיו לגמרי בשבילך
+              </h2>
               <div className="max-w-2xl mx-auto lg:mr-0 mt-4 sm:mt-6 px-2">
-                <p className="text-base sm:text-lg md:text-xl font-bold mb-3 sm:mb-4 leading-relaxed" style={{ color: 'white' }}>
-                  לא צריך להיות אולימפי כדי לקבל יחס של ספורטאי אולימפי
+                <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed mb-3 sm:mb-4">
+                  נעים להכיר, אנדריי.
                 </p>
-                <p className="text-sm sm:text-base md:text-lg leading-relaxed" style={{ color: 'white' }}>
-                  אבחון מדויק, טיפול שורש ושיקום מקצועי בסטנדרט של נבחרת ישראל – ממש כאן באשדוד. כפיזיותרפיסט נבחרת ישראל בג&apos;ודו לשעבר ובעל תואר שני (MSc), אני מזמין אותך לבנות יחד תוכנית שיקום אישית שתחזיר אותך לתפקוד מלא.
-                  <br /><br />
-                  אל תתפשר על הבריאות שלך – בוא ניתן לגוף שלך טיפול של אלופים. שריין תור כבר עכשיו.
+                <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed mb-3 sm:mb-4">
+                  בוא נשים את האמת על השולחן: כשכואב לך, שום דבר אחר לא משנה.
+                </p>
+                <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed mb-3 sm:mb-4">
+                  כפיזיותרפיסט נבחרת ישראל בג&apos;ודו (לשעבר) ובעל תואר שני (MSc), ראיתי את הגופות החזקים ביותר נשברים – וראיתי אותם מחלימים כנגד כל הסיכויים.
+                </p>
+                <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed mb-3 sm:mb-4">
+                  הסוד הוא לא קסם, אלא התעקשות. אני לא מאמין ב&apos;לחיות עם הכאב&apos;. אני מאמין באבחון מדויק, בעבודה חכמה, ובשותפות אמיתית.
+                </p>
+                <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed">
+                  אני כאן כדי להילחם על התנועה שלך, על הביטחון שלך, ועל החיים שמחכים לך בצד השני של הכאב.
                 </p>
               </div>
             </div>
