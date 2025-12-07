@@ -107,12 +107,19 @@ export default function HeroSection() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-2">
             <Link
-              href="/contact"
-              className="bg-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105 text-base sm:text-lg w-full sm:w-auto text-center"
-              style={{ color: '#2A3080' }}
-              aria-label="שריין תור"
+              href="/services"
+              className="bg-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105 text-base sm:text-lg w-full sm:w-auto text-center text-white"
+              style={{ backgroundColor: '#2A3080' }}
+              aria-label="צפה בכל השירותים שלנו"
             >
-              בוא נתחיל. שריין תור
+              השירותים שלנו
+            </Link>
+            <Link
+              href="/contact"
+              className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105 text-base sm:text-lg w-full sm:w-auto border-2 border-white/30 text-center"
+              aria-label="צור קשר איתנו"
+            >
+              צור קשר
             </Link>
           </div>
         </div>
