@@ -76,7 +76,23 @@ export function getApiSecretKey(): string | undefined {
 }
 
 /**
- * Validate API key
+ * Constant-time string comparison to prevent timing attacks
+ */
+function constantTimeEquals(a: string, b: string): boolean {
+  if (a.length !== b.length) {
+    return false
+  }
+  
+  let result = 0
+  for (let i = 0; i < a.length; i++) {
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i)
+  }
+  
+  return result === 0
+}
+
+/**
+ * Validate API key with constant-time comparison to prevent timing attacks
  */
 export function validateApiKey(providedKey: string | null | undefined): boolean {
   if (!securityConfig.apiAuth.enabled) {
@@ -89,7 +105,12 @@ export function validateApiKey(providedKey: string | null | undefined): boolean 
     return false
   }
 
-  return providedKey === secretKey
+  if (!providedKey) {
+    return false
+  }
+
+  // Use constant-time comparison to prevent timing attacks
+  return constantTimeEquals(providedKey, secretKey)
 }
 
 /**

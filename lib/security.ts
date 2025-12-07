@@ -63,22 +63,50 @@ export function checkRateLimit(
 }
 
 /**
- * Get client identifier (IP address)
+ * Validate IP address format
+ */
+function isValidIpAddress(ip: string): boolean {
+  // IPv4 regex
+  const ipv4Regex = /^(\d{1,3}\.){3}\d{1,3}$/
+  // IPv6 regex (simplified)
+  const ipv6Regex = /^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$/
+  
+  return ipv4Regex.test(ip) || ipv6Regex.test(ip)
+}
+
+/**
+ * Get client identifier (IP address) with validation
  */
 export function getClientIdentifier(headers: Headers): string {
   // Try to get real IP from various headers (for proxies/load balancers)
-  const forwardedFor = headers.get('x-forwarded-for')
+  // Priority: Cloudflare > X-Real-IP > X-Forwarded-For (first IP)
+  const cfConnectingIp = headers.get('cf-connecting-ip') // Cloudflare (most trusted)
   const realIp = headers.get('x-real-ip')
-  const cfConnectingIp = headers.get('cf-connecting-ip') // Cloudflare
+  const forwardedFor = headers.get('x-forwarded-for')
 
-  if (forwardedFor) {
-    return forwardedFor.split(',')[0].trim()
-  }
-  if (realIp) {
-    return realIp
-  }
+  // Validate and return Cloudflare IP
   if (cfConnectingIp) {
-    return cfConnectingIp
+    const ip = cfConnectingIp.trim()
+    if (isValidIpAddress(ip)) {
+      return ip
+    }
+  }
+
+  // Validate and return X-Real-IP
+  if (realIp) {
+    const ip = realIp.trim()
+    if (isValidIpAddress(ip)) {
+      return ip
+    }
+  }
+
+  // X-Forwarded-For can contain multiple IPs (client, proxy1, proxy2...)
+  // Take the first one (original client) but validate it
+  if (forwardedFor) {
+    const firstIp = forwardedFor.split(',')[0].trim()
+    if (isValidIpAddress(firstIp)) {
+      return firstIp
+    }
   }
 
   // Fallback to a default identifier
@@ -86,7 +114,7 @@ export function getClientIdentifier(headers: Headers): string {
 }
 
 /**
- * Sanitize string input to prevent XSS
+ * Sanitize string input to prevent XSS (enhanced)
  */
 export function sanitizeInput(input: string): string {
   if (typeof input !== 'string') {
@@ -94,11 +122,56 @@ export function sanitizeInput(input: string): string {
   }
 
   return input
-    .replace(/[<>]/g, '') // Remove < and >
-    .replace(/javascript:/gi, '') // Remove javascript: protocol
-    .replace(/on\w+=/gi, '') // Remove event handlers
+    // Remove HTML tags
+    .replace(/<[^>]*>/g, '')
+    // Remove script tags and content
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    // Remove event handlers
+    .replace(/on\w+\s*=\s*["'][^"']*["']/gi, '')
+    .replace(/on\w+\s*=\s*[^\s>]*/gi, '')
+    // Remove javascript: protocol
+    .replace(/javascript:/gi, '')
+    .replace(/jscript:/gi, '')
+    .replace(/vbscript:/gi, '')
+    .replace(/data:text\/html/gi, '')
+    // Remove dangerous CSS
+    .replace(/expression\s*\(/gi, '')
+    .replace(/url\s*\(\s*["']?javascript:/gi, '')
+    // Remove null bytes
+    .replace(/\0/g, '')
+    // Remove control characters except newlines and tabs
+    .replace(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F]/g, '')
     .trim()
     .slice(0, 10000) // Max length
+}
+
+/**
+ * Sanitize HTML content for dangerouslySetInnerHTML (use with caution)
+ * Only use for trusted content or after server-side validation
+ */
+export function sanitizeHtml(html: string): string {
+  if (typeof html !== 'string') {
+    return ''
+  }
+
+  // For dangerouslySetInnerHTML, we need to be more careful
+  // This is a basic sanitization - consider using DOMPurify for production
+  return html
+    // Remove script tags
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    // Remove event handlers
+    .replace(/\son\w+\s*=\s*["'][^"']*["']/gi, '')
+    .replace(/\son\w+\s*=\s*[^\s>]*/gi, '')
+    // Remove javascript: in attributes
+    .replace(/javascript:/gi, '')
+    .replace(/jscript:/gi, '')
+    .replace(/vbscript:/gi, '')
+    // Remove dangerous iframe/src attributes
+    .replace(/<iframe[^>]*>/gi, '')
+    .replace(/<object[^>]*>/gi, '')
+    .replace(/<embed[^>]*>/gi, '')
+    .trim()
+    .slice(0, 50000) // Max length for HTML
 }
 
 /**

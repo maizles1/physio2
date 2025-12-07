@@ -5,6 +5,7 @@ import { getAllPosts, type BlogPost } from '@/config/blog.config'
 import { getRelatedPosts } from '@/lib/blog-utils'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import SocialSharing from '@/components/SocialSharing'
+import { sanitizeHtml } from '@/lib/security'
 
 // פונקציה ליצירת map מהמערך
 function getBlogPostsMap(): Record<string, BlogPost> {
@@ -146,7 +147,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               style={{
                 color: '#1f2937',
               }}
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content) }}
             />
             <div className="mt-8 pt-6 border-t border-gray-200">
               <SocialSharing 
