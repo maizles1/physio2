@@ -44,7 +44,7 @@ export default function HeroSection() {
             alt="משרד הביטחון"
             width={40}
             height={20}
-            className="h-6 sm:h-8 w-auto object-contain opacity-90"
+            className="h-24 sm:h-32 w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
