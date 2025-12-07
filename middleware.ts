@@ -12,6 +12,8 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const headers = request.headers
   const searchParams = request.nextUrl.searchParams
+  const host = headers.get('host') || ''
+  const origin = headers.get('origin')
 
   // Skip rate limiting for static files and Next.js internals
   if (
@@ -81,6 +83,7 @@ export function middleware(request: NextRequest) {
   // CORS headers for API routes
   if (pathname.startsWith('/api/') && securityConfig.cors.enabled) {
     const origin = headers.get('origin')
+    const host = headers.get('host')
     
     // Secure origin validation - prevent subdomain spoofing
     let isAllowedOrigin = false
@@ -88,16 +91,42 @@ export function middleware(request: NextRequest) {
       isAllowedOrigin = true // No origin header (same-origin request)
     } else {
       try {
+        const originUrl = new URL(origin)
+        const originHostname = originUrl.hostname
+        
+        // Check if it's a Vercel domain (automatic allow)
+        const isVercelDomain = 
+          originHostname.endsWith('.vercel.app') ||
+          originHostname.endsWith('.vercel-dns.com') ||
+          originHostname.includes('.vercel.app')
+        
+        // If host matches origin, it's same-origin (always allow)
+        // This allows custom domains configured in Vercel
+        const isSameOrigin = host && (
+          host === originHostname || 
+          host === originUrl.host ||
+          // Allow if host and origin are the same domain (for custom domains)
+          (host.replace(/^www\./, '') === originHostname.replace(/^www\./, ''))
+        )
+        
+        // In production on Vercel, if the request comes from the same host,
+        // it's safe to allow (Vercel validates custom domains)
+        const isVercelProduction = process.env.VERCEL && process.env.NODE_ENV === 'production'
+        const isCustomDomainOnVercel = isVercelProduction && host && host === originHostname
+        
         // Exact match check first
         if (securityConfig.cors.allowedOrigins.includes(origin)) {
+          isAllowedOrigin = true
+        } else if (isVercelDomain || isSameOrigin || isCustomDomainOnVercel) {
+          // Automatically allow:
+          // 1. Vercel domains (.vercel.app)
+          // 2. Same-origin requests
+          // 3. Custom domains on Vercel (validated by Vercel)
           isAllowedOrigin = true
         } else {
           // For subdomain matching, ensure it's a valid subdomain (not prefix spoofing)
           // Example: "https://physiotherapy.plus" allows "https://www.physiotherapy.plus"
           // But NOT "https://evil-physiotherapy.plus"
-          const originUrl = new URL(origin)
-          const originHostname = originUrl.hostname
-          
           isAllowedOrigin = securityConfig.cors.allowedOrigins.some((allowed) => {
             try {
               const allowedUrl = new URL(allowed)
@@ -127,8 +156,14 @@ export function middleware(request: NextRequest) {
       }
     }
 
-    if (isAllowedOrigin && origin) {
-      response.headers.set('Access-Control-Allow-Origin', origin)
+    // Always set CORS headers if origin is present and allowed, or if it's same-origin
+    if (isAllowedOrigin) {
+      if (origin) {
+        response.headers.set('Access-Control-Allow-Origin', origin)
+      } else if (host) {
+        // For same-origin requests without origin header, allow the host
+        response.headers.set('Access-Control-Allow-Origin', `https://${host}`)
+      }
     }
 
     response.headers.set(

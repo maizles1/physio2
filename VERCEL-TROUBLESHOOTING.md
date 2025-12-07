@@ -71,6 +71,38 @@ npm run build
 - שפר את הביצועים
 - Vercel (חינם) מגביל ל-10 שניות
 
+### 6. בעיית דומיין - האתר לא עולה בדומיין החדש
+
+**תסמינים:**
+- Vercel פעיל אבל הדומיין החדש לא עובד
+- האתר עובד ב-vercel.app אבל לא בדומיין המותאם אישית
+
+**פתרון מהיר:**
+1. **הוסף את הדומיין ב-Vercel:**
+   - Settings → Domains → Add Domain
+   - הזן את הדומיין שלך
+
+2. **הגדר DNS:**
+   - לך ל-registrar של הדומיין
+   - הוסף את ה-DNS records ש-Vercel נתן לך
+   - בדרך כלל: CNAME → `cname.vercel-dns.com`
+
+3. **עדכן Environment Variables:**
+   - Settings → Environment Variables
+   - עדכן `ALLOWED_ORIGINS` לכלול את הדומיין החדש:
+     ```
+     ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com,https://physiotherapy.plus,https://www.physiotherapy.plus
+     ```
+
+4. **Redeploy:**
+   - Deployments → Redeploy
+
+5. **המתן:**
+   - DNS propagation: 1-2 שעות (עד 48 שעות)
+   - SSL Certificate: כמה דקות עד 24 שעות
+
+**מדריך מפורט:** ראה `DOMAIN-SETUP-GUIDE.md`
+
 ## שלבים לפריסה מוצלחת
 
 ### שלב 1: בדיקה מקומית
