@@ -44,13 +44,13 @@ export default function HeroSection() {
             alt="משרד הביטחון"
             width={40}
             height={20}
-            className="h-10 sm:h-12 w-auto object-contain opacity-90"
+            className="h-6 sm:h-8 w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20 lg:py-24 relative z-10 pt-20 sm:pt-12">
+      <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20 lg:py-24 relative z-10 sm:pt-12">
         <div className="max-w-6xl mx-auto">
           {/* Header with Image and Title */}
           <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 mb-8 sm:mb-12">

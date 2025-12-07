@@ -115,7 +115,7 @@ export default function ServicesPreview() {
                   src={service.imagePath}
                   alt={service.title}
                   fill
-                  className="object-contain group-hover:scale-105 transition-transform duration-300"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-20 group-hover:opacity-30 transition-opacity`}></div>
