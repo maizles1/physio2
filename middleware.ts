@@ -35,10 +35,20 @@ export function middleware(request: NextRequest) {
     rateLimitConfig.windowMs
   )
 
-  // Create response with rate limit headers
-  const response = rateLimitResult.allowed
-    ? NextResponse.next()
-    : createRateLimitResponse(rateLimitResult.resetTime)
+  // If rate limited, return early
+  if (!rateLimitResult.allowed) {
+    const rateLimitResponse = createRateLimitResponse(rateLimitResult.resetTime)
+    rateLimitResponse.headers.set('X-RateLimit-Limit', String(rateLimitConfig.maxRequests))
+    rateLimitResponse.headers.set('X-RateLimit-Remaining', String(rateLimitResult.remaining))
+    rateLimitResponse.headers.set(
+      'X-RateLimit-Reset',
+      new Date(rateLimitResult.resetTime).toISOString()
+    )
+    return rateLimitResponse
+  }
+
+  // Create response for allowed requests
+  const response = NextResponse.next()
 
   // Add rate limit headers
   response.headers.set('X-RateLimit-Limit', String(rateLimitConfig.maxRequests))
@@ -47,11 +57,6 @@ export function middleware(request: NextRequest) {
     'X-RateLimit-Reset',
     new Date(rateLimitResult.resetTime).toISOString()
   )
-
-  // If rate limited, return early
-  if (!rateLimitResult.allowed) {
-    return response
-  }
 
   // API authentication for API routes
   if (pathname.startsWith('/api/')) {
