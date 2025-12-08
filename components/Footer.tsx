@@ -130,7 +130,16 @@ export default function Footer() {
                 </svg>
                 <a 
                   href={`tel:${phoneNumber}`} 
-                  onClick={() => gtag.clickToCall(phoneNumber)}
+                  onClick={() => {
+                    try {
+                      gtag.clickToCall(phoneNumber)
+                    } catch (error) {
+                      // Silently fail if gtag is not available
+                      if (process.env.NODE_ENV === 'development') {
+                        console.warn('Google Analytics tracking failed:', error)
+                      }
+                    }
+                  }}
                   className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium"
                 >
                   {phoneNumber}

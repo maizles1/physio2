@@ -189,10 +189,17 @@ export default function ContactPage() {
       // const response = await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) })
       
       // Track form submission
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'form_submit', {
-          form_name: 'contact_form',
-        })
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        try {
+          window.gtag('event', 'form_submit', {
+            form_name: 'contact_form',
+          })
+        } catch (error) {
+          // Silently fail if gtag is not available
+          if (process.env.NODE_ENV === 'development') {
+            console.warn('Google Analytics tracking failed:', error)
+          }
+        }
       }
       
       setSubmitSuccess(true)
@@ -234,12 +241,12 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <section className="py-8 sm:py-12 md:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
             {/* Contact Form */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">שלחו לנו הודעה</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">שלחו לנו הודעה</h2>
               
               {/* Success Message */}
               {submitSuccess && (
@@ -268,7 +275,7 @@ export default function ContactPage() {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6" noValidate>
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                     שם מלא *
@@ -281,7 +288,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-base ${
                       errors.name && touched.name
                         ? 'border-red-500 focus:ring-red-500'
                         : touched.name && !errors.name
@@ -323,7 +330,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-base ${
                       errors.email && touched.email
                         ? 'border-red-500 focus:ring-red-500'
                         : touched.email && !errors.email
@@ -365,7 +372,7 @@ export default function ContactPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-base ${
                       errors.phone && touched.phone
                         ? 'border-red-500 focus:ring-red-500'
                         : touched.phone && !errors.phone
@@ -407,7 +414,7 @@ export default function ContactPage() {
                     value={formData.subject}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-base ${
                       errors.subject && touched.subject
                         ? 'border-red-500 focus:ring-red-500'
                         : touched.subject && !errors.subject
@@ -448,11 +455,11 @@ export default function ContactPage() {
                     id="message"
                     name="message"
                     required
-                    rows={6}
+                    rows={5}
                     value={formData.message}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-y ${
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-y text-base ${
                       errors.message && touched.message
                         ? 'border-red-500 focus:ring-red-500'
                         : touched.message && !errors.message
@@ -520,7 +527,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white font-bold py-4 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 min-h-[48px] text-base sm:text-lg"
                   aria-label="שלח הודעה"
                 >
                   {isSubmitting ? (
@@ -540,8 +547,8 @@ export default function ContactPage() {
 
             {/* Contact Info */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">פרטי התקשרות</h2>
-              <div className="space-y-6">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">פרטי התקשרות</h2>
+              <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -610,45 +617,46 @@ export default function ContactPage() {
               </div>
 
               {/* Map */}
-              <div className="mt-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">איך להגיע</h3>
+              <div className="mt-6 sm:mt-8">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">איך להגיע</h3>
                 <div className="rounded-lg overflow-hidden shadow-lg mb-4">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.5!2d34.6553!3d31.8044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDQ4JzE1LjgiTiAzNMKwMzknMTkuMSJF!5e0!3m2!1she!2sil!4v1700000000000"
-                    width="100%"
-                    height="400"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="מיקום הקליניקה - מרכז כלניות, אשדוד"
-                    aria-label="מפת גוגל מפות - מיקום הקליניקה"
-                  ></iframe>
+                  <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.5!2d34.6553!3d31.8044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDQ4JzE1LjgiTiAzNMKwMzknMTkuMSJF!5e0!3m2!1she!2sil!4v1700000000000"
+                      className="absolute top-0 left-0 w-full h-full"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="מיקום הקליניקה - מרכז כלניות, אשדוד"
+                      aria-label="מפת גוגל מפות - מיקום הקליניקה"
+                    ></iframe>
+                  </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <a
                     href="https://www.google.com/maps/dir/?api=1&destination=מרכז+כלניות,+אשדוד"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg"
+                    className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 sm:px-6 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm sm:text-base min-h-[48px]"
                     aria-label="פתח ניווט ב-Google Maps"
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                     </svg>
-                    פתח ב-Google Maps
+                    <span className="whitespace-nowrap">פתח ב-Google Maps</span>
                   </a>
                   <a
                     href="https://waze.com/ul?q=מרכז כלניות, אשדוד"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-[#33CCFF] hover:bg-[#2BB5E6] text-white font-medium py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg"
+                    className="flex items-center justify-center gap-2 bg-[#33CCFF] hover:bg-[#2BB5E6] text-white font-medium py-3 px-4 sm:px-6 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm sm:text-base min-h-[48px]"
                     aria-label="פתח ניווט ב-Waze"
                   >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.4c5.302 0 9.6 4.298 9.6 9.6 0 5.302-4.298 9.6-9.6 9.6-5.302 0-9.6-4.298-9.6-9.6 0-5.302 4.298-9.6 9.6-9.6zm0 1.92c-4.234 0-7.68 3.446-7.68 7.68 0 4.234 3.446 7.68 7.68 7.68 4.234 0 7.68-3.446 7.68-7.68 0-4.234-3.446-7.68-7.68-7.68zm-.96 2.88v1.44h1.92v7.68h-1.92v1.44h5.76v-1.44h-1.92V8.64h1.92V7.2H11.04z"/>
                     </svg>
-                    נווט ב-Waze
+                    <span className="whitespace-nowrap">נווט ב-Waze</span>
                   </a>
                 </div>
               </div>

@@ -44,27 +44,36 @@ export default function Header() {
       {/* Top Bar - Contact Info */}
       <div className="hidden md:block text-white py-2.5" style={{ background: 'linear-gradient(to left, #2A3080, #2080C0)' }}>
         <div className="container mx-auto px-4">
-          <div className="flex flex-row justify-between items-center text-sm">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-row justify-between items-center text-sm flex-wrap gap-2">
+            <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
               <a 
                 href={`tel:${phoneNumber}`} 
-                onClick={() => gtag.clickToCall(phoneNumber)}
-                className="flex items-center gap-2 hover:opacity-90 transition-opacity" 
+                onClick={() => {
+                  try {
+                    gtag.clickToCall(phoneNumber)
+                  } catch (error) {
+                    // Silently fail if gtag is not available
+                    if (process.env.NODE_ENV === 'development') {
+                      console.warn('Google Analytics tracking failed:', error)
+                    }
+                  }
+                }}
+                className="flex items-center gap-2 hover:opacity-90 transition-opacity min-h-[32px]" 
                 aria-label={`התקשר אלינו: ${phoneNumber}`}
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                <span className="font-medium">{phoneNumber}</span>
+                <span className="font-medium whitespace-nowrap">{phoneNumber}</span>
               </a>
-              <span className="text-blue-200">|</span>
-              <span className="text-blue-100">{address}</span>
+              <span className="text-blue-200 hidden lg:inline">|</span>
+              <span className="text-blue-100 hidden lg:inline">{address}</span>
             </div>
             <div className="flex items-center gap-2 text-blue-100">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span className="text-xs sm:text-sm">ראשון-חמישי: 08:00-20:00 | שישי: 08:00-14:00</span>
+              <span className="text-xs sm:text-sm whitespace-nowrap">ראשון-חמישי: 08:00-20:00 | שישי: 08:00-14:00</span>
             </div>
           </div>
         </div>
@@ -139,14 +148,23 @@ export default function Header() {
             </a>
             <a
               href={`tel:${phoneNumber}`}
-              onClick={() => gtag.clickToCall(phoneNumber)}
-              className="bg-[#2080C0] hover:bg-[#004080] text-white px-4 py-2 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg flex items-center gap-2 text-sm"
+              onClick={() => {
+                try {
+                  gtag.clickToCall(phoneNumber)
+                } catch (error) {
+                  // Silently fail if gtag is not available
+                  if (process.env.NODE_ENV === 'development') {
+                    console.warn('Google Analytics tracking failed:', error)
+                  }
+                }
+              }}
+              className="bg-[#2080C0] hover:bg-[#004080] text-white px-4 py-2 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg flex items-center gap-2 text-sm min-h-[48px] min-w-[48px]"
               aria-label={`התקשר אלינו: ${phoneNumber}`}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              התקשר
+              <span className="hidden sm:inline">התקשר</span>
             </a>
           </div>
 
@@ -154,8 +172,17 @@ export default function Header() {
           <div className="flex lg:hidden items-center gap-2">
             <a
               href={`tel:${phoneNumber}`}
-              onClick={() => gtag.clickToCall(phoneNumber)}
-              className="p-2 bg-[#2080C0] text-white rounded-lg shadow-md hover:bg-[#004080] transition-colors"
+              onClick={() => {
+                try {
+                  gtag.clickToCall(phoneNumber)
+                } catch (error) {
+                  // Silently fail if gtag is not available
+                  if (process.env.NODE_ENV === 'development') {
+                    console.warn('Google Analytics tracking failed:', error)
+                  }
+                }
+              }}
+              className="p-2 bg-[#2080C0] text-white rounded-lg shadow-md hover:bg-[#004080] transition-colors min-h-[48px] min-w-[48px] flex items-center justify-center"
               aria-label="התקשר"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

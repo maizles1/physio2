@@ -52,12 +52,19 @@ export default function SocialSharing({
     }
 
     // Track sharing event if GA is available
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'share', {
-        method: platform,
-        content_type: 'article',
-        item_id: pathname,
-      })
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      try {
+        window.gtag('event', 'share', {
+          method: platform,
+          content_type: 'article',
+          item_id: pathname,
+        })
+      } catch (error) {
+        // Silently fail if gtag is not available
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Google Analytics tracking failed:', error)
+        }
+      }
     }
   }
 

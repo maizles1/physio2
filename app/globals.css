@@ -86,23 +86,24 @@ a {
   padding: 4rem 0;
 }
 
-@media (max-width: 768px) {
+/* iPhone (375px) and small mobile devices */
+@media (max-width: 480px) {
   .section-spacing {
-    padding: 2.5rem 0;
+    padding: 2rem 0;
   }
   
   h1 {
-    font-size: 1.875rem; /* 30px */
+    font-size: 1.5rem; /* 24px */
     line-height: 1.2;
   }
   
   h2 {
-    font-size: 1.5rem; /* 24px */
+    font-size: 1.25rem; /* 20px */
     line-height: 1.3;
   }
   
   h3 {
-    font-size: 1.25rem; /* 20px */
+    font-size: 1.125rem; /* 18px */
   }
   
   /* Ensure buttons are touch-friendly (min 48x48px) */
@@ -115,16 +116,101 @@ a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem;
   }
   
+  /* Improve text readability on mobile */
+  p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+  
+  /* Container padding for small screens */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* iPad (768px) and tablets */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .section-spacing {
+    padding: 3rem 0;
+  }
+  
+  h1 {
+    font-size: 2rem; /* 32px */
+    line-height: 1.25;
+  }
+  
+  h2 {
+    font-size: 1.625rem; /* 26px */
+    line-height: 1.3;
+  }
+  
+  h3 {
+    font-size: 1.375rem; /* 22px */
+  }
+  
+  /* Ensure buttons are touch-friendly */
+  button, 
+  a[role="button"],
+  a.button,
+  .btn {
+    min-height: 48px;
+    min-width: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Container padding for tablets */
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Mobile and tablet common styles */
+@media (max-width: 1024px) {
   /* Prevent horizontal overflow */
   body {
     overflow-x: hidden;
   }
   
-  /* Improve text readability on mobile */
-  p {
-    font-size: 1rem;
-    line-height: 1.7;
+  /* Ensure images don't overflow */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Fix iframe responsiveness */
+  iframe {
+    max-width: 100%;
+  }
+}
+
+/* Desktop (1920px and larger) */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1400px;
+  }
+  
+  h1 {
+    font-size: 3.5rem; /* 56px */
+  }
+  
+  h2 {
+    font-size: 2.5rem; /* 40px */
+  }
+  
+  h3 {
+    font-size: 1.875rem; /* 30px */
+  }
+  
+  /* Better spacing on large screens */
+  .section-spacing {
+    padding: 6rem 0;
   }
 }
