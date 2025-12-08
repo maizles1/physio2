@@ -166,16 +166,32 @@ echo ""
 echo -e "${BLUE}מנקה גיבויים ישנים (שומר 10 האחרונים)...${NC}"
 if [ -d "${BACKUP_DIR}" ]; then
     cd "${BACKUP_DIR}"
-    # Count backups (directories and archives)
-    BACKUP_COUNT=$(ls -1d ${PROJECT_NAME}_backup_* 2>/dev/null | wc -l | tr -d ' ')
+    # Count only backup directories (not .tar.gz files)
+    # Each backup session consists of a directory and optionally a .tar.gz file
+    BACKUP_COUNT=$(find . -maxdepth 1 -type d -name "${PROJECT_NAME}_backup_*" 2>/dev/null | wc -l | tr -d ' ')
     
     if [ "$BACKUP_COUNT" -gt 10 ]; then
-        ls -1t ${PROJECT_NAME}_backup_* 2>/dev/null | tail -n +11 | while read -r old_backup; do
-            rm -rf "$old_backup"
-            echo -e "${YELLOW}✓${NC} נמחק: $old_backup"
+        # Get list of backup directories sorted by modification time (newest first)
+        # Using ls -lt to sort by modification time, then extract directory names
+        # tail -n +11 skips the first 10 (newest) and keeps the rest (oldest)
+        ls -1td ${PROJECT_NAME}_backup_*/ 2>/dev/null | tail -n +11 | while read -r old_backup_dir; do
+            # Remove trailing slash if present
+            old_backup_dir=$(echo "$old_backup_dir" | sed 's|/$||')
+            backup_basename=$(basename "$old_backup_dir")
+            
+            # Remove the directory
+            if [ -d "$old_backup_dir" ]; then
+                rm -rf "$old_backup_dir"
+                echo -e "${YELLOW}✓${NC} נמחק תיקייה: ${backup_basename}"
+            fi
+            # Remove corresponding .tar.gz file if it exists
+            if [ -f "${backup_basename}.tar.gz" ]; then
+                rm -f "${backup_basename}.tar.gz"
+                echo -e "${YELLOW}✓${NC} נמחק ארכיון: ${backup_basename}.tar.gz"
+            fi
         done
     else
-        echo -e "${GREEN}✓${NC} אין גיבויים ישנים למחיקה"
+        echo -e "${GREEN}✓${NC} אין גיבויים ישנים למחיקה (נמצאו ${BACKUP_COUNT} גיבויים)"
     fi
 fi
 
