@@ -34,8 +34,8 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
         src={imgSrc}
         alt={alt}
         fill
-        className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-        sizes={sizes || '(max-width: 768px) 100vw, 50vw'}
+        className={`${className || 'object-cover'} w-full h-full ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+        sizes={sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
         unoptimized={isSvg}
         priority={priority}
         loading={priority ? undefined : 'lazy'}

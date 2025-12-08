@@ -168,14 +168,14 @@ export default function VideosSection() {
                     aria-label={`סרטון: ${video.title}`}
                     onClick={() => openVideo(video)}
                   >
-                    <div className="relative aspect-video bg-gradient-to-br from-[#2080C0] to-[#2A3080] overflow-hidden group">
+                    <div className="relative aspect-video bg-gradient-to-br from-[#2080C0] to-[#2A3080] overflow-hidden group w-full">
                       {hasValidVideoId && thumbnailUrl ? (
                         <Image
                           src={thumbnailUrl}
                           alt={`תמונת תצוגה: ${video.title}`}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                           loading="lazy"
                           onError={(e) => {
                             // Fallback to placeholder if thumbnail doesn't load

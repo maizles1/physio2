@@ -18,33 +18,33 @@ export default function HeroSection() {
 
       {/* Insurance Logos - Top Left */}
       <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 flex flex-col gap-2 sm:gap-3 hidden sm:flex">
-        <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg">
+        <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg min-h-[40px] sm:min-h-[48px]">
           <Image
             src="/images/insurance/Clalit-Logo.png"
             alt="כללית"
             width={40}
             height={20}
-            className="h-6 sm:h-8 w-auto object-contain opacity-90"
+            className="h-6 sm:h-8 w-auto object-contain opacity-90 max-h-full"
             unoptimized
           />
         </div>
-        <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg">
+        <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg min-h-[40px] sm:min-h-[48px]">
           <Image
             src="/images/insurance/Meuhedet-Logo.png"
             alt="מאוחדת"
             width={40}
             height={20}
-            className="h-6 sm:h-8 w-auto object-contain opacity-90"
+            className="h-6 sm:h-8 w-auto object-contain opacity-90 max-h-full"
             unoptimized
           />
         </div>
-        <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg">
+        <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg min-h-[40px] sm:min-h-[48px]">
           <Image
             src="/images/insurance/Ministry-of-defense-logo.png"
             alt="משרד הביטחון"
             width={40}
             height={20}
-            className="h-24 sm:h-32 w-auto object-contain opacity-90"
+            className="h-20 sm:h-24 md:h-28 w-auto object-contain opacity-90 max-h-full"
             unoptimized
           />
         </div>

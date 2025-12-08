@@ -243,16 +243,16 @@ export default function ServicesPage() {
                   </div>
                 </div>
                 <div className="flex-1 w-full">
-                  <div className={`h-64 sm:h-80 md:h-96 rounded-xl shadow-xl overflow-hidden relative bg-gradient-to-br ${service.color}`}>
+                  <div className={`h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-xl shadow-xl overflow-hidden relative`}>
                     <ServiceImage
                       src={service.imagePath}
                       fallbackSrc={service.fallbackImagePath}
                       alt={service.title}
-                      className="object-cover opacity-90"
+                      className="object-cover w-full h-full"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       priority={index < 2}
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 pointer-events-none`} aria-hidden="true"></div>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-10 pointer-events-none`} aria-hidden="true"></div>
                   </div>
                 </div>
               </div>

@@ -7,14 +7,14 @@ export default function ClinicLogo() {
   const [logoError, setLogoError] = useState(false)
 
   return (
-    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center shadow-md overflow-hidden relative bg-white border border-gray-200">
+    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center shadow-md overflow-hidden relative bg-white border border-gray-200 p-1">
       {!logoError ? (
         <Image
           src="/images/logo/clinic-logo.png"
           alt="לוגו פיזיותרפיה.פלוס"
           width={48}
           height={48}
-          className="object-contain w-full h-full p-1"
+          className="object-contain w-full h-full max-w-full max-h-full"
           onError={() => setLogoError(true)}
           unoptimized
         />

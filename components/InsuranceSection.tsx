@@ -82,15 +82,18 @@ export default function InsuranceSection() {
                 key={index}
                 className={`${option.bgColor} rounded-xl p-4 sm:p-6 border border-gray-200 hover:shadow-lg transition-shadow`}
               >
-                <div className="mb-3 sm:mb-4 h-16 sm:h-20 flex items-center justify-center relative" aria-hidden="true">
-                  <Image
-                    src={option.logoPath}
-                    alt={`${option.title} - לוגו`}
-                    width={160}
-                    height={64}
-                    className="object-contain max-h-full w-auto"
-                    unoptimized
-                  />
+                <div className="mb-3 sm:mb-4 h-16 sm:h-20 md:h-24 flex items-center justify-center relative px-2 w-full" aria-hidden="true">
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <Image
+                      src={option.logoPath}
+                      alt={`${option.title} - לוגו`}
+                      width={160}
+                      height={64}
+                      className="object-contain w-full h-full max-h-full max-w-full"
+                      unoptimized
+                      style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
+                    />
+                  </div>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-gray-900">
                   {option.title}

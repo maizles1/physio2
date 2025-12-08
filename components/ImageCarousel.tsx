@@ -109,7 +109,7 @@ export default function ImageCarousel() {
 
   const currentImage = useMemo(() => images[currentIndex], [currentIndex])
 
-  // Update container height based on current image
+  // Update container height based on current image - ensure no empty borders
   useEffect(() => {
     const updateHeight = () => {
       if (!imagesContainerRef.current || !carouselRef.current) return
@@ -125,10 +125,32 @@ export default function ImageCarousel() {
         if (naturalWidth && naturalHeight) {
           const containerWidth = carouselRef.current.clientWidth || 1200
           const aspectRatio = naturalWidth / naturalHeight
-          const calculatedHeight = containerWidth / aspectRatio
-          // Limit to 60vh max to ensure it fits on screen
-          const maxHeight = typeof window !== 'undefined' ? Math.min(window.innerHeight * 0.6, 600) : 600
-          setContainerHeight(Math.min(Math.max(calculatedHeight, 300), maxHeight))
+          
+          // Calculate height based on aspect ratio to fill container exactly - no empty borders
+          let calculatedHeight = containerWidth / aspectRatio
+          
+          // Responsive max height based on screen size
+          const maxHeight = typeof window !== 'undefined' 
+            ? window.innerWidth < 640 
+              ? Math.min(window.innerHeight * 0.5, 400) // Mobile: 50vh or 400px
+              : window.innerWidth < 1024
+              ? Math.min(window.innerHeight * 0.55, 500) // Tablet: 55vh or 500px
+              : Math.min(window.innerHeight * 0.6, 600) // Desktop: 60vh or 600px
+            : 400
+          
+          const minHeight = typeof window !== 'undefined' && window.innerWidth < 640 ? 250 : 300
+          
+          // If calculated height exceeds max, use maxHeight (image will fill with object-cover)
+          // If calculated height is less than min, use minHeight
+          // Otherwise use calculated height to match aspect ratio exactly
+          const finalHeight = calculatedHeight > maxHeight 
+            ? maxHeight 
+            : calculatedHeight < minHeight 
+            ? minHeight 
+            : calculatedHeight
+          
+          // Set height to ensure no empty borders - image will fill with object-cover
+          setContainerHeight(finalHeight)
         }
       }
     }
@@ -161,10 +183,11 @@ export default function ImageCarousel() {
             ref={carouselRef}
             className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-xl sm:shadow-2xl w-full"
             style={{ 
-              minHeight: '300px',
+              minHeight: '250px',
               maxHeight: '60vh',
-              height: containerHeight ? `${containerHeight}px` : 'auto',
-              transition: 'height 0.5s ease-in-out'
+              height: containerHeight ? `${containerHeight}px` : '400px',
+              transition: 'height 0.5s ease-in-out',
+              width: '100%'
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -173,7 +196,7 @@ export default function ImageCarousel() {
             aria-label="קרוסלת תמונות של הקליניקה"
           >
             {/* Images */}
-            <div ref={imagesContainerRef} className="relative w-full h-full bg-white">
+            <div ref={imagesContainerRef} className="relative w-full h-full">
               {images.map((image, index) => {
                 const isCurrent = index === currentIndex
                 return (
@@ -189,7 +212,7 @@ export default function ImageCarousel() {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className="object-contain"
+                      className="object-cover w-full h-full"
                       priority={index === 0}
                       loading={index === 0 ? undefined : 'lazy'}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
@@ -206,9 +229,28 @@ export default function ImageCarousel() {
                                 const containerWidth = carouselRef.current.clientWidth || 1200
                                 const aspectRatio = naturalWidth / naturalHeight
                                 const calculatedHeight = containerWidth / aspectRatio
-                                // Limit to 60vh max to ensure it fits on screen
-                                const maxHeight = typeof window !== 'undefined' ? Math.min(window.innerHeight * 0.6, 600) : 600
-                                setContainerHeight(Math.min(Math.max(calculatedHeight, 300), maxHeight))
+                                // Responsive max height based on screen size
+                                const maxHeight = typeof window !== 'undefined' 
+                                  ? window.innerWidth < 640 
+                                    ? Math.min(window.innerHeight * 0.5, 400) // Mobile: 50vh or 400px
+                                    : window.innerWidth < 1024
+                                    ? Math.min(window.innerHeight * 0.55, 500) // Tablet: 55vh or 500px
+                                    : Math.min(window.innerHeight * 0.6, 600) // Desktop: 60vh or 600px
+                                  : 400
+                                
+                                const minHeight = typeof window !== 'undefined' && window.innerWidth < 640 ? 250 : 300
+                                
+                                // If calculated height exceeds max, use maxHeight (image will fill with object-cover)
+                                // If calculated height is less than min, use minHeight
+                                // Otherwise use calculated height to match aspect ratio exactly
+                                const finalHeight = calculatedHeight > maxHeight 
+                                  ? maxHeight 
+                                  : calculatedHeight < minHeight 
+                                  ? minHeight 
+                                  : calculatedHeight
+                                
+                                // Set height to ensure no empty borders - image will fill with object-cover
+                                setContainerHeight(finalHeight)
                               }
                             }
                           }, 50)

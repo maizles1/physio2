@@ -154,14 +154,14 @@ export default function AboutPage() {
             {/* Andrey Meizels */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
               <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/3">
-                  <div className="relative w-full h-96 bg-gradient-to-br from-[#40C0F0] to-[#2A3080]">
+                <div className="md:w-1/3 w-full">
+                  <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[500px] overflow-hidden">
                     <Image
                       src="/images/andrey-meizels.JPG"
                       alt="אנדריי מייזלס, פיזיותרפיסט מקצועי"
                       fill
-                      className="object-cover"
-                      style={{ objectFit: 'cover' }}
+                      className="object-cover w-full h-full"
+                      sizes="(max-width: 768px) 100vw, 33vw"
                       unoptimized
                     />
                   </div>

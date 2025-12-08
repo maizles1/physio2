@@ -110,13 +110,13 @@ export default function ServicesPreview() {
               aria-label={`${service.title} - ${service.description}. למידע נוסף`}
             >
               {/* תמונה קטנה */}
-              <div className="relative h-48 w-full overflow-hidden">
+              <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 w-full overflow-hidden">
                 <Image
                   src={service.imagePath}
                   alt={service.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                  className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-20 group-hover:opacity-30 transition-opacity`}></div>
               </div>
