@@ -65,7 +65,7 @@ export default function FAQPage() {
         <div className="container mx-auto px-4 relative z-10">
           <Breadcrumbs items={[{ label: 'דף בית', href: '/' }, { label: 'שאלות נפוצות', href: '/faq' }]} />
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">שאלות נפוצות</h1>
-          <p className="text-lg sm:text-xl text-blue-100">תשובות לשאלות הנפוצות ביותר על הקליניקה והטיפולים</p>
+          <p className="text-lg sm:text-xl text-white">תשובות לשאלות הנפוצות ביותר על הקליניקה והטיפולים</p>
         </div>
       </section>
 

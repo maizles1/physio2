@@ -73,7 +73,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 relative z-10">
           <Breadcrumbs items={[{ label: 'דף בית', href: '/' }, { label: 'אודות', href: '/about' }]} />
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">אודות הקליניקה</h1>
-          <p className="text-lg sm:text-xl text-blue-100">הכירו את פיזיותרפיה.פלוס ואנדריי מייזלס</p>
+          <p className="text-lg sm:text-xl text-white">הכירו את פיזיותרפיה.פלוס ואנדריי מייזלס</p>
         </div>
       </section>
 

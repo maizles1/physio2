@@ -41,7 +41,7 @@ export default function AboutPreview() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <h3 className="font-bold text-lg mb-2">איכות גבוהה</h3>
-                <p className="text-blue-100">טיפול מקצועי ברמה גבוהה ביותר</p>
+                <p className="text-white">טיפול מקצועי ברמה גבוהה ביותר</p>
               </div>
               <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-6 text-white h-48 flex flex-col justify-center">
                 <svg className="w-10 h-10 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

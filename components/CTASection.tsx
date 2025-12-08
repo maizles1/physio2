@@ -8,7 +8,7 @@ export default function CTASection() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             מוכנים להתחיל את תהליך השיקום?
           </h2>
-          <p className="text-lg sm:text-xl mb-8 text-blue-100">
+          <p className="text-lg sm:text-xl mb-8 text-white">
             צרו איתנו קשר עוד היום וקבלו ייעוץ מקצועי
           </p>
           <div className="flex justify-center items-center">

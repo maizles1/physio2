@@ -195,7 +195,7 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4 relative z-10">
           <Breadcrumbs items={[{ label: 'דף בית', href: '/' }, { label: 'שירותים', href: '/services' }]} />
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">השירותים שלנו</h1>
-          <p className="text-lg sm:text-xl text-blue-100">מגוון רחב של שירותי פיזיותרפיה מקצועיים המותאמים לצרכי כל מטופל</p>
+          <p className="text-lg sm:text-xl text-white">מגוון רחב של שירותי פיזיותרפיה מקצועיים המותאמים לצרכי כל מטופל</p>
         </div>
       </section>
 
@@ -267,7 +267,7 @@ export default function ServicesPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             מוכנים להתחיל את תהליך השיקום?
           </h2>
-          <p className="text-lg sm:text-xl mb-8 text-blue-100">
+          <p className="text-lg sm:text-xl mb-8 text-white">
             צרו איתנו קשר עוד היום וקבלו ייעוץ מקצועי
           </p>
           <Link

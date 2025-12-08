@@ -100,7 +100,7 @@ export default function AppointmentPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">קביעת תור</h1>
-          <p className="text-lg sm:text-xl text-blue-100">מלאו את הפרטים ונחזור אליכם בהקדם לאישור התור</p>
+          <p className="text-lg sm:text-xl text-white">מלאו את הפרטים ונחזור אליכם בהקדם לאישור התור</p>
         </div>
       </section>
 

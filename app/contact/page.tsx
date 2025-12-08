@@ -236,7 +236,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 relative z-10">
           <Breadcrumbs items={[{ label: 'דף בית', href: '/' }, { label: 'צור קשר', href: '/contact' }]} />
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">צור קשר</h1>
-          <p className="text-lg sm:text-xl text-blue-100">אנחנו כאן כדי לעזור - צרו איתנו קשר בכל דרך שמתאימה לכם</p>
+          <p className="text-lg sm:text-xl text-white">אנחנו כאן כדי לעזור - צרו איתנו קשר בכל דרך שמתאימה לכם</p>
         </div>
       </section>
 
