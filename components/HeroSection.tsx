@@ -16,35 +16,35 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Insurance Logos - Top Left */}
-      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 flex flex-col gap-2 sm:gap-3 hidden sm:flex">
-        <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg min-h-[40px] sm:min-h-[48px]">
+      {/* Insurance Logos - Top Left - קטן ומסודר */}
+      <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-20 flex flex-col gap-1.5 sm:gap-2 hidden sm:flex">
+        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-md">
           <Image
             src="/images/insurance/Clalit-Logo.png"
             alt="כללית"
-            width={40}
-            height={20}
-            className="h-6 sm:h-8 w-auto object-contain opacity-90 max-h-full"
+            width={60}
+            height={30}
+            className="h-4 sm:h-5 w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
-        <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg min-h-[40px] sm:min-h-[48px]">
+        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-md">
           <Image
             src="/images/insurance/Meuhedet-Logo.png"
             alt="מאוחדת"
-            width={40}
-            height={20}
-            className="h-6 sm:h-8 w-auto object-contain opacity-90 max-h-full"
+            width={60}
+            height={30}
+            className="h-4 sm:h-5 w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
-        <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-lg min-h-[40px] sm:min-h-[48px]">
+        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-md">
           <Image
             src="/images/insurance/Ministry-of-defense-logo.png"
             alt="משרד הביטחון"
-            width={40}
-            height={20}
-            className="h-20 sm:h-24 md:h-28 w-auto object-contain opacity-90 max-h-full"
+            width={60}
+            height={30}
+            className="h-5 sm:h-6 w-auto object-contain opacity-90"
             unoptimized
           />
         </div>

@@ -20,7 +20,7 @@ export default function AccessibilityPage() {
           />
         </div>
         <div className="container mx-auto px-4 relative z-10">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">הצהרת נגישות</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">הצהרת נגישות</h1>
           <p className="text-lg sm:text-xl text-white">מחויבותנו לנגישות השירותים והאתר</p>
         </div>
       </section>

@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium mb-4 inline-block">
               {post.category}
             </span>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">{post.title}</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">{post.title}</h1>
             <p className="text-white text-base sm:text-lg">{post.date}</p>
           </div>
         </div>

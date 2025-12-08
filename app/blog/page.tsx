@@ -46,7 +46,7 @@ export default function BlogPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <Breadcrumbs items={[{ label: 'דף בית', href: '/' }, { label: 'בלוג', href: '/blog' }]} />
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">בלוג ומאמרים</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">בלוג ומאמרים</h1>
           <p className="text-lg sm:text-xl text-white">מאמרים מקצועיים, טיפים ומידע שימושי על פיזיותרפיה ובריאות</p>
         </div>
       </section>

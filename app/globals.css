@@ -71,6 +71,58 @@ p {
   color: var(--text);
 }
 
+/* Ensure all text on blue background sections is white */
+section[style*="#2A3080"],
+section[style*="#2080C0"],
+section[style*="#40C0F0"],
+section[style*="linear-gradient"][class*="text-white"],
+section[class*="text-white"] {
+  color: white !important;
+}
+
+section[style*="#2A3080"] h1,
+section[style*="#2A3080"] h2,
+section[style*="#2A3080"] h3,
+section[style*="#2A3080"] h4,
+section[style*="#2A3080"] h5,
+section[style*="#2A3080"] h6,
+section[style*="#2A3080"] p,
+section[style*="#2A3080"] span,
+section[style*="#2080C0"] h1,
+section[style*="#2080C0"] h2,
+section[style*="#2080C0"] h3,
+section[style*="#2080C0"] h4,
+section[style*="#2080C0"] h5,
+section[style*="#2080C0"] h6,
+section[style*="#2080C0"] p,
+section[style*="#2080C0"] span,
+section[style*="#40C0F0"] h1,
+section[style*="#40C0F0"] h2,
+section[style*="#40C0F0"] h3,
+section[style*="#40C0F0"] h4,
+section[style*="#40C0F0"] h5,
+section[style*="#40C0F0"] h6,
+section[style*="#40C0F0"] p,
+section[style*="#40C0F0"] span,
+section[style*="linear-gradient"][class*="text-white"] h1,
+section[style*="linear-gradient"][class*="text-white"] h2,
+section[style*="linear-gradient"][class*="text-white"] h3,
+section[style*="linear-gradient"][class*="text-white"] h4,
+section[style*="linear-gradient"][class*="text-white"] h5,
+section[style*="linear-gradient"][class*="text-white"] h6,
+section[style*="linear-gradient"][class*="text-white"] p,
+section[style*="linear-gradient"][class*="text-white"] span,
+section[class*="text-white"] h1,
+section[class*="text-white"] h2,
+section[class*="text-white"] h3,
+section[class*="text-white"] h4,
+section[class*="text-white"] h5,
+section[class*="text-white"] h6,
+section[class*="text-white"] p,
+section[class*="text-white"] span {
+  color: white !important;
+}
+
 a {
   transition: all 0.2s ease;
 }
