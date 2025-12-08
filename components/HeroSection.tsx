@@ -16,35 +16,35 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Insurance Logos - Top Left - קטן ומסודר */}
-      <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-20 flex flex-col gap-1 sm:gap-1.5 hidden sm:flex">
-        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded px-1 sm:px-1.5 py-0.5 sm:py-1 shadow-sm">
+      {/* Insurance Logos - Top Left - קטן ומסודר מאוד */}
+      <div className="absolute top-1 left-1 sm:top-2 sm:left-2 z-20 flex flex-col gap-0.5 sm:gap-1 hidden sm:flex">
+        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded px-0.5 sm:px-1 py-0.5 shadow-sm">
           <Image
             src="/images/insurance/Clalit-Logo.png"
             alt="כללית"
-            width={50}
-            height={25}
-            className="h-3 sm:h-4 w-auto object-contain opacity-90"
+            width={40}
+            height={20}
+            className="h-2.5 sm:h-3 w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
-        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded px-1 sm:px-1.5 py-0.5 sm:py-1 shadow-sm">
+        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded px-0.5 sm:px-1 py-0.5 shadow-sm">
           <Image
             src="/images/insurance/Meuhedet-Logo.png"
             alt="מאוחדת"
-            width={50}
-            height={25}
-            className="h-3 sm:h-4 w-auto object-contain opacity-90"
+            width={40}
+            height={20}
+            className="h-2.5 sm:h-3 w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
-        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded px-1 sm:px-1.5 py-0.5 sm:py-1 shadow-sm">
+        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded px-0.5 sm:px-1 py-0.5 shadow-sm">
           <Image
             src="/images/insurance/Ministry-of-defense-logo.png"
             alt="משרד הביטחון"
-            width={50}
-            height={25}
-            className="h-3.5 sm:h-4.5 w-auto object-contain opacity-90"
+            width={40}
+            height={20}
+            className="h-3 sm:h-3.5 w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
