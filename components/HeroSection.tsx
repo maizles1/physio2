@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 export default function HeroSection() {
   return (
-    <section className="relative text-white overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #2A3080, #2080C0, #40C0F0)' }}>
+    <section className="relative text-white overflow-hidden bg-primary-gradient section-spacing">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div 
@@ -30,30 +30,28 @@ export default function HeroSection() {
           />
         </div>
         <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-md">
-          <Image
+            <Image
             src="/images/insurance/Meuhedet-Logo.png"
             alt="מאוחדת"
             width={40}
             height={20}
             className="max-h-[60px] w-auto object-contain opacity-90"
-            style={{ maxHeight: '60px', width: 'auto', height: 'auto' }}
             unoptimized
           />
         </div>
         <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-md">
-          <Image
+            <Image
             src="/images/insurance/Ministry-of-defense-logo.png"
             alt="משרד הביטחון"
             width={40}
             height={20}
             className="max-h-[60px] w-auto object-contain opacity-90"
-            style={{ maxHeight: '60px', width: 'auto', height: 'auto' }}
             unoptimized
           />
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20 lg:py-24 relative z-10 sm:pt-12">
+      <div className="container relative z-10 pt-12">
         <div className="max-w-6xl mx-auto">
           {/* Header with Image and Title */}
           <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 mb-8 sm:mb-12">
@@ -95,10 +93,10 @@ export default function HeroSection() {
                 סטנדרט אולימפי. יחס אישי.
               </h1>
               <div className="max-w-2xl mx-auto lg:mr-0 mt-4 sm:mt-6 px-2">
-                <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6 leading-relaxed text-white">
+                <h2 className="mb-4 sm:mb-6 text-white">
                   הידיים שטיפלו בנבחרת ישראל בג&apos;ודו – עכשיו לגמרי בשבילך
                 </h2>
-                <p className="text-sm sm:text-base md:text-lg leading-relaxed text-white">
+                <p className="text-large text-white">
                   נעים להכיר, אנדריי. בוא נשים את האמת על השולחן: כשכואב לך, שום דבר אחר לא משנה. כפיזיותרפיסט נבחרת ישראל בג&apos;ודו (לשעבר) ובעל תואר שני (MSc), ליוויתי ספורטאים ברגעים הקשים ביותר וראיתי אותם חוזרים למזרון כנגד כל הסיכויים. למדתי שאין פתרונות קסם, יש דרך. אני לא מאמין בטיפולי &apos;פס ייצור&apos;. אני מאמין באבחון שורש, ובתפירת חליפת טיפול המותאמת אישית ומדויקת למידות ולצרכים שלך. אני כאן כדי להילחם על התנועה שלך, להחזיר לך את הביטחון בגוף, ולהוביל אותך לחיים שמחכים לך בצד השני של הכאב.
                 </p>
               </div>
@@ -109,7 +107,7 @@ export default function HeroSection() {
           <div className="flex justify-center items-center px-2">
             <Link
               href="/contact"
-              className="bg-white text-[#2A3080] font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105 text-base sm:text-lg w-full sm:w-auto text-center min-h-[48px] flex items-center justify-center"
+              className="btn btn-secondary btn-large w-full sm:w-auto"
               aria-label="בוא נתחיל. שריין תור"
             >
               בוא נתחיל. שריין תור

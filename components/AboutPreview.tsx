@@ -2,11 +2,11 @@ import Link from 'next/link'
 
 export default function AboutPreview() {
   return (
-    <section className="py-12 sm:py-16 bg-white">
-      <div className="container mx-auto px-4">
+    <section className="section-spacing bg-white">
+      <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           <div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="mb-6 text-gray-900">
               אודות הקליניקה
             </h2>
             <p className="text-base sm:text-lg text-gray-700 mb-4 leading-relaxed">
@@ -28,7 +28,7 @@ export default function AboutPreview() {
             </div>
             <Link
               href="/about"
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="btn btn-primary"
               aria-label="קרא עוד על הקליניקה ועל אנדריי מייזלס"
             >
               קרא עוד עלינו

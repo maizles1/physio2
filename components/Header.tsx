@@ -40,10 +40,10 @@ export default function Header() {
   ]
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50 border-b" style={{ borderColor: '#E5E7EB' }}>
+    <header className="bg-white shadow-md sticky top-0 z-50 border-b border-gray-200">
       {/* Top Bar - Contact Info */}
-      <div className="hidden md:block text-white py-2.5" style={{ background: 'linear-gradient(to left, #2A3080, #2080C0)' }}>
-        <div className="container mx-auto px-4">
+      <div className="hidden md:block text-white py-2.5 bg-primary-gradient">
+        <div className="container">
           <div className="flex flex-row justify-between items-center text-sm flex-wrap gap-2">
             <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
               <a 
@@ -86,8 +86,8 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3 flex-shrink-0 hover:opacity-90 transition-opacity" aria-label="פיזיותרפיה.פלוס - דף בית">
             <ClinicLogo />
             <div className="hidden sm:block">
-              <h1 className="text-lg md:text-xl font-bold leading-tight" style={{ color: '#2A3080' }}>פיזיותרפיה.פלוס</h1>
-              <p className="text-xs md:text-sm leading-tight" style={{ color: '#2080C0' }}>מקצוענות שמרגישים בגוף</p>
+              <h1 className="text-lg md:text-xl font-bold leading-tight text-primary-dark">פיזיותרפיה.פלוס</h1>
+              <p className="text-xs md:text-sm leading-tight text-primary">מקצוענות שמרגישים בגוף</p>
             </div>
           </Link>
 
@@ -138,7 +138,7 @@ export default function Header() {
               href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#25D366] hover:bg-[#20BA5A] text-white px-4 py-2 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg flex items-center gap-2 text-sm"
+              className="btn bg-[#25D366] hover:bg-[#20BA5A] text-white text-sm"
               aria-label="שלח הודעת WhatsApp"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -158,7 +158,7 @@ export default function Header() {
                   }
                 }
               }}
-              className="bg-[#2080C0] hover:bg-[#004080] text-white px-4 py-2 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg flex items-center gap-2 text-sm min-h-[48px] min-w-[48px]"
+              className="btn btn-primary text-sm"
               aria-label={`התקשר אלינו: ${phoneNumber}`}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

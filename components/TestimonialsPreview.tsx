@@ -41,10 +41,10 @@ export default function TestimonialsPreview() {
   }
 
   return (
-    <section className="py-12 sm:py-16 bg-gradient-to-br from-gray-50 to-blue-50">
-      <div className="container mx-auto px-4">
+    <section className="section-spacing bg-gradient-to-br from-gray-50 to-blue-50">
+      <div className="container">
         <div className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="mb-4 text-gray-900">
             מה אומרים המטופלים שלנו
           </h2>
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">

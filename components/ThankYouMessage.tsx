@@ -31,7 +31,7 @@ function ThankYouMessageInner() {
   if (!showMessage) return null
 
   return (
-    <div className="container mx-auto px-4 py-4">
+    <div className="container py-4">
       <div className="max-w-6xl mx-auto">
         <div className="bg-green-50 border-r-4 border-green-500 rounded-lg p-4 mb-4 animate-fade-in">
           <div className="flex items-start gap-3">

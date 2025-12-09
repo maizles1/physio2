@@ -140,11 +140,11 @@ export default function VideosSection() {
           />
         )
       ))}
-      <section className="py-12 sm:py-16 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="section-spacing bg-white">
+        <div className="container">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-8 sm:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4" style={{ color: '#2A3080' }}>
+              <h2 className="mb-3 sm:mb-4 text-primary-dark">
                 סרטונים על הקליניקה
               </h2>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-2">
@@ -202,7 +202,7 @@ export default function VideosSection() {
                     </div>
                     
                     <div className="p-4 sm:p-6">
-                      <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: '#2A3080' }}>
+                      <h3 className="text-lg sm:text-xl font-bold mb-2 text-primary-dark">
                         {video.title}
                       </h3>
                       <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">

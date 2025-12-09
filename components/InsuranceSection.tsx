@@ -64,11 +64,11 @@ const insuranceOptions: InsuranceOption[] = [
 
 export default function InsuranceSection() {
   return (
-    <section className="py-12 sm:py-16 bg-gradient-to-br from-gray-50 to-blue-50">
-      <div className="container mx-auto px-4">
+    <section className="section-spacing bg-gradient-to-br from-gray-50 to-blue-50">
+      <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4" style={{ color: '#2A3080' }}>
+            <h2 className="mb-3 sm:mb-4 text-primary-dark">
               קופות חולים וביטוחים
             </h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-2">
@@ -91,7 +91,6 @@ export default function InsuranceSection() {
                       height={64}
                       className="object-contain w-full h-full max-h-full max-w-full"
                       unoptimized
-                      style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
                     />
                   </div>
                 </div>

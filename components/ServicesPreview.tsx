@@ -91,7 +91,7 @@ const services = [
 export default function ServicesPreview() {
   return (
     <section className="py-12 sm:py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
+      <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             השירותים שלנו
@@ -148,7 +148,7 @@ export default function ServicesPreview() {
         <div className="text-center mt-12">
           <Link
             href="/services"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="btn btn-primary"
             aria-label="צפה בכל השירותים שלנו"
           >
             צפה בכל השירותים

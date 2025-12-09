@@ -95,14 +95,14 @@ export default function TestimonialsContent() {
 
       {/* Testimonials */}
       <section className="py-16">
-        <div className="container mx-auto px-4">
+        <div className="container">
           <div className="max-w-6xl mx-auto">
             {/* Average Rating */}
             {reviewsData.averageRating > 0 && (
               <div className="text-center mb-12">
                 <div className="inline-flex flex-col items-center gap-3 bg-blue-50 rounded-xl px-8 py-6 border-2 border-blue-200">
                   <div className="flex items-center gap-4">
-                    <div className="text-4xl font-bold" style={{ color: '#2A3080' }}>
+                    <div className="text-4xl font-bold text-primary-dark">
                       {reviewsData.averageRating.toFixed(1)}
                     </div>
                     <div className="flex gap-1">
@@ -190,7 +190,7 @@ export default function TestimonialsContent() {
             {/* Call to Action */}
             <div className="mt-12 text-center">
               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8">
-                <h2 className="text-2xl font-bold mb-4" style={{ color: '#2A3080' }}>
+                <h2 className="text-2xl font-bold mb-4 text-primary-dark">
                   חווית טיפול טובה? נשמח לשמוע מכם!
                 </h2>
                 <p className="text-gray-600 mb-6">
