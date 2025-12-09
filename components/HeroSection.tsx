@@ -17,34 +17,37 @@ export default function HeroSection() {
       </div>
 
       {/* Insurance Logos - Top Left - קטן */}
-      <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-20 flex flex-col gap-1 sm:gap-1.5 hidden sm:flex">
-        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-md min-h-[32px] sm:min-h-[36px]">
+      <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 flex flex-col gap-1 sm:gap-1.5 hidden sm:flex">
+        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-md">
           <Image
             src="/images/insurance/Clalit-Logo.png"
             alt="כללית"
             width={40}
             height={20}
-            className="h-4 sm:h-5 w-auto object-contain opacity-90"
+            className="max-h-[60px] w-auto object-contain opacity-90"
+            style={{ maxHeight: '60px', width: 'auto', height: 'auto' }}
             unoptimized
           />
         </div>
-        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-md min-h-[32px] sm:min-h-[36px]">
+        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-md">
           <Image
             src="/images/insurance/Meuhedet-Logo.png"
             alt="מאוחדת"
             width={40}
             height={20}
-            className="h-4 sm:h-5 w-auto object-contain opacity-90"
+            className="max-h-[60px] w-auto object-contain opacity-90"
+            style={{ maxHeight: '60px', width: 'auto', height: 'auto' }}
             unoptimized
           />
         </div>
-        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-md min-h-[32px] sm:min-h-[36px]">
+        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-md">
           <Image
             src="/images/insurance/Ministry-of-defense-logo.png"
             alt="משרד הביטחון"
             width={40}
             height={20}
-            className="h-4 sm:h-5 w-auto object-contain opacity-90"
+            className="max-h-[60px] w-auto object-contain opacity-90"
+            style={{ maxHeight: '60px', width: 'auto', height: 'auto' }}
             unoptimized
           />
         </div>
