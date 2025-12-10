@@ -51,10 +51,10 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="container relative z-10 pt-12">
+      <div className="container relative z-10 pt-16 sm:pt-20">
         <div className="max-w-6xl mx-auto">
           {/* Header with Image and Title */}
-          <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 mb-8 sm:mb-12">
+          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-10 mb-8 sm:mb-12">
             {/* Image */}
             <div className="flex-shrink-0 order-2 lg:order-1">
               <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl bg-white/10">
@@ -88,15 +88,15 @@ export default function HeroSection() {
             </div>
             
             {/* Title and Description */}
-            <div className="flex-1 text-center lg:text-right order-1 lg:order-2">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 leading-tight px-2 text-white">
+            <div className="flex-1 text-center lg:text-right order-1 lg:order-2 pr-16 sm:pr-20 md:pr-24">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-relaxed tracking-wide px-2 text-white">
                 סטנדרט אולימפי. יחס אישי.
               </h1>
-              <div className="max-w-2xl mx-auto lg:mr-0 mt-4 sm:mt-6 px-2">
-                <h2 className="mb-4 sm:mb-6 text-white">
+              <div className="max-w-3xl mx-auto lg:mr-0 mt-4 sm:mt-6 px-2">
+                <h2 className="mb-6 sm:mb-8 text-white leading-relaxed">
                   הידיים שטיפלו בנבחרת ישראל בג&apos;ודו – עכשיו לגמרי בשבילך
                 </h2>
-                <p className="text-large text-white">
+                <p className="text-large text-white leading-loose" style={{ lineHeight: '2.0' }}>
                   נעים להכיר, אנדריי. בוא נשים את האמת על השולחן: כשכואב לך, שום דבר אחר לא משנה. כפיזיותרפיסט נבחרת ישראל בג&apos;ודו (לשעבר) ובעל תואר שני (MSc), ליוויתי ספורטאים ברגעים הקשים ביותר וראיתי אותם חוזרים למזרון כנגד כל הסיכויים. למדתי שאין פתרונות קסם, יש דרך. אני לא מאמין בטיפולי &apos;פס ייצור&apos;. אני מאמין באבחון שורש, ובתפירת חליפת טיפול המותאמת אישית ומדויקת למידות ולצרכים שלך. אני כאן כדי להילחם על התנועה שלך, להחזיר לך את הביטחון בגוף, ולהוביל אותך לחיים שמחכים לך בצד השני של הכאב.
                 </p>
               </div>
