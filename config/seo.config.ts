@@ -42,8 +42,8 @@ export interface SEOConfig {
 export const seoConfig: SEOConfig = {
   siteName: 'פיזיותרפיה.פלוס - מרכז הפיזיותרפיה של אשדוד',
   siteUrl: 'https://physiotherapy.plus',
-  defaultTitle: 'פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד | מרכז כלניות',
-  defaultDescription: 'מכון פיזיותרפיה פרטי באשדוד במרכז כלניות. טיפול מקצועי בכאבי גב, צוואר, TMJ, שיקום אורטופדי ושיקום וסטיבולרי. פיזיותרפיסט מומלץ עם ניסיון של 15+ שנה.',
+  defaultTitle: 'פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס - מרכז כלניות',
+  defaultDescription: 'פיזיותרפיסט פרטי מומלץ באשדוד. מכון פיזיותרפיה פרטי באשדוד במרכז כלניות. טיפול מקצועי בכאבי גב, צוואר, TMJ, שיקום אורטופדי ושיקום וסטיבולרי. פיזיותרפיסט מומלץ עם ניסיון של 15+ שנה.',
   defaultKeywords: [
     'פיזיותרפיסט פרטי באשדוד',
     'פיזיותרפיסט מומלץ באשדוד',
@@ -146,6 +146,7 @@ export function getOGImageUrl(imagePath?: string): string {
   }
   return `${seoConfig.siteUrl}/images/logo/clinic-logo.png`
 }
+
 
 
 
