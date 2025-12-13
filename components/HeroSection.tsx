@@ -94,7 +94,7 @@ export default function HeroSection() {
               </h1>
               <div className="max-w-3xl mx-auto lg:mr-0 mt-4 sm:mt-6 px-2">
                 <h2 className="mb-6 sm:mb-8 text-white leading-relaxed text-lg sm:text-xl">
-                  פיזיותרפיסט נבחרת ישראל בג׳ודו (לשעבר) | MSc בפיזיותרפיה | מוכר להחזרים
+                  אנדריי מייזלס | פיזיותרפיסט נבחרת ישראל בג׳ודו (לשעבר) | תואר שני בפיזיותרפיה
                 </h2>
                 <div className="hero-bio">
                   <p className="text-lg leading-relaxed mb-6 text-white">
@@ -126,7 +126,7 @@ export default function HeroSection() {
                   <p className="font-medium text-lg border-t border-white/20 pt-4 mt-4 inline-block text-white">
                     לכל מטופל אני מתייחס כאל שותף בתהליך — מהאבחון הראשוני ועד לחזרה לפעילות מלאה.
                     <br />
-                    <span className="font-bold text-xl block mt-2">מקצועיות. רפואה. תוצאות.</span>
+                    <span className="font-bold text-xl block mt-2">סטנדרט אולימפי. יחס אישי.</span>
                   </p>
                 </div>
               </div>
