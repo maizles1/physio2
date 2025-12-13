@@ -222,6 +222,8 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/images/logo/clinic-logo.png" type="image/png" sizes="32x32" />
         <link rel="shortcut icon" href="/images/logo/clinic-logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/images/logo/clinic-logo.png" />
@@ -244,6 +246,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
       </head>
       <body className="antialiased">
         <ErrorBoundary>
