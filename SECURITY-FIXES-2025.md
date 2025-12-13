@@ -191,3 +191,4 @@ dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content) }}
 ---
 
 **כל התיקונים נבדקו ואושרו. האתר כעת מאובטח יותר.**
+

@@ -221,3 +221,4 @@ curl https://physiotherapy.plus/api/reviews
 - [env.example](./env.example) - Template למשתני סביבה
 - [Next.js Security Docs](https://nextjs.org/docs/app/building-your-application/configuring/security-headers)
 
+

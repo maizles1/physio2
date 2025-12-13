@@ -100,3 +100,4 @@ git remote add origin https://github.com/maizles1/physio2.git
    - השתמש בסקריפט - הוא יציג לך את השינויים לפני commit
    - או עשה `git status` לפני `git add`
 
+
