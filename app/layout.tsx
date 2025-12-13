@@ -222,7 +222,7 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <head>
-        <meta charset="UTF-8" />
+        <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/images/logo/clinic-logo.png" type="image/png" sizes="32x32" />
         <link rel="shortcut icon" href="/images/logo/clinic-logo.png" type="image/png" />
