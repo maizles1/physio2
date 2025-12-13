@@ -58,7 +58,11 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: '/images/logo/clinic-logo.png',
+    icon: [
+      { url: '/images/logo/clinic-logo.png', type: 'image/png' },
+      { url: '/images/logo/clinic-logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/images/logo/clinic-logo.png', sizes: '16x16', type: 'image/png' },
+    ],
     shortcut: '/images/logo/clinic-logo.png',
     apple: '/images/logo/clinic-logo.png',
   },
@@ -218,7 +222,9 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <head>
-        <link rel="icon" href="/images/logo/clinic-logo.png" type="image/png" />
+        <link rel="icon" href="/images/logo/clinic-logo.png" type="image/png" sizes="32x32" />
+        <link rel="shortcut icon" href="/images/logo/clinic-logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/logo/clinic-logo.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap" as="style" />

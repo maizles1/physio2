@@ -57,7 +57,41 @@ export default function HeroSection() {
           <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12">
             {/* Image */}
             <div className="flex-shrink-0 mb-6 lg:mb-0 lg:mt-16 order-1">
-              <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl bg-white/10">
+              <div className="flex flex-row items-center gap-3 lg:flex-col lg:items-start">
+                {/* Insurance Logos - Mobile - משמאל לתמונה */}
+                <div className="flex flex-col gap-2 lg:hidden">
+                  <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-2 py-1.5 shadow-md">
+                    <Image
+                      src="/images/insurance/Clalit-Logo.png"
+                      alt="כללית"
+                      width={35}
+                      height={18}
+                      className="max-h-[45px] w-auto object-contain opacity-90"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-2 py-1.5 shadow-md">
+                    <Image
+                      src="/images/insurance/Meuhedet-Logo.png"
+                      alt="מאוחדת"
+                      width={35}
+                      height={18}
+                      className="max-h-[45px] w-auto object-contain opacity-90"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-2 py-1.5 shadow-md">
+                    <Image
+                      src="/images/insurance/Ministry-of-defense-logo.png"
+                      alt="משרד הביטחון"
+                      width={35}
+                      height={18}
+                      className="max-h-[45px] w-auto object-contain opacity-90"
+                      unoptimized
+                    />
+                  </div>
+                </div>
+                <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl bg-white/10">
                 <Image
                   src="/images/andrey-meizels.JPG"
                   alt="אנדריי מייזלס, פיזיותרפיסט מקצועי"
