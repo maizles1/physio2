@@ -51,8 +51,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
-        width: 1200,
-        height: 630,
+        width: 1000,
+        height: 1000,
         alt: 'פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד',
       },
     ],
