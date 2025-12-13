@@ -48,11 +48,25 @@ export const metadata: Metadata = {
     siteName: 'פיזיותרפיה.פלוס',
     title: 'פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס',
     description: 'פיזיותרפיסט פרטי מומלץ באשדוד. אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו. מכון פיזיותרפיה פרטי באשדוד במרכז כלניות. טיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
+    images: [
+      {
+        url: 'https://physiotherapy.plus/images/logo/clinic-logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד',
+      },
+    ],
+  },
+  icons: {
+    icon: '/images/logo/clinic-logo.png',
+    shortcut: '/images/logo/clinic-logo.png',
+    apple: '/images/logo/clinic-logo.png',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס',
     description: 'פיזיותרפיסט פרטי מומלץ באשדוד. אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו. מכון פיזיותרפיה פרטי באשדוד במרכז כלניות.',
+    images: ['https://physiotherapy.plus/images/logo/clinic-logo.png'],
   },
   robots: {
     index: true,
@@ -204,6 +218,7 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <head>
+        <link rel="icon" href="/images/logo/clinic-logo.png" type="image/png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap" as="style" />
