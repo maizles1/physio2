@@ -51,12 +51,12 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="container relative z-10 pt-16 sm:pt-20">
+      <div className="container relative z-10 pt-20 sm:pt-24 lg:pt-16">
         <div className="max-w-6xl mx-auto">
           {/* Header with Image and Title */}
-          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-10 mb-8 sm:mb-12">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12">
             {/* Image */}
-            <div className="flex-shrink-0 order-2 lg:order-1">
+            <div className="flex-shrink-0 mt-16 sm:mt-20 lg:mt-0 ml-4 sm:ml-6 lg:ml-0 mb-6 lg:mb-0">
               <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl bg-white/10">
                 <Image
                   src="/images/andrey-meizels.JPG"
@@ -88,11 +88,11 @@ export default function HeroSection() {
             </div>
             
             {/* Title and Description */}
-            <div className="flex-1 text-center lg:text-right order-1 lg:order-2 pr-16 sm:pr-20 md:pr-24">
+            <div className="flex-1 text-center lg:text-right pl-4 sm:pl-6 lg:pl-0">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-relaxed tracking-wide px-2 text-white">
                 פיזיותרפיסט פרטי באשדוד
               </h1>
-              <div className="max-w-3xl mx-auto lg:mr-0 mt-4 sm:mt-6 px-2">
+              <div className="max-w-3xl mx-auto lg:mx-0 lg:mr-0 mt-4 sm:mt-6 px-2">
                 <h2 className="mb-6 sm:mb-8 text-white leading-relaxed text-lg sm:text-xl">
                   אנדריי מייזלס | פיזיותרפיסט נבחרת ישראל בג׳ודו (לשעבר) | תואר שני בפיזיותרפיה
                 </h2>
