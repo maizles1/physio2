@@ -224,6 +224,7 @@ export default function RootLayout({
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="google-site-verification" content="3hvigL2OU0tVghImB-V_m3vitkOKrmjieeqQIa4IBRE" />
         <link rel="icon" href="/images/logo/clinic-logo.png" type="image/png" sizes="32x32" />
         <link rel="shortcut icon" href="/images/logo/clinic-logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/images/logo/clinic-logo.png" />
