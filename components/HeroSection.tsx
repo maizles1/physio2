@@ -93,16 +93,22 @@ export default function HeroSection() {
                 </div>
                 <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl bg-white/10">
                 <Image
-                  src="/images/andrey-meizels.JPG"
+                  src="/images/andrey-meizels.webp"
                   alt="אנדריי מייזלס, פיזיותרפיסט מקצועי"
                   width={320}
                   height={320}
                   className="w-full h-full object-cover"
                   priority
+                  fetchPriority="high"
                   sizes="(max-width: 640px) 160px, (max-width: 768px) 192px, (max-width: 1024px) 256px, 320px"
                   onError={(e) => {
-                    // Fallback to placeholder if image doesn't exist
+                    // Fallback to JPG if WebP doesn't exist
                     const target = e.target as HTMLImageElement
+                    if (target.src.includes('.webp')) {
+                      target.src = '/images/andrey-meizels.JPG'
+                      return
+                    }
+                    // Fallback to placeholder if image doesn't exist
                     target.style.display = 'none'
                     if (target.nextElementSibling) {
                       (target.nextElementSibling as HTMLElement).style.display = 'flex'
