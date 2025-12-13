@@ -86,6 +86,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://physio-plus.co.il',
   },
+  verification: {
+    google: '3hvigL2OU0tVghImB-V_m3vitkOKrmjieeqQIa4IBRE',
+  },
 };
 
 const organizationSchema = {
