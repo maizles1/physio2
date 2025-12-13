@@ -129,7 +129,7 @@ export default function HeroSection() {
             </div>
             
             {/* Title and Description */}
-            <div className="flex-1 text-center lg:text-right order-2">
+            <div className="flex-1 text-center lg:text-right lg:pl-24 order-2">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-relaxed tracking-wide text-white">
                 פיזיותרפיסט פרטי באשדוד
               </h1>
