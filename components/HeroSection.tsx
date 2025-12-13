@@ -56,7 +56,7 @@ export default function HeroSection() {
           {/* Header with Image and Title */}
           <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12">
             {/* Image */}
-            <div className="flex-shrink-0 mb-6 lg:mb-0 lg:mt-16">
+            <div className="flex-shrink-0 mb-6 lg:mb-0 lg:mt-16 order-1">
               <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl bg-white/10">
                 <Image
                   src="/images/andrey-meizels.JPG"
@@ -88,7 +88,7 @@ export default function HeroSection() {
             </div>
             
             {/* Title and Description */}
-            <div className="flex-1 text-center lg:text-right">
+            <div className="flex-1 text-center lg:text-right order-2">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-relaxed tracking-wide text-white">
                 פיזיותרפיסט פרטי באשדוד
               </h1>
