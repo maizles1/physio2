@@ -46,7 +46,7 @@ export interface SEOMonitoringConfig {
 // The actual config will be loaded in the scripts using require()
 
 export const seoMonitoringConfig: SEOMonitoringConfig = {
-  siteUrl: 'https://physiotherapy.plus',
+  siteUrl: 'https://physio-plus.co.il',
   pagesToCheck: [
     '/',
     '/about',
@@ -58,7 +58,7 @@ export const seoMonitoringConfig: SEOMonitoringConfig = {
   ],
   email: {
     enabled: true,
-    from: process.env.SEO_REPORT_EMAIL_FROM || 'noreply@physiotherapy.plus',
+    from: process.env.SEO_REPORT_EMAIL_FROM || 'noreply@physio-plus.co.il',
     to: process.env.SEO_REPORT_EMAIL_TO?.split(',') || ['your-email@example.com'],
     smtp: {
       host: process.env.SMTP_HOST || 'smtp.gmail.com',

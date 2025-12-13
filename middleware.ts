@@ -125,8 +125,8 @@ export function middleware(request: NextRequest) {
           isAllowedOrigin = true
         } else {
           // For subdomain matching, ensure it's a valid subdomain (not prefix spoofing)
-          // Example: "https://physiotherapy.plus" allows "https://www.physiotherapy.plus"
-          // But NOT "https://evil-physiotherapy.plus"
+          // Example: "https://physio-plus.co.il" allows "https://www.physio-plus.co.il"
+          // But NOT "https://evil-physio-plus.co.il"
           isAllowedOrigin = securityConfig.cors.allowedOrigins.some((allowed) => {
             try {
               const allowedUrl = new URL(allowed)
@@ -138,7 +138,7 @@ export function middleware(request: NextRequest) {
               }
               
               // Subdomain check: origin must end with .allowedHostname
-              // e.g., "www.physiotherapy.plus" ends with ".physiotherapy.plus"
+              // e.g., "www.physio-plus.co.il" ends with ".physio-plus.co.il"
               if (originHostname.endsWith('.' + allowedHostname)) {
                 return true
               }

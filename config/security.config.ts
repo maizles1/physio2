@@ -55,7 +55,7 @@ export const securityConfig: SecurityConfig = {
       // Base allowed origins from environment or default
       const baseOrigins = process.env.ALLOWED_ORIGINS
         ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim()).filter(o => o.length > 0)
-        : ['https://physiotherapy.plus', 'https://www.physiotherapy.plus']
+        : ['https://physio-plus.co.il', 'https://www.physio-plus.co.il']
       
       // Automatically add Vercel preview and production domains at build time
       // Note: Runtime Vercel domains and custom domains are handled in middleware.ts

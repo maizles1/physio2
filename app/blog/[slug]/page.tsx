@@ -42,14 +42,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `https://physiotherapy.plus/blog/${post.slug}`,
+      url: `https://physio-plus.co.il/blog/${post.slug}`,
       type: 'article',
       publishedTime: post.date,
       authors: ['אנדריי מייזלס'],
       tags: post.keywords || [],
     },
     alternates: {
-      canonical: `https://physiotherapy.plus/blog/${post.slug}`,
+      canonical: `https://physio-plus.co.il/blog/${post.slug}`,
     },
     other: {
       'article:author': 'אנדריי מייזלס',
@@ -75,24 +75,24 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     '@type': 'Article',
     headline: post.title,
     description: post.excerpt,
-    image: post.image ? `https://physiotherapy.plus${post.image}` : 'https://physiotherapy.plus/images/logo/clinic-logo.png',
+    image: post.image ? `https://physio-plus.co.il${post.image}` : 'https://physio-plus.co.il/images/logo/clinic-logo.png',
     datePublished: post.date,
     dateModified: post.date,
     author: {
       '@type': 'Person',
       name: 'אנדריי מייזלס',
-      url: 'https://physiotherapy.plus/about',
+      url: 'https://physio-plus.co.il/about',
     },
     publisher: {
       '@type': 'MedicalBusiness',
       name: 'פיזיותרפיה.פלוס',
-      url: 'https://physiotherapy.plus',
+      url: 'https://physio-plus.co.il',
     },
     articleSection: post.category,
     keywords: post.keywords?.join(', ') || '',
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://physiotherapy.plus/blog/${post.slug}`,
+      '@id': `https://physio-plus.co.il/blog/${post.slug}`,
     },
   }
 

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'עדויות מטופלים - פיזיותרפיה.פלוס',
     description: 'חוות דעת והמלצות של מטופלים על הטיפול בקליניקה',
-    url: 'https://physiotherapy.plus/testimonials',
+    url: 'https://physio-plus.co.il/testimonials',
   },
 }
 

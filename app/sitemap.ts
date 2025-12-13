@@ -3,7 +3,7 @@ import { getAllPosts } from '@/config/blog.config'
 import { parseHebrewDate } from '@/lib/date-utils'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://physiotherapy.plus'
+  const baseUrl = 'https://physio-plus.co.il'
   const blogPosts = getAllPosts()
 
   // יצירת רשימת URL-ים למאמרי הבלוג

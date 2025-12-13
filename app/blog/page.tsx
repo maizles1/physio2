@@ -17,10 +17,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'בלוג פיזיותרפיה - מאמרים מקצועיים',
     description: 'מאמרים מקצועיים על פיזיותרפיה, טיפים לבריאות ושיקום',
-    url: 'https://physiotherapy.plus/blog',
+    url: 'https://physio-plus.co.il/blog',
   },
   alternates: {
-    canonical: 'https://physiotherapy.plus/blog',
+    canonical: 'https://physio-plus.co.il/blog',
   },
   other: {
     'geo.region': 'IL',

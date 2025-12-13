@@ -119,7 +119,7 @@ export default function VideosSection() {
         name: 'פיזיותרפיה.פלוס',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://physiotherapy.plus/images/logo/clinic-logo.png',
+          url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
         },
       },
     }

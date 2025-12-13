@@ -10,7 +10,7 @@ interface BreadcrumbsProps {
 }
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
-  const baseUrl = 'https://physiotherapy.plus'
+  const baseUrl = 'https://physio-plus.co.il'
   
   // Create BreadcrumbList schema
   const breadcrumbSchema = {

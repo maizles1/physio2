@@ -12,10 +12,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'שאלות נפוצות - פיזיותרפיה.פלוס',
     description: 'תשובות לשאלות הנפוצות ביותר על הטיפולים והשירותים',
-    url: 'https://physiotherapy.plus/faq',
+    url: 'https://physio-plus.co.il/faq',
   },
   alternates: {
-    canonical: 'https://physiotherapy.plus/faq',
+    canonical: 'https://physio-plus.co.il/faq',
   },
   other: {
     'geo.region': 'IL',

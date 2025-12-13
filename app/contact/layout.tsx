@@ -12,10 +12,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'צור קשר - פיזיותרפיה.פלוס',
     description: 'צרו קשר עם מכון פיזיותרפיה.פלוס באשדוד',
-    url: 'https://physiotherapy.plus/contact',
+    url: 'https://physio-plus.co.il/contact',
   },
   alternates: {
-    canonical: 'https://physiotherapy.plus/contact',
+    canonical: 'https://physio-plus.co.il/contact',
   },
   other: {
     'geo.region': 'IL',

@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'אודות פיזיותרפיה.פלוס - אנדריי מייזלס',
     description: 'אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו, מנהל מכון פיזיותרפיה פרטי באשדוד. ניסיון עשיר בטיפול ושיקום.',
-    url: 'https://physiotherapy.plus/about',
+    url: 'https://physio-plus.co.il/about',
   },
   alternates: {
-    canonical: 'https://physiotherapy.plus/about',
+    canonical: 'https://physio-plus.co.il/about',
   },
   other: {
     'geo.region': 'IL',
@@ -27,12 +27,12 @@ export default function AboutPage() {
     name: 'אנדריי מייזלס',
     jobTitle: 'פיזיותרפיסט מקצועי',
     description: 'פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו, מתמחה בטיפול בכאבים, שיקום לאחר ניתוחים ושיקום וסטיבולרי',
-    url: 'https://physiotherapy.plus/about',
-    image: 'https://physiotherapy.plus/images/andrey-meizels.JPG',
+    url: 'https://physio-plus.co.il/about',
+    image: 'https://physio-plus.co.il/images/andrey-meizels.JPG',
     worksFor: {
       '@type': 'MedicalBusiness',
       name: 'פיזיותרפיה.פלוס',
-      url: 'https://physiotherapy.plus',
+      url: 'https://physio-plus.co.il',
     },
     knowsAbout: [
       'Physical Therapy',

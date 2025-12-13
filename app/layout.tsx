@@ -44,13 +44,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'he_IL',
-    url: 'https://physiotherapy.plus',
+    url: 'https://physio-plus.co.il',
     siteName: 'פיזיותרפיה.פלוס',
     title: 'פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס',
     description: 'פיזיותרפיסט פרטי מומלץ באשדוד. אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו. מכון פיזיותרפיה פרטי באשדוד במרכז כלניות. טיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
     images: [
       {
-        url: 'https://physiotherapy.plus/images/logo/clinic-logo.png',
+        url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
         width: 1200,
         height: 630,
         alt: 'פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד',
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס',
     description: 'פיזיותרפיסט פרטי מומלץ באשדוד. אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו. מכון פיזיותרפיה פרטי באשדוד במרכז כלניות.',
-    images: ['https://physiotherapy.plus/images/logo/clinic-logo.png'],
+    images: ['https://physio-plus.co.il/images/logo/clinic-logo.png'],
   },
   robots: {
     index: true,
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://physiotherapy.plus',
+    canonical: 'https://physio-plus.co.il',
   },
 };
 
@@ -93,8 +93,8 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'פיזיותרפיה.פלוס',
   alternateName: 'Physiotherapy.Plus',
-  url: 'https://physiotherapy.plus',
-  logo: 'https://physiotherapy.plus/images/logo/clinic-logo.png',
+  url: 'https://physio-plus.co.il',
+  logo: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: '050-883-8982',
@@ -113,10 +113,10 @@ const structuredData = {
   name: 'פיזיותרפיה.פלוס',
   alternateName: 'Physiotherapy.Plus',
   description: 'מכון פיזיותרפיה פרטי באשדוד - טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי',
-  url: 'https://physiotherapy.plus',
+  url: 'https://physio-plus.co.il',
   telephone: '050-883-8982',
-  image: 'https://physiotherapy.plus/images/logo/clinic-logo.png',
-  logo: 'https://physiotherapy.plus/images/logo/clinic-logo.png',
+  image: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
+  logo: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'מרכז כלניות',
@@ -159,7 +159,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'טיפול בכאבי גב',
-          url: 'https://physiotherapy.plus/services#back-pain',
+          url: 'https://physio-plus.co.il/services#back-pain',
         },
       },
       {
@@ -167,7 +167,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'טיפול בכאבי כתף',
-          url: 'https://physiotherapy.plus/services#shoulder-pain',
+          url: 'https://physio-plus.co.il/services#shoulder-pain',
         },
       },
       {
@@ -175,7 +175,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'טיפול בכאבי צוואר',
-          url: 'https://physiotherapy.plus/services#neck-pain',
+          url: 'https://physio-plus.co.il/services#neck-pain',
         },
       },
       {
@@ -183,7 +183,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'טיפול בכאבי ברך',
-          url: 'https://physiotherapy.plus/services#knee-pain',
+          url: 'https://physio-plus.co.il/services#knee-pain',
         },
       },
       {
@@ -191,7 +191,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'שיקום לאחר ניתוחים',
-          url: 'https://physiotherapy.plus/services#post-surgery',
+          url: 'https://physio-plus.co.il/services#post-surgery',
         },
       },
       {
@@ -199,7 +199,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'שיקום וסטיבולרי - טיפול בסחרחורות',
-          url: 'https://physiotherapy.plus/services#vestibular',
+          url: 'https://physio-plus.co.il/services#vestibular',
         },
       },
       {
@@ -207,7 +207,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'טיפול במפרק הלסת (TMJ)',
-          url: 'https://physiotherapy.plus/services#tmj',
+          url: 'https://physio-plus.co.il/services#tmj',
         },
       },
     ],

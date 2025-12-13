@@ -17,7 +17,7 @@ export default function LeaveReviewButton({
   
   // If redirectTo is provided, use it to create a review page with instructions
   const finalUrl = redirectTo 
-    ? (typeof window !== 'undefined' ? window.location.origin : 'https://physiotherapy.plus') + redirectTo
+    ? (typeof window !== 'undefined' ? window.location.origin : 'https://physio-plus.co.il') + redirectTo
     : reviewUrl
 
   if (!reviewUrl) {

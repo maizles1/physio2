@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     'אשדוד',
   ],
   alternates: {
-    canonical: 'https://physiotherapy.plus',
+    canonical: 'https://physio-plus.co.il',
   },
   other: {
     'geo.region': 'IL',

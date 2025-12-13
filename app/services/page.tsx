@@ -20,10 +20,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
     description: 'טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
-    url: 'https://physiotherapy.plus/services',
+    url: 'https://physio-plus.co.il/services',
   },
   alternates: {
-    canonical: 'https://physiotherapy.plus/services',
+    canonical: 'https://physio-plus.co.il/services',
   },
   other: {
     'geo.region': 'IL',
@@ -167,9 +167,9 @@ export default function ServicesPage() {
     provider: {
       '@type': 'MedicalBusiness',
       name: 'פיזיותרפיה.פלוס',
-      url: 'https://physiotherapy.plus',
+      url: 'https://physio-plus.co.il',
     },
-    url: `https://physiotherapy.plus/services#${service.id}`,
+    url: `https://physio-plus.co.il/services#${service.id}`,
   }))
 
   return (

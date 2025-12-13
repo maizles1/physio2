@@ -41,7 +41,7 @@ export interface SEOConfig {
 
 export const seoConfig: SEOConfig = {
   siteName: 'פיזיותרפיה.פלוס - מרכז הפיזיותרפיה של אשדוד',
-  siteUrl: 'https://physiotherapy.plus',
+  siteUrl: 'https://physio-plus.co.il',
   defaultTitle: 'פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס - מרכז כלניות',
   defaultDescription: 'פיזיותרפיסט פרטי מומלץ באשדוד. מכון פיזיותרפיה פרטי באשדוד במרכז כלניות. טיפול מקצועי בכאבי גב, צוואר, TMJ, שיקום אורטופדי ושיקום וסטיבולרי. פיזיותרפיסט מומלץ עם ניסיון של 15+ שנה.',
   defaultKeywords: [

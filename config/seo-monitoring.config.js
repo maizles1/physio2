@@ -6,7 +6,7 @@
 require('dotenv').config({ path: '.env.local' })
 
 const seoMonitoringConfig = {
-  siteUrl: 'https://physiotherapy.plus',
+  siteUrl: 'https://physio-plus.co.il',
   pagesToCheck: [
     '/',
     '/about',
@@ -18,7 +18,7 @@ const seoMonitoringConfig = {
   ],
   email: {
     enabled: true,
-    from: process.env.SEO_REPORT_EMAIL_FROM || 'noreply@physiotherapy.plus',
+    from: process.env.SEO_REPORT_EMAIL_FROM || 'noreply@physio-plus.co.il',
     to: (process.env.SEO_REPORT_EMAIL_TO || 'your-email@example.com').split(','),
     smtp: {
       host: process.env.SMTP_HOST || 'smtp.gmail.com',
