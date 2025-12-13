@@ -90,15 +90,45 @@ export default function HeroSection() {
             {/* Title and Description */}
             <div className="flex-1 text-center lg:text-right order-1 lg:order-2 pr-16 sm:pr-20 md:pr-24">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-relaxed tracking-wide px-2 text-white">
-                פיזיותרפיסט פרטי באשדוד | סטנדרט אולימפי. יחס אישי.
+                פיזיותרפיסט פרטי באשדוד
               </h1>
               <div className="max-w-3xl mx-auto lg:mr-0 mt-4 sm:mt-6 px-2">
-                <h2 className="mb-6 sm:mb-8 text-white leading-relaxed">
-                  הידיים שטיפלו בנבחרת ישראל בג&apos;ודו – עכשיו לגמרי בשבילך
+                <h2 className="mb-6 sm:mb-8 text-white leading-relaxed text-lg sm:text-xl">
+                  פיזיותרפיסט נבחרת ישראל בג׳ודו (לשעבר) | MSc בפיזיותרפיה | מוכר להחזרים
                 </h2>
-                <p className="text-large text-white leading-loose" style={{ lineHeight: '2.0' }}>
-                  נעים להכיר, אנדריי. בוא נשים את האמת על השולחן: כשכואב לך, שום דבר אחר לא משנה. כפיזיותרפיסט פרטי באשדוד, פיזיותרפיסט נבחרת ישראל בג&apos;ודו (לשעבר) ובעל תואר שני (MSc), ליוויתי ספורטאים ברגעים הקשים ביותר וראיתי אותם חוזרים למזרון כנגד כל הסיכויים. למדתי שאין פתרונות קסם, יש דרך. אני לא מאמין בטיפולי &apos;פס ייצור&apos;. אני מאמין באבחון שורש, ובתפירת חליפת טיפול המותאמת אישית ומדויקת למידות ולצרכים שלך. אני כאן כדי להילחם על התנועה שלך, להחזיר לך את הביטחון בגוף, ולהוביל אותך לחיים שמחכים לך בצד השני של הכאב.
-                </p>
+                <div className="hero-bio">
+                  <p className="text-lg leading-relaxed mb-6 text-white">
+                    אני מספק טיפול פיזיותרפי אישי ומדויק, המבוסס על פרוטוקולים קליניים עדכניים ושיטות שיקום של ספורטאי עילית. 
+                    הטיפול מותאם פרטני לכל מטופל, עם דגש על אבחון עומק ותוצאות שנמדדות בשיפור תפקודי משמעותי.
+                  </p>
+                  
+                  <ul className="benefits-list space-y-3 mb-6 text-white">
+                    <li className="flex items-start">
+                      <span className="mr-2 mt-1 flex-shrink-0">✔️</span>
+                      <div>
+                        <strong>גישה קלינית מדויקת:</strong> אבחון מקצועי, זיהוי המקור הפיזיולוגי לפציעה ושילוב פתרונות טיפוליים מבוססי ראיות.
+                      </div>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="mr-2 mt-1 flex-shrink-0">✔️</span>
+                      <div>
+                        <strong>שיקום מותאם אישית:</strong> שילוב טכניקות מנואליות (ידניות) מתקדמות, תרגול מובנה ושיקום אקטיבי להאצת ההחלמה.
+                      </div>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="mr-2 mt-1 flex-shrink-0">✔️</span>
+                      <div>
+                        <strong>מעטפת מלאה:</strong> ליווי מקצועי צמוד, זמינות גבוהה לתורים וסיוע בקבלת החזרים מהביטוח.
+                      </div>
+                    </li>
+                  </ul>
+
+                  <p className="font-medium text-lg border-t border-white/20 pt-4 mt-4 inline-block text-white">
+                    לכל מטופל אני מתייחס כאל שותף בתהליך — מהאבחון הראשוני ועד לחזרה לפעילות מלאה.
+                    <br />
+                    <span className="font-bold text-xl block mt-2">מקצועיות. רפואה. תוצאות.</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
