@@ -344,3 +344,5 @@ if (require.main === module) {
 
 module.exports = { generateAllImages, generateImage };
 
+
+

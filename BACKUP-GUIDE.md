@@ -257,3 +257,5 @@ cp .env.local ~/physio2-backups/physio2_backup_YYYYMMDD_HHMMSS/.env.local.backup
 אם יש בעיות או שאלות, בדוק את קובץ `BACKUP_INFO.txt` בכל גיבוי.
 If you have issues or questions, check the `BACKUP_INFO.txt` file in each backup.
 
+
+
