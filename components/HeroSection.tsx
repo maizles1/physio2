@@ -82,14 +82,14 @@ export default function HeroSection() {
             {/* Title and Description */}
             <div className="flex-1 text-center lg:text-right order-1 lg:order-2 pr-16 sm:pr-20 md:pr-24">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-relaxed tracking-wide px-2 text-white">
-                סטנדרט אולימפי. יחס אישי.
+                פיזיותרפיסט פרטי באשדוד-  סטנדרט אולימפי. יחס אישי.
               </h1>
               <div className="max-w-3xl mx-auto lg:mr-0 mt-4 sm:mt-6 px-2">
                 <h2 className="mb-6 sm:mb-8 text-white leading-relaxed">
-                  הידיים שטיפלו בנבחרת ישראל בג&apos;ודו – עכשיו לגמרי בשבילך
+                  הידיים שטיפלו בנבחרת ישראל בג&apos;ודו – עכשיו זמינות לכאב שלך
                 </h2>
                 <p className="text-large text-white leading-loose" style={{ lineHeight: '2.0' }}>
-                  נעים להכיר, אנדריי. בוא נשים את האמת על השולחן: כשכואב לך, שום דבר אחר לא משנה. כפיזיותרפיסט נבחרת ישראל בג&apos;ודו (לשעבר) ובעל תואר שני (MSc), ליוויתי ספורטאים ברגעים הקשים ביותר וראיתי אותם חוזרים למזרון כנגד כל הסיכויים. למדתי שאין פתרונות קסם, יש דרך. אני לא מאמין בטיפולי &apos;פס ייצור&apos;. אני מאמין באבחון שורש, ובתפירת חליפת טיפול המותאמת אישית ומדויקת למידות ולצרכים שלך. אני כאן כדי להילחם על התנועה שלך, להחזיר לך את הביטחון בגוף, ולהוביל אותך לחיים שמחכים לך בצד השני של הכאב.
+                  כאב לא חייב לנהל לך את החיים. בקליניקה תקבל את הסטנדרט המקצועי של נבחרת ישראל: אבחון קליני, חשיבה רפואית מתקדמת והתאמה אישית של הטיפול. אני לא מוכר אשליות ולא מבטיח קסמים, אבל אני מתחייב לדבר אחד: 100% מהידע, הניסיון והמאמץ שלי מושקעים בשיקום שלך, בדיוק כפי שהייתי משקיע בספורטאי אולימפי.
                 </p>
               </div>
             </div>
@@ -100,9 +100,9 @@ export default function HeroSection() {
             <Link
               href="/contact"
               className="btn btn-secondary btn-large w-full sm:w-auto"
-              aria-label="בוא נתחיל. שריין תור"
+              aria-label="צור קשר עוד היום"
             >
-              בוא נתחיל. שריין תור
+              צור קשר עוד היום
             </Link>
           </div>
         </div>
