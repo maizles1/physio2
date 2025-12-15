@@ -69,7 +69,7 @@ export default function InsuranceSection() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="mb-3 sm:mb-4 text-primary-dark">
-              קופות חולים וביטוחים
+              עם מי אנחנו עובדים
             </h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-2">
               הקליניקה עובדת עם קופות החולים וביטוחים שונים. בדקו את זכאותכם
