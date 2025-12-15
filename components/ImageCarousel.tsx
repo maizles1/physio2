@@ -146,6 +146,7 @@ export default function ImageCarousel() {
                       alt={image.alt}
                       fill
                       className="object-contain w-full h-full"
+                      style={{ objectFit: 'contain' }}
                       priority={index === 0}
                       loading={index === 0 ? undefined : 'lazy'}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"

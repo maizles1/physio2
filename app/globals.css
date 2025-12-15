@@ -673,13 +673,13 @@ div[class*="relative"] img[fill]:not([src*="insurance"]),
 }
 
 /* Ensure image containers fill space without empty borders */
-/* Exclude insurance logos from these aggressive rules */
-.relative[class*="overflow-hidden"] img:not([src*="insurance"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
-div[class*="overflow-hidden"] img:not([src*="insurance"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
-div[class*="relative"] img[fill]:not([src*="insurance"]),
-.relative img[fill]:not([src*="insurance"]),
-div[class*="relative"] > img:not([src*="insurance"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
-.relative > img:not([src*="insurance"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]) {
+/* Exclude insurance logos and carousel images from these aggressive rules */
+.relative[class*="overflow-hidden"] img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
+div[class*="overflow-hidden"] img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
+div[class*="relative"] img[fill]:not([src*="insurance"]):not([src*="carousel"]),
+.relative img[fill]:not([src*="insurance"]):not([src*="carousel"]),
+div[class*="relative"] > img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
+.relative > img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]) {
   object-fit: cover !important;
   width: 100% !important;
   height: 100% !important;
@@ -714,9 +714,9 @@ div[class*="relative"] > img:not([src*="insurance"]):not([alt*="כללית"]):no
   }
   
   /* Ensure image containers fill space */
-  /* Exclude insurance logos from these aggressive rules */
-  .relative img:not([src*="insurance"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
-  [class*="relative"] img:not([src*="insurance"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]) {
+  /* Exclude insurance logos and carousel images from these aggressive rules */
+  .relative img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
+  [class*="relative"] img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]) {
     width: 100%;
     height: 100%;
     object-fit: cover;
