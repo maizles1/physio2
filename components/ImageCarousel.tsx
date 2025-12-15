@@ -26,7 +26,6 @@ export default function ImageCarousel() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [isHovered, setIsHovered] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [containerHeight, setContainerHeight] = useState<number>(400)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const carouselRef = useRef<HTMLDivElement>(null)
@@ -109,69 +108,6 @@ export default function ImageCarousel() {
 
   const currentImage = useMemo(() => images[currentIndex], [currentIndex])
 
-  // Update container height based on current image - ensure full image is visible with object-contain
-  useEffect(() => {
-    const updateHeight = () => {
-      if (!imagesContainerRef.current || !carouselRef.current) return
-      
-      const currentImageElement = imagesContainerRef.current.querySelector(
-        `div[data-image-index="${currentIndex}"] img`
-      ) as HTMLImageElement | null
-      
-      if (currentImageElement && currentImageElement.complete) {
-        const naturalWidth = currentImageElement.naturalWidth
-        const naturalHeight = currentImageElement.naturalHeight
-        
-        if (naturalWidth && naturalHeight) {
-          const containerWidth = carouselRef.current.clientWidth || 1200
-          const aspectRatio = naturalWidth / naturalHeight
-          
-          // Calculate height based on aspect ratio to show full image with object-contain
-          let calculatedHeight = containerWidth / aspectRatio
-          
-          // Responsive max height based on screen size - increased to show full images
-          const maxHeight = typeof window !== 'undefined' 
-            ? window.innerWidth < 640 
-              ? Math.min(window.innerHeight * 0.7, 600) // Mobile: 70vh or 600px
-              : window.innerWidth < 1024
-              ? Math.min(window.innerHeight * 0.75, 700) // Tablet: 75vh or 700px
-              : Math.min(window.innerHeight * 0.8, 800) // Desktop: 80vh or 800px
-            : 600
-          
-          const minHeight = typeof window !== 'undefined' && window.innerWidth < 640 ? 300 : 400
-          
-          // With object-contain, we want to show the full image
-          // If calculated height exceeds max, use maxHeight (image will scale down to fit)
-          // If calculated height is less than min, use minHeight
-          // Otherwise use calculated height to match aspect ratio
-          const finalHeight = calculatedHeight > maxHeight 
-            ? maxHeight 
-            : calculatedHeight < minHeight 
-            ? minHeight 
-            : calculatedHeight
-          
-          // Set height to show full image with object-contain
-          setContainerHeight(finalHeight)
-        }
-      }
-    }
-
-    // Wait a bit for image to load
-    const timeoutId = setTimeout(updateHeight, 100)
-    updateHeight()
-
-    // Also update on window resize
-    const handleResize = () => {
-      updateHeight()
-    }
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      clearTimeout(timeoutId)
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [currentIndex])
-
   return (
     <section className="section-spacing bg-gray-50">
       <div className="container">
@@ -182,12 +118,8 @@ export default function ImageCarousel() {
           
           <div
             ref={carouselRef}
-            className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-xl sm:shadow-2xl w-full"
+            className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-xl sm:shadow-2xl w-full h-[400px] sm:h-[500px] md:h-[550px]"
             style={{ 
-              minHeight: '300px',
-              maxHeight: '80vh',
-              height: containerHeight ? `${containerHeight}px` : '500px',
-              transition: 'height 0.5s ease-in-out',
               width: '100%'
             }}
             onMouseEnter={() => setIsHovered(true)}
@@ -217,47 +149,6 @@ export default function ImageCarousel() {
                       priority={index === 0}
                       loading={index === 0 ? undefined : 'lazy'}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                      onLoad={() => {
-                        if (index === currentIndex) {
-                          setTimeout(() => {
-                            const img = imagesContainerRef.current?.querySelector(
-                              `div[data-image-index="${index}"] img`
-                            ) as HTMLImageElement | null
-                            if (img && img.complete && carouselRef.current) {
-                              const naturalWidth = img.naturalWidth
-                              const naturalHeight = img.naturalHeight
-                              if (naturalWidth && naturalHeight) {
-                                const containerWidth = carouselRef.current.clientWidth || 1200
-                                const aspectRatio = naturalWidth / naturalHeight
-                                const calculatedHeight = containerWidth / aspectRatio
-                                // Responsive max height based on screen size - increased to show full images
-                                const maxHeight = typeof window !== 'undefined' 
-                                  ? window.innerWidth < 640 
-                                    ? Math.min(window.innerHeight * 0.7, 600) // Mobile: 70vh or 600px
-                                    : window.innerWidth < 1024
-                                    ? Math.min(window.innerHeight * 0.75, 700) // Tablet: 75vh or 700px
-                                    : Math.min(window.innerHeight * 0.8, 800) // Desktop: 80vh or 800px
-                                  : 600
-                                
-                                const minHeight = typeof window !== 'undefined' && window.innerWidth < 640 ? 300 : 400
-                                
-                                // With object-contain, we want to show the full image
-                                // If calculated height exceeds max, use maxHeight (image will scale down to fit)
-                                // If calculated height is less than min, use minHeight
-                                // Otherwise use calculated height to match aspect ratio
-                                const finalHeight = calculatedHeight > maxHeight 
-                                  ? maxHeight 
-                                  : calculatedHeight < minHeight 
-                                  ? minHeight 
-                                  : calculatedHeight
-                                
-                                // Set height to show full image with object-contain
-                                setContainerHeight(finalHeight)
-                              }
-                            }
-                          }, 50)
-                        }
-                      }}
                       onError={(e) => {
                         // Fallback to placeholder if image doesn't exist
                         const target = e.target as HTMLImageElement
