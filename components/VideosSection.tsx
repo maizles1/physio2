@@ -145,7 +145,7 @@ export default function VideosSection() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-8 sm:mb-12">
               <h2 className="mb-3 sm:mb-4 text-primary-dark">
-                סרטונים על הקליניקה
+                הצצה על הקליניקה
               </h2>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-2">
                 הכירו את הקליניקה, את אנדריי מייזלס ואת הגישה הטיפולית המקצועית
