@@ -129,7 +129,7 @@ export default function ImageCarousel() {
             aria-label="קרוסלת תמונות של הקליניקה"
           >
             {/* Images */}
-            <div ref={imagesContainerRef} className="relative w-full h-full">
+            <div ref={imagesContainerRef} className="relative w-full h-full carousel-images-container">
               {images.map((image, index) => {
                 const isCurrent = index === currentIndex
                 return (
@@ -145,7 +145,7 @@ export default function ImageCarousel() {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className="object-contain w-full h-full"
+                      className="object-contain w-full h-full carousel-image"
                       style={{ objectFit: 'contain' }}
                       priority={index === 0}
                       loading={index === 0 ? undefined : 'lazy'}

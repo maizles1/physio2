@@ -663,11 +663,11 @@ img[alt*="ביטחון"] {
 }
 
 /* Ensure Next.js Image components with fill prop are responsive */
-/* Exclude insurance logos from these aggressive rules */
-span[style*="position: relative"] img:not([src*="insurance"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
-span[style*="position:relative"] img:not([src*="insurance"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
-div[class*="relative"] img[fill]:not([src*="insurance"]),
-.relative img[fill]:not([src*="insurance"]) {
+/* Exclude insurance logos and carousel images from these aggressive rules */
+span[style*="position: relative"] img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
+span[style*="position:relative"] img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
+div[class*="relative"] img[fill]:not([src*="insurance"]):not([src*="carousel"]),
+.relative img[fill]:not([src*="insurance"]):not([src*="carousel"]) {
   width: 100% !important;
   height: 100% !important;
 }
@@ -684,6 +684,32 @@ div[class*="relative"] > img:not([src*="insurance"]):not([src*="carousel"]):not(
   width: 100% !important;
   height: 100% !important;
   display: block;
+}
+
+/* Carousel images - force contain to show full images */
+/* Use class selector with high specificity to override global rules */
+.carousel-image,
+img.carousel-image,
+.carousel-images-container .carousel-image,
+.carousel-images-container img.carousel-image,
+.carousel-images-container span img.carousel-image {
+  object-fit: contain !important;
+}
+
+/* Also target by src for additional coverage */
+div[class*="relative"] img[src*="carousel"],
+.relative img[src*="carousel"],
+img[src*="carousel"] {
+  object-fit: contain !important;
+}
+
+/* Ensure carousel container images don't get overridden - highest specificity */
+section.section-spacing .carousel-images-container .carousel-image,
+section.section-spacing .carousel-images-container img,
+section[class*="section-spacing"] .carousel-images-container span img {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* Mobile and tablet common styles */
@@ -840,4 +866,14 @@ div[class*="relative"] > img:not([src*="insurance"]):not([src*="carousel"]):not(
   [class*="Card"] {
     padding: 1.5rem;
   }
+}
+
+/* Carousel images override - must be at the end with highest specificity */
+/* This ensures carousel images use contain instead of cover */
+section.section-spacing.bg-gray-50 .container .max-w-6xl .relative .carousel-images-container img.carousel-image,
+section.section-spacing .carousel-images-container img.carousel-image,
+.carousel-images-container .carousel-image {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: 100% !important;
 }
