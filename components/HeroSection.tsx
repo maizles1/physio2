@@ -61,20 +61,11 @@ export default function HeroSection() {
                 <Image
                   src="/images/andrey-meizels.JPG"
                   alt="אנדריי מייזלס, פיזיותרפיסט מקצועי"
-                  width={320}
-                  height={320}
-                  className="w-full h-full object-cover"
-                  priority
+                  fill
+                  className="object-cover w-full h-full"
                   sizes="(max-width: 640px) 160px, (max-width: 768px) 192px, (max-width: 1024px) 256px, 320px"
+                  priority
                   unoptimized
-                  onError={(e) => {
-                    // Fallback to placeholder if image doesn't exist
-                    const target = e.target as HTMLImageElement
-                    target.style.display = 'none'
-                    if (target.nextElementSibling) {
-                      (target.nextElementSibling as HTMLElement).style.display = 'flex'
-                    }
-                  }}
                 />
                 <div className="w-full h-full hidden items-center justify-center" role="img" aria-label="אנדריי מייזלס, פיזיותרפיסט מקצועי">
                   <div className="text-center text-white">
