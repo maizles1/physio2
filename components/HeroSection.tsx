@@ -51,64 +51,25 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="container relative z-10 pt-20 sm:pt-24 lg:pt-16">
+      <div className="container relative z-10 pt-16 sm:pt-20">
         <div className="max-w-6xl mx-auto">
           {/* Header with Image and Title */}
-          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12">
+          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-10 mb-8 sm:mb-12">
             {/* Image */}
-            <div className="flex-shrink-0 mb-6 lg:mb-0 lg:mt-16 order-1">
-              <div className="flex flex-row items-center gap-3 lg:flex-col lg:items-start">
-                {/* Insurance Logos - Mobile - משמאל לתמונה */}
-                <div className="flex flex-col gap-2 lg:hidden">
-                  <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-2 py-1.5 shadow-md">
-                    <Image
-                      src="/images/insurance/Clalit-Logo.png"
-                      alt="כללית"
-                      width={35}
-                      height={18}
-                      className="max-h-[45px] w-auto object-contain opacity-90"
-                      unoptimized
-                    />
-                  </div>
-                  <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-2 py-1.5 shadow-md">
-                    <Image
-                      src="/images/insurance/Meuhedet-Logo.png"
-                      alt="מאוחדת"
-                      width={35}
-                      height={18}
-                      className="max-h-[45px] w-auto object-contain opacity-90"
-                      unoptimized
-                    />
-                  </div>
-                  <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-2 py-1.5 shadow-md">
-                    <Image
-                      src="/images/insurance/Ministry-of-defense-logo.png"
-                      alt="משרד הביטחון"
-                      width={35}
-                      height={18}
-                      className="max-h-[45px] w-auto object-contain opacity-90"
-                      unoptimized
-                    />
-                  </div>
-                </div>
-                <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl bg-white/10">
+            <div className="flex-shrink-0 order-2 lg:order-1">
+              <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl bg-white/10">
                 <Image
-                  src="/images/andrey-meizels.webp"
+                  src="/images/andrey-meizels.JPG"
                   alt="אנדריי מייזלס, פיזיותרפיסט מקצועי"
                   width={320}
                   height={320}
                   className="w-full h-full object-cover"
                   priority
-                  fetchPriority="high"
                   sizes="(max-width: 640px) 160px, (max-width: 768px) 192px, (max-width: 1024px) 256px, 320px"
+                  unoptimized
                   onError={(e) => {
-                    // Fallback to JPG if WebP doesn't exist
-                    const target = e.target as HTMLImageElement
-                    if (target.src.includes('.webp')) {
-                      target.src = '/images/andrey-meizels.JPG'
-                      return
-                    }
                     // Fallback to placeholder if image doesn't exist
+                    const target = e.target as HTMLImageElement
                     target.style.display = 'none'
                     if (target.nextElementSibling) {
                       (target.nextElementSibling as HTMLElement).style.display = 'flex'
@@ -125,51 +86,20 @@ export default function HeroSection() {
                   </div>
                 </div>
               </div>
-              </div>
             </div>
             
             {/* Title and Description */}
-            <div className="flex-1 text-center lg:text-right lg:pl-24 order-2">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-relaxed tracking-wide text-white">
-                פיזיותרפיסט פרטי באשדוד
+            <div className="flex-1 text-center lg:text-right order-1 lg:order-2 pr-16 sm:pr-20 md:pr-24">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-relaxed tracking-wide px-2 text-white">
+                סטנדרט אולימפי. יחס אישי.
               </h1>
-              <div className="max-w-3xl mx-auto lg:mx-0 lg:mr-0 mt-4 sm:mt-6">
-                <h2 className="mb-6 sm:mb-8 text-white leading-relaxed text-lg sm:text-xl">
-                  אנדריי מייזלס | פיזיותרפיסט נבחרת ישראל בג׳ודו (לשעבר) | תואר שני בפיזיותרפיה
+              <div className="max-w-3xl mx-auto lg:mr-0 mt-4 sm:mt-6 px-2">
+                <h2 className="mb-6 sm:mb-8 text-white leading-relaxed">
+                  הידיים שטיפלו בנבחרת ישראל בג&apos;ודו – עכשיו לגמרי בשבילך
                 </h2>
-                <div className="hero-bio">
-                  <p className="text-lg leading-relaxed mb-6 text-white">
-                    אני מספק טיפול פיזיותרפי אישי ומדויק, המבוסס על פרוטוקולים קליניים עדכניים ושיטות שיקום של ספורטאי עילית. 
-                    הטיפול מותאם פרטני לכל מטופל, עם דגש על אבחון עומק ותוצאות שנמדדות בשיפור תפקודי משמעותי.
-                  </p>
-                  
-                  <ul className="benefits-list space-y-3 mb-6 text-white">
-                    <li className="flex items-start">
-                      <span className="mr-2 mt-1 flex-shrink-0">✔️</span>
-                      <div>
-                        <strong>גישה קלינית מדויקת:</strong> אבחון מקצועי, זיהוי המקור הפיזיולוגי לפציעה ושילוב פתרונות טיפוליים מבוססי ראיות.
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="mr-2 mt-1 flex-shrink-0">✔️</span>
-                      <div>
-                        <strong>שיקום מותאם אישית:</strong> שילוב טכניקות מנואליות (ידניות) מתקדמות, תרגול מובנה ושיקום אקטיבי להאצת ההחלמה.
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="mr-2 mt-1 flex-shrink-0">✔️</span>
-                      <div>
-                        <strong>מעטפת מלאה:</strong> ליווי מקצועי צמוד, זמינות גבוהה לתורים וסיוע בקבלת החזרים מהביטוח.
-                      </div>
-                    </li>
-                  </ul>
-
-                  <p className="font-medium text-lg border-t border-white/20 pt-4 mt-4 inline-block text-white">
-                    לכל מטופל אני מתייחס כאל שותף בתהליך — מהאבחון הראשוני ועד לחזרה לפעילות מלאה.
-                    <br />
-                    <span className="font-bold text-xl block mt-2">סטנדרט אולימפי. יחס אישי.</span>
-                  </p>
-                </div>
+                <p className="text-large text-white leading-loose" style={{ lineHeight: '2.0' }}>
+                  נעים להכיר, אנדריי. בוא נשים את האמת על השולחן: כשכואב לך, שום דבר אחר לא משנה. כפיזיותרפיסט נבחרת ישראל בג&apos;ודו (לשעבר) ובעל תואר שני (MSc), ליוויתי ספורטאים ברגעים הקשים ביותר וראיתי אותם חוזרים למזרון כנגד כל הסיכויים. למדתי שאין פתרונות קסם, יש דרך. אני לא מאמין בטיפולי &apos;פס ייצור&apos;. אני מאמין באבחון שורש, ובתפירת חליפת טיפול המותאמת אישית ומדויקת למידות ולצרכים שלך. אני כאן כדי להילחם על התנועה שלך, להחזיר לך את הביטחון בגוף, ולהוביל אותך לחיים שמחכים לך בצד השני של הכאב.
+                </p>
               </div>
             </div>
           </div>

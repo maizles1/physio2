@@ -10,14 +10,11 @@ import PageTracking from "@/components/PageTracking";
 
 export const metadata: Metadata = {
   title: {
-    default: "פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס - אנדריי מייזלס",
+    default: "פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד | אנדריי מייזלס",
     template: "%s | פיזיותרפיה.פלוס",
   },
-  description: "פיזיותרפיסט פרטי מומלץ באשדוד. אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג&apos;ודו. מכון פיזיותרפיה פרטי באשדוד במרכז כלניות. טיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי וטיפול במפרק הלסת. 050-883-8982",
+  description: "פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד. אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג&apos;ודו, מתמחה בטיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי וטיפול במפרק הלסת. מרכז כלניות, אשדוד. 050-883-8982",
   keywords: [
-    "פיזיותרפיסט פרטי באשדוד",
-    "פיזיותרפיסט מומלץ באשדוד",
-    "מכון פיזיותרפיה פרטי באשדוד",
     "פיזיותרפיה",
     "פיזיותרפיה.פלוס",
     "מכון פיזיותרפיה פרטי",
@@ -44,33 +41,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'he_IL',
-    url: 'https://physio-plus.co.il',
+    url: 'https://physiotherapy.plus',
     siteName: 'פיזיותרפיה.פלוס',
-    title: 'פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס',
-    description: 'פיזיותרפיסט פרטי מומלץ באשדוד. אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו. מכון פיזיותרפיה פרטי באשדוד במרכז כלניות. טיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
-    images: [
-      {
-        url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
-        width: 1000,
-        height: 1000,
-        alt: 'פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד',
-      },
-    ],
-  },
-  icons: {
-    icon: [
-      { url: '/images/logo/clinic-logo.png', type: 'image/png' },
-      { url: '/images/logo/clinic-logo.png', sizes: '32x32', type: 'image/png' },
-      { url: '/images/logo/clinic-logo.png', sizes: '16x16', type: 'image/png' },
-    ],
-    shortcut: '/images/logo/clinic-logo.png',
-    apple: '/images/logo/clinic-logo.png',
+    title: 'פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד',
+    description: 'אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו, מתמחה בטיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס',
-    description: 'פיזיותרפיסט פרטי מומלץ באשדוד. אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו. מכון פיזיותרפיה פרטי באשדוד במרכז כלניות.',
-    images: ['https://physio-plus.co.il/images/logo/clinic-logo.png'],
+    title: 'פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד',
+    description: 'אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו באשדוד',
   },
   robots: {
     index: true,
@@ -84,10 +63,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://physio-plus.co.il',
-  },
-  verification: {
-    google: '3hvigL2OU0tVghImB-V_m3vitkOKrmjieeqQIa4IBRE',
+    canonical: 'https://physiotherapy.plus',
   },
 };
 
@@ -96,8 +72,8 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'פיזיותרפיה.פלוס',
   alternateName: 'Physiotherapy.Plus',
-  url: 'https://physio-plus.co.il',
-  logo: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
+  url: 'https://physiotherapy.plus',
+  logo: 'https://physiotherapy.plus/images/logo/clinic-logo.png',
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: '050-883-8982',
@@ -116,10 +92,10 @@ const structuredData = {
   name: 'פיזיותרפיה.פלוס',
   alternateName: 'Physiotherapy.Plus',
   description: 'מכון פיזיותרפיה פרטי באשדוד - טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי',
-  url: 'https://physio-plus.co.il',
+  url: 'https://physiotherapy.plus',
   telephone: '050-883-8982',
-  image: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
-  logo: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
+  image: 'https://physiotherapy.plus/images/logo/clinic-logo.png',
+  logo: 'https://physiotherapy.plus/images/logo/clinic-logo.png',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'מרכז כלניות',
@@ -162,7 +138,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'טיפול בכאבי גב',
-          url: 'https://physio-plus.co.il/services#back-pain',
+          url: 'https://physiotherapy.plus/services#back-pain',
         },
       },
       {
@@ -170,7 +146,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'טיפול בכאבי כתף',
-          url: 'https://physio-plus.co.il/services#shoulder-pain',
+          url: 'https://physiotherapy.plus/services#shoulder-pain',
         },
       },
       {
@@ -178,7 +154,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'טיפול בכאבי צוואר',
-          url: 'https://physio-plus.co.il/services#neck-pain',
+          url: 'https://physiotherapy.plus/services#neck-pain',
         },
       },
       {
@@ -186,7 +162,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'טיפול בכאבי ברך',
-          url: 'https://physio-plus.co.il/services#knee-pain',
+          url: 'https://physiotherapy.plus/services#knee-pain',
         },
       },
       {
@@ -194,7 +170,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'שיקום לאחר ניתוחים',
-          url: 'https://physio-plus.co.il/services#post-surgery',
+          url: 'https://physiotherapy.plus/services#post-surgery',
         },
       },
       {
@@ -202,7 +178,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'שיקום וסטיבולרי - טיפול בסחרחורות',
-          url: 'https://physio-plus.co.il/services#vestibular',
+          url: 'https://physiotherapy.plus/services#vestibular',
         },
       },
       {
@@ -210,7 +186,7 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'טיפול במפרק הלסת (TMJ)',
-          url: 'https://physio-plus.co.il/services#tmj',
+          url: 'https://physiotherapy.plus/services#tmj',
         },
       },
     ],
@@ -225,17 +201,9 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="google-site-verification" content="3hvigL2OU0tVghImB-V_m3vitkOKrmjieeqQIa4IBRE" />
-        <link rel="icon" href="/images/logo/clinic-logo.png" type="image/png" sizes="32x32" />
-        <link rel="shortcut icon" href="/images/logo/clinic-logo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/images/logo/clinic-logo.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap" as="style" />
-        {/* Preload main hero image for LCP optimization - WebP format */}
-        <link rel="preload" as="image" href="/images/andrey-meizels.webp" type="image/webp" />
         <link rel="preconnect" href="https://www.google.com" />
         <link rel="preconnect" href="https://maps.googleapis.com" />
         <link rel="preconnect" href="https://www.youtube.com" />
@@ -252,7 +220,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
       </head>
       <body className="antialiased">
         <ErrorBoundary>
