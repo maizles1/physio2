@@ -90,12 +90,12 @@ const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'MedicalBusiness',
   name: 'פיזיותרפיה.פלוס',
-  alternateName: 'Physiotherapy.Plus',
-  description: 'מכון פיזיותרפיה פרטי באשדוד - טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי',
-  url: 'https://physiotherapy.plus',
-  telephone: '050-883-8982',
-  image: 'https://physiotherapy.plus/images/logo/clinic-logo.png',
-  logo: 'https://physiotherapy.plus/images/logo/clinic-logo.png',
+  alternateName: 'Physio Plus',
+  description: 'קליניקת פיזיותרפיה מקצועית באשדוד. פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו.',
+  url: 'https://physio-plus.co.il',
+  logo: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
+  image: 'https://physio-plus.co.il/images/andrey-meizels.JPG',
+  telephone: '+972-50-883-8982',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'מרכז כלניות',
@@ -104,8 +104,8 @@ const structuredData = {
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: '31.8044',
-    longitude: '34.6553',
+    latitude: '31.783106159195388',
+    longitude: '34.65489203389065',
   },
   openingHoursSpecification: [
     {
@@ -121,56 +121,23 @@ const structuredData = {
       closes: '14:00',
     },
   ],
-  priceRange: '$$',
-  paymentAccepted: 'Cash, Credit Card, Insurance',
-  currenciesAccepted: 'ILS',
-  medicalSpecialty: ['Physical Therapy', 'Rehabilitation', 'Orthopedic Physical Therapy'],
-  areaServed: {
-    '@type': 'City',
-    name: 'אשדוד',
+  priceRange: '₪₪',
+  medicalSpecialty: ['Physical Therapy', 'Sports Medicine', 'Vestibular Rehabilitation'],
+  founder: {
+    '@type': 'Person',
+    name: 'אנדריי מייזלס',
+    jobTitle: 'פיזיותרפיסט מומחה',
+    description: 'פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו',
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'שירותי פיזיותרפיה',
     itemListElement: [
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
           name: 'טיפול בכאבי גב',
-          url: 'https://physiotherapy.plus/services#back-pain',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'טיפול בכאבי כתף',
-          url: 'https://physiotherapy.plus/services#shoulder-pain',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'טיפול בכאבי צוואר',
-          url: 'https://physiotherapy.plus/services#neck-pain',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'טיפול בכאבי ברך',
-          url: 'https://physiotherapy.plus/services#knee-pain',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'שיקום לאחר ניתוחים',
-          url: 'https://physiotherapy.plus/services#post-surgery',
+          url: 'https://physio-plus.co.il/services#back-pain',
         },
       },
       {
@@ -178,19 +145,56 @@ const structuredData = {
         itemOffered: {
           '@type': 'Service',
           name: 'שיקום וסטיבולרי - טיפול בסחרחורות',
-          url: 'https://physiotherapy.plus/services#vestibular',
+          url: 'https://physio-plus.co.il/services#vestibular',
         },
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'טיפול במפרק הלסת (TMJ)',
-          url: 'https://physiotherapy.plus/services#tmj',
+          name: 'שיקום לאחר ניתוחים',
+          url: 'https://physio-plus.co.il/services#post-surgery',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'טיפול בכאבי כתף',
+          url: 'https://physio-plus.co.il/services#shoulder-pain',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'טיפול במפרק הלסת TMJ',
+          url: 'https://physio-plus.co.il/services#tmj',
         },
       },
     ],
   },
+  areaServed: [
+    { '@type': 'City', name: 'אשדוד' },
+    { '@type': 'City', name: 'אשקלון' },
+    { '@type': 'City', name: 'קריית גת' },
+    { '@type': 'City', name: 'ראשון לציון' },
+  ],
+  acceptedPaymentMethod: [
+    { '@type': 'PaymentMethod', name: 'ביטוח משלים כללית' },
+    { '@type': 'PaymentMethod', name: 'קופת חולים מאוחדת' },
+    { '@type': 'PaymentMethod', name: 'משרד הביטחון' },
+  ],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: '150',
+    bestRating: '5',
+  },
+  sameAs: [
+    'https://www.facebook.com/yourpage',
+    'https://www.instagram.com/yourpage',
+  ],
 }
 
 export default function RootLayout({
