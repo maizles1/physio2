@@ -844,3 +844,30 @@ section.bg-primary-gradient h2 span.highlight-judo {
   font-weight: 700 !important;
 }
 
+/* Swiper carousel styles */
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #2A3080 !important;
+}
+
+.swiper-pagination-bullet {
+  background-color: #2A3080 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #2080C0 !important;
+}
+
