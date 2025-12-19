@@ -57,34 +57,12 @@ export default function ImageCarousel() {
             <Slider {...settings} ref={sliderRef}>
               <div className="flex items-center justify-center h-[400px] sm:h-[500px] md:h-[550px]">
                 <img 
-                  src="/images/carousel/clinic-1.jpg" 
-                  alt="תמונת קליניקה 1" 
-                  className="max-w-full max-h-full object-contain"
-                  // #region agent log
-                  onLoad={() => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img1',message:'Image 1 loaded successfully',data:{src:'/images/carousel/clinic-1.jpg'},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
-                  onError={(e) => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img1',message:'Image 1 failed to load',data:{src:'/images/carousel/clinic-1.jpg',error:String(e.target)},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
-                  // #endregion
-                />
-              </div>
-              <div className="flex items-center justify-center h-[400px] sm:h-[500px] md:h-[550px]">
-                <img 
-                  src="/images/carousel/clinic-2.jpg" 
-                  alt="תמונת קליניקה 2" 
-                  className="max-w-full max-h-full object-contain"
-                  // #region agent log
-                  onLoad={() => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img2',message:'Image 2 loaded successfully',data:{src:'/images/carousel/clinic-2.jpg'},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
-                  onError={(e) => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img2',message:'Image 2 failed to load',data:{src:'/images/carousel/clinic-2.jpg',error:String(e.target)},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
-                  // #endregion
-                />
-              </div>
-              <div className="flex items-center justify-center h-[400px] sm:h-[500px] md:h-[550px]">
-                <img 
                   src="/images/carousel/clinic-3.jpg" 
                   alt="תמונת קליניקה 3" 
                   className="max-w-full max-h-full object-contain"
                   // #region agent log
-                  onLoad={() => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img3',message:'Image 3 loaded successfully',data:{src:'/images/carousel/clinic-3.jpg'},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
-                  onError={(e) => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img3',message:'Image 3 failed to load',data:{src:'/images/carousel/clinic-3.jpg',error:String(e)},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
+                  onLoad={() => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img1',message:'Image 1 loaded successfully',data:{src:'/images/carousel/clinic-3.jpg'},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
+                  onError={(e) => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img1',message:'Image 1 failed to load',data:{src:'/images/carousel/clinic-3.jpg',error:String(e.target)},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
                   // #endregion
                 />
               </div>
@@ -94,8 +72,8 @@ export default function ImageCarousel() {
                   alt="תמונת קליניקה 4" 
                   className="max-w-full max-h-full object-contain"
                   // #region agent log
-                  onLoad={() => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img4',message:'Image 4 loaded successfully',data:{src:'/images/carousel/clinic-4.jpg'},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
-                  onError={(e) => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img4',message:'Image 4 failed to load',data:{src:'/images/carousel/clinic-4.jpg',error:String(e)},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
+                  onLoad={() => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img2',message:'Image 2 loaded successfully',data:{src:'/images/carousel/clinic-4.jpg'},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
+                  onError={(e) => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img2',message:'Image 2 failed to load',data:{src:'/images/carousel/clinic-4.jpg',error:String(e.target)},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
                   // #endregion
                 />
               </div>
@@ -105,8 +83,8 @@ export default function ImageCarousel() {
                   alt="תמונת קליניקה 5" 
                   className="max-w-full max-h-full object-contain"
                   // #region agent log
-                  onLoad={() => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img5',message:'Image 5 loaded successfully',data:{src:'/images/carousel/clinic-5.jpg'},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
-                  onError={(e) => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img5',message:'Image 5 failed to load',data:{src:'/images/carousel/clinic-5.jpg',error:String(e)},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
+                  onLoad={() => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img3',message:'Image 3 loaded successfully',data:{src:'/images/carousel/clinic-5.jpg'},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
+                  onError={(e) => fetch('http://127.0.0.1:7242/ingest/880c9da5-111c-4908-a21d-54ca7c959f70',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ImageCarousel.tsx:img3',message:'Image 3 failed to load',data:{src:'/images/carousel/clinic-5.jpg',error:String(e.target)},timestamp:Date.now(),sessionId:'debug-session',runId:'run2',hypothesisId:'B'})}).catch(()=>{})}
                   // #endregion
                 />
               </div>
