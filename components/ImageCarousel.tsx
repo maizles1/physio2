@@ -45,13 +45,11 @@ export default function ImageCarousel() {
   const goToPrevious = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
     setIsAutoPlaying(false)
-    setImageLoaded(false)
   }, [])
 
   const goToNext = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
     setIsAutoPlaying(false)
-    setImageLoaded(false)
   }, [])
 
   // Auto-play
@@ -94,41 +92,36 @@ export default function ImageCarousel() {
             role="region"
             aria-label="קרוסלת תמונות של הקליניקה"
           >
-            {/* Current Image */}
-            <div className="absolute inset-0 w-full h-full flex items-center justify-center">
-              <img
-                key={`carousel-img-${currentIndex}`}
-                src={currentImage.src}
-                alt={currentImage.alt}
-                className="max-w-full max-h-full w-auto h-auto"
+            {/* Images */}
+            {images.map((image, index) => (
+              <div
+                key={`carousel-img-${index}`}
+                className="absolute inset-0 w-full h-full flex items-center justify-center"
                 style={{
-                  objectFit: 'contain',
-                  display: 'block'
+                  opacity: index === currentIndex ? 1 : 0,
+                  transition: 'opacity 0.5s ease-in-out',
+                  zIndex: index === currentIndex ? 1 : 0,
+                  pointerEvents: index === currentIndex ? 'auto' : 'none'
                 }}
-                loading="eager"
-                onError={(e) => {
-                  console.error(`❌ Failed to load image: ${currentImage.src}`, e)
-                  const target = e.target as HTMLImageElement
-                  console.error('Image error details:', {
-                    src: target.src,
-                    naturalWidth: target.naturalWidth,
-                    naturalHeight: target.naturalHeight,
-                    complete: target.complete,
-                    currentSrc: target.currentSrc
-                  })
-                }}
-                onLoad={(e) => {
-                  console.log(`✅ Image loaded successfully: ${currentImage.src}`)
-                  const target = e.target as HTMLImageElement
-                  console.log('Image load details:', {
-                    src: target.src,
-                    naturalWidth: target.naturalWidth,
-                    naturalHeight: target.naturalHeight,
-                    complete: target.complete
-                  })
-                }}
-              />
-            </div>
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="max-w-full max-h-full w-auto h-auto"
+                  style={{
+                    objectFit: 'contain',
+                    display: 'block'
+                  }}
+                  loading={index <= 2 ? "eager" : "lazy"}
+                  onError={(e) => {
+                    console.error(`❌ Failed to load image: ${image.src}`, e)
+                  }}
+                  onLoad={() => {
+                    console.log(`✅ Image loaded: ${image.src}`)
+                  }}
+                />
+              </div>
+            ))}
 
             {/* Navigation Arrows */}
             <button
