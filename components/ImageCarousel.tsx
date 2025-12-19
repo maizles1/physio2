@@ -69,21 +69,25 @@ export default function ImageCarousel() {
             aria-label="קרוסלת תמונות של הקליניקה"
           >
             {/* Current Image */}
-            <div className="absolute inset-0 w-full h-full">
+            <div className="absolute inset-0 w-full h-full flex items-center justify-center">
               <img
+                key={currentIndex}
                 src={currentImage.src}
                 alt={currentImage.alt}
-                className="w-full h-full object-contain"
+                className="max-w-full max-h-full w-auto h-auto object-contain"
                 style={{
-                  width: '100%',
-                  height: '100%',
                   objectFit: 'contain',
-                  display: 'block'
+                  display: 'block',
+                  maxWidth: '100%',
+                  maxHeight: '100%'
                 }}
                 onError={(e) => {
-                  console.error(`Failed to load image: ${currentImage.src}`)
+                  console.error(`Failed to load image: ${currentImage.src}`, e)
                   const target = e.target as HTMLImageElement
                   target.style.display = 'none'
+                }}
+                onLoad={() => {
+                  console.log(`✅ Image loaded: ${currentImage.src}`)
                 }}
               />
             </div>
