@@ -21,7 +21,6 @@ export default function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [isHovered, setIsHovered] = useState(false)
-  const [imageLoaded, setImageLoaded] = useState<boolean>(false)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   
   // Preload all images on mount
@@ -41,7 +40,6 @@ export default function ImageCarousel() {
   const goToSlide = useCallback((index: number) => {
     setCurrentIndex(index)
     setIsAutoPlaying(false)
-    setImageLoaded(false) // Reset loaded state when changing image
   }, [])
 
   const goToPrevious = useCallback(() => {
@@ -67,11 +65,7 @@ export default function ImageCarousel() {
     }
 
     intervalRef.current = setInterval(() => {
-      setCurrentIndex((prevIndex) => {
-        const nextIndex = (prevIndex + 1) % images.length
-        setImageLoaded(false) // Reset loaded state when auto-changing
-        return nextIndex
-      })
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
     }, AUTO_PLAY_INTERVAL)
 
     return () => {
@@ -109,9 +103,7 @@ export default function ImageCarousel() {
                 className="max-w-full max-h-full w-auto h-auto"
                 style={{
                   objectFit: 'contain',
-                  display: imageLoaded ? 'block' : 'none',
-                  opacity: imageLoaded ? 1 : 0,
-                  transition: 'opacity 0.3s ease-in-out'
+                  display: 'block'
                 }}
                 loading="eager"
                 onError={(e) => {
@@ -124,7 +116,6 @@ export default function ImageCarousel() {
                     complete: target.complete,
                     currentSrc: target.currentSrc
                   })
-                  setImageLoaded(false)
                 }}
                 onLoad={(e) => {
                   console.log(`✅ Image loaded successfully: ${currentImage.src}`)
@@ -135,7 +126,6 @@ export default function ImageCarousel() {
                     naturalHeight: target.naturalHeight,
                     complete: target.complete
                   })
-                  setImageLoaded(true)
                 }}
               />
             </div>
