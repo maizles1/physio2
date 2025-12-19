@@ -60,7 +60,7 @@ const services = [
     ),
     href: '/services',
     color: 'from-[#004080] to-[#2080C0]',
-    imagePath: '/images/carousel/clinic-1.jpg',
+    imagePath: '/images/services/back-pain/service-image.jpg',
   },
 ]
 
