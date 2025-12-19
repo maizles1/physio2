@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 
 interface CarouselImage {
   src: string
@@ -10,9 +10,6 @@ interface CarouselImage {
 const images: CarouselImage[] = [
   { src: '/images/carousel/clinic-1.jpg', alt: 'קליניקת פיזיותרפיה.פלוס - חלל טיפול מקצועי' },
   { src: '/images/carousel/clinic-2.jpg', alt: 'ציוד מקצועי לטיפול פיזיותרפיה' },
-  { src: '/images/carousel/clinic-3.jpg', alt: 'חדר טיפול בקליניקה' },
-  { src: '/images/carousel/clinic-4.jpg', alt: 'אזור המתנה בקליניקה' },
-  { src: '/images/carousel/clinic-5.jpg', alt: 'פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד' },
 ]
 
 const AUTO_PLAY_INTERVAL = 5000 // 5 seconds
@@ -21,93 +18,39 @@ export default function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [isHovered, setIsHovered] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set())
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
-  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null)
-  const carouselRef = useRef<HTMLDivElement>(null)
-  const imagesContainerRef = useRef<HTMLDivElement>(null)
-  
-  const handleImageLoad = useCallback((index: number) => {
-    setLoadedImages((prev) => new Set(prev).add(index))
-  }, [])
 
   const goToSlide = useCallback((index: number) => {
     setCurrentIndex(index)
     setIsAutoPlaying(false)
-    setProgress(0)
   }, [])
 
   const goToPrevious = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
     setIsAutoPlaying(false)
-    setProgress(0)
   }, [])
 
   const goToNext = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
     setIsAutoPlaying(false)
-    setProgress(0)
   }, [])
 
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!carouselRef.current?.contains(document.activeElement)) return
-
-      switch (e.key) {
-        case 'ArrowRight':
-          e.preventDefault()
-          goToPrevious()
-          break
-        case 'ArrowLeft':
-          e.preventDefault()
-          goToNext()
-          break
-        case 'Home':
-          e.preventDefault()
-          goToSlide(0)
-          break
-        case 'End':
-          e.preventDefault()
-          goToSlide(images.length - 1)
-          break
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [goToNext, goToPrevious, goToSlide])
-
-  // Auto-play and progress tracking
+  // Auto-play
   useEffect(() => {
     if (!isAutoPlaying || isHovered) {
-      // Use setTimeout to avoid synchronous setState in effect
-      const timer = setTimeout(() => setProgress(0), 0)
-      return () => clearTimeout(timer)
+      return
     }
 
-    // Progress interval (update every 50ms for smooth animation)
-    progressIntervalRef.current = setInterval(() => {
-      setProgress((prev) => {
-        const newProgress = prev + (100 / (AUTO_PLAY_INTERVAL / 50))
-        return newProgress >= 100 ? 0 : newProgress
-      })
-    }, 50)
-
-    // Auto-play interval
     intervalRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
-      setTimeout(() => setProgress(0), 0)
     }, AUTO_PLAY_INTERVAL)
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current)
-      if (progressIntervalRef.current) clearInterval(progressIntervalRef.current)
     }
-  }, [isAutoPlaying, isHovered, currentIndex])
+  }, [isAutoPlaying, isHovered])
 
-  const currentImage = useMemo(() => images[currentIndex], [currentIndex])
+  const currentImage = images[currentIndex]
 
   return (
     <section className="section-spacing bg-gray-50">
@@ -118,85 +61,32 @@ export default function ImageCarousel() {
           </h2>
           
           <div
-            ref={carouselRef}
-            className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-xl sm:shadow-2xl w-full h-[400px] sm:h-[500px] md:h-[550px]"
-            style={{ 
-              width: '100%'
-            }}
+            className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-xl sm:shadow-2xl w-full h-[400px] sm:h-[500px] md:h-[550px] bg-gray-200"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             tabIndex={0}
             role="region"
             aria-label="קרוסלת תמונות של הקליניקה"
           >
-            {/* Images */}
-            <div ref={imagesContainerRef} className="relative w-full h-full carousel-images-container" style={{ backgroundColor: '#f3f4f6' }}>
-              {images.map((image, index) => {
-                const isCurrent = index === currentIndex
-                return (
-                  <div
-                    key={`img-${index}-${isCurrent}`}
-                    data-image-index={index}
-                    className="absolute inset-0"
-                    style={{
-                      opacity: isCurrent ? 1 : 0,
-                      transition: 'opacity 0.7s ease-in-out',
-                      zIndex: isCurrent ? 10 : 0,
-                      pointerEvents: isCurrent ? 'auto' : 'none',
-                      visibility: isCurrent ? 'visible' : 'hidden'
-                    }}
-                    aria-hidden={!isCurrent}
-                  >
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      className="w-full h-full object-contain carousel-image"
-                      style={{ 
-                        objectFit: 'contain',
-                        width: '100%',
-                        height: '100%',
-                        display: 'block'
-                      }}
-                      loading={index <= 1 ? "eager" : "lazy"}
-                      onLoad={() => {
-                        handleImageLoad(index)
-                        console.log(`✅ Image ${index} (${image.src}) loaded successfully`)
-                      }}
-                      onError={(e) => {
-                        console.error(`❌ Failed to load image: ${image.src}`, e)
-                        const target = e.target as HTMLImageElement
-                        target.style.display = 'none'
-                        const placeholder = target.parentElement?.querySelector('.image-placeholder') as HTMLElement
-                        if (placeholder) {
-                          placeholder.classList.remove('hidden')
-                          placeholder.classList.add('flex')
-                        }
-                      }}
-                    />
-                    <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#2080C0] to-[#2A3080] hidden items-center justify-center image-placeholder" role="img" aria-label={image.alt}>
-                      <div className="text-center text-white p-8">
-                        <svg className="w-24 h-24 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p className="text-lg font-medium mb-2">{image.alt}</p>
-                        <p className="text-sm opacity-75">תמונה זמנית - יש להוסיף תמונה לקובץ: {image.src}</p>
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
+            {/* Current Image */}
+            <div className="absolute inset-0 w-full h-full">
+              <img
+                src={currentImage.src}
+                alt={currentImage.alt}
+                className="w-full h-full object-contain"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block'
+                }}
+                onError={(e) => {
+                  console.error(`Failed to load image: ${currentImage.src}`)
+                  const target = e.target as HTMLImageElement
+                  target.style.display = 'none'
+                }}
+              />
             </div>
-
-            {/* Progress Bar */}
-            {isAutoPlaying && !isHovered && (
-              <div className="absolute top-0 left-0 right-0 h-1 bg-white/20 z-20">
-                <div
-                  className="h-full bg-white transition-all duration-75 ease-linear"
-                  style={{ width: `${progress}%` }}
-                  aria-hidden="true"
-                />
-              </div>
-            )}
 
             {/* Navigation Arrows */}
             <button
