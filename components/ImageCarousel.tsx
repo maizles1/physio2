@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
-import Image from 'next/image'
 
 interface CarouselImage {
   src: string
@@ -139,20 +138,21 @@ export default function ImageCarousel() {
                     key={index}
                     data-image-index={index}
                     className={`absolute inset-0 transition-opacity duration-700 ${
-                      isCurrent ? 'opacity-100' : 'opacity-0'
+                      isCurrent ? 'opacity-100 z-10' : 'opacity-0 z-0'
                     }`}
                     aria-hidden={!isCurrent}
                   >
-                    <Image
+                    <img
                       src={image.src}
                       alt={image.alt}
-                      fill
-                      className="object-contain w-full h-full carousel-image"
-                      style={{ objectFit: 'contain' }}
-                      priority={index <= 1}
+                      className="w-full h-full object-contain carousel-image"
+                      style={{ 
+                        objectFit: 'contain',
+                        width: '100%',
+                        height: '100%',
+                        display: 'block'
+                      }}
                       loading="eager"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                      unoptimized
                       onLoad={() => handleImageLoad(index)}
                       onError={(e) => {
                         console.error(`Failed to load image: ${image.src}`)
