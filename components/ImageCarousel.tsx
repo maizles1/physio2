@@ -9,10 +9,10 @@ interface CarouselImage {
 }
 
 const images: CarouselImage[] = [
-  { src: '/images/carousel/clinic-1.jpg', alt: 'קליניקת פיזיותרפיה.פלוס - חלל טיפול מקצועי' },
-  { src: '/images/carousel/clinic-2.jpg', alt: 'ציוד מקצועי לטיפול פיזיותרפיה' },
-  { src: '/images/carousel/clinic-3.jpeg', alt: 'חדר טיפול בקליניקה' },
-  { src: '/images/carousel/clinic-4.jpeg', alt: 'אזור המתנה בקליניקה' },
+  { src: '/images/carousel/clinic-1.jpeg', alt: 'קליניקת פיזיותרפיה.פלוס - חלל טיפול מקצועי' },
+  { src: '/images/carousel/clinic-2.jpeg', alt: 'ציוד מקצועי לטיפול פיזיותרפיה' },
+  { src: '/images/carousel/clinic-3.jpg', alt: 'חדר טיפול בקליניקה' },
+  { src: '/images/carousel/clinic-4.jpg', alt: 'אזור המתנה בקליניקה' },
   { src: '/images/carousel/clinic-5.jpg', alt: 'פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד' },
 ]
 
