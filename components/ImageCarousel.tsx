@@ -21,21 +21,39 @@ export default function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [isHovered, setIsHovered] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  
+  // Preload all images on mount
+  useEffect(() => {
+    images.forEach((image) => {
+      const img = new Image()
+      img.src = image.src
+      img.onload = () => {
+        console.log(`✅ Preloaded: ${image.src}`)
+      }
+      img.onerror = () => {
+        console.error(`❌ Failed to preload: ${image.src}`)
+      }
+    })
+  }, [])
 
   const goToSlide = useCallback((index: number) => {
     setCurrentIndex(index)
     setIsAutoPlaying(false)
+    setImageLoaded(false) // Reset loaded state when changing image
   }, [])
 
   const goToPrevious = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
     setIsAutoPlaying(false)
+    setImageLoaded(false)
   }, [])
 
   const goToNext = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
     setIsAutoPlaying(false)
+    setImageLoaded(false)
   }, [])
 
   // Auto-play
@@ -49,7 +67,11 @@ export default function ImageCarousel() {
     }
 
     intervalRef.current = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+      setCurrentIndex((prevIndex) => {
+        const nextIndex = (prevIndex + 1) % images.length
+        setImageLoaded(false) // Reset loaded state when auto-changing
+        return nextIndex
+      })
     }, AUTO_PLAY_INTERVAL)
 
     return () => {
@@ -81,15 +103,17 @@ export default function ImageCarousel() {
             {/* Current Image */}
             <div className="absolute inset-0 w-full h-full flex items-center justify-center">
               <img
-                key={`carousel-img-${currentIndex}-${currentImage.src}`}
+                key={`carousel-img-${currentIndex}`}
                 src={currentImage.src}
                 alt={currentImage.alt}
                 className="max-w-full max-h-full w-auto h-auto"
                 style={{
                   objectFit: 'contain',
-                  display: 'block'
+                  display: imageLoaded ? 'block' : 'none',
+                  opacity: imageLoaded ? 1 : 0,
+                  transition: 'opacity 0.3s ease-in-out'
                 }}
-                loading={currentIndex <= 1 ? "eager" : "lazy"}
+                loading="eager"
                 onError={(e) => {
                   console.error(`❌ Failed to load image: ${currentImage.src}`, e)
                   const target = e.target as HTMLImageElement
@@ -97,12 +121,21 @@ export default function ImageCarousel() {
                     src: target.src,
                     naturalWidth: target.naturalWidth,
                     naturalHeight: target.naturalHeight,
+                    complete: target.complete,
+                    currentSrc: target.currentSrc
+                  })
+                  setImageLoaded(false)
+                }}
+                onLoad={(e) => {
+                  console.log(`✅ Image loaded successfully: ${currentImage.src}`)
+                  const target = e.target as HTMLImageElement
+                  console.log('Image load details:', {
+                    src: target.src,
+                    naturalWidth: target.naturalWidth,
+                    naturalHeight: target.naturalHeight,
                     complete: target.complete
                   })
-                  target.style.visibility = 'hidden'
-                }}
-                onLoad={() => {
-                  console.log(`✅ Image loaded successfully: ${currentImage.src}`)
+                  setImageLoaded(true)
                 }}
               />
             </div>
