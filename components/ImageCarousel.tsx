@@ -130,7 +130,7 @@ export default function ImageCarousel() {
             aria-label="קרוסלת תמונות של הקליניקה"
           >
             {/* Images */}
-            <div ref={imagesContainerRef} className="relative w-full h-full carousel-images-container">
+            <div ref={imagesContainerRef} className="relative w-full h-full carousel-images-container bg-gray-200">
               {images.map((image, index) => {
                 const isCurrent = index === currentIndex
                 return (
@@ -138,7 +138,7 @@ export default function ImageCarousel() {
                     key={index}
                     data-image-index={index}
                     className={`absolute inset-0 transition-opacity duration-700 ${
-                      isCurrent ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                      isCurrent ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                     }`}
                     aria-hidden={!isCurrent}
                   >
@@ -152,10 +152,13 @@ export default function ImageCarousel() {
                         height: '100%',
                         display: 'block'
                       }}
-                      loading="eager"
-                      onLoad={() => handleImageLoad(index)}
+                      loading={index <= 1 ? "eager" : "lazy"}
+                      onLoad={() => {
+                        handleImageLoad(index)
+                        console.log(`✅ Image ${index} (${image.src}) loaded successfully`)
+                      }}
                       onError={(e) => {
-                        console.error(`Failed to load image: ${image.src}`)
+                        console.error(`❌ Failed to load image: ${image.src}`, e)
                         // Fallback to placeholder if image doesn't exist
                         const target = e.target as HTMLImageElement
                         target.style.display = 'none'
