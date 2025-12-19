@@ -877,3 +877,11 @@ section.section-spacing .carousel-images-container img.carousel-image,
   width: 100% !important;
   height: 100% !important;
 }
+
+/* Highlight "ג'ודו" in hero section - override global white color */
+section.bg-primary-gradient h2 .highlight-judo,
+section.bg-primary-gradient h2 span.highlight-judo {
+  color: #dc2626 !important; /* red-600 */
+  font-size: 1.4em !important;
+  font-weight: 700 !important;
+}

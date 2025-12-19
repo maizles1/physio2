@@ -86,7 +86,7 @@ export default function HeroSection() {
               </h1>
               <div className="max-w-3xl mx-auto lg:mx-0 lg:mr-0 mt-4 sm:mt-6 px-2">
                 <h2 className="mb-6 sm:mb-8 text-white leading-relaxed">
-                  הידיים שטיפלו בנבחרת ישראל ב<span className="text-red-600 font-bold text-xl">ג&apos;ודו</span> – עכשיו זמינות לכאב שלך
+                  הידיים שטיפלו בנבחרת ישראל ב<span className="font-bold highlight-judo">ג&apos;ודו</span> – עכשיו זמינות לכאב שלך
                 </h2>
                 <p className="text-large text-white leading-loose" style={{ lineHeight: '2.0' }}>
                   כאב לא חייב לנהל לך את החיים. בקליניקה תקבל את הסטנדרט המקצועי של נבחרת ישראל: אבחון קליני, חשיבה רפואית מתקדמת והתאמה אישית של הטיפול. אני לא מוכר אשליות ולא מבטיח קסמים, אבל אני מתחייב לדבר אחד: 100% מהידע, הניסיון והמאמץ שלי מושקעים בשיקום שלך, בדיוק כפי שהייתי משקיע בספורטאי אולימפי.
