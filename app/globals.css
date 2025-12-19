@@ -885,3 +885,34 @@ section.bg-primary-gradient h2 span.highlight-judo {
   font-size: 1.4em !important;
   font-weight: 700 !important;
 }
+
+/* react-slick carousel styles - ensure visibility and proper display */
+.slick-slider,
+.slick-list,
+.slick-track {
+  display: block !important;
+  visibility: visible !important;
+}
+
+.slick-slide {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
+}
+
+.slick-slide > div {
+  display: block !important;
+  height: 100% !important;
+}
+
+/* Ensure slick carousel images are visible */
+.slick-slide img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  object-fit: contain !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+}

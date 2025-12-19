@@ -1,5 +1,5 @@
 import HeroSection from '@/components/HeroSection'
-import ImageCarousel from '@/components/ImageCarousel'
+import ImageCarouselWrapper from '@/components/ImageCarouselWrapper'
 import VideosSection from '@/components/VideosSection'
 import InsuranceSection from '@/components/InsuranceSection'
 import ServicesPreview from '@/components/ServicesPreview'
@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <ImageCarousel />
+      <ImageCarouselWrapper />
       <VideosSection />
       <InsuranceSection />
       <ServicesPreview />
