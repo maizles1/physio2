@@ -10,6 +10,9 @@ interface CarouselImage {
 const images: CarouselImage[] = [
   { src: '/images/carousel/clinic-1.jpg', alt: 'קליניקת פיזיותרפיה.פלוס - חלל טיפול מקצועי' },
   { src: '/images/carousel/clinic-2.jpg', alt: 'ציוד מקצועי לטיפול פיזיותרפיה' },
+  { src: '/images/carousel/clinic-3.jpg', alt: 'חדר טיפול בקליניקה' },
+  { src: '/images/carousel/clinic-4.jpg', alt: 'אזור המתנה בקליניקה' },
+  { src: '/images/carousel/clinic-5.jpg', alt: 'פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד' },
 ]
 
 const AUTO_PLAY_INTERVAL = 5000 // 5 seconds
@@ -38,6 +41,10 @@ export default function ImageCarousel() {
   // Auto-play
   useEffect(() => {
     if (!isAutoPlaying || isHovered) {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
       return
     }
 
@@ -46,7 +53,10 @@ export default function ImageCarousel() {
     }, AUTO_PLAY_INTERVAL)
 
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current)
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
     }
   }, [isAutoPlaying, isHovered])
 
@@ -71,23 +81,21 @@ export default function ImageCarousel() {
             {/* Current Image */}
             <div className="absolute inset-0 w-full h-full flex items-center justify-center">
               <img
-                key={currentIndex}
+                key={`carousel-img-${currentIndex}`}
                 src={currentImage.src}
                 alt={currentImage.alt}
-                className="max-w-full max-h-full w-auto h-auto object-contain"
+                className="max-w-full max-h-full w-auto h-auto"
                 style={{
                   objectFit: 'contain',
-                  display: 'block',
-                  maxWidth: '100%',
-                  maxHeight: '100%'
+                  display: 'block'
                 }}
                 onError={(e) => {
-                  console.error(`Failed to load image: ${currentImage.src}`, e)
+                  console.error(`❌ Failed to load image: ${currentImage.src}`)
                   const target = e.target as HTMLImageElement
-                  target.style.display = 'none'
+                  target.style.visibility = 'hidden'
                 }}
                 onLoad={() => {
-                  console.log(`✅ Image loaded: ${currentImage.src}`)
+                  console.log(`✅ Image loaded successfully: ${currentImage.src}`)
                 }}
               />
             </div>
