@@ -22,10 +22,10 @@ export default function HeroSection() {
           <Image
             src="/images/insurance/Clalit-Logo.png"
             alt="כללית"
-            width={40}
-            height={20}
-            className="max-h-[60px] w-auto object-contain opacity-90"
-            style={{ maxHeight: '60px', width: 'auto', height: 'auto' }}
+            width={35}
+            height={18}
+            className="max-h-[50px] w-auto object-contain opacity-90"
+            style={{ maxHeight: '50px', width: 'auto', height: 'auto' }}
             unoptimized
           />
         </div>
@@ -33,19 +33,19 @@ export default function HeroSection() {
             <Image
             src="/images/insurance/Meuhedet-Logo.png"
             alt="מאוחדת"
-            width={40}
-            height={20}
-            className="max-h-[60px] w-auto object-contain opacity-90"
+            width={35}
+            height={18}
+            className="max-h-[50px] w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
-        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-md">
+        <div className="flex items-center justify-center bg-white border-2 border-white rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 shadow-lg">
             <Image
             src="/images/insurance/Ministry-of-defense-logo.png"
             alt="משרד הביטחון"
-            width={40}
-            height={20}
-            className="max-h-[60px] w-auto object-contain opacity-90"
+            width={35}
+            height={18}
+            className="max-h-[50px] w-auto object-contain"
             unoptimized
           />
         </div>
@@ -80,13 +80,13 @@ export default function HeroSection() {
             </div>
             
             {/* Title and Description */}
-            <div className="flex-1 text-center lg:text-right order-1 lg:order-2 pr-16 sm:pr-20 md:pr-24">
+            <div className="flex-1 text-center lg:text-right order-1 lg:order-2 pr-16 sm:pr-20 md:pr-24 pl-20 sm:pl-24 md:pl-28">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-relaxed tracking-wide px-2 text-white">
                 פיזיותרפיסט פרטי באשדוד-  סטנדרט אולימפי. יחס אישי.
               </h1>
-              <div className="max-w-3xl mx-auto lg:mr-0 mt-4 sm:mt-6 px-2">
+              <div className="max-w-3xl mx-auto lg:mx-0 lg:mr-0 mt-4 sm:mt-6 px-2">
                 <h2 className="mb-6 sm:mb-8 text-white leading-relaxed">
-                  הידיים שטיפלו בנבחרת ישראל בג&apos;ודו – עכשיו זמינות לכאב שלך
+                  הידיים שטיפלו בנבחרת ישראל ב<span className="text-red-600 font-bold text-xl">ג&apos;ודו</span> – עכשיו זמינות לכאב שלך
                 </h2>
                 <p className="text-large text-white leading-loose" style={{ lineHeight: '2.0' }}>
                   כאב לא חייב לנהל לך את החיים. בקליניקה תקבל את הסטנדרט המקצועי של נבחרת ישראל: אבחון קליני, חשיבה רפואית מתקדמת והתאמה אישית של הטיפול. אני לא מוכר אשליות ולא מבטיח קסמים, אבל אני מתחייב לדבר אחד: 100% מהידע, הניסיון והמאמץ שלי מושקעים בשיקום שלך, בדיוק כפי שהייתי משקיע בספורטאי אולימפי.
