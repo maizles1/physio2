@@ -663,7 +663,7 @@ img[alt*="ביטחון"] {
 }
 
 /* Ensure Next.js Image components with fill prop are responsive */
-/* Exclude insurance logos and carousel images from these aggressive rules */
+/* Exclude insurance logos from these aggressive rules */
 span[style*="position: relative"] img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
 span[style*="position:relative"] img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
 div[class*="relative"] img[fill]:not([src*="insurance"]):not([src*="carousel"]),
@@ -673,7 +673,7 @@ div[class*="relative"] img[fill]:not([src*="insurance"]):not([src*="carousel"]),
 }
 
 /* Ensure image containers fill space without empty borders */
-/* Exclude insurance logos and carousel images from these aggressive rules */
+/* Exclude insurance logos from these aggressive rules */
 .relative[class*="overflow-hidden"] img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
 div[class*="overflow-hidden"] img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
 div[class*="relative"] img[fill]:not([src*="insurance"]):not([src*="carousel"]),
@@ -684,32 +684,6 @@ div[class*="relative"] > img:not([src*="insurance"]):not([src*="carousel"]):not(
   width: 100% !important;
   height: 100% !important;
   display: block;
-}
-
-/* Carousel images - force contain to show full images */
-/* Use class selector with high specificity to override global rules */
-.carousel-image,
-img.carousel-image,
-.carousel-images-container .carousel-image,
-.carousel-images-container img.carousel-image,
-.carousel-images-container span img.carousel-image {
-  object-fit: contain !important;
-}
-
-/* Also target by src for additional coverage */
-div[class*="relative"] img[src*="carousel"],
-.relative img[src*="carousel"],
-img[src*="carousel"] {
-  object-fit: contain !important;
-}
-
-/* Ensure carousel container images don't get overridden - highest specificity */
-section.section-spacing .carousel-images-container .carousel-image,
-section.section-spacing .carousel-images-container img,
-section[class*="section-spacing"] .carousel-images-container span img {
-  object-fit: contain !important;
-  width: 100% !important;
-  height: 100% !important;
 }
 
 /* Mobile and tablet common styles */
@@ -740,7 +714,7 @@ section[class*="section-spacing"] .carousel-images-container span img {
   }
   
   /* Ensure image containers fill space */
-  /* Exclude insurance logos and carousel images from these aggressive rules */
+  /* Exclude insurance logos from these aggressive rules */
   .relative img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]),
   [class*="relative"] img:not([src*="insurance"]):not([src*="carousel"]):not([alt*="כללית"]):not([alt*="מאוחדת"]):not([alt*="ביטחון"]) {
     width: 100%;
@@ -827,12 +801,6 @@ section[class*="section-spacing"] .carousel-images-container span img {
     padding-bottom: 2rem;
   }
   
-  /* Optimize carousel for mobile */
-  [class*="carousel"],
-  [class*="Carousel"] {
-    touch-action: pan-x;
-  }
-  
   /* Better modal/dialog spacing on mobile */
   [role="dialog"],
   [class*="modal"],
@@ -868,16 +836,6 @@ section[class*="section-spacing"] .carousel-images-container span img {
   }
 }
 
-/* Carousel images override - must be at the end with highest specificity */
-/* This ensures carousel images use contain instead of cover */
-section.section-spacing.bg-gray-50 .container .max-w-6xl .relative .carousel-images-container img.carousel-image,
-section.section-spacing .carousel-images-container img.carousel-image,
-.carousel-images-container .carousel-image {
-  object-fit: contain !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
 /* Highlight "ג'ודו" in hero section - override global white color */
 section.bg-primary-gradient h2 .highlight-judo,
 section.bg-primary-gradient h2 span.highlight-judo {
@@ -886,33 +844,3 @@ section.bg-primary-gradient h2 span.highlight-judo {
   font-weight: 700 !important;
 }
 
-/* react-slick carousel styles - ensure visibility and proper display */
-.slick-slider,
-.slick-list,
-.slick-track {
-  display: block !important;
-  visibility: visible !important;
-}
-
-.slick-slide {
-  display: block !important;
-  visibility: visible !important;
-  height: auto !important;
-}
-
-.slick-slide > div {
-  display: block !important;
-  height: 100% !important;
-}
-
-/* Ensure slick carousel images are visible */
-.slick-slide img {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  object-fit: contain !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  width: auto !important;
-  height: auto !important;
-}
