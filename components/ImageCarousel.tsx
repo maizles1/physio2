@@ -23,10 +23,15 @@ export default function ImageCarousel() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [isHovered, setIsHovered] = useState(false)
   const [progress, setProgress] = useState(0)
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set())
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const carouselRef = useRef<HTMLDivElement>(null)
   const imagesContainerRef = useRef<HTMLDivElement>(null)
+  
+  const handleImageLoad = useCallback((index: number) => {
+    setLoadedImages((prev) => new Set(prev).add(index))
+  }, [])
 
   const goToSlide = useCallback((index: number) => {
     setCurrentIndex(index)
@@ -144,10 +149,13 @@ export default function ImageCarousel() {
                       fill
                       className="object-contain w-full h-full carousel-image"
                       style={{ objectFit: 'contain' }}
-                      priority={index === 0}
-                      loading={index === 0 ? undefined : 'lazy'}
+                      priority={index <= 1}
+                      loading="eager"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                      unoptimized
+                      onLoad={() => handleImageLoad(index)}
                       onError={(e) => {
+                        console.error(`Failed to load image: ${image.src}`)
                         // Fallback to placeholder if image doesn't exist
                         const target = e.target as HTMLImageElement
                         target.style.display = 'none'
