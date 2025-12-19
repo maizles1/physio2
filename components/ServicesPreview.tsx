@@ -3,55 +3,19 @@ import Image from 'next/image'
 
 const services = [
   {
-    title: 'טיפול בכאבי גב',
-    description: 'טיפול מקצועי ומקיף בכאבי גב אקוטיים וכרוניים, כולל כאבי גב תחתון, עליון ומתיחה בגב',
+    title: 'טיפול בכאבי שלד שריר',
+    description: 'טיפול מקצועי ומקיף בכאבי גב, כתף, צוואר, ברך ומפרקים אחרים. טיפול מותאם אישית לכל מטופל',
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
       </svg>
     ),
-    href: '/services#back-pain',
+    href: '/services',
     color: 'from-[#2080C0] to-[#2A3080]',
     imagePath: '/images/services/back-pain/service-image.jpg',
   },
   {
-    title: 'טיפול בכאבי כתף',
-    description: 'שיקום וטיפול בכאבי כתף, בעיות מפרק הכתף, דלקות גידים ופציעות כתף שונות',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-      </svg>
-    ),
-    href: '/services#shoulder-pain',
-    color: 'from-[#40C0F0] to-[#2080C0]',
-    imagePath: '/images/services/shoulder-pain/service-image.jpg',
-  },
-  {
-    title: 'טיפול בכאבי צוואר',
-    description: 'טיפול מקצועי ומקיף בכאבי צוואר, בעיות מפרק הצוואר, שרירים ורקמות רכות',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
-    href: '/services#neck-pain',
-    color: 'from-[#004080] to-[#2080C0]',
-    imagePath: '/images/services/neck-pain/service-image.jpg',
-  },
-  {
-    title: 'טיפול בכאבי ברך',
-    description: 'טיפול מקצועי ומקיף בכאבי ברך, בעיות מפרק הברך, פציעות ודלקות',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
-    href: '/services#knee-pain',
-    color: 'from-[#2080C0] to-[#40C0F0]',
-    imagePath: '/images/services/knee-pain/service-image.jpg',
-  },
-  {
-    title: 'שיקום לאחר ניתוחים',
+    title: 'שיקום מניתוחים',
     description: 'תוכניות שיקום מותאמות אישית לאחר ניתוחים אורטופדיים, כולל ניתוחי מפרקים, שברים וניתוחי עמוד שדרה',
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,11 +27,11 @@ const services = [
     imagePath: '/images/services/post-surgery/service-image.jpg',
   },
   {
-    title: 'שיקום וסטיבולרי - טיפול בסחרחורות',
+    title: 'טיפול בסחרחורות',
     description: 'טיפול מקצועי בסחרחורות, ורטיגו ובעיות שיווי משקל באמצעות שיקום וסטיבולרי מתקדם',
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
       </svg>
     ),
     href: '/services#vestibular',
@@ -75,16 +39,28 @@ const services = [
     imagePath: '/images/services/vestibular/service-image.jpg',
   },
   {
-    title: 'טיפול במפרק הלסת (TMJ)',
-    description: 'טיפול מקצועי בכאבי לסת, נעילת לסת, בעיות במפרק הטמפורומנדיבולרי וקשיי לעיסה',
+    title: 'שיקום מפרק לסת',
+    description: 'טיפול מקצועי בכאבי לסת, נעילת לסת, בעיות במפרק הטמפורומנדיבולרי (TMJ) וקשיי לעיסה',
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
       </svg>
     ),
     href: '/services#tmj',
     color: 'from-[#40C0F0] to-[#2A3080]',
     imagePath: '/images/services/tmj/service-image.jpg',
+  },
+  {
+    title: 'ביקורי בית באשדוד',
+    description: 'שירותי פיזיותרפיה מקצועיים בביקורי בית באשדוד והסביבה. טיפול מקצועי בנוחות הבית שלך',
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+    ),
+    href: '/services',
+    color: 'from-[#004080] to-[#2080C0]',
+    imagePath: '/images/carousel/clinic-1.jpg',
   },
 ]
 
@@ -101,7 +77,7 @@ export default function ServicesPreview() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {services.map((service, index) => (
             <Link
               key={index}
