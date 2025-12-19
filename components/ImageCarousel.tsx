@@ -81,7 +81,7 @@ export default function ImageCarousel() {
             {/* Current Image */}
             <div className="absolute inset-0 w-full h-full flex items-center justify-center">
               <img
-                key={`carousel-img-${currentIndex}`}
+                key={`carousel-img-${currentIndex}-${currentImage.src}`}
                 src={currentImage.src}
                 alt={currentImage.alt}
                 className="max-w-full max-h-full w-auto h-auto"
@@ -89,9 +89,16 @@ export default function ImageCarousel() {
                   objectFit: 'contain',
                   display: 'block'
                 }}
+                loading={currentIndex <= 1 ? "eager" : "lazy"}
                 onError={(e) => {
-                  console.error(`❌ Failed to load image: ${currentImage.src}`)
+                  console.error(`❌ Failed to load image: ${currentImage.src}`, e)
                   const target = e.target as HTMLImageElement
+                  console.error('Image error details:', {
+                    src: target.src,
+                    naturalWidth: target.naturalWidth,
+                    naturalHeight: target.naturalHeight,
+                    complete: target.complete
+                  })
                   target.style.visibility = 'hidden'
                 }}
                 onLoad={() => {
