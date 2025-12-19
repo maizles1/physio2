@@ -1,11 +1,9 @@
 'use client'
-
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 const images = ['clinic-1.jpg', 'clinic-2.jpg', 'clinic-3.jpg', 'clinic-4.jpg', 'clinic-5.jpg']
-
 console.log('Carousel images array:', images)
 
 export default function ImageCarousel() {
