@@ -49,9 +49,6 @@ export default function ImageCarousel() {
                       className="max-w-full max-h-full w-auto h-auto object-contain"
                       loading={index <= 1 ? 'eager' : 'lazy'}
                       style={{ display: 'block' }}
-                      onLoad={(e) => {
-                        console.log(`Image ${index + 1} loaded successfully: ${src}`)
-                      }}
                       onError={(e) => {
                         console.error(`Failed to load image ${index + 1}: ${src}`, e)
                         const target = e.target
