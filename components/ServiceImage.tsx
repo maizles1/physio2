@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 interface ServiceImageProps {
   src: string
@@ -16,14 +16,56 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
   const [imgSrc, setImgSrc] = useState(src)
   const [hasError, setHasError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const isSvg = imgSrc.endsWith('.svg')
+  const isLargeImage = imgSrc.endsWith('.png') && (imgSrc.includes('home-visits') || imgSrc.includes('vestibular') || imgSrc.includes('tmj'))
 
   // Reset when src changes
   useEffect(() => {
     setImgSrc(src)
     setHasError(false)
     setIsLoading(true)
-  }, [src])
+
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+
+    // Set timeout for image loading (10 seconds)
+    timeoutRef.current = setTimeout(() => {
+      if (src !== fallbackSrc) {
+        console.warn(`Image loading timeout: ${src}, switching to fallback`)
+        setHasError(true)
+        setImgSrc(fallbackSrc)
+        setIsLoading(true)
+      }
+    }, 10000)
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [src, fallbackSrc])
+
+  const handleError = () => {
+    if (!hasError && imgSrc !== fallbackSrc) {
+      console.warn(`Image load error: ${imgSrc}, switching to fallback`)
+      setHasError(true)
+      setImgSrc(fallbackSrc)
+      setIsLoading(true)
+    } else if (hasError && imgSrc === fallbackSrc) {
+      // If fallback also fails, show placeholder
+      setIsLoading(false)
+    }
+  }
+
+  const handleLoad = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+    setIsLoading(false)
+  }
 
   return (
     <>
@@ -36,22 +78,12 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
         fill
         className={`${className || 'object-cover'} w-full h-full ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
         sizes={sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
-        unoptimized={isSvg}
+        unoptimized={isSvg || isLargeImage}
         priority={priority}
         loading={priority ? undefined : 'lazy'}
-        onError={() => {
-          if (!hasError && imgSrc !== fallbackSrc) {
-            setHasError(true)
-            setImgSrc(fallbackSrc)
-            setIsLoading(true)
-          }
-        }}
-        onLoad={() => {
-          setIsLoading(false)
-        }}
-        onLoadingComplete={() => {
-          setIsLoading(false)
-        }}
+        onError={handleError}
+        onLoad={handleLoad}
+        onLoadingComplete={handleLoad}
       />
     </>
   )
