@@ -72,7 +72,7 @@ const services = [
     ),
     href: '/services#sports-teams',
     color: 'from-[#2A3080] to-[#2080C0]',
-    imagePath: '/images/services/post-surgery/service-image.jpg',
+    imagePath: '/images/services/sports-teams/service-image.jpg',
   },
 ]
 
