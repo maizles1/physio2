@@ -82,7 +82,9 @@ export const seoConfig: SEOConfig = {
     sunday: { opens: '08:00', closes: '20:00' },
   },
   social: {
-    // הוסף קישורים לרשתות חברתיות כשזמינים
+    facebook: 'https://www.facebook.com/a.mphysiotherapy1',
+    // הוסף קישורים נוספים לרשתות חברתיות כשזמינים
+    // instagram: 'https://www.instagram.com/your-profile',
   },
   // הוסף את ה-IDs כשזמינים
   // googleAnalyticsId: 'G-XXXXXXXXXX',
