@@ -83,8 +83,7 @@ export const seoConfig: SEOConfig = {
   },
   social: {
     facebook: 'https://www.facebook.com/a.mphysiotherapy1',
-    // הוסף קישורים נוספים לרשתות חברתיות כשזמינים
-    // instagram: 'https://www.instagram.com/your-profile',
+    instagram: 'https://www.instagram.com/physiotherapy.plus/',
   },
   // הוסף את ה-IDs כשזמינים
   // googleAnalyticsId: 'G-XXXXXXXXXX',
