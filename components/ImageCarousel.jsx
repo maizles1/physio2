@@ -4,11 +4,10 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import Image from 'next/image'
 
 const images = [
-  '/images/carousel/clinic-1.jpeg',
-  '/images/carousel/clinic-2.jpeg',
+  '/images/carousel/clinic-1.jpg',
+  '/images/carousel/clinic-2.jpg',
   '/images/carousel/clinic-3.jpg',
   '/images/carousel/clinic-4.jpg',
   '/images/carousel/clinic-5.jpg',
@@ -42,17 +41,23 @@ export default function ImageCarousel() {
             >
               {images.map((src, index) => (
                 <SwiperSlide key={index}>
-                  <div className="flex items-center justify-center h-[400px] sm:h-[500px] md:h-[550px] w-full relative">
-                    <Image
+                  <div className="relative w-full h-[400px] sm:h-[500px] md:h-[550px] flex items-center justify-center bg-gray-200">
+                    <img
+                      key={src}
                       src={src}
                       alt={`תמונת קליניקה ${index + 1}`}
-                      width={1200}
-                      height={800}
-                      className="max-w-full max-h-full object-contain"
-                      priority={index === 0}
-                      unoptimized
+                      className="max-w-full max-h-full w-auto h-auto object-contain"
+                      loading={index <= 1 ? 'eager' : 'lazy'}
+                      style={{ display: 'block' }}
+                      onLoad={(e) => {
+                        console.log(`Image ${index + 1} loaded successfully: ${src}`)
+                      }}
                       onError={(e) => {
-                        console.error(`Failed to load image: ${src}`, e)
+                        console.error(`Failed to load image ${index + 1}: ${src}`, e)
+                        const target = e.target
+                        if (target instanceof HTMLImageElement) {
+                          target.style.display = 'none'
+                        }
                       }}
                     />
                   </div>
@@ -65,3 +70,4 @@ export default function ImageCarousel() {
     </section>
   )
 }
+
