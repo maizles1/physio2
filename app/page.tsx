@@ -4,7 +4,6 @@ import VideosSection from '@/components/VideosSection'
 import InsuranceSection from '@/components/InsuranceSection'
 import ServicesPreview from '@/components/ServicesPreview'
 import AboutPreview from '@/components/AboutPreview'
-import TestimonialsPreview from '@/components/TestimonialsPreview'
 import FAQSection from '@/components/FAQSection'
 import CTASection from '@/components/CTASection'
 import { Metadata } from 'next'
@@ -52,7 +51,6 @@ export default function Home() {
       <InsuranceSection />
       <ServicesPreview />
       <AboutPreview />
-      <TestimonialsPreview />
       <FAQSection />
       <CTASection />
     </>
