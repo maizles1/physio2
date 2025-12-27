@@ -648,14 +648,14 @@ video {
   display: block;
 }
 
-/* Insurance logos - ensure they stay small and don't overlay */
-img[src*="insurance"],
-img[src*="Clalit"],
-img[src*="Meuhedet"],
-img[src*="defense"],
-img[alt*="כללית"],
-img[alt*="מאוחדת"],
-img[alt*="ביטחון"] {
+/* Insurance logos in HeroSection only - ensure they stay small */
+section.bg-primary-gradient img[src*="insurance"],
+section.bg-primary-gradient img[src*="Clalit"],
+section.bg-primary-gradient img[src*="Meuhedet"],
+section.bg-primary-gradient img[src*="defense"],
+section.bg-primary-gradient img[alt*="כללית"],
+section.bg-primary-gradient img[alt*="מאוחדת"],
+section.bg-primary-gradient img[alt*="ביטחון"] {
   max-height: 15px !important;
   width: auto !important;
   height: auto !important;
@@ -663,13 +663,13 @@ img[alt*="ביטחון"] {
 }
 
 @media (min-width: 640px) {
-  img[src*="insurance"],
-  img[src*="Clalit"],
-  img[src*="Meuhedet"],
-  img[src*="defense"],
-  img[alt*="כללית"],
-  img[alt*="מאוחדת"],
-  img[alt*="ביטחון"] {
+  section.bg-primary-gradient img[src*="insurance"],
+  section.bg-primary-gradient img[src*="Clalit"],
+  section.bg-primary-gradient img[src*="Meuhedet"],
+  section.bg-primary-gradient img[src*="defense"],
+  section.bg-primary-gradient img[alt*="כללית"],
+  section.bg-primary-gradient img[alt*="מאוחדת"],
+  section.bg-primary-gradient img[alt*="ביטחון"] {
     max-height: 25px !important;
   }
 }
