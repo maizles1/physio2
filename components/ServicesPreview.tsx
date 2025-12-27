@@ -60,7 +60,7 @@ const services = [
     ),
     href: '/services#home-visits',
     color: 'from-[#004080] to-[#2080C0]',
-    imagePath: '/images/services/home-visits/service-image.jpg',
+    imagePath: '/images/services/home-visits/service-image.png',
   },
   {
     title: 'ליווי קבוצות ספורט וספורטאים',

@@ -182,7 +182,7 @@ const services = [
     ],
     icon: '🏠',
     color: 'from-[#004080] to-[#2080C0]',
-    imagePath: '/images/services/home-visits/service-image.jpg',
+    imagePath: '/images/services/home-visits/service-image.png',
     fallbackImagePath: '/images/services/home-visits/service-image.svg',
   },
 ]
