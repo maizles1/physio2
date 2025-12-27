@@ -151,6 +151,23 @@ const services = [
     imagePath: '/images/services/tmj/service-image.jpg',
     fallbackImagePath: '/images/services/tmj/service-image.svg',
   },
+  {
+    id: 'sports-teams',
+    title: 'ליווי קבוצות ספורט וספורטאים',
+    description: 'שירותי פיזיותרפיה מקצועיים לליווי קבוצות ספורט וספורטאים, כולל טיפול בפציעות ספורט, מניעת פציעות ותכניות אימון מותאמות',
+    details: [
+      'ליווי קבוצות ספורט מקצועיות',
+      'טיפול בפציעות ספורט אקוטיות',
+      'מניעת פציעות ספורט',
+      'תכניות אימון ושיקום לספורטאים',
+      'ייעוץ והדרכה למאמנים',
+      'טיפול על המגרש בזמן אימונים ותחרויות',
+    ],
+    icon: '⚽',
+    color: 'from-[#2A3080] to-[#2080C0]',
+    imagePath: '/images/services/post-surgery/service-image.jpg',
+    fallbackImagePath: '/images/services/post-surgery/service-image.svg',
+  },
 ]
 
 export default function ServicesPage() {

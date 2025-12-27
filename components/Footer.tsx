@@ -110,6 +110,11 @@ export default function Footer() {
                   טיפול במפרק הלסת
                 </Link>
               </li>
+              <li>
+                <Link href="/services#sports-teams" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                  ליווי קבוצות ספורט וספורטאים
+                </Link>
+              </li>
             </ul>
           </div>
 

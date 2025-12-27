@@ -31,6 +31,7 @@ export default function Header() {
         { name: 'שיקום לאחר ניתוחים', href: '/services#post-surgery' },
         { name: 'שיקום וסטיבולרי - טיפול בסחרחורות', href: '/services#vestibular' },
         { name: 'טיפול במפרק הלסת (TMJ)', href: '/services#tmj' },
+        { name: 'ליווי קבוצות ספורט וספורטאים', href: '/services#sports-teams' },
       ]
     },
     { name: 'בלוג', href: '/blog' },
