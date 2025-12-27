@@ -165,8 +165,25 @@ const services = [
     ],
     icon: '⚽',
     color: 'from-[#2A3080] to-[#2080C0]',
-    imagePath: '/images/services/post-surgery/service-image.jpg',
-    fallbackImagePath: '/images/services/post-surgery/service-image.svg',
+    imagePath: '/images/services/sports-teams/service-image.jpg',
+    fallbackImagePath: '/images/services/sports-teams/service-image.svg',
+  },
+  {
+    id: 'home-visits',
+    title: 'ביקורי בית באשדוד',
+    description: 'שירותי פיזיותרפיה מקצועיים בביקורי בית באשדוד והסביבה. טיפול מקצועי בנוחות הבית שלך',
+    details: [
+      'ביקורי בית באשדוד והסביבה',
+      'טיפול מקצועי בנוחות הבית',
+      'שיקום לאחר ניתוחים בבית',
+      'טיפול בקשישים ובמתקשים להגיע לקליניקה',
+      'טיפול בפציעות בבית',
+      'תוכניות שיקום מותאמות אישית',
+    ],
+    icon: '🏠',
+    color: 'from-[#004080] to-[#2080C0]',
+    imagePath: '/images/services/home-visits/service-image.jpg',
+    fallbackImagePath: '/images/services/home-visits/service-image.svg',
   },
 ]
 
