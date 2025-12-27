@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import VideoModal from './VideoModal'
 import { videosConfig } from '@/config/videos.config'
 
@@ -234,6 +235,17 @@ export default function VideosSection() {
                   </article>
                 )
               })}
+            </div>
+
+            {/* Additional Videos Button */}
+            <div className="text-center mt-8 sm:mt-12">
+              <Link
+                href="/about"
+                className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+                aria-label="לסרטונים נוספים"
+              >
+                סרטונים נוספים
+              </Link>
             </div>
           </div>
         </div>

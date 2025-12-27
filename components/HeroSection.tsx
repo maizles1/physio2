@@ -17,40 +17,40 @@ export default function HeroSection() {
       </div>
 
       {/* Insurance Logos - Top Left - קטן */}
-      <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 flex flex-col gap-0.5 sm:gap-1.5">
-        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1 py-0.5 sm:px-2 sm:py-1.5 shadow-md">
+      <div className="absolute top-1 left-1 sm:top-2 sm:left-2 z-20 flex flex-col gap-0.5 sm:gap-1">
+        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded px-0.5 py-0.5 sm:px-1 sm:py-1 shadow-md">
           <Image
             src="/images/insurance/Clalit-Logo.png"
             alt="כללית"
-            width={35}
-            height={18}
-            className="max-h-[30px] sm:max-h-[50px] w-auto object-contain opacity-90"
+            width={18}
+            height={9}
+            className="max-h-[15px] sm:max-h-[25px] w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
-        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-md px-1 py-0.5 sm:px-2 sm:py-1.5 shadow-md">
+        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded px-0.5 py-0.5 sm:px-1 sm:py-1 shadow-md">
             <Image
             src="/images/insurance/Meuhedet-Logo.png"
             alt="מאוחדת"
-            width={35}
-            height={18}
-            className="max-h-[30px] sm:max-h-[50px] w-auto object-contain opacity-90"
+            width={18}
+            height={9}
+            className="max-h-[15px] sm:max-h-[25px] w-auto object-contain opacity-90"
             unoptimized
           />
         </div>
-        <div className="flex items-center justify-center bg-white border-2 border-white rounded-md px-1 py-0.5 sm:px-2 sm:py-1.5 shadow-lg">
+        <div className="flex items-center justify-center bg-white border border-white rounded px-0.5 py-0.5 sm:px-1 sm:py-1 shadow-lg">
             <Image
             src="/images/insurance/Ministry-of-defense-logo.png"
             alt="משרד הביטחון"
-            width={35}
-            height={18}
-            className="max-h-[30px] sm:max-h-[50px] w-auto object-contain"
+            width={18}
+            height={9}
+            className="max-h-[15px] sm:max-h-[25px] w-auto object-contain"
             unoptimized
           />
         </div>
       </div>
 
-      <div className="container relative z-10 pt-16 sm:pt-20">
+      <div className="container relative z-10 pt-12 sm:pt-16">
         <div className="max-w-6xl mx-auto">
           {/* Header with Image and Title */}
           <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 lg:gap-10 mb-8 sm:mb-12">

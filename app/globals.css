@@ -656,10 +656,22 @@ img[src*="defense"],
 img[alt*="כללית"],
 img[alt*="מאוחדת"],
 img[alt*="ביטחון"] {
-  max-height: 60px !important;
+  max-height: 15px !important;
   width: auto !important;
   height: auto !important;
   object-fit: contain !important;
+}
+
+@media (min-width: 640px) {
+  img[src*="insurance"],
+  img[src*="Clalit"],
+  img[src*="Meuhedet"],
+  img[src*="defense"],
+  img[alt*="כללית"],
+  img[alt*="מאוחדת"],
+  img[alt*="ביטחון"] {
+    max-height: 25px !important;
+  }
 }
 
 /* Ensure Next.js Image components with fill prop are responsive */
