@@ -30,7 +30,7 @@ export const blogPosts: BlogPost[] = [
     date: '12 בפברואר 2025',
     category: 'כתף קפואה',
     categoryId: 'frozen-shoulder',
-    image: '/images/blog/frozen-shoulder-guide.jpg',
+    image: '/images/blog/frozen-shoulder-guide.png',
     keywords: ['כתף קפואה', 'Frozen Shoulder', 'Adhesive Capsulitis', 'טיפול בכתף קפואה', 'פיזיותרפיה לכתף קפואה', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'שיקום כתף', 'כאבי כתף', 'פיזיותרפיסט ספורט באשדוד'],
     relatedPosts: ['shoulder-pain-complete-guide', 'what-happens-in-physiotherapy-treatment', 'post-surgery-physiotherapy-necessity'],
     content: `
@@ -159,7 +159,7 @@ export const blogPosts: BlogPost[] = [
     date: '10 בפברואר 2025',
     category: 'שיקום לאחר ניתוח',
     categoryId: 'post-surgery',
-    image: '/images/blog/knee-rehabilitation-guide.jpg',
+    image: '/images/blog/knee-rehabilitation-guide.png',
     keywords: ['שיקום ברך', 'שיקום לאחר ניתוח ברך', 'ניתוח ACL', 'ניתוח מניסקוס', 'פיזיותרפיסט ספורט באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'שיקום ברך לאחר ניתוח', 'פיזיותרפיסט M.Sc', 'Return to Sport', 'שיקום ACL', 'שיקום מניסקוס'],
     relatedPosts: ['post-surgery-physiotherapy-necessity', 'hip-knee-replacement-rehabilitation-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
@@ -259,7 +259,7 @@ export const blogPosts: BlogPost[] = [
     date: '7 בפברואר 2025',
     category: 'שיקום לאחר ניתוח',
     categoryId: 'post-surgery',
-    image: '/images/blog/post-surgery-physiotherapy.jpg',
+    image: '/images/blog/post-surgery-physiotherapy.png',
     keywords: ['שיקום לאחר ניתוח', 'פיזיותרפיה לאחר ניתוח', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'שיקום אורטופדי', 'ניתוח ACL', 'החלפת מפרק', 'שיקום כתף', 'Post-surgery rehabilitation', 'Physical therapy after surgery', 'שיקום ניתוחי'],
     relatedPosts: ['knee-rehabilitation-after-surgery-complete-guide', 'hip-knee-replacement-rehabilitation-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
@@ -346,7 +346,7 @@ export const blogPosts: BlogPost[] = [
     date: '5 בפברואר 2025',
     category: 'כאבי כתף',
     categoryId: 'shoulder-pain',
-    image: '/images/blog/shoulder-pain-guide.jpg',
+    image: '/images/blog/shoulder-pain-guide.png',
     keywords: ['כאבי כתף', 'פיזיותרפיה לכאבי כתף', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'Rotator Cuff', 'תסמונת הצביטה', 'כתף קפואה', 'שיקום כתף', 'Shoulder Pain', 'Impingement Syndrome', 'Frozen Shoulder'],
     relatedPosts: ['frozen-shoulder-complete-guide', 'post-surgery-physiotherapy-necessity', 'what-happens-in-physiotherapy-treatment'],
     content: `
@@ -437,7 +437,7 @@ export const blogPosts: BlogPost[] = [
     date: '1 בפברואר 2025',
     category: 'כאבי גב',
     categoryId: 'back-pain',
-    image: '/images/blog/lower-back-pain-guide.jpg',
+    image: '/images/blog/lower-back-pain-guide.png',
     keywords: ['כאבי גב תחתון', 'כאב גב', 'פיזיותרפיה לכאבי גב', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'אישיאס', 'סיאטיקה', 'בלט דיסק', 'פריצת דיסק', 'Lower Back Pain', 'LBP', 'Non-specific back pain'],
     relatedPosts: ['ergonomics-work-from-home-guide', 'why-waste-time-at-orthopedist', 'what-happens-in-physiotherapy-treatment'],
     content: `
@@ -562,7 +562,7 @@ export const blogPosts: BlogPost[] = [
     date: '30 בינואר 2025',
     category: 'פציעות ספורט',
     categoryId: 'sports-injuries',
-    image: '/images/blog/running-injuries-guide.jpg',
+    image: '/images/blog/running-injuries-guide.png',
     keywords: ['פציעות ריצה', 'ריצה באשדוד', 'ברך רצים', 'דורבן', 'שין ספלינט', 'שברי מאמץ', 'פיזיותרפיסט ספורט באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'תסמונת הכאב הפטלו-פמורלי', 'Plantar Fasciitis', 'Gait Analysis', 'Return to Run', 'ריצה בטיילת אשדוד'],
     relatedPosts: ['lower-back-pain-complete-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
@@ -659,7 +659,7 @@ export const blogPosts: BlogPost[] = [
     date: '29 בינואר 2025',
     category: 'ארגונומיה',
     categoryId: 'ergonomics',
-    image: '/images/blog/ergonomics-work-from-home.jpg',
+    image: '/images/blog/ergonomics-work-from-home.png',
     keywords: ['ארגונומיה', 'עמדת עבודה', 'כאבי גב', 'כאבי צוואר', 'עבודה מהבית', 'ישיבה נכונה', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'כאבי כתפיים', 'תסמונת התעלה הקרפלית', 'מרפק טניס', 'עמדת עמידה', 'standing desk'],
     relatedPosts: ['lower-back-pain-complete-guide', 'shoulder-pain-complete-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
@@ -736,7 +736,7 @@ export const blogPosts: BlogPost[] = [
     date: '28 בינואר 2025',
     category: 'החלפת מפרק',
     categoryId: 'joint-replacement',
-    image: '/images/blog/hip-knee-replacement.jpg',
+    image: '/images/blog/hip-knee-replacement.png',
     keywords: ['החלפת מפרק ברך', 'החלפת מפרק ירך', 'שיקום לאחר החלפת מפרק', 'פיזיותרפיה לאחר ניתוח', 'שיקום ברך', 'שיקום ירך', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'שיקום אורטופדי', 'Pre-Hab', 'חלון הזדמנויות', 'שיקום לאחר ניתוח באשדוד'],
     relatedPosts: ['knee-rehabilitation-after-surgery-complete-guide', 'post-surgery-physiotherapy-necessity', 'what-happens-in-physiotherapy-treatment'],
     content: `
@@ -841,7 +841,7 @@ export const blogPosts: BlogPost[] = [
     date: '27 בינואר 2025',
     category: 'מתי לאורטופד ומתי לפיזיותרפיסט',
     categoryId: 'when-to-see-orthopedist',
-    image: '/images/blog/orthopedist-vs-physiotherapist.jpg',
+    image: '/images/blog/orthopedist-vs-physiotherapist.png',
     keywords: ['אורתופד', 'פיזיותרפיסט', 'מתי לאורטופד', 'מתי לפיזיותרפיסט', 'כאבי גב', 'כאבי ברך', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'הבדל בין אורתופד לפיזיותרפיסט', 'מתי צריך ניתוח'],
     relatedPosts: ['lower-back-pain-complete-guide', 'shoulder-pain-complete-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
@@ -911,7 +911,7 @@ export const blogPosts: BlogPost[] = [
     date: '26 בינואר 2025',
     category: 'תהליך הטיפול',
     categoryId: 'treatment-process',
-    image: '/images/blog/physiotherapy-treatment-process.jpg',
+    image: '/images/blog/physiotherapy-treatment-process.png',
     content: `
       <p>כשאנשים מתקשרים לקבוע תור ראשון אצלי כפיזיותרפיסט פרטי באשדוד, אני שומע בקול שלהם תערובת של תקווה וחשש. הם כואבים, הם מתוסכלים, ולעיתים קרובות הם כבר ראו רופא אחד או שניים שנתנו להם כדורים שלא עזרו. השאלה שמרחפת באוויר היא תמיד: "מה אתה תעשה ששונה ממה שכבר עשיתי?".</p>
       
@@ -994,7 +994,7 @@ export const blogPosts: BlogPost[] = [
     date: '26 בינואר 2025',
     category: 'ורטיגו וסחרחורות',
     categoryId: 'vertigo',
-    image: '/images/blog/vertigo-bppv.jpg',
+    image: '/images/blog/vertigo-bppv.png',
     content: `
       <p>דמיינו את הסיטואציה הבאה: אתם נכנסים למיטה אחרי יום ארוך, מניחים את הראש על הכרית, עוצמים עיניים ולפתע – בום. החדר מתחיל להסתובב סביבכם בטירוף כמו קרוסלה שיצאה משליטה. הבטן מתהפכת, אתם חווים בחילה איומה, הזיעה הקרה מכסה את המצח, ואתם נאחזים במזרן בחוזקה מפחד שמא תיפלו לרצפה, למרות שאתם שוכבים בבטחה.</p>
       

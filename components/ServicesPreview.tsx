@@ -36,7 +36,7 @@ const services = [
     ),
     href: '/services#vestibular',
     color: 'from-[#2080C0] to-[#40C0F0]',
-    imagePath: '/images/services/vestibular/service-image.jpg',
+    imagePath: '/images/services/vestibular/service-image.png',
   },
   {
     title: 'שיקום מפרק לסת',
@@ -48,7 +48,7 @@ const services = [
     ),
     href: '/services#tmj',
     color: 'from-[#40C0F0] to-[#2A3080]',
-    imagePath: '/images/services/tmj/service-image.jpg',
+    imagePath: '/images/services/tmj/service-image.png',
   },
   {
     title: 'ביקורי בית באשדוד',
