@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getAllPosts, type BlogPost } from '@/config/blog.config'
 import { getRelatedPosts } from '@/lib/blog-utils'
@@ -134,6 +135,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
+            {/* Featured Image */}
+            {post.image && (
+              <div className="mb-8 rounded-xl overflow-hidden shadow-lg">
+                <div className="relative w-full h-64 sm:h-80 md:h-96">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover w-full h-full"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 896px"
+                    priority
+                  />
+                </div>
+              </div>
+            )}
             <div className="mb-6 pb-6 border-b border-gray-200">
               <SocialSharing 
                 title={post.title}

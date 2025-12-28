@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getAllPosts } from '@/config/blog.config'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
@@ -61,7 +62,19 @@ export default function BlogPage() {
                 key={post.id}
                 className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow"
               >
-                <div className="h-48 bg-gradient-to-br from-[#2080C0] to-[#2A3080]"></div>
+                {post.image ? (
+                  <Link href={`/blog/${post.slug}`} className="block relative h-48 w-full overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </Link>
+                ) : (
+                  <div className="h-48 bg-gradient-to-br from-[#2080C0] to-[#2A3080]"></div>
+                )}
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="px-3 py-1 text-sm font-medium rounded-full" style={{ background: '#E3F2FD', color: '#2080C0' }}>
