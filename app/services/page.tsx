@@ -269,10 +269,10 @@ export default function ServicesPage() {
                       צור קשר
                     </Link>
                     <Link
-                      href="/blog"
+                      href={service.id === 'neck-pain' ? '/blog/neck-pain-complete-guide' : '/blog'}
                       className="inline-block text-[#2080C0] border-2 border-[#2080C0] font-bold py-3 px-8 rounded-lg transition-all duration-200 hover:bg-[#2080C0] hover:text-white text-center"
                     >
-                      קרא מאמרים
+                      {service.id === 'neck-pain' ? 'קרא את המדריך המלא' : 'קרא מאמרים'}
                     </Link>
                   </div>
                 </div>
