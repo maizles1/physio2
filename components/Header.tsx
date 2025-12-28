@@ -13,7 +13,7 @@ export default function Header() {
   const phoneNumber = '0508838982'
   const whatsappNumber = '972508838982'
   const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
-  const address = 'מרכז כלניות, אשדוד'
+  const address = 'יקינטון 3 אשדוד'
 
   const navigation = [
     { name: 'דף בית', href: '/' },

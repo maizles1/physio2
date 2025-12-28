@@ -558,7 +558,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                   <h3 className="font-bold text-lg text-gray-900 mb-1">כתובת</h3>
-                  <p className="text-gray-700">מרכז כלניות, אשדוד</p>
+                  <p className="text-gray-700">יקינטון 3 אשדוד</p>
                   </div>
                 </div>
 
@@ -616,26 +616,12 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Map */}
+              {/* Navigation Buttons */}
               <div className="mt-6 sm:mt-8">
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">איך להגיע</h3>
-                <div className="rounded-lg overflow-hidden shadow-lg mb-4">
-                  <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                    <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.5!2d34.6553!3d31.8044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDQ4JzE1LjgiTiAzNMKwMzknMTkuMSJF!5e0!3m2!1she!2sil!4v1700000000000"
-                      className="absolute top-0 left-0 w-full h-full"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="מיקום הקליניקה - מרכז כלניות, אשדוד"
-                      aria-label="מפת גוגל מפות - מיקום הקליניקה"
-                    ></iframe>
-                  </div>
-                </div>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <a
-                    href="https://www.google.com/maps/dir/?api=1&destination=מרכז+כלניות,+אשדוד"
+                    href="https://www.google.com/maps/dir/?api=1&destination=יקינטון+3+אשדוד"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 sm:px-6 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm sm:text-base min-h-[48px]"
@@ -647,7 +633,7 @@ export default function ContactPage() {
                     <span className="whitespace-nowrap">פתח ב-Google Maps</span>
                   </a>
                   <a
-                    href="https://waze.com/ul?q=מרכז כלניות, אשדוד"
+                    href="https://waze.com/ul?q=יקינטון 3 אשדוד"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 bg-[#33CCFF] hover:bg-[#2BB5E6] text-white font-medium py-3 px-4 sm:px-6 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm sm:text-base min-h-[48px]"
@@ -660,6 +646,7 @@ export default function ContactPage() {
                   </a>
                 </div>
               </div>
+
             </div>
           </div>
         </div>

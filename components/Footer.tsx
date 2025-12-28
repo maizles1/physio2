@@ -8,7 +8,7 @@ export default function Footer() {
   const phoneNumber = '0508838982'
   const whatsappNumber = '972508838982'
   const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
-  const address = 'מרכז כלניות, אשדוד'
+  const address = 'יקינטון 3 אשדוד'
 
   return (
     <footer className="bg-white text-gray-900 border-t border-gray-200">
