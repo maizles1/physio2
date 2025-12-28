@@ -81,7 +81,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/testimonials" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
-                  עדויות מטופלים
+                  המלצות מטופלים
                 </Link>
               </li>
               <li>

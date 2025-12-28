@@ -58,7 +58,7 @@ export default function TestimonialsPreview() {
               key={testimonial.id}
               className="bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:shadow-xl transition-shadow"
               role="article"
-              aria-label={`עדות של ${testimonial.authorName}`}
+              aria-label={`המלצה של ${testimonial.authorName}`}
             >
               <div className="flex gap-1 mb-4" aria-label={`דירוג: ${testimonial.rating} מתוך 5 כוכבים`}>
                 {[...Array(testimonial.rating)].map((_, i) => (
@@ -90,9 +90,9 @@ export default function TestimonialsPreview() {
           <Link
             href="/testimonials"
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
-            aria-label="צפה בכל עדויות המטופלים"
+            aria-label="צפה בכל המלצות המטופלים"
           >
-            צפה בכל העדויות
+            צפה בכל ההמלצות
           </Link>
         </div>
       </div>

@@ -36,7 +36,7 @@ export default function Header() {
       ]
     },
     { name: 'בלוג', href: '/blog' },
-    { name: 'עדויות', href: '/testimonials' },
+    { name: 'המלצות', href: '/testimonials' },
     { name: 'שאלות נפוצות', href: '/faq' },
     { name: 'צור קשר', href: '/contact' },
   ]

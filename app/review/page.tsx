@@ -25,7 +25,7 @@ export default function ReviewPage() {
             href="/testimonials"
             className="text-blue-600 hover:underline"
           >
-            חזרה לדף העדויות
+            חזרה לדף ההמלצות
           </Link>
         </div>
       </div>
@@ -67,7 +67,7 @@ export default function ReviewPage() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">5</span>
-                <span className="text-right">חזור לדף העדויות שלנו - הביקורת תועתק אוטומטית ותופיע שם תוך מספר שעות!</span>
+                <span className="text-right">חזור לדף ההמלצות שלנו - הביקורת תועתק אוטומטית ותופיע שם תוך מספר שעות!</span>
               </li>
             </ol>
           </div>
@@ -82,7 +82,7 @@ export default function ReviewPage() {
                 // After opening Google, show message to come back
                 setTimeout(() => {
                   if (typeof window !== 'undefined') {
-                    window.alert('לאחר שתפרסם את הביקורת ב-Google, חזור לדף העדויות שלנו כדי לראות אותה!')
+                    window.alert('לאחר שתפרסם את הביקורת ב-Google, חזור לדף ההמלצות שלנו כדי לראות אותה!')
                   }
                 }, 1000)
               }}
@@ -122,9 +122,9 @@ export default function ReviewPage() {
               <strong>💡 איך זה עובד:</strong>
             </p>
             <p className="text-gray-700">
-              לאחר שתפרסם את הביקורת ב-Google, חזור לדף העדויות שלנו. 
+              לאחר שתפרסם את הביקורת ב-Google, חזור לדף ההמלצות שלנו. 
               <br />
-              <strong>הביקורת תועתק אוטומטית</strong> ותופיע בדף העדויות תוך מספר שעות (תלוי בעדכון של Google).
+              <strong>הביקורת תועתק אוטומטית</strong> ותופיע בדף ההמלצות תוך מספר שעות (תלוי בעדכון של Google).
             </p>
           </div>
 
@@ -136,7 +136,7 @@ export default function ReviewPage() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-              חזרה לדף העדויות
+              חזרה לדף ההמלצות
             </Link>
             <Link
               href="/"

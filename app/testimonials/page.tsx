@@ -5,10 +5,10 @@ import TestimonialsContent from '@/components/TestimonialsContent'
 import ThankYouMessage from '@/components/ThankYouMessage'
 
 export const metadata: Metadata = {
-  title: 'עדויות מטופלים - המלצות על פיזיותרפיה.פלוס',
-  description: 'קראו עדויות והמלצות של מטופלים על השירותים והטיפול במכון פיזיותרפיה.פלוס. חוות דעת אמיתיות ממטופלים מרוצים.',
+  title: 'המלצות מטופלים - המלצות על פיזיותרפיה.פלוס',
+  description: 'קראו המלצות של מטופלים על השירותים והטיפול במכון פיזיותרפיה.פלוס. חוות דעת אמיתיות ממטופלים מרוצים.',
   openGraph: {
-    title: 'עדויות מטופלים - פיזיותרפיה.פלוס',
+    title: 'המלצות מטופלים - פיזיותרפיה.פלוס',
     description: 'חוות דעת והמלצות של מטופלים על הטיפול בקליניקה',
     url: 'https://physio-plus.co.il/testimonials',
   },
@@ -30,7 +30,7 @@ export default function TestimonialsPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">עדויות מטופלים</h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">המלצות מטופלים</h1>
             <p className="text-lg sm:text-xl text-white mb-6">קראו מה אומרים המטופלים שלנו על השירותים והטיפול בקליניקה</p>
             
             {/* Leave Review Button */}
