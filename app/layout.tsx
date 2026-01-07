@@ -65,6 +65,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://physiotherapy.plus',
   },
+  other: {
+    'facebook-domain-verification': 'ckan6zgvnc71v4gv1yuxlcsb1s5kw4',
+  },
 };
 
 const organizationSchema = {
@@ -235,6 +238,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* End Google tag (gtag.js) */}
+        {/* Facebook Domain Verification */}
+        <meta name="facebook-domain-verification" content="ckan6zgvnc71v4gv1yuxlcsb1s5kw4" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap" as="style" />
