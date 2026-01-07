@@ -1,16 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
+import nodemailer from 'nodemailer'
 
-const resendApiKey = process.env.RESEND_API_KEY
-
-// Initialize Resend only if API key exists
-const resend = resendApiKey ? new Resend(resendApiKey) : null
+// Create transporter with SMTP configuration
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: parseInt(process.env.SMTP_PORT || '587', 10),
+  secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+})
 
 export async function POST(request: NextRequest) {
   try {
-    // Check if Resend API key is configured
-    if (!resendApiKey || !resend) {
-      console.error('RESEND_API_KEY is not configured')
+    // Check if SMTP is configured
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      console.error('SMTP configuration is missing')
       return NextResponse.json(
         { error: 'שירות האימייל לא מוגדר. אנא פנה למנהל האתר.' },
         { status: 500 }
@@ -39,10 +45,10 @@ export async function POST(request: NextRequest) {
 
     console.log('Attempting to send email:', { name, email, phone, subject })
 
-    // Send email
-    const { data, error } = await resend.emails.send({
-      from: 'Contact Form <onboarding@resend.dev>', // צריך להחליף לדומיין מאומת ב-Resend
-      to: ['maizles1@gmail.com'],
+    // Send email using nodemailer
+    const info = await transporter.sendMail({
+      from: process.env.SMTP_USER,
+      to: 'maizles1@gmail.com',
       subject: `הודעה חדשה מטופס יצירת קשר: ${subject}`,
       html: `
         <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -70,19 +76,8 @@ export async function POST(request: NextRequest) {
       replyTo: email,
     })
 
-    if (error) {
-      console.error('Resend error details:', JSON.stringify(error, null, 2))
-      return NextResponse.json(
-        { 
-          error: 'שגיאה בשליחת ההודעה. אנא נסה שוב מאוחר יותר.',
-          details: process.env.NODE_ENV === 'development' ? error : undefined
-        },
-        { status: 500 }
-      )
-    }
-
-    console.log('Email sent successfully:', data)
-    return NextResponse.json({ success: true, data })
+    console.log('Email sent successfully:', info.messageId)
+    return NextResponse.json({ success: true, messageId: info.messageId })
   } catch (error) {
     console.error('Contact form error:', error)
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
@@ -107,4 +102,3 @@ function escapeHtml(text: string): string {
   }
   return text.replace(/[&<>"']/g, (m) => map[m])
 }
-
