@@ -200,6 +200,7 @@ export default function ContactPage() {
       const data = await response.json()
 
       if (!response.ok) {
+        console.error('API error:', data)
         throw new Error(data.error || 'שגיאה בשליחת ההודעה')
       }
       

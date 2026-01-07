@@ -1,10 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resendApiKey = process.env.RESEND_API_KEY
+
+// Initialize Resend only if API key exists
+const resend = resendApiKey ? new Resend(resendApiKey) : null
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if Resend API key is configured
+    if (!resendApiKey || !resend) {
+      console.error('RESEND_API_KEY is not configured')
+      return NextResponse.json(
+        { error: 'שירות האימייל לא מוגדר. אנא פנה למנהל האתר.' },
+        { status: 500 }
+      )
+    }
+
     const body = await request.json()
     const { name, email, phone, subject, message } = body
 
@@ -24,6 +36,8 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
+
+    console.log('Attempting to send email:', { name, email, phone, subject })
 
     // Send email
     const { data, error } = await resend.emails.send({
@@ -57,18 +71,26 @@ export async function POST(request: NextRequest) {
     })
 
     if (error) {
-      console.error('Resend error:', error)
+      console.error('Resend error details:', JSON.stringify(error, null, 2))
       return NextResponse.json(
-        { error: 'שגיאה בשליחת ההודעה. אנא נסה שוב מאוחר יותר.' },
+        { 
+          error: 'שגיאה בשליחת ההודעה. אנא נסה שוב מאוחר יותר.',
+          details: process.env.NODE_ENV === 'development' ? error : undefined
+        },
         { status: 500 }
       )
     }
 
+    console.log('Email sent successfully:', data)
     return NextResponse.json({ success: true, data })
   } catch (error) {
     console.error('Contact form error:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json(
-      { error: 'שגיאה בשליחת ההודעה. אנא נסה שוב מאוחר יותר.' },
+      { 
+        error: 'שגיאה בשליחת ההודעה. אנא נסה שוב מאוחר יותר.',
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
+      },
       { status: 500 }
     )
   }
