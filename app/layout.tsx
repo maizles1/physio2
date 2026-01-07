@@ -205,6 +205,9 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <head>
+        {/* Preconnect to Google Tag Manager for better performance */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
@@ -217,7 +220,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
         {/* End Google Tag Manager */}
         {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-705216601" />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-705216601"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
