@@ -182,11 +182,26 @@ export default function ContactPage() {
     setIsSubmitting(true)
     
     try {
-      // Simulate API call - replace with actual API call later
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      
-      // Here you would make the actual API call
-      // const response = await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) })
+      // Send form data to API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'שגיאה בשליחת ההודעה')
+      }
       
       // Track form submission
       if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
@@ -209,9 +224,10 @@ export default function ContactPage() {
       
       // Scroll to success message
       window.scrollTo({ top: 0, behavior: 'smooth' })
-    } catch {
+    } catch (error) {
       // Handle error
-      setErrors({ ...errors, _submit: 'שגיאה בשליחת ההודעה. אנא נסה שוב מאוחר יותר.' })
+      const errorMessage = error instanceof Error ? error.message : 'שגיאה בשליחת ההודעה. אנא נסה שוב מאוחר יותר.'
+      setErrors({ ...errors, _submit: errorMessage })
     } finally {
       setIsSubmitting(false)
     }
