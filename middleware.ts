@@ -63,7 +63,8 @@ export function middleware(request: NextRequest) {
   // API authentication for API routes
   if (pathname.startsWith('/api/')) {
     // Skip authentication for public endpoints if configured
-    const isPublicEndpoint = pathname === '/api/reviews' && !securityConfig.apiAuth.enabled
+    const publicEndpoints = ['/api/reviews', '/api/contact']
+    const isPublicEndpoint = publicEndpoints.includes(pathname) && !securityConfig.apiAuth.enabled
 
     if (!isPublicEndpoint && securityConfig.apiAuth.enabled) {
       const isValid = validateApiKeyFromRequest(headers, searchParams)
