@@ -81,7 +81,7 @@ export default function HeroSection() {
             {/* Title and Description */}
             <div className="flex-1 text-center lg:text-right order-2 lg:order-2 px-2 sm:pr-20 md:pr-24 sm:pl-0 md:pl-28">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 sm:mb-8 leading-tight sm:leading-relaxed tracking-wide text-white">
-                פיזיותרפיסט פרטי באשדוד-  סטנדרט אולימפי. יחס אישי.
+                פיזיותרפיה פרטית באשדוד - פיזיותרפיסט פרטי באשדוד: סטנדרט אולימפי. יחס אישי.
               </h1>
               <div className="max-w-3xl mx-auto lg:mx-0 lg:mr-0 mt-6 sm:mt-8 space-y-4 sm:space-y-6">
                 <h2 className="mb-4 sm:mb-6 text-white leading-relaxed">
