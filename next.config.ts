@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://www.google-analytics.com https://maps.googleapis.com https://www.googleapis.com",
+              "connect-src 'self' https://www.google-analytics.com https://maps.googleapis.com https://www.googleapis.com https://api.web3forms.com",
               "frame-src https://www.youtube.com",
               "object-src 'none'",
               "base-uri 'self'",
