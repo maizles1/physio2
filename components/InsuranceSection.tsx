@@ -90,7 +90,8 @@ export default function InsuranceSection() {
                       width={160}
                       height={64}
                       className="object-contain w-full h-full max-h-full max-w-full"
-                      unoptimized
+                      loading="lazy"
+                      quality={90}
                     />
                   </div>
                 </div>

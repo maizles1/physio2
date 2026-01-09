@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'he_IL',
-    url: 'https://physiotherapy.plus',
+    url: 'https://physio-plus.co.il',
     siteName: 'פיזיותרפיה.פלוס',
     title: 'פיזיותרפיה פרטית באשדוד - פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס',
     description: 'פיזיותרפיה פרטית באשדוד - מכון פיזיותרפיה פרטי באשדוד. אנדריי מייזלס, פיזיותרפיסט פרטי באשדוד, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו, מתמחה בטיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://physiotherapy.plus',
+    canonical: 'https://physio-plus.co.il',
   },
   other: {
     'facebook-domain-verification': 'ckan6zgvnc71v4gv1yuxlcsb1s5kw4',
@@ -79,8 +79,8 @@ const organizationSchema = {
   name: 'פיזיותרפיה.פלוס - פיזיותרפיה פרטית באשדוד',
   alternateName: 'Physiotherapy.Plus',
   description: 'פיזיותרפיה פרטית באשדוד - מכון פיזיותרפיה פרטי באשדוד',
-  url: 'https://physiotherapy.plus',
-  logo: 'https://physiotherapy.plus/images/logo/clinic-logo.png',
+  url: 'https://physio-plus.co.il',
+  logo: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: '050-883-8982',
@@ -253,6 +253,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <link rel="dns-prefetch" href="https://maps.googleapis.com" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://i.ytimg.com" />
+        <link rel="preload" href="/images/andrey-meizels.JPG" as="image" />
+        <link rel="preload" href="/images/carousel/clinic-1.jpg" as="image" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

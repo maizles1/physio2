@@ -187,10 +187,13 @@ export default function VideosSection() {
                           fill
                           className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
                           sizes={isProminent ? "(max-width: 1024px) 100vw, 896px" : "(max-width: 1024px) 100vw, 768px"}
-                          loading="lazy"
+                          loading={isProminent ? "eager" : "lazy"}
+                          quality={85}
                           onError={(e) => {
                             const target = e.target as HTMLImageElement
-                            target.style.display = 'none'
+                            if (target) {
+                              target.style.display = 'none'
+                            }
                           }}
                         />
                       ) : (

@@ -148,6 +148,8 @@ export default function TestimonialsContent() {
                           width={64}
                           height={64}
                           className="w-16 h-16 rounded-full object-cover"
+                          loading="lazy"
+                          quality={85}
                         />
                       ) : (
                         <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-xl font-bold">

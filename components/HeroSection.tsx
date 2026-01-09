@@ -25,7 +25,8 @@ export default function HeroSection() {
             width={18}
             height={9}
             className="max-h-[15px] sm:max-h-[25px] w-auto object-contain opacity-90"
-            unoptimized
+            loading="lazy"
+            quality={90}
           />
         </div>
         <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded px-0.5 py-0.5 sm:px-1 sm:py-1 shadow-md">
@@ -35,7 +36,8 @@ export default function HeroSection() {
             width={18}
             height={9}
             className="max-h-[15px] sm:max-h-[25px] w-auto object-contain opacity-90"
-            unoptimized
+            loading="lazy"
+            quality={90}
           />
         </div>
         <div className="flex items-center justify-center bg-white border border-white rounded px-0.5 py-0.5 sm:px-1 sm:py-1 shadow-lg">
@@ -45,7 +47,8 @@ export default function HeroSection() {
             width={18}
             height={9}
             className="max-h-[15px] sm:max-h-[25px] w-auto object-contain"
-            unoptimized
+            loading="lazy"
+            quality={90}
           />
         </div>
       </div>
@@ -64,7 +67,7 @@ export default function HeroSection() {
                   className="object-cover w-full h-full"
                   sizes="(max-width: 640px) 160px, (max-width: 768px) 192px, (max-width: 1024px) 256px, 320px"
                   priority
-                  unoptimized
+                  quality={90}
                 />
                 <div className="w-full h-full hidden items-center justify-center" role="img" aria-label="אנדריי מייזלס, פיזיותרפיסט מקצועי">
                   <div className="text-center text-white">

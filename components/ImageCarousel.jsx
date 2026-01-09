@@ -1,6 +1,7 @@
 'use client'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
+import Image from 'next/image'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -42,17 +43,19 @@ export default function ImageCarousel() {
               {images.map((src, index) => (
                 <SwiperSlide key={index}>
                   <div className="relative w-full h-[400px] sm:h-[500px] md:h-[550px] flex items-center justify-center bg-gray-200">
-                    <img
-                      key={src}
+                    <Image
                       src={src}
                       alt={`תמונת קליניקה ${index + 1}`}
-                      className="max-w-full max-h-full w-auto h-auto object-contain"
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                      priority={index === 0}
                       loading={index <= 1 ? 'eager' : 'lazy'}
-                      style={{ display: 'block' }}
+                      quality={85}
                       onError={(e) => {
                         console.error(`Failed to load image ${index + 1}: ${src}`, e)
                         const target = e.target
-                        if (target instanceof HTMLImageElement) {
+                        if (target && target instanceof HTMLImageElement) {
                           target.style.display = 'none'
                         }
                       }}

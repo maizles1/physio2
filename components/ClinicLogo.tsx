@@ -16,7 +16,8 @@ export default function ClinicLogo() {
           height={48}
           className="object-contain w-full h-full max-w-full max-h-full"
           onError={() => setLogoError(true)}
-          unoptimized
+          priority
+          quality={90}
         />
       ) : (
         <svg className="w-6 h-6 md:w-8 md:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
