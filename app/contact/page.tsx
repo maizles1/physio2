@@ -188,6 +188,12 @@ export default function ContactPage() {
         throw new Error('שירות האימייל לא מוגדר. אנא פנה למנהל האתר.')
       }
 
+      console.log('Sending form to Web3Forms:', { 
+        name: formData.name, 
+        email: formData.email, 
+        subject: formData.subject 
+      })
+
       // Send form data to Web3Forms
       const formDataToSend = new FormData()
       formDataToSend.append('access_key', accessKey)
@@ -195,14 +201,24 @@ export default function ContactPage() {
       formDataToSend.append('from_name', 'אתר פיזיותרפיה.פלוס')
       formDataToSend.append('name', formData.name)
       formDataToSend.append('email', formData.email)
-      formDataToSend.append('phone', formData.phone)
+      formDataToSend.append('phone', formData.phone || '')
       formDataToSend.append('message', formData.message)
-      formDataToSend.append('subject_option', formData.subject)
+      
+      // Add honeypot field (Web3Forms requires it for spam protection)
+      formDataToSend.append('botcheck', '')
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         body: formDataToSend,
       })
+      
+      console.log('Web3Forms response status:', response.status)
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error('Web3Forms HTTP error:', response.status, errorText)
+        throw new Error(`שגיאה בשליחת ההודעה (${response.status})`)
+      }
 
       const data = await response.json()
 

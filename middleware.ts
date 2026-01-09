@@ -63,7 +63,7 @@ export function middleware(request: NextRequest) {
   // API authentication for API routes
   if (pathname.startsWith('/api/')) {
     // Public endpoints that don't require authentication
-    const publicEndpoints = ['/api/reviews', '/api/contact']
+    const publicEndpoints = ['/api/reviews']
     const isPublicEndpoint = publicEndpoints.includes(pathname)
 
     // Only require authentication for non-public endpoints when API auth is enabled
