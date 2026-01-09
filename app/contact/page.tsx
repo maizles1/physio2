@@ -182,26 +182,33 @@ export default function ContactPage() {
     setIsSubmitting(true)
     
     try {
-      // Send form data to API
-      const response = await fetch('/api/contact', {
+      // Check if Web3Forms access key is configured
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '508775fc-382e-4616-97d8-c21fa7e907ea'
+      if (!accessKey) {
+        throw new Error('שירות האימייל לא מוגדר. אנא פנה למנהל האתר.')
+      }
+
+      // Send form data to Web3Forms
+      const formDataToSend = new FormData()
+      formDataToSend.append('access_key', accessKey)
+      formDataToSend.append('subject', `פנייה חדשה מהאתר - ${formData.subject}`)
+      formDataToSend.append('from_name', 'אתר פיזיותרפיה.פלוס')
+      formDataToSend.append('name', formData.name)
+      formDataToSend.append('email', formData.email)
+      formDataToSend.append('phone', formData.phone)
+      formDataToSend.append('message', formData.message)
+      formDataToSend.append('subject_option', formData.subject)
+
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          subject: formData.subject,
-          message: formData.message,
-        }),
+        body: formDataToSend,
       })
 
       const data = await response.json()
 
-      if (!response.ok) {
-        console.error('API error:', data)
-        throw new Error(data.error || 'שגיאה בשליחת ההודעה')
+      if (!data.success) {
+        console.error('Web3Forms error:', data)
+        throw new Error(data.message || 'שגיאה בשליחת ההודעה')
       }
       
       // Track form submission
