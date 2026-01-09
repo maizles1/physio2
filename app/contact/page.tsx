@@ -9,7 +9,6 @@ interface FormErrors {
   name?: string
   email?: string
   phone?: string
-  subject?: string
   message?: string
   privacyConsent?: string
   _submit?: string
@@ -78,19 +77,8 @@ export default function ContactPage() {
       case 'phone':
         return validatePhone(value)
 
-      case 'subject':
-        if (!value) {
-          return 'נושא הוא שדה חובה'
-        }
-        return undefined
-
       case 'message':
-        if (!value.trim()) {
-          return 'הודעה היא שדה חובה'
-        }
-        if (value.trim().length < 10) {
-          return 'הודעה חייבת להכיל לפחות 10 תווים'
-        }
+        // Message is optional, but if provided, check max length
         if (value.length > 1000) {
           return 'הודעה לא יכולה להכיל יותר מ-1000 תווים'
         }
@@ -193,14 +181,13 @@ export default function ContactPage() {
       console.log('Preparing to send form to Web3Forms:', { 
         name: formData.name, 
         email: formData.email, 
-        subject: formData.subject,
         hasAccessKey: !!accessKey
       })
 
       // Prepare form data for Web3Forms
       const formDataToSend = new FormData()
       formDataToSend.append('access_key', accessKey)
-      formDataToSend.append('subject', `פנייה חדשה מהאתר - ${formData.subject}`)
+      formDataToSend.append('subject', 'פנייה חדשה מהאתר')
       formDataToSend.append('from_name', formData.name)
       formDataToSend.append('name', formData.name)
       formDataToSend.append('email', formData.email)
@@ -470,48 +457,9 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                    נושא *
-                  </label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    required
-                    value={formData.subject}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-base ${
-                      errors.subject && touched.subject
-                        ? 'border-red-500 focus:ring-red-500'
-                        : touched.subject && !errors.subject
-                        ? 'border-green-500'
-                        : 'border-gray-300'
-                    }`}
-                    aria-label="נושא ההודעה"
-                    aria-required="true"
-                    aria-invalid={errors.subject && touched.subject ? 'true' : 'false'}
-                    aria-describedby={errors.subject && touched.subject ? 'subject-error' : undefined}
-                  >
-                    <option value="">בחר נושא</option>
-                    <option value="question">שאלה כללית</option>
-                    <option value="insurance">ביטוח</option>
-                    <option value="info">מידע על שירותים</option>
-                    <option value="other">אחר</option>
-                  </select>
-                  {touched.subject && errors.subject && (
-                    <p id="subject-error" className="mt-1 text-sm text-red-600 flex items-center gap-1" role="alert">
-                      <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      {errors.subject}
-                    </p>
-                  )}
-                </div>
-
-                <div>
                   <div className="flex justify-between items-center mb-2">
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-                      הודעה *
+                      הודעה
                     </label>
                     <span className={`text-xs ${messageLength > maxMessageLength ? 'text-red-600' : messageLength > maxMessageLength * 0.9 ? 'text-yellow-600' : 'text-gray-500'}`}>
                       {messageLength} / {maxMessageLength}
@@ -520,7 +468,6 @@ export default function ContactPage() {
                   <textarea
                     id="message"
                     name="message"
-                    required
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
@@ -533,7 +480,6 @@ export default function ContactPage() {
                         : 'border-gray-300'
                     }`}
                     aria-label="תוכן ההודעה"
-                    aria-required="true"
                     aria-invalid={errors.message && touched.message ? 'true' : 'false'}
                     aria-describedby={errors.message && touched.message ? 'message-error' : undefined}
                     maxLength={maxMessageLength}
