@@ -182,48 +182,74 @@ export default function ContactPage() {
     setIsSubmitting(true)
     
     try {
-      // Check if Web3Forms access key is configured
+      // Get Web3Forms access key from environment variable or use default
+      // In Next.js, NEXT_PUBLIC_* variables are available at build time
       const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '508775fc-382e-4616-97d8-c21fa7e907ea'
-      if (!accessKey) {
+      
+      if (!accessKey || accessKey === 'your_access_key_here') {
         throw new Error('שירות האימייל לא מוגדר. אנא פנה למנהל האתר.')
       }
 
-      console.log('Sending form to Web3Forms:', { 
+      console.log('Preparing to send form to Web3Forms:', { 
         name: formData.name, 
         email: formData.email, 
-        subject: formData.subject 
+        subject: formData.subject,
+        hasAccessKey: !!accessKey
       })
 
-      // Send form data to Web3Forms
+      // Prepare form data for Web3Forms
       const formDataToSend = new FormData()
       formDataToSend.append('access_key', accessKey)
       formDataToSend.append('subject', `פנייה חדשה מהאתר - ${formData.subject}`)
-      formDataToSend.append('from_name', 'אתר פיזיותרפיה.פלוס')
+      formDataToSend.append('from_name', formData.name)
       formDataToSend.append('name', formData.name)
       formDataToSend.append('email', formData.email)
       formDataToSend.append('phone', formData.phone || '')
       formDataToSend.append('message', formData.message)
       
       // Add honeypot field (Web3Forms requires it for spam protection)
+      // This field should be empty - bots will fill it
       formDataToSend.append('botcheck', '')
+
+      console.log('Sending request to Web3Forms API...')
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+        },
         body: formDataToSend,
       })
       
       console.log('Web3Forms response status:', response.status)
+      console.log('Web3Forms response headers:', Object.fromEntries(response.headers.entries()))
+
+      // Get response text first to see what we're dealing with
+      const responseText = await response.text()
+      console.log('Web3Forms response text:', responseText)
 
       if (!response.ok) {
-        const errorText = await response.text()
-        console.error('Web3Forms HTTP error:', response.status, errorText)
-        throw new Error(`שגיאה בשליחת ההודעה (${response.status})`)
+        console.error('Web3Forms HTTP error:', {
+          status: response.status,
+          statusText: response.statusText,
+          body: responseText
+        })
+        throw new Error(`שגיאה בשליחת ההודעה (${response.status}: ${response.statusText})`)
       }
 
-      const data = await response.json()
+      // Try to parse as JSON
+      let data
+      try {
+        data = JSON.parse(responseText)
+      } catch (parseError) {
+        console.error('Failed to parse Web3Forms response as JSON:', parseError)
+        throw new Error('תגובה לא תקינה מהשרת. אנא נסה שוב מאוחר יותר.')
+      }
+
+      console.log('Web3Forms response data:', data)
 
       if (!data.success) {
-        console.error('Web3Forms error:', data)
+        console.error('Web3Forms returned error:', data)
         throw new Error(data.message || 'שגיאה בשליחת ההודעה')
       }
       

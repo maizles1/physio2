@@ -73,7 +73,7 @@ export default function BlogPage() {
                     />
                   </Link>
                 ) : (
-                  <div className="h-48 bg-gradient-to-br from-[#2080C0] to-[#2A3080]"></div>
+                <div className="h-48 bg-gradient-to-br from-[#2080C0] to-[#2A3080]"></div>
                 )}
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-3">
