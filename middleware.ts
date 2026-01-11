@@ -14,6 +14,23 @@ export function middleware(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const host = headers.get('host') || ''
   const origin = headers.get('origin')
+  const protocol = headers.get('x-forwarded-proto') || 'https'
+
+  // URL Canonicalization: Redirect www to non-www and http to https
+  if (host.startsWith('www.')) {
+    const newHost = host.replace(/^www\./, '')
+    const url = request.nextUrl.clone()
+    url.host = newHost
+    url.protocol = 'https:'
+    return NextResponse.redirect(url, 301)
+  }
+
+  // Redirect http to https (if not already handled by hosting)
+  if (protocol === 'http') {
+    const url = request.nextUrl.clone()
+    url.protocol = 'https:'
+    return NextResponse.redirect(url, 301)
+  }
 
   // Skip rate limiting for static files and Next.js internals
   if (

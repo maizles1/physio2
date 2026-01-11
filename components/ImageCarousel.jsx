@@ -53,9 +53,12 @@ export default function ImageCarousel() {
                       loading={index <= 1 ? 'eager' : 'lazy'}
                       quality={85}
                       onError={(e) => {
-                        console.error(`Failed to load image ${index + 1}: ${src}`, e)
+                        // Silently handle image loading errors in production
+                        if (process.env.NODE_ENV === 'development') {
+                          console.error(`Failed to load image ${index + 1}: ${src}`, e)
+                        }
                         const target = e.target
-                        if (target && target instanceof HTMLImageElement) {
+                        if (target && 'style' in target && target.style) {
                           target.style.display = 'none'
                         }
                       }}

@@ -18,7 +18,7 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
   const [isLoading, setIsLoading] = useState(true)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const isSvg = imgSrc.endsWith('.svg')
-  const isLargeImage = imgSrc.endsWith('.png') && (imgSrc.includes('home-visits') || imgSrc.includes('vestibular') || imgSrc.includes('tmj'))
+  // Removed isLargeImage check - Next.js will optimize PNG images to WebP/AVIF automatically
 
   // Reset when src changes
   useEffect(() => {
@@ -34,7 +34,9 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
     // Set timeout for image loading (10 seconds)
     timeoutRef.current = setTimeout(() => {
       if (src !== fallbackSrc) {
-        console.warn(`Image loading timeout: ${src}, switching to fallback`)
+        if (process.env.NODE_ENV === 'development') {
+          console.warn(`Image loading timeout: ${src}, switching to fallback`)
+        }
         setHasError(true)
         setImgSrc(fallbackSrc)
         setIsLoading(true)
@@ -50,7 +52,9 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
 
   const handleError = () => {
     if (!hasError && imgSrc !== fallbackSrc) {
-      console.warn(`Image load error: ${imgSrc}, switching to fallback`)
+      if (process.env.NODE_ENV === 'development') {
+        console.warn(`Image load error: ${imgSrc}, switching to fallback`)
+      }
       setHasError(true)
       setImgSrc(fallbackSrc)
       setIsLoading(true)
@@ -78,7 +82,7 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
         fill
         className={`${className || 'object-cover'} w-full h-full ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
         sizes={sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
-        unoptimized={isSvg || isLargeImage}
+        unoptimized={isSvg}
         priority={priority}
         loading={priority ? undefined : 'lazy'}
         onError={handleError}
