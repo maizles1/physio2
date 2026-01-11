@@ -78,15 +78,35 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
   useEffect(() => {
     if (!isLoading) return
     
-    const timeout = isSvg ? 1000 : 2000 // SVG should load faster, give it less time
+    const timeout = isSvg ? 1500 : 3000 // Give more time for images to load
     const fallbackTimer = setTimeout(() => {
       if (isLoading) {
+        // Force show the image even if onLoad wasn't called
         setIsLoading(false)
       }
     }, timeout)
     
     return () => clearTimeout(fallbackTimer)
   }, [isLoading, imgSrc, alt, isSvg, hasError])
+
+  // For SVG, use regular img tag as Next.js Image can have issues with SVG
+  if (isSvg) {
+    return (
+      <div className="relative w-full h-full">
+        {isLoading && (
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse" aria-hidden="true" />
+        )}
+        <img
+          src={imgSrc}
+          alt={alt}
+          className={`${className || 'object-cover'} w-full h-full ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+          onError={handleError}
+          onLoad={handleLoad}
+          style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+        />
+      </div>
+    )
+  }
 
   return (
     <>
@@ -99,9 +119,8 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
         fill
         className={`${className || 'object-cover'} w-full h-full ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
         sizes={sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
-        unoptimized={isSvg}
-        priority={priority || isSvg} // Prioritize SVG to load faster
-        loading={priority || isSvg ? undefined : 'lazy'}
+        priority={priority}
+        loading={priority ? undefined : 'lazy'}
         onError={handleError}
         onLoad={handleLoad}
         onLoadingComplete={handleLoad}
@@ -109,4 +128,3 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
     </>
   )
 }
-
