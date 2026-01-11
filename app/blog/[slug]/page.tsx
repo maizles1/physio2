@@ -70,6 +70,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound()
   }
 
+  // Check if post is a guide/tutorial (contains "מדריך", "איך", "guide", "how to")
+  const isGuide = post.title.toLowerCase().includes('מדריך') || 
+                  post.title.toLowerCase().includes('איך') ||
+                  post.title.toLowerCase().includes('guide') ||
+                  post.title.toLowerCase().includes('how to') ||
+                  post.category.toLowerCase().includes('מדריך')
+
   // Article Schema for SEO
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -97,12 +104,38 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     },
   }
 
+  // HowTo Schema for guides
+  const howToSchema = isGuide ? {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: post.title,
+    description: post.excerpt,
+    image: post.image ? `https://physio-plus.co.il${post.image}` : 'https://physio-plus.co.il/images/logo/clinic-logo.png',
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: 'קרא את המאמר המלא',
+        text: post.excerpt,
+        url: `https://physio-plus.co.il/blog/${post.slug}`,
+      },
+    ],
+    totalTime: 'PT30M', // Estimated reading time
+    supply: [],
+    tool: [],
+  } : null
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      {howToSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        />
+      )}
       <article className="bg-white">
       {/* Hero Section */}
       <section className="relative text-white overflow-hidden py-12 sm:py-16" style={{ background: 'linear-gradient(to bottom right, #2A3080, #2080C0, #40C0F0)' }}>

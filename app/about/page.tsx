@@ -10,6 +10,14 @@ export const metadata: Metadata = {
     title: 'אודות פיזיותרפיה.פלוס - אנדריי מייזלס',
     description: 'אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו, מנהל מכון פיזיותרפיה פרטי באשדוד. ניסיון עשיר בטיפול ושיקום.',
     url: 'https://physio-plus.co.il/about',
+    images: [
+      {
+        url: 'https://physio-plus.co.il/images/og/about.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'אודות פיזיותרפיה.פלוס - אנדריי מייזלס',
+      },
+    ],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/about',

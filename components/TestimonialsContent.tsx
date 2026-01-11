@@ -57,11 +57,12 @@ export default function TestimonialsContent() {
   const reviewsData = getReviews()
   const allReviews = reviewsData.reviews
 
-  // Create structured data for reviews
+  // Create enhanced structured data for reviews
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': 'MedicalBusiness',
     name: 'פיזיותרפיה.פלוס',
+    url: 'https://physio-plus.co.il',
     aggregateRating: allReviews.length > 0 ? {
       '@type': 'AggregateRating',
       ratingValue: reviewsData.averageRating || 5,
@@ -74,6 +75,7 @@ export default function TestimonialsContent() {
       author: {
         '@type': 'Person',
         name: review.authorName,
+        identifier: review.id,
       },
       datePublished: review.date,
       reviewBody: review.text,
@@ -82,6 +84,11 @@ export default function TestimonialsContent() {
         ratingValue: review.rating,
         bestRating: 5,
         worstRating: 1,
+      },
+      itemReviewed: {
+        '@type': 'MedicalBusiness',
+        name: 'פיזיותרפיה.פלוס',
+        url: 'https://physio-plus.co.il',
       },
     })),
   }

@@ -1,13 +1,36 @@
 import HeroSection from '@/components/HeroSection'
-import ImageCarousel from '@/components/ImageCarousel'
-import VideosSection from '@/components/VideosSection'
-import InsuranceSection from '@/components/InsuranceSection'
-import ServicesPreview from '@/components/ServicesPreview'
-import AboutPreview from '@/components/AboutPreview'
-import TestimonialsPreview from '@/components/TestimonialsPreview'
-import FAQSection from '@/components/FAQSection'
-import CTASection from '@/components/CTASection'
+import dynamic from 'next/dynamic'
 import { Metadata } from 'next'
+
+// Lazy load heavy components below the fold
+const ImageCarousel = dynamic(() => import('@/components/ImageCarousel'), {
+  loading: () => (
+    <section className="section-spacing bg-gray-50">
+      <div className="container">
+        <div className="max-w-6xl mx-auto">
+          <div className="h-[400px] sm:h-[500px] md:h-[550px] bg-gray-200 rounded-lg animate-pulse" />
+        </div>
+      </div>
+    </section>
+  ),
+})
+
+const VideosSection = dynamic(() => import('@/components/VideosSection'), {
+  loading: () => (
+    <section className="section-spacing bg-white">
+      <div className="container">
+        <div className="h-64 bg-gray-100 rounded-lg animate-pulse" />
+      </div>
+    </section>
+  ),
+})
+
+const InsuranceSection = dynamic(() => import('@/components/InsuranceSection'))
+const ServicesPreview = dynamic(() => import('@/components/ServicesPreview'))
+const AboutPreview = dynamic(() => import('@/components/AboutPreview'))
+const TestimonialsPreview = dynamic(() => import('@/components/TestimonialsPreview'))
+const FAQSection = dynamic(() => import('@/components/FAQSection'))
+const CTASection = dynamic(() => import('@/components/CTASection'))
 
 export const metadata: Metadata = {
   title: 'פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס - אנדריי מייזלס',
@@ -33,6 +56,19 @@ export const metadata: Metadata = {
     'TMJ',
     'אשדוד',
   ],
+  openGraph: {
+    title: 'פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס - אנדריי מייזלס',
+    description: 'פיזיותרפיה פרטית באשדוד - פיזיותרפיסט פרטי מומלץ באשדוד. אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו.',
+    url: 'https://physio-plus.co.il',
+    images: [
+      {
+        url: 'https://physio-plus.co.il/images/og/home.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'פיזיותרפיה.פלוס - פיזיותרפיסט פרטי באשדוד',
+      },
+    ],
+  },
   alternates: {
     canonical: 'https://physio-plus.co.il',
   },

@@ -3,6 +3,9 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'הצהרת נגישות',
   description: 'הצהרת נגישות של אתר פיזיותרפיה.פלוס - מחויבותנו לנגישות השירותים והאתר.',
+  alternates: {
+    canonical: 'https://physio-plus.co.il/accessibility',
+  },
 }
 
 export default function AccessibilityPage() {

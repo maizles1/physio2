@@ -1,0 +1,33 @@
+/* Critical CSS - Above the fold content */
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --primary-dark: #2A3080;
+  --primary: #2080C0;
+  --primary-light: #40C0F0;
+  --primary-darker: #004080;
+  --secondary: #10b981;
+  --secondary-dark: #059669;
+  --accent: #f59e0b;
+  --text: #1f2937;
+  --text-light: #6b7280;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Assistant', -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Hebrew", Arial, sans-serif;
+  direction: rtl;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+.bg-primary-gradient {
+  background: linear-gradient(to bottom right, #2A3080, #2080C0, #40C0F0);
+}

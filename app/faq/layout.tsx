@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     title: 'שאלות נפוצות - פיזיותרפיה.פלוס',
     description: 'תשובות לשאלות הנפוצות ביותר על הטיפולים והשירותים',
     url: 'https://physio-plus.co.il/faq',
+    images: [
+      {
+        url: 'https://physio-plus.co.il/images/og/faq.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'שאלות נפוצות - פיזיותרפיה.פלוס',
+      },
+    ],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/faq',

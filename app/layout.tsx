@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Assistant } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,6 +9,14 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import FloatingButtons from "@/components/FloatingButtons";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import PageTracking from "@/components/PageTracking";
+
+const assistant = Assistant({
+  subsets: ["latin", "hebrew"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+  preload: true,
+  variable: "--font-assistant",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -49,6 +58,14 @@ export const metadata: Metadata = {
     siteName: 'פיזיותרפיה.פלוס',
     title: 'פיזיותרפיה פרטית באשדוד - פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס',
     description: 'פיזיותרפיה פרטית באשדוד - מכון פיזיותרפיה פרטי באשדוד. אנדריי מייזלס, פיזיותרפיסט פרטי באשדוד, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו, מתמחה בטיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
+    images: [
+      {
+        url: 'https://physio-plus.co.il/images/og/home.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'פיזיותרפיה.פלוס - פיזיותרפיסט פרטי באשדוד',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -71,6 +88,7 @@ export const metadata: Metadata = {
   },
   other: {
     'facebook-domain-verification': 'ckan6zgvnc71v4gv1yuxlcsb1s5kw4',
+    'google-site-verification': process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
   },
 };
 
@@ -183,11 +201,56 @@ const structuredData = {
     ],
   },
   areaServed: [
-    { '@type': 'City', name: 'אשדוד' },
-    { '@type': 'City', name: 'אשקלון' },
-    { '@type': 'City', name: 'קריית גת' },
-    { '@type': 'City', name: 'ראשון לציון' },
+    { 
+      '@type': 'City', 
+      name: 'אשדוד',
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '31.8044',
+        longitude: '34.6553',
+      },
+    },
+    { 
+      '@type': 'City', 
+      name: 'אשקלון',
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '31.6688',
+        longitude: '34.5744',
+      },
+    },
+    { 
+      '@type': 'City', 
+      name: 'קריית גת',
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '31.6100',
+        longitude: '34.7719',
+      },
+    },
+    { 
+      '@type': 'City', 
+      name: 'ראשון לציון',
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '31.9730',
+        longitude: '34.7925',
+      },
+    },
   ],
+  serviceArea: {
+    '@type': 'GeoCircle',
+    geoMidpoint: {
+      '@type': 'GeoCoordinates',
+      latitude: '31.783106159195388',
+      longitude: '34.65489203389065',
+    },
+    geoRadius: {
+      '@type': 'Distance',
+      value: '50',
+      unitCode: 'KMT', // Kilometers
+    },
+  },
   acceptedPaymentMethod: [
     { '@type': 'PaymentMethod', name: 'ביטוח משלים כללית' },
     { '@type': 'PaymentMethod', name: 'קופת חולים מאוחדת' },
@@ -202,7 +265,12 @@ const structuredData = {
   sameAs: [
     'https://www.facebook.com/yourpage',
     'https://www.instagram.com/yourpage',
+    // Add Google Business Profile URL when available
+    // Example: 'https://www.google.com/maps/place/...',
   ],
+  // Google Business Profile ID (if available)
+  // Add this when you have the Google Business Profile ID
+  // googleBusinessProfileId: process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_PROFILE_ID || '',
 }
 
 export default function RootLayout({
@@ -213,12 +281,18 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <head>
+        {/* Critical CSS - Inline for faster rendering */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            :root{--background:#ffffff;--foreground:#1a1a1a;--primary-dark:#2A3080;--primary:#2080C0;--primary-light:#40C0F0;--primary-darker:#004080;--secondary:#10b981;--secondary-dark:#059669;--accent:#f59e0b;--text:#1f2937;--text-light:#6b7280}
+            body{background:var(--background);color:var(--foreground);font-family:'Assistant',-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans Hebrew",Arial,sans-serif;direction:rtl;line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-size:16px;letter-spacing:0.01em;text-rendering:optimizeLegibility;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+            .bg-primary-gradient{background:linear-gradient(to bottom right,#2A3080,#2080C0,#40C0F0)}
+          `
+        }} />
         {/* Preconnect to Google Tag Manager for better performance */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap" as="style" />
+        {/* Fonts are loaded via next/font/google - no need for external links */}
         <link rel="preconnect" href="https://www.google.com" />
         <link rel="preconnect" href="https://maps.googleapis.com" />
         <link rel="preconnect" href="https://www.youtube.com" />

@@ -11,6 +11,17 @@ export const metadata: Metadata = {
     title: 'המלצות מטופלים - פיזיותרפיה.פלוס',
     description: 'חוות דעת והמלצות של מטופלים על הטיפול בקליניקה',
     url: 'https://physio-plus.co.il/testimonials',
+    images: [
+      {
+        url: 'https://physio-plus.co.il/images/og/testimonials.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'המלצות מטופלים - פיזיותרפיה.פלוס',
+      },
+    ],
+  },
+  alternates: {
+    canonical: 'https://physio-plus.co.il/testimonials',
   },
 }
 

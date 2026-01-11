@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap');
+/* Fonts are loaded via next/font/google in layout.tsx */
 @import "tailwindcss";
 
 :root {
@@ -26,7 +26,7 @@
   --color-secondary: var(--secondary);
   --color-secondary-dark: var(--secondary-dark);
   --color-accent: var(--accent);
-  --font-sans: 'Assistant', -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Hebrew", Arial, sans-serif;
+  --font-sans: var(--font-assistant), 'Assistant', -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Hebrew", Arial, sans-serif;
 }
 
 body {

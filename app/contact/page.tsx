@@ -570,7 +570,33 @@ export default function ContactPage() {
                   </div>
                   <div>
                   <h3 className="font-bold text-lg text-gray-900 mb-1">כתובת</h3>
-                  <p className="text-gray-700">יקינטון 3 אשדוד</p>
+                  <p className="text-gray-700">מרכז כלניות, אשדוד</p>
+                  <div className="mt-4 flex flex-col sm:flex-row gap-3">
+                    <a
+                      href="https://www.google.com/maps/dir/?api=1&destination=31.783106159195388,34.65489203389065"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-secondary text-sm"
+                      aria-label="נווט עם Google Maps"
+                    >
+                      <svg className="w-5 h-5 inline-block ml-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                      </svg>
+                      Google Maps
+                    </a>
+                    <a
+                      href="https://waze.com/ul?q=31.783106159195388,34.65489203389065&navigate=yes"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-secondary text-sm"
+                      aria-label="נווט עם Waze"
+                    >
+                      <svg className="w-5 h-5 inline-block ml-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 19.5c-4.136 0-7.5-3.364-7.5-7.5S7.864 4.5 12 4.5s7.5 3.364 7.5 7.5-3.364 7.5-7.5 7.5z"/>
+                      </svg>
+                      Waze
+                    </a>
+                  </div>
                   </div>
                 </div>
 
@@ -633,7 +659,7 @@ export default function ContactPage() {
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">איך להגיע</h3>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <a
-                    href="https://www.google.com/maps/dir/?api=1&destination=יקינטון+3+אשדוד"
+                    href="https://www.google.com/maps/dir/?api=1&destination=31.783106159195388,34.65489203389065"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 sm:px-6 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm sm:text-base min-h-[48px]"
@@ -645,7 +671,7 @@ export default function ContactPage() {
                     <span className="whitespace-nowrap">פתח ב-Google Maps</span>
                   </a>
                   <a
-                    href="https://waze.com/ul?q=יקינטון 3 אשדוד"
+                    href="https://waze.com/ul?q=31.783106159195388,34.65489203389065&navigate=yes"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 bg-[#33CCFF] hover:bg-[#2BB5E6] text-white font-medium py-3 px-4 sm:px-6 rounded-lg transition-colors shadow-md hover:shadow-lg text-sm sm:text-base min-h-[48px]"

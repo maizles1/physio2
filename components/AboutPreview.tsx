@@ -26,13 +26,22 @@ export default function AboutPreview() {
                 <div className="text-gray-700">מטופלים מרוצים</div>
               </div>
             </div>
-            <Link
-              href="/about"
-              className="btn btn-primary"
-              aria-label="קרא עוד על הקליניקה ועל אנדריי מייזלס"
-            >
-              קרא עוד עלינו
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/about"
+                className="btn btn-primary"
+                aria-label="קרא עוד על הקליניקה ועל אנדריי מייזלס"
+              >
+                קרא עוד עלינו
+              </Link>
+              <Link
+                href="/services"
+                className="btn btn-secondary"
+                aria-label="צפה בשירותי הפיזיותרפיה שלנו"
+              >
+                השירותים שלנו
+              </Link>
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-4">

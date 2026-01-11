@@ -16,11 +16,33 @@ export const metadata: Metadata = {
     'טיפול בסחרחורות',
     'טיפול במפרק הלסת',
     'TMJ',
+    // Long-tail keywords
+    'טיפול בכאבי גב באשדוד',
+    'שיקום לאחר ניתוח ברך באשדוד',
+    'שיקום וסטיבולרי אשדוד',
+    'טיפול בסחרחורות אשדוד',
+    // LSI keywords
+    'שיקום אורטופדי',
+    'פיזיותרפיה אורטופדית',
+    'טיפול בפציעות ספורט',
+    'שיקום לאחר ניתוח כתף',
+    'שיקום לאחר ניתוח גב',
+    // Local queries
+    'פיזיותרפיה אשדוד מרכז כלניות',
+    'שירותי פיזיותרפיה אשדוד',
   ],
   openGraph: {
     title: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
     description: 'טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
     url: 'https://physio-plus.co.il/services',
+    images: [
+      {
+        url: 'https://physio-plus.co.il/images/og/services.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
+      },
+    ],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/services',

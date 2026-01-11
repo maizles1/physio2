@@ -10,10 +10,10 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
 
-  const phoneNumber = '0508838982'
+  const phoneNumber = '050-883-8982'
   const whatsappNumber = '972508838982'
   const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
-  const address = 'יקינטון 3 אשדוד'
+  const address = 'מרכז כלניות, אשדוד'
 
   const navigation = [
     { name: 'דף בית', href: '/' },

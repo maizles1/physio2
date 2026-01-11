@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     title: 'צור קשר - פיזיותרפיה.פלוס',
     description: 'צרו קשר עם מכון פיזיותרפיה.פלוס באשדוד',
     url: 'https://physio-plus.co.il/contact',
+    images: [
+      {
+        url: 'https://physio-plus.co.il/images/og/contact.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'צור קשר - פיזיותרפיה.פלוס',
+      },
+    ],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/contact',

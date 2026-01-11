@@ -19,9 +19,20 @@ export const metadata: Metadata = {
     title: 'בלוג פיזיותרפיה - מאמרים מקצועיים',
     description: 'מאמרים מקצועיים על פיזיותרפיה, טיפים לבריאות ושיקום',
     url: 'https://physio-plus.co.il/blog',
+    images: [
+      {
+        url: 'https://physio-plus.co.il/images/og/blog.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'בלוג פיזיותרפיה - פיזיותרפיה.פלוס',
+      },
+    ],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/blog',
+    types: {
+      'application/rss+xml': [{ url: 'https://physio-plus.co.il/rss', title: 'RSS Feed' }],
+    },
   },
   other: {
     'geo.region': 'IL',

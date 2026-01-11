@@ -5,10 +5,10 @@ import { seoConfig } from '@/config/seo.config'
 import { gtag } from './GoogleAnalytics'
 
 export default function Footer() {
-  const phoneNumber = '0508838982'
+  const phoneNumber = '050-883-8982'
   const whatsappNumber = '972508838982'
   const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
-  const address = 'יקינטון 3 אשדוד'
+  const address = 'מרכז כלניות, אשדוד'
 
   return (
     <footer className="bg-white text-gray-900 border-t border-gray-200">
@@ -148,7 +148,30 @@ export default function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span className="text-gray-700 font-medium">{address}</span>
+                <div>
+                  <span className="text-gray-700 font-medium block mb-2">{address}</span>
+                  <div className="flex gap-2">
+                    <a
+                      href="https://www.google.com/maps/dir/?api=1&destination=31.783106159195388,34.65489203389065"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-[#2080C0] hover:underline"
+                      aria-label="נווט עם Google Maps"
+                    >
+                      Google Maps
+                    </a>
+                    <span className="text-gray-400">|</span>
+                    <a
+                      href="https://waze.com/ul?q=31.783106159195388,34.65489203389065&navigate=yes"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-[#2080C0] hover:underline"
+                      aria-label="נווט עם Waze"
+                    >
+                      Waze
+                    </a>
+                  </div>
+                </div>
               </li>
               <li className="flex items-center gap-3">
                 <svg className="w-5 h-5 flex-shrink-0 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
