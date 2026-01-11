@@ -68,7 +68,7 @@ export default function Header() {
                 </svg>
                 <span className="font-medium whitespace-nowrap">{phoneNumber}</span>
               </a>
-              <span className="text-blue-200 hidden lg:inline">|</span>
+              <span className="text-blue-200 hidden lg:inline" aria-hidden="true">|</span>
               <span className="text-white hidden lg:inline">{address}</span>
             </div>
             {(seoConfig.social?.facebook || seoConfig.social?.instagram) && (
@@ -228,7 +228,9 @@ export default function Header() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-gray-700 hover:text-[#2080C0] hover:bg-blue-50 rounded-lg transition-colors"
-              aria-label="תפריט"
+              aria-label={mobileMenuOpen ? "סגור תפריט" : "פתח תפריט"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {mobileMenuOpen ? (
@@ -243,7 +245,13 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden pb-4 border-t border-gray-200 animate-in slide-in-from-top">
+          <div 
+            id="mobile-menu"
+            className="lg:hidden pb-4 border-t border-gray-200 animate-in slide-in-from-top"
+            role="menu"
+            aria-label="תפריט ניווט ראשי"
+            aria-live="polite"
+          >
             <div className="pt-4 space-y-1">
               {navigation.map((item) => (
                 <div key={item.name}>
@@ -254,6 +262,8 @@ export default function Header() {
                       setActiveDropdown(null)
                     }}
                     className="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-[#2080C0] rounded-lg transition-colors"
+                    role="menuitem"
+                    aria-label={item.name}
                   >
                     {item.name}
                   </Link>
@@ -268,6 +278,8 @@ export default function Header() {
                             setActiveDropdown(null)
                           }}
                           className="block px-4 py-2 text-sm text-gray-600 hover:bg-blue-50 hover:text-[#2080C0] rounded-lg transition-colors"
+                          role="menuitem"
+                          aria-label={`${subItem.name} - ${item.name}`}
                         >
                           {subItem.name}
                         </Link>

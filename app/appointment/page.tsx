@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { toast } from '@/lib/toast'
 
 export default function AppointmentPage() {
   const [formData, setFormData] = useState({
@@ -28,7 +29,7 @@ export default function AppointmentPage() {
     }
     
     // כאן תהיה הלוגיקה לשליחת הטופס
-    alert('תודה! בקשתכם נקלטה. ניצור איתכם קשר בהקדם לאישור התור.')
+    toast.success('תודה! בקשתכם נקלטה. ניצור איתכם קשר בהקדם לאישור התור.')
     setFormData({
       name: '',
       phone: '',

@@ -27,12 +27,13 @@ export const gtag = {
   },
 
   // Track custom events
-  event: (action: string, category: string, label?: string, value?: number) => {
+  event: (action: string, category: string, label?: string, value?: number, additionalParams?: Record<string, unknown>) => {
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', action, {
         event_category: category,
         event_label: label,
         value: value,
+        ...additionalParams,
       })
     }
   },
@@ -71,7 +72,27 @@ export const gtag = {
   externalLink: (url: string) => {
     gtag.event('external_link', 'outbound', url)
   },
-}
+
+  // Track view item (service)
+  viewItem: (itemName: string, itemId?: string) => {
+    gtag.event('view_item', 'engagement', itemName, undefined)
+    if (itemId) {
+      gtag.event('view_item', 'engagement', itemName, undefined, {
+        item_id: itemId,
+        item_name: itemName,
+      })
+    }
+  },
+
+  // Track purchase/conversion (appointment booking)
+  purchase: (value: number, transactionId: string, items?: Array<{ name: string; value: number }>) => {
+    gtag.event('purchase', 'conversion', transactionId, value, {
+      transaction_id: transactionId,
+      value: value,
+      currency: 'ILS',
+      items: items,
+    })
+  },
 
 // Extend Window interface
 declare global {

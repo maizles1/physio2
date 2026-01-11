@@ -9,6 +9,9 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import FloatingButtons from "@/components/FloatingButtons";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import PageTracking from "@/components/PageTracking";
+import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
+import ToastContainer from "@/components/Toast";
+import PerformanceTracker from "@/components/PerformanceTracker";
 
 const assistant = Assistant({
   subsets: ["latin", "hebrew"],
@@ -290,19 +293,28 @@ export default function RootLayout({
           `
         }} />
         {/* Preconnect to Google Tag Manager for better performance */}
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        {/* Resource Hints for External Domains */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.google.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://maps.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.youtube.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://api.web3forms.com" crossOrigin="anonymous" />
+        
+        {/* DNS Prefetch for Additional Domains */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        {/* Fonts are loaded via next/font/google - no need for external links */}
-        <link rel="preconnect" href="https://www.google.com" />
-        <link rel="preconnect" href="https://maps.googleapis.com" />
-        <link rel="preconnect" href="https://www.youtube.com" />
-        <link rel="preconnect" href="https://i.ytimg.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.google.com" />
         <link rel="dns-prefetch" href="https://maps.googleapis.com" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://i.ytimg.com" />
-        <link rel="preload" href="/images/andrey-meizels.JPG" as="image" />
-        <link rel="preload" href="/images/carousel/clinic-1.jpg" as="image" />
+        <link rel="dns-prefetch" href="https://api.web3forms.com" />
+        
+        {/* Preload Critical Resources */}
+        <link rel="preload" href="/images/andrey-meizels.JPG" as="image" fetchPriority="high" />
+        <link rel="preload" href="/images/carousel/clinic-1.jpg" as="image" fetchPriority="high" />
+        <link rel="preload" href="/images/logo/clinic-logo.png" as="image" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -310,6 +322,23 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'פיזיותרפיה.פלוס',
+            url: 'https://physio-plus.co.il',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: {
+                '@type': 'EntryPoint',
+                urlTemplate: 'https://physio-plus.co.il/search?q={search_term_string}',
+              },
+              'query-input': 'required name=search_term_string',
+            },
+          }) }}
         />
       </head>
       <body className="antialiased">
@@ -353,8 +382,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         <ErrorBoundary>
+          <ServiceWorkerRegistration />
           <GoogleAnalytics />
           <PageTracking />
+          <PerformanceTracker />
+          <ToastContainer />
           <SkipLink />
           <Header />
           <main id="main-content" className="min-h-screen">

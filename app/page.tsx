@@ -1,6 +1,7 @@
 import HeroSection from '@/components/HeroSection'
 import dynamic from 'next/dynamic'
 import { Metadata } from 'next'
+import { ImageSkeleton } from '@/components/LoadingSkeleton'
 
 // Lazy load heavy components below the fold
 const ImageCarousel = dynamic(() => import('@/components/ImageCarousel'), {
@@ -8,7 +9,7 @@ const ImageCarousel = dynamic(() => import('@/components/ImageCarousel'), {
     <section className="section-spacing bg-gray-50">
       <div className="container">
         <div className="max-w-6xl mx-auto">
-          <div className="h-[400px] sm:h-[500px] md:h-[550px] bg-gray-200 rounded-lg animate-pulse" />
+          <ImageSkeleton className="w-full" aspectRatio="16/9" />
         </div>
       </div>
     </section>
@@ -19,7 +20,7 @@ const VideosSection = dynamic(() => import('@/components/VideosSection'), {
   loading: () => (
     <section className="section-spacing bg-white">
       <div className="container">
-        <div className="h-64 bg-gray-100 rounded-lg animate-pulse" />
+        <ImageSkeleton className="w-full" aspectRatio="16/9" />
       </div>
     </section>
   ),
