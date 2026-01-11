@@ -172,6 +172,7 @@ export default function AboutPage() {
                   <p className="text-lg mb-4" style={{ color: '#2080C0' }}>פיזיותרפיסט מקצועי, מנהל הקליניקה</p>
                   
                   <div className="space-y-4 mb-6">
+                    <h4 className="text-xl font-bold mb-2" style={{ color: '#2A3080' }}>נעים להכיר, אנדריי מייזלס</h4>
                     <p className="text-gray-700 leading-relaxed">
                       כמי שמחפש <strong>פיזיותרפיסט פרטי באשדוד</strong>, חשוב שתדע שאתה מפקיד את הגוף שלך בידיים מנוסות ומקצועיות. 
                       שמי אנדריי מייזלס, פיזיותרפיסט מוסמך בעל תואר שני (M.Sc) בפיזיותרפיה.
