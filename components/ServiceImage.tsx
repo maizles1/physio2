@@ -16,7 +16,7 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
   const [imgSrc, setImgSrc] = useState(src)
   const [hasError, setHasError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [hasLoaded, setHasLoaded] = useState(false) // Track if image has successfully loaded
+  const [hasLoaded, setHasLoaded] = useState(false)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const fallbackTimerRef = useRef<NodeJS.Timeout | null>(null)
   const isSvg = imgSrc.endsWith('.svg') || imgSrc.endsWith('.svg?')
@@ -26,7 +26,7 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
     setImgSrc(src)
     setHasError(false)
     setIsLoading(true)
-    setHasLoaded(false) // Reset loaded state when src changes
+    setHasLoaded(false)
 
     // Clear any existing timeouts
     if (timeoutRef.current) {
@@ -36,9 +36,9 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
       clearTimeout(fallbackTimerRef.current)
     }
 
-    // Set timeout for image loading (10 seconds)
+    // Set timeout for image loading (10 seconds) - switch to fallback if needed
     timeoutRef.current = setTimeout(() => {
-      if (src !== fallbackSrc && !hasLoaded) {
+      if (src !== fallbackSrc) {
         if (process.env.NODE_ENV === 'development') {
           console.warn(`Image loading timeout: ${src}, switching to fallback`)
         }
@@ -57,7 +57,7 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
         clearTimeout(fallbackTimerRef.current)
       }
     }
-  }, [src, fallbackSrc, hasLoaded])
+  }, [src, fallbackSrc]) // Only reset when src or fallbackSrc changes
 
   const handleError = () => {
     if (!hasError && imgSrc !== fallbackSrc) {
@@ -73,7 +73,6 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
       if (process.env.NODE_ENV === 'development') {
         console.warn(`Both image and fallback failed for: ${alt}`)
       }
-      // Don't set isLoading to false - let the fallback timer handle it
     }
   }
 
@@ -86,21 +85,19 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
       clearTimeout(fallbackTimerRef.current)
     }
     setIsLoading(false)
-    setHasLoaded(true) // Mark as loaded - prevent disappearing
+    setHasLoaded(true)
   }
   
-  // Fallback: if image doesn't load after timeout, show it anyway (might be slow network or SVG issue)
-  // Only run this if image hasn't loaded yet
+  // Fallback timer: if image doesn't load after timeout, show it anyway
   useEffect(() => {
-    if (!isLoading || hasLoaded) return // Don't run if already loaded
+    // Don't run if already loaded or not loading
+    if (hasLoaded || !isLoading) return
     
-    const timeout = isSvg ? 1500 : 3000 // Give more time for images to load
+    const timeout = isSvg ? 1500 : 3000
     fallbackTimerRef.current = setTimeout(() => {
-      // Only force show if still loading and hasn't loaded yet
-      if (isLoading && !hasLoaded) {
-        setIsLoading(false)
-        setHasLoaded(true) // Mark as loaded to prevent re-triggering
-      }
+      // Force show the image even if onLoad wasn't called
+      setIsLoading(false)
+      setHasLoaded(true)
     }, timeout)
     
     return () => {
@@ -108,7 +105,7 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
         clearTimeout(fallbackTimerRef.current)
       }
     }
-  }, [isLoading, isSvg, hasLoaded]) // Removed imgSrc, alt, hasError from dependencies
+  }, [isLoading, isSvg, hasLoaded])
 
   // For SVG, use regular img tag as Next.js Image can have issues with SVG
   if (isSvg) {
