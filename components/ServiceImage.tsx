@@ -17,7 +17,7 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
   const [hasError, setHasError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const isSvg = imgSrc.endsWith('.svg')
+  const isSvg = imgSrc.endsWith('.svg') || imgSrc.endsWith('.svg?')
   // Removed isLargeImage check - Next.js will optimize PNG images to WebP/AVIF automatically
 
   // Reset when src changes
@@ -53,14 +53,17 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
   const handleError = () => {
     if (!hasError && imgSrc !== fallbackSrc) {
       if (process.env.NODE_ENV === 'development') {
-        console.warn(`Image load error: ${imgSrc}, switching to fallback`)
+        console.warn(`Image load error: ${imgSrc}, switching to fallback: ${fallbackSrc}`)
       }
       setHasError(true)
       setImgSrc(fallbackSrc)
       setIsLoading(true)
     } else if (hasError && imgSrc === fallbackSrc) {
-      // If fallback also fails, show placeholder
-      setIsLoading(false)
+      // If fallback also fails, show placeholder but keep trying
+      if (process.env.NODE_ENV === 'development') {
+        console.warn(`Both image and fallback failed for: ${alt}`)
+      }
+      // Don't set isLoading to false - let the fallback timer handle it
     }
   }
 
@@ -70,6 +73,20 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
     }
     setIsLoading(false)
   }
+  
+  // Fallback: if image doesn't load after timeout, show it anyway (might be slow network or SVG issue)
+  useEffect(() => {
+    if (!isLoading) return
+    
+    const timeout = isSvg ? 1000 : 2000 // SVG should load faster, give it less time
+    const fallbackTimer = setTimeout(() => {
+      if (isLoading) {
+        setIsLoading(false)
+      }
+    }, timeout)
+    
+    return () => clearTimeout(fallbackTimer)
+  }, [isLoading, imgSrc, alt, isSvg, hasError])
 
   return (
     <>
@@ -83,8 +100,8 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
         className={`${className || 'object-cover'} w-full h-full ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
         sizes={sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
         unoptimized={isSvg}
-        priority={priority}
-        loading={priority ? undefined : 'lazy'}
+        priority={priority || isSvg} // Prioritize SVG to load faster
+        loading={priority || isSvg ? undefined : 'lazy'}
         onError={handleError}
         onLoad={handleLoad}
         onLoadingComplete={handleLoad}

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Image from 'next/image'
+import ServiceImage from '@/components/ServiceImage'
 
 const services = [
   {
@@ -13,6 +13,7 @@ const services = [
     href: '/services',
     color: 'from-[#2080C0] to-[#2A3080]',
     imagePath: '/images/services/back-pain/service-image.jpg',
+    fallbackImagePath: '/images/services/back-pain/service-image.jpg',
   },
   {
     title: 'שיקום מניתוחים',
@@ -25,6 +26,7 @@ const services = [
     href: '/services#post-surgery',
     color: 'from-[#2A3080] to-[#004080]',
     imagePath: '/images/services/post-surgery/service-image.jpg',
+    fallbackImagePath: '/images/services/post-surgery/service-image.svg',
   },
   {
     title: 'טיפול בסחרחורות',
@@ -37,6 +39,7 @@ const services = [
     href: '/services#vestibular',
     color: 'from-[#2080C0] to-[#40C0F0]',
     imagePath: '/images/services/vestibular/service-image.png',
+    fallbackImagePath: '/images/services/vestibular/service-image.svg',
   },
   {
     title: 'שיקום מפרק לסת',
@@ -49,6 +52,7 @@ const services = [
     href: '/services#tmj',
     color: 'from-[#40C0F0] to-[#2A3080]',
     imagePath: '/images/services/tmj/service-image.png',
+    fallbackImagePath: '/images/services/tmj/service-image.svg',
   },
   {
     title: 'ביקורי בית באשדוד',
@@ -61,6 +65,7 @@ const services = [
     href: '/services#home-visits',
     color: 'from-[#004080] to-[#2080C0]',
     imagePath: '/images/services/home-visits/service-image.png',
+    fallbackImagePath: '/images/services/home-visits/service-image.png',
   },
   {
     title: 'ליווי קבוצות ספורט וספורטאים',
@@ -73,6 +78,7 @@ const services = [
     href: '/services#sports-teams',
     color: 'from-[#2A3080] to-[#2080C0]',
     imagePath: '/images/services/sports-teams/service-image.jpg',
+    fallbackImagePath: '/images/services/sports-teams/service-image.svg',
   },
 ]
 
@@ -99,16 +105,15 @@ export default function ServicesPreview() {
             >
               {/* תמונה קטנה */}
               <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 w-full overflow-hidden">
-                <Image
+                <ServiceImage
                   src={service.imagePath}
+                  fallbackSrc={service.fallbackImagePath || service.imagePath}
                   alt={service.title}
-                  fill
                   className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  loading="lazy"
-                  quality={85}
+                  priority={index < 3}
                 />
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-20 group-hover:opacity-30 transition-opacity`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-20 group-hover:opacity-30 transition-opacity pointer-events-none`} aria-hidden="true"></div>
               </div>
               
               {/* תוכן */}
