@@ -37,8 +37,10 @@ export async function fetchGoogleReviews(): Promise<GoogleReview[]> {
   try {
     const url = `${GOOGLE_PLACES_API_BASE}?place_id=${encodeURIComponent(placeId)}&fields=reviews,rating,user_ratings_total&key=${encodeURIComponent(apiKey)}&language=iw`
     
-    console.log('[Google Reviews] מנסה לטעון ביקורות מ-Google Places API...')
-    console.log('[Google Reviews] Place ID:', placeId.substring(0, 10) + '...')
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[Google Reviews] מנסה לטעון ביקורות מ-Google Places API...')
+      console.log('[Google Reviews] Place ID:', placeId && placeId.length > 10 ? placeId.substring(0, 10) + '...' : placeId)
+    }
     
     const response = await fetch(url, {
       cache: 'no-store' // Don't cache to always get fresh reviews
@@ -65,16 +67,22 @@ export async function fetchGoogleReviews(): Promise<GoogleReview[]> {
 
     if (data.result && data.result.reviews && Array.isArray(data.result.reviews)) {
       const reviews = data.result.reviews as GoogleReview[]
-      console.log(`[Google Reviews] נטענו ${reviews.length} ביקורות בהצלחה`)
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`[Google Reviews] נטענו ${reviews.length} ביקורות בהצלחה`)
+      }
       return reviews
     }
 
-    console.warn('[Google Reviews] אין ביקורות בנתונים שהתקבלו')
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('[Google Reviews] אין ביקורות בנתונים שהתקבלו')
+    }
     return []
   } catch (error) {
-    console.error('[Google Reviews] שגיאה בטעינת ביקורות:', error)
-    if (error instanceof Error) {
-      console.error('[Google Reviews] פרטי השגיאה:', error.message)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('[Google Reviews] שגיאה בטעינת ביקורות:', error)
+      if (error instanceof Error) {
+        console.error('[Google Reviews] פרטי השגיאה:', error.message)
+      }
     }
     return []
   }

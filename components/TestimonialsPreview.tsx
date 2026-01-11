@@ -74,7 +74,7 @@ export default function TestimonialsPreview() {
                 ))}
               </div>
               <p className="text-gray-700 mb-6 leading-relaxed italic">
-                &quot;{testimonial.text.length > 150 ? testimonial.text.substring(0, 150) + '...' : testimonial.text}&quot;
+                &quot;{testimonial.text && testimonial.text.length > 150 ? testimonial.text.substring(0, 150) + '...' : testimonial.text || ''}&quot;
               </p>
               <div className="border-t border-gray-200 pt-4">
                 <div className="font-bold text-gray-900">{testimonial.authorName}</div>

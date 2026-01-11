@@ -104,34 +104,37 @@ export default function VideosSection() {
   // Get the two videos to display:
   // 1. First video (most prominent): "המלצות מטופלים" (index 2)
   // 2. Second video: "קליניקה לפיזיותרפיה" (index 0)
-  const testimonialsVideo = videos.find(v => v.title === 'המלצות מטופלים') || videos[2]
-  const clinicVideo = videos.find(v => v.title === 'קליניקה לפיזיותרפיה') || videos[0]
-  const displayVideos = [testimonialsVideo, clinicVideo].filter(Boolean)
+  const testimonialsVideo = videos.find(v => v.title === 'המלצות מטופלים') || (videos.length > 2 ? videos[2] : null)
+  const clinicVideo = videos.find(v => v.title === 'קליניקה לפיזיותרפיה') || (videos.length > 0 ? videos[0] : null)
+  const displayVideos = [testimonialsVideo, clinicVideo].filter((v): v is Video => v !== null)
 
   // Create VideoObject schemas for displayed videos
-  const videoSchemas = displayVideos.map((video) => {
-    const videoId = getVideoId(video.youtubeUrl)
-    if (!videoId) return null
+  const videoSchemas = displayVideos
+    .map((video) => {
+      if (!video) return null
+      const videoId = getVideoId(video.youtubeUrl)
+      if (!videoId) return null
 
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'VideoObject',
-      name: video.title,
-      description: video.description,
-      thumbnailUrl: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
-      uploadDate: new Date().toISOString(),
-      contentUrl: `https://www.youtube.com/watch?v=${videoId}`,
-      embedUrl: `https://www.youtube.com/embed/${videoId}`,
-      publisher: {
-        '@type': 'Organization',
-        name: 'פיזיותרפיה.פלוס',
-        logo: {
-          '@type': 'ImageObject',
-          url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'VideoObject',
+        name: video.title,
+        description: video.description,
+        thumbnailUrl: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+        uploadDate: new Date().toISOString(),
+        contentUrl: `https://www.youtube.com/watch?v=${videoId}`,
+        embedUrl: `https://www.youtube.com/embed/${videoId}`,
+        publisher: {
+          '@type': 'Organization',
+          name: 'פיזיותרפיה.פלוס',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
+          },
         },
-      },
-    }
-  }).filter(Boolean)
+      }
+    })
+    .filter((schema): schema is NonNullable<typeof schema> => schema !== null)
 
   const closeVideo = () => {
     setSelectedVideo(null)
@@ -163,6 +166,7 @@ export default function VideosSection() {
             {/* Videos Section - First video (most prominent): Recommendations, Second video: Clinic */}
             <div className="grid grid-cols-1 gap-8">
               {displayVideos.map((video, index) => {
+                if (!video) return null
                 const videoId = getVideoId(video.youtubeUrl)
                 const hasValidVideoId = videoId && videoId !== 'PLACEHOLDER' && !video.youtubeUrl.includes('PLACEHOLDER')
                 const thumbnailUrl = hasValidVideoId

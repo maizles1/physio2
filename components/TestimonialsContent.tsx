@@ -45,12 +45,16 @@ function getReviews(): ReviewsResponse {
 
 
 function getInitials(name: string): string {
+  if (!name || typeof name !== 'string') {
+    return '??'
+  }
   return name
     .split(' ')
+    .filter(n => n.length > 0)
     .map(n => n.charAt(0))
     .join('')
     .toUpperCase()
-    .slice(0, 2)
+    .slice(0, 2) || '??'
 }
 
 export default function TestimonialsContent() {
