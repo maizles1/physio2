@@ -226,42 +226,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* About Andrey Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ color: '#2A3080' }}>נעים להכיר, אנדריי מייזלס</h2>
-            </div>
-            
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 md:p-12 shadow-lg border border-blue-100">
-              <div className="prose prose-lg max-w-none">
-                <p className="text-lg text-gray-800 leading-relaxed mb-6">
-                  כמי שמחפש <strong>פיזיותרפיסט פרטי באשדוד</strong>, חשוב שתדע שאתה מפקיד את הגוף שלך בידיים מנוסות ומקצועיות. 
-                  שמי אנדריי מייזלס, פיזיותרפיסט מוסמך בעל תואר שני (M.Sc) בפיזיותרפיה.
-                </p>
-                
-                <p className="text-lg text-gray-800 leading-relaxed mb-6">
-                  את הניסיון הקליני והמעשי שלי צברתי במקומות התובעניים ביותר: שימשתי כפיזיותרפיסט של נבחרת ישראל בג&apos;ודו, 
-                  שם למדתי לטפל בספורטאי עלית תחת עומס קיצוני, וכפיזיותרפיסט של יחידת העילית סיירת חרוב, 
-                  שם התמודדתי עם פציעות מורכבות בשטח.
-                </p>
-                
-                <p className="text-lg text-gray-800 leading-relaxed mb-6">
-                  כיום, אני מביא את הסטנדרט המקצועי הזה אליכם לקליניקה. אני מעניק שירותי <strong>פיזיותרפיה פרטית באשדוד</strong>, 
-                  ומתמחה בשיקום ספורט ובטיפול במגוון כאבים אורטופדיים – מכאבי גב וצוואר ועד שיקום לאחר ניתוח.
-                </p>
-                
-                <p className="text-lg text-gray-800 leading-relaxed mb-0">
-                  אני מאמין שכל מטופל שמגיע אליי לקליניקה ראוי לאותו יחס, דיוק ומקצועיות שמקבלים לוחמים וספורטאים אולימפיים. 
-                  המטרה שלי היא לא רק להעביר את הכאב, אלא להחזיר אתכם לתפקוד מלא, חזק ובריא יותר.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }
