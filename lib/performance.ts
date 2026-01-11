@@ -46,13 +46,12 @@ export function initWebVitalsTracking() {
   }
 
   // Only load web-vitals in browser
-  import('web-vitals').then(({ onCLS, onFID, onFCP, onLCP, onTTFB, onINP }) => {
+  import('web-vitals').then(({ onCLS, onFCP, onLCP, onTTFB, onINP }) => {
     onCLS(trackWebVitals)
-    onFID(trackWebVitals)
     onFCP(trackWebVitals)
     onLCP(trackWebVitals)
     onTTFB(trackWebVitals)
-    onINP(trackWebVitals)
+    onINP(trackWebVitals) // onINP replaces onFID in web-vitals v3+
   }).catch((error) => {
     console.warn('Failed to load web-vitals:', error)
   })

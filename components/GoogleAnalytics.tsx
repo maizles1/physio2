@@ -93,16 +93,17 @@ export const gtag = {
       items: items,
     })
   },
+}
 
 // Extend Window interface
 declare global {
   interface Window {
-    gtag: (
+    gtag?: (
       command: 'config' | 'event' | 'js' | 'set',
       targetId: string | Date,
       config?: Record<string, unknown>
     ) => void
-    dataLayer: unknown[]
+    dataLayer?: unknown[]
   }
 }
 

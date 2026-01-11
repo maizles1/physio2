@@ -1,14 +1,9 @@
-import Link from 'next/link'
-import { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'מצב לא מקוון - פיזיותרפיה.פלוס',
-  description: 'אין חיבור לאינטרנט. אנא בדוק את החיבור שלך ונסה שוב.',
-  robots: {
-    index: false,
-    follow: false,
-  },
-}
+import Link from 'next/link'
+
+// Note: Metadata cannot be exported from Client Components
+// If needed, move metadata to layout.tsx
 
 export default function OfflinePage() {
   return (

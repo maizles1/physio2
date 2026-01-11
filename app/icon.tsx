@@ -1,16 +1,32 @@
-import { MetadataRoute } from 'next'
+import { ImageResponse } from 'next/og'
 
-export default function icon(): MetadataRoute.Icons {
-  return {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/images/logo/clinic-logo.png', sizes: '32x32', type: 'image/png' },
-      { url: '/images/logo/clinic-logo.png', sizes: '96x96', type: 'image/png' },
-      { url: '/images/logo/clinic-logo.png', sizes: '192x192', type: 'image/png' },
-      { url: '/images/logo/clinic-logo.png', sizes: '512x512', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/images/logo/clinic-logo.png', sizes: '180x180', type: 'image/png' },
-    ],
-  }
+export const size = {
+  width: 32,
+  height: 32,
+}
+export const contentType = 'image/png'
+
+export default function Icon() {
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          fontSize: 24,
+          background: 'linear-gradient(to bottom right, #2A3080, #2080C0, #40C0F0)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
+          borderRadius: '8px',
+        }}
+      >
+        פ+
+      </div>
+    ),
+    {
+      ...size,
+    }
+  )
 }
