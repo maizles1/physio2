@@ -3,14 +3,17 @@ import { Suspense } from 'react'
 import LeaveReviewButton from '@/components/LeaveReviewButton'
 import TestimonialsContent from '@/components/TestimonialsContent'
 import ThankYouMessage from '@/components/ThankYouMessage'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'המלצות מטופלים - המלצות על פיזיותרפיה.פלוס',
-  description: 'קראו המלצות של מטופלים על השירותים והטיפול במכון פיזיותרפיה.פלוס. חוות דעת אמיתיות ממטופלים מרוצים.',
+  description: 'קראו המלצות אמיתיות ממטופלים על הטיפול בפיזיותרפיה.פלוס באשדוד. חוות דעת מפורטות על שירותי הפיזיותרפיה והתוצאות.',
   openGraph: {
     title: 'המלצות מטופלים - פיזיותרפיה.פלוס',
-    description: 'חוות דעת והמלצות של מטופלים על הטיפול בקליניקה',
+    description: 'חוות דעת והמלצות אמיתיות של מטופלים על הטיפול בקליניקה. דירוג 5 כוכבים.',
     url: 'https://physio-plus.co.il/testimonials',
+    type: 'website',
+    locale: 'he_IL',
     images: [
       {
         url: 'https://physio-plus.co.il/images/og/testimonials.jpg',
@@ -19,6 +22,12 @@ export const metadata: Metadata = {
         alt: 'המלצות מטופלים - פיזיותרפיה.פלוס',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'המלצות מטופלים - פיזיותרפיה.פלוס',
+    description: 'חוות דעת והמלצות אמיתיות של מטופלים על הטיפול בקליניקה',
+    images: ['https://physio-plus.co.il/images/og/testimonials.jpg'],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/testimonials',
@@ -41,6 +50,7 @@ export default function TestimonialsPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-6xl mx-auto">
+            <Breadcrumbs items={[{ label: 'דף בית', href: '/' }, { label: 'המלצות מטופלים', href: '/testimonials' }]} />
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">המלצות מטופלים</h1>
             <p className="text-lg sm:text-xl text-white mb-6">קראו מה אומרים המטופלים שלנו על השירותים והטיפול בקליניקה</p>
             

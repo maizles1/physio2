@@ -45,7 +45,7 @@ export default function ImageCarousel() {
                   <div className="relative w-full h-[400px] sm:h-[500px] md:h-[550px] flex items-center justify-center bg-gray-200">
                     <Image
                       src={src}
-                      alt={`תמונת קליניקה ${index + 1}`}
+                      alt={`תמונת קליניקת פיזיותרפיה.פלוס במרכז כלניות אשדוד - תמונה ${index + 1} מתוך ${images.length}`}
                       fill
                       className="object-contain"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"

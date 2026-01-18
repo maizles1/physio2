@@ -5,7 +5,7 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'שירותי פיזיותרפיה - טיפול בכאבי גב, כתף, צוואר וברך | פיזיותרפיה.פלוס',
-  description: 'מגוון רחב של שירותי פיזיותרפיה מקצועיים: טיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי וטיפול במפרק הלסת. מכון פיזיותרפיה פרטי באשדוד.',
+  description: 'שירותי פיזיותרפיה מקצועיים באשדוד: טיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי וטיפול במפרק הלסת. מכון פיזיותרפיה פרטי.',
   keywords: [
     'טיפול בכאבי גב',
     'טיפול בכאבי כתף',
@@ -33,8 +33,10 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
-    description: 'טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
+    description: 'טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי. מכון פיזיותרפיה פרטי באשדוד.',
     url: 'https://physio-plus.co.il/services',
+    type: 'website',
+    locale: 'he_IL',
     images: [
       {
         url: 'https://physio-plus.co.il/images/og/services.jpg',
@@ -43,6 +45,12 @@ export const metadata: Metadata = {
         alt: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
+    description: 'טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
+    images: ['https://physio-plus.co.il/images/og/services.jpg'],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/services',
@@ -210,26 +218,78 @@ const services = [
 ]
 
 export default function ServicesPage() {
-  const serviceSchemas = services.map((service) => ({
+  // Enhanced MedicalProcedure schemas with more details
+  const serviceSchemas = services.map((service) => {
+    const schema: any = {
+      '@context': 'https://schema.org',
+      '@type': 'MedicalProcedure',
+      name: service.title,
+      description: service.description,
+      procedureType: service.title,
+      medicalSpecialty: {
+        '@type': 'MedicalSpecialty',
+        name: 'Physical Therapy',
+      },
+      provider: {
+        '@type': 'MedicalBusiness',
+        name: 'פיזיותרפיה.פלוס',
+        url: 'https://physio-plus.co.il',
+      },
+      url: `https://physio-plus.co.il/services#${service.id}`,
+    }
+
+    // Add treatment duration (average 45-60 minutes per session)
+    schema.duration = 'PT45M'
+    
+    // Add what the treatment addresses based on service details
+    if (service.details && service.details.length > 0) {
+      schema.followup = service.details.join(', ')
+    }
+
+    // Add specific conditions treated based on service ID
+    const conditionMap: Record<string, string[]> = {
+      'back-pain': ['כאבי גב תחתון', 'כאבי גב עליון', 'דיסק בולט', 'פריצת דיסק', 'מתיחות שרירים בגב'],
+      'shoulder-pain': ['כאבי כתף', 'דלקות גידים', 'פגיעות במסובב הכתף', 'נקעים בכתף'],
+      'neck-pain': ['כאבי צוואר', 'בעיות מפרק הצוואר', 'כאבי ראש הקשורים לצוואר'],
+      'knee-pain': ['כאבי ברך', 'בעיות מניסקוס', 'דלקות בגידים', 'בעיות רצועות הברך'],
+      'post-surgery': ['שיקום לאחר ניתוחי ברך', 'שיקום לאחר ניתוחי כתף', 'שיקום לאחר ניתוחי עמוד שדרה', 'שיקום לאחר שברים'],
+      'vestibular': ['ורטיגו', 'סחרחורות', 'בעיות שיווי משקל', 'BPPV'],
+      'tmj': ['כאבי לסת', 'נעילת לסת', 'בעיות TMJ', 'קשיי לעיסה'],
+      'sports-teams': ['פציעות ספורט', 'מניעת פציעות', 'שיקום ספורטאים'],
+      'home-visits': ['שיקום בבית', 'טיפול בקשישים', 'שיקום לאחר ניתוחים בבית'],
+    }
+    
+    if (conditionMap[service.id]) {
+      schema.condition = conditionMap[service.id]
+    }
+
+    return schema
+  })
+
+  // ItemList schema for all services
+  const itemListSchema = {
     '@context': 'https://schema.org',
-    '@type': 'MedicalProcedure',
-    name: service.title,
-    description: service.description,
-    procedureType: service.title,
-    medicalSpecialty: {
-      '@type': 'MedicalSpecialty',
-      name: 'Physical Therapy',
-    },
-    provider: {
-      '@type': 'MedicalBusiness',
-      name: 'פיזיותרפיה.פלוס',
-      url: 'https://physio-plus.co.il',
-    },
-    url: `https://physio-plus.co.il/services#${service.id}`,
-  }))
+    '@type': 'ItemList',
+    name: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
+    description: 'רשימת כל שירותי הפיזיותרפיה המוצעים בקליניקה',
+    itemListElement: services.map((service, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'MedicalProcedure',
+        name: service.title,
+        description: service.description,
+        url: `https://physio-plus.co.il/services#${service.id}`,
+      },
+    })),
+  }
 
   return (
     <div className="bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
       {serviceSchemas.map((schema, index) => (
         <script
           key={index}
@@ -260,7 +320,7 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4">
           <div className="space-y-16">
             {services.map((service, index) => (
-              <div
+              <article
                 key={service.id}
                 id={service.id}
                 className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 items-center`}
@@ -269,30 +329,134 @@ export default function ServicesPage() {
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ color: '#2A3080' }}>
                     {service.title}
                   </h2>
-                  <p className="text-lg sm:text-xl text-gray-700 mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
-                  <ul className="space-y-3 mb-6">
-                    {service.details.map((detail, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <svg className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: '#2080C0' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span className="text-lg text-gray-700">{detail}</span>
+                  
+                  {/* Summary */}
+                  <div className="mb-6 p-4 bg-blue-50 rounded-lg border-r-4" style={{ borderColor: '#2080C0' }}>
+                    <p className="text-lg text-gray-700 leading-relaxed">
+                      <strong>סיכום:</strong> {service.description}
+                    </p>
+                  </div>
+
+                  {/* מה כולל הטיפול? */}
+                  <h3 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#2A3080' }}>
+                    מה כולל הטיפול?
+                  </h3>
+                  <ol className="space-y-3 mb-6 list-decimal list-inside">
+                    {service.details.slice(0, 4).map((detail, idx) => (
+                      <li key={idx} className="text-lg text-gray-700">
+                        {detail}
                       </li>
                     ))}
+                  </ol>
+
+                  {/* למי מתאים? */}
+                  <h3 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#2A3080' }}>
+                    למי מתאים?
+                  </h3>
+                  <ul className="space-y-2 mb-6">
+                    {(() => {
+                      const targetAudience: Record<string, string[]> = {
+                        'back-pain': [
+                          'כאבי גב תחתון/עליון חריפים או כרוניים',
+                          'דיסק בולט או פריצת דיסק',
+                          'כאבים מעבודה סטטית או עבודה פיזית',
+                          'כאבי גב לאחר פציעה או תאונה',
+                        ],
+                        'shoulder-pain': [
+                          'כאבי כתף אקוטיים או כרוניים',
+                          'דלקות גידים בכתף',
+                          'פגיעות במסובב הכתף',
+                          'כאבי כתף לאחר פציעה או ניתוח',
+                        ],
+                        'neck-pain': [
+                          'כאבי צוואר ושרירים',
+                          'כאבי ראש הקשורים לצוואר',
+                          'בעיות יציבה המשפיעות על הצוואר',
+                          'כאבי צוואר מעבודה ממושכת מול מחשב',
+                        ],
+                        'knee-pain': [
+                          'כאבי ברך אקוטיים או כרוניים',
+                          'בעיות מניסקוס',
+                          'דלקות בגידים',
+                          'כאבי ברך לאחר פעילות ספורטיבית',
+                        ],
+                        'post-surgery': [
+                          'שיקום לאחר ניתוחי ברך, כתף או עמוד שדרה',
+                          'שיקום לאחר שברים',
+                          'החזרה לפעילות לאחר ניתוח',
+                          'טיפול בצלקות ובצקות לאחר ניתוח',
+                        ],
+                        'vestibular': [
+                          'ורטיגו וסחרחורות',
+                          'בעיות שיווי משקל',
+                          'BPPV (Benign Paroxysmal Positional Vertigo)',
+                          'סחרחורות לאחר פציעת ראש',
+                        ],
+                        'tmj': [
+                          'כאבי לסת ומפרק הלסת',
+                          'נעילת לסת והגבלת פתיחה',
+                          'קשיי לעיסה ובליעה',
+                          'כאבי פנים וצוואר קשורים ללסת',
+                        ],
+                        'sports-teams': [
+                          'ספורטאים מקצועיים',
+                          'קבוצות ספורט',
+                          'פציעות ספורט',
+                          'מניעת פציעות ספורט',
+                        ],
+                        'home-visits': [
+                          'קשישים ומתקשים להגיע לקליניקה',
+                          'שיקום לאחר ניתוחים בבית',
+                          'פציעות הדורשות טיפול בבית',
+                          'מטופלים עם מוגבלות תנועה',
+                        ],
+                      }
+                      return (targetAudience[service.id] || service.details.slice(0, 3)).map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <svg className="w-5 h-5 flex-shrink-0 mt-1" style={{ color: '#2080C0' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className="text-lg text-gray-700">{item}</span>
+                        </li>
+                      ))
+                    })()}
                   </ul>
+
+                  {/* תוצאות צפויות */}
+                  <h3 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#2A3080' }}>
+                    תוצאות צפויות
+                  </h3>
+                  <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                    {(() => {
+                      const expectedResults: Record<string, string> = {
+                        'back-pain': 'רוב המטופלים חווים הקלה משמעותית כבר לאחר 3-5 טיפולים. תהליך השיקום המלא נמשך בדרך כלל 6-12 שבועות, תלוי בחומרת הבעיה.',
+                        'shoulder-pain': 'שיפור בטווח התנועה והפחתת כאב כבר לאחר מספר טיפולים. תהליך השיקום המלא נמשך בדרך כלל 8-16 שבועות.',
+                        'neck-pain': 'הקלה בכאבים ושיפור בתנועתיות הצוואר כבר לאחר 4-6 טיפולים. תהליך השיקום המלא נמשך בדרך כלל 6-10 שבועות.',
+                        'knee-pain': 'שיפור ביציבות הברך והפחתת כאב כבר לאחר 4-6 טיפולים. תהליך השיקום המלא נמשך בדרך כלל 8-14 שבועות.',
+                        'post-surgery': 'החזרה הדרגתית לפעילות יומיומית תוך 6-12 שבועות. תהליך השיקום המלא נמשך בדרך כלל 12-24 שבועות, תלוי בסוג הניתוח.',
+                        'vestibular': 'שיפור משמעותי בסחרחורות ושיווי משקל כבר לאחר 4-8 טיפולים. תהליך השיקום המלא נמשך בדרך כלל 6-12 שבועות.',
+                        'tmj': 'הקלה בכאבי לסת ושיפור בתפקוד הלסת כבר לאחר 4-6 טיפולים. תהליך השיקום המלא נמשך בדרך כלל 6-10 שבועות.',
+                        'sports-teams': 'שיפור בביצועים ומניעת פציעות. זמן השיקום משתנה בהתאם לסוג הפציעה ורמת הספורטאי.',
+                        'home-visits': 'שיקום יעיל בנוחות הבית. זמן השיקום משתנה בהתאם לבעיה ולצרכי המטופל.',
+                      }
+                      return expectedResults[service.id] || 'תוצאות משתנות בהתאם לבעיה ולצרכי המטופל. לאחר הערכה ראשונית, נקבעת תוכנית טיפול מותאמת אישית.'
+                    })()}
+                  </p>
+
+                  {/* CTA */}
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Link
                       href="/contact"
                       className="inline-block text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl text-center"
                       style={{ background: 'linear-gradient(to left, #2080C0, #2A3080)' }}
+                      aria-label={`קבע תור לטיפול ב${service.title}`}
                     >
-                      צור קשר
+                      קבע תור לטיפול
                     </Link>
                     <Link
                       href={service.id === 'neck-pain' ? '/blog/neck-pain-complete-guide' : '/blog'}
                       className="inline-block text-[#2080C0] border-2 border-[#2080C0] font-bold py-3 px-8 rounded-lg transition-all duration-200 hover:bg-[#2080C0] hover:text-white text-center"
+                      aria-label={`קרא מאמרים על ${service.title}`}
                     >
                       {service.id === 'neck-pain' ? 'קרא את המדריך המלא' : 'קרא מאמרים'}
                     </Link>
@@ -303,7 +467,7 @@ export default function ServicesPage() {
                     <ServiceImage
                       src={service.imagePath}
                       fallbackSrc={service.fallbackImagePath}
-                      alt={service.title}
+                      alt={`${service.title} - טיפול פיזיותרפי מקצועי בקליניקת פיזיותרפיה.פלוס באשדוד`}
                       className="object-cover w-full h-full"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       priority={index < 2}
@@ -311,7 +475,7 @@ export default function ServicesPage() {
                     <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-10 pointer-events-none`} aria-hidden="true"></div>
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>

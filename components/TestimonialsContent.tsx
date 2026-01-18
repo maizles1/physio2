@@ -97,12 +97,63 @@ export default function TestimonialsContent() {
     })),
   }
 
+  // Individual Review schemas for each review
+  const individualReviewSchemas = allReviews.map((review) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    author: {
+      '@type': 'Person',
+      name: review.authorName,
+    },
+    datePublished: review.date,
+    reviewBody: review.text,
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: review.rating,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    itemReviewed: {
+      '@type': 'MedicalBusiness',
+      name: 'פיזיותרפיה.פלוס',
+      url: 'https://physio-plus.co.il',
+    },
+  }))
+
+  // AggregateRating schema
+  const aggregateRatingSchema = allReviews.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'AggregateRating',
+    ratingValue: reviewsData.averageRating || 5,
+    reviewCount: allReviews.length,
+    bestRating: 5,
+    worstRating: 1,
+    itemReviewed: {
+      '@type': 'MedicalBusiness',
+      name: 'פיזיותרפיה.פלוס',
+      url: 'https://physio-plus.co.il',
+    },
+  } : null
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
+      {aggregateRatingSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingSchema) }}
+        />
+      )}
+      {individualReviewSchemas.map((schema, index) => (
+        <script
+          key={`review-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
 
       {/* Testimonials */}
       <section className="py-16">
@@ -155,7 +206,7 @@ export default function TestimonialsContent() {
                       {review.profilePhotoUrl ? (
                         <Image
                           src={review.profilePhotoUrl}
-                          alt={review.authorName}
+                          alt={`תמונת פרופיל של ${review.authorName}, מטופל בקליניקת פיזיותרפיה.פלוס`}
                           width={64}
                           height={64}
                           className="w-16 h-16 rounded-full object-cover"

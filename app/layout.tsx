@@ -258,6 +258,7 @@ const structuredData = {
     { '@type': 'PaymentMethod', name: 'ביטוח משלים כללית' },
     { '@type': 'PaymentMethod', name: 'קופת חולים מאוחדת' },
     { '@type': 'PaymentMethod', name: 'משרד הביטחון' },
+    { '@type': 'PaymentMethod', name: 'ביטוחים פרטיים' },
   ],
   aggregateRating: {
     '@type': 'AggregateRating',
@@ -274,6 +275,111 @@ const structuredData = {
   // Google Business Profile ID (if available)
   // Add this when you have the Google Business Profile ID
   // googleBusinessProfileId: process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_PROFILE_ID || '',
+}
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://physio-plus.co.il/#localbusiness',
+  name: 'פיזיותרפיה.פלוס',
+  alternateName: 'Physio Plus',
+  description: 'פיזיותרפיה פרטית באשדוד - קליניקת פיזיותרפיה מקצועית. פיזיותרפיסט פרטי באשדוד, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו.',
+  url: 'https://physio-plus.co.il',
+  logo: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
+  image: 'https://physio-plus.co.il/images/andrey-meizels.JPG',
+  telephone: '+972-50-883-8982',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'מרכז כלניות',
+    addressLocality: 'אשדוד',
+    addressRegion: 'אשדוד',
+    addressCountry: 'IL',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: '31.783106159195388',
+    longitude: '34.65489203389065',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+      opens: '08:00',
+      closes: '20:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Friday',
+      opens: '08:00',
+      closes: '14:00',
+    },
+  ],
+  priceRange: '₪₪',
+  paymentAccepted: ['ביטוח משלים כללית', 'קופת חולים מאוחדת', 'משרד הביטחון', 'ביטוחים פרטיים'],
+  currenciesAccepted: 'ILS',
+}
+
+const professionalServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': 'https://physio-plus.co.il/#professionalservice',
+  name: 'פיזיותרפיה.פלוס - שירותי פיזיותרפיה מקצועיים',
+  description: 'שירותי פיזיותרפיה מקצועיים באשדוד: טיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי וטיפול במפרק הלסת.',
+  url: 'https://physio-plus.co.il',
+  provider: {
+    '@type': 'MedicalBusiness',
+    name: 'פיזיותרפיה.פלוס',
+    url: 'https://physio-plus.co.il',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'אשדוד',
+  },
+  serviceType: [
+    'Physical Therapy',
+    'Orthopedic Physical Therapy',
+    'Sports Medicine',
+    'Vestibular Rehabilitation',
+    'Post-Surgical Rehabilitation',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'שירותי פיזיותרפיה',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'טיפול בכאבי גב',
+          description: 'טיפול מקצועי ומקיף בכאבי גב אקוטיים וכרוניים',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'טיפול בכאבי כתף',
+          description: 'שיקום וטיפול בכאבי כתף ובעיות מפרק הכתף',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'שיקום לאחר ניתוחים',
+          description: 'תוכניות שיקום מותאמות אישית לאחר ניתוחים אורטופדיים',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'שיקום וסטיבולרי',
+          description: 'טיפול מקצועי בסחרחורות, ורטיגו ובעיות שיווי משקל',
+        },
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
@@ -322,6 +428,14 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
         />
         <script
           type="application/ld+json"

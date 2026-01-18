@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'שאלות נפוצות - FAQ | פיזיותרפיה.פלוס',
-  description: 'תשובות לשאלות הנפוצות ביותר על מכון פיזיותרפיה.פלוס, הטיפולים, ביטוחים, תהליך הטיפול ועוד. מידע מקיף על שירותי הפיזיותרפיה.',
+  description: 'תשובות לשאלות הנפוצות על פיזיותרפיה.פלוס: ביטוחים, תהליך טיפול, החזרים, משך טיפול ועוד. מידע מקיף על שירותי הפיזיותרפיה באשדוד.',
   keywords: [
     'שאלות נפוצות פיזיותרפיה',
     'FAQ פיזיותרפיה',
@@ -11,8 +11,10 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'שאלות נפוצות - פיזיותרפיה.פלוס',
-    description: 'תשובות לשאלות הנפוצות ביותר על הטיפולים והשירותים',
+    description: 'תשובות לשאלות הנפוצות ביותר על הטיפולים, ביטוחים ותהליך הטיפול. מידע מקיף על שירותי הפיזיותרפיה.',
     url: 'https://physio-plus.co.il/faq',
+    type: 'website',
+    locale: 'he_IL',
     images: [
       {
         url: 'https://physio-plus.co.il/images/og/faq.jpg',
@@ -21,6 +23,12 @@ export const metadata: Metadata = {
         alt: 'שאלות נפוצות - פיזיותרפיה.פלוס',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'שאלות נפוצות - פיזיותרפיה.פלוס',
+    description: 'תשובות לשאלות הנפוצות ביותר על הטיפולים והשירותים',
+    images: ['https://physio-plus.co.il/images/og/faq.jpg'],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/faq',

@@ -4,12 +4,14 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'אודות - פיזיותרפיה.פלוס',
-  description: 'למידע על מכון פיזיותרפיה.פלוס ואנדריי מייזלס. פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו, עם ניסיון עשיר בטיפול ושיקום. מכון פיזיותרפיה פרטי באשדוד.',
+  description: 'אנדריי מייזלס - פיזיותרפיסט מקצועי בעל תואר שני, לשעבר נבחרת ישראל בג\'ודו. מכון פיזיותרפיה פרטי באשדוד עם ניסיון עשיר.',
   authors: [{ name: 'אנדריי מייזלס' }],
   openGraph: {
     title: 'אודות פיזיותרפיה.פלוס - אנדריי מייזלס',
-    description: 'אנדריי מייזלס, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו, מנהל מכון פיזיותרפיה פרטי באשדוד. ניסיון עשיר בטיפול ושיקום.',
+    description: 'אנדריי מייזלס - פיזיותרפיסט מקצועי בעל תואר שני, לשעבר נבחרת ישראל בג\'ודו. מנהל מכון פיזיותרפיה פרטי באשדוד.',
     url: 'https://physio-plus.co.il/about',
+    type: 'website',
+    locale: 'he_IL',
     images: [
       {
         url: 'https://physio-plus.co.il/images/og/about.jpg',
@@ -18,6 +20,12 @@ export const metadata: Metadata = {
         alt: 'אודות פיזיותרפיה.פלוס - אנדריי מייזלס',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'אודות פיזיותרפיה.פלוס - אנדריי מייזלס',
+    description: 'אנדריי מייזלס - פיזיותרפיסט מקצועי בעל תואר שני, לשעבר נבחרת ישראל בג\'ודו.',
+    images: ['https://physio-plus.co.il/images/og/about.jpg'],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/about',
@@ -29,6 +37,25 @@ export const metadata: Metadata = {
 }
 
 export default function AboutPage() {
+  // EducationalOccupationalCredential schema for Master's degree
+  const credentialSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOccupationalCredential',
+    credentialCategory: 'degree',
+    educationalLevel: 'Master\'s Degree',
+    name: 'תואר שני בפיזיותרפיה',
+    description: 'תואר שני (M.Sc) בפיזיותרפיה',
+    recognizedBy: {
+      '@type': 'Organization',
+      name: 'אוניברסיטה',
+    },
+    about: {
+      '@type': 'EducationalOccupationalProgram',
+      programType: 'Graduate Program',
+      occupationalCategory: 'Physical Therapy',
+    },
+  }
+
   const personSchema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -49,7 +76,15 @@ export default function AboutPage() {
       'Vestibular Rehabilitation',
       'Sports Medicine',
       'Pain Management',
+      'Post-Surgical Rehabilitation',
+      'TMJ Treatment',
     ],
+    hasCredential: {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'degree',
+      educationalLevel: 'Master\'s Degree',
+      name: 'תואר שני בפיזיותרפיה',
+    },
     alumniOf: {
       '@type': 'EducationalOrganization',
       name: 'אוניברסיטה (תואר שני בפיזיותרפיה)',
@@ -59,10 +94,28 @@ export default function AboutPage() {
       name: 'נבחרת ישראל בג\'ודו',
       roleName: 'פיזיותרפיסט',
     },
+    hasOccupation: {
+      '@type': 'Occupation',
+      occupationLocation: {
+        '@type': 'City',
+        name: 'אשדוד',
+      },
+      skills: [
+        'טיפול בכאבי גב',
+        'טיפול בכאבי כתף',
+        'שיקום לאחר ניתוחים',
+        'שיקום וסטיבולרי',
+        'טיפול במפרק הלסת',
+      ],
+    },
   }
 
   return (
     <div className="bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(credentialSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}

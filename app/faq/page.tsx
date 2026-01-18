@@ -6,23 +6,23 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 const faqs = [
   {
     question: 'איך אני יכול ליצור קשר?',
-    answer: 'ניתן ליצור קשר בטלפון 050-883-8982, דרך טופס יצירת קשר באתר או דרך WhatsApp. אנו זמינים בימים ראשון-חמישי בין השעות 08:00-20:00, ובימי שישי בין 08:00-14:00.',
+    answer: 'ניתן ליצור קשר בטלפון 050-883-8982, דרך <a href="/contact" className="text-blue-600 hover:underline">טופס יצירת קשר באתר</a> או דרך WhatsApp. אנו זמינים בימים ראשון-חמישי בין השעות 08:00-20:00, ובימי שישי בין 08:00-14:00.',
   },
   {
     question: 'כיצד אפשר לקבל החזרים?',
-    answer: 'החזרים מכללית, ועובדים עם מבוטחי מאוחדת שיא. שאר הקופות באופן פרטי. החזרים מהביטוחים הפרטיים, תלוי ביטוח של המטופל.',
+    answer: 'החזרים מכללית, ועובדים עם מבוטחי מאוחדת שיא. שאר הקופות באופן פרטי. החזרים מהביטוחים הפרטיים תלויים בפוליסה של המטופל. למידע נוסף על <a href="/services" className="text-blue-600 hover:underline">השירותים שלנו</a>.',
   },
   {
     question: 'כמה זמן נמשך כל טיפול?',
-    answer: 'משך הטיפול משתנה בהתאם לסוג הטיפול ולצרכים האישיים של המטופל. בטיפול הראשון נערכת הערכה מקיפה שיכולה להימשך מעט יותר זמן.',
+    answer: 'משך הטיפול משתנה בהתאם לסוג הטיפול ולצרכים האישיים של המטופל. בדרך כלל, טיפול נמשך 45-60 דקות. בטיפול הראשון נערכת הערכה מקיפה שיכולה להימשך מעט יותר זמן.',
   },
   {
     question: 'מה להביא לטיפול הראשון?',
-    answer: 'לטיפול הראשון מומלץ להביא: הפניה מהרופא (אם קיימת), מסמכים רפואיים רלוונטיים (צילומים, בדיקות), בגדי ספורט נוחים, ולמלא מראש את הטפסים שנשלחו אליך באימייל.',
+    answer: 'לטיפול הראשון מומלץ להביא: הפניה מהרופא (אם קיימת), מסמכים רפואיים רלוונטיים (צילומים, בדיקות), בגדי ספורט נוחים. מומלץ למלא מראש את הטפסים שנשלחו אליך באימייל.',
   },
   {
     question: 'כמה טיפולים נדרשים?',
-    answer: 'מספר הטיפולים משתנה בהתאם לבעיה, חומרתה ולקצב ההתקדמות של המטופל. לאחר ההערכה הראשונית, נקבע תוכנית טיפול מותאמת אישית. בדרך כלל, תוכנית טיפול כוללת בין 6-12 מפגשים, תלוי בבעיה.',
+    answer: 'מספר הטיפולים משתנה בהתאם לבעיה, חומרתה ולקצב ההתקדמות של המטופל. לאחר ההערכה הראשונית, נקבעת תוכנית טיפול מותאמת אישית. בדרך כלל, תוכנית טיפול כוללת בין 6-12 מפגשים. למידע נוסף על <a href="/services" className="text-blue-600 hover:underline">תהליך הטיפול</a>.',
   },
   {
     question: 'מה ההבדל בין פיזיותרפיה לאימון כושר?',
@@ -30,15 +30,15 @@ const faqs = [
   },
   {
     question: 'האם הטיפול כואב?',
-    answer: 'הטיפול לא אמור להיות כואב. חלק מהטכניקות יכולות לגרום לאי נוחות קלה, אך לא לכאב משמעותי. אנו מתאימים את הטיפול לרמת הכאב והסבילות שלך. אם חווית כאב במהלך הטיפול, חשוב ליידע את המטפל.',
+    answer: 'הטיפול לא אמור להיות כואב. חלק מהטכניקות יכולות לגרום לאי נוחות קלה, אך לא לכאב משמעותי. אנו מתאימים את הטיפול לרמת הכאב והסבילות שלך. אם חווית כאב במהלך הטיפול, חשוב ליידע את המטפל מיד.',
   },
   {
     question: 'איך מתבצע תהליך הטיפול?',
-    answer: 'במפגש הראשון נערכת הערכה מקיפה של המצב הרפואי והפיזי של המטופל. לאחר מכן נקבעת תוכנית טיפול מותאמת אישית. הטיפולים הבאים כוללים תרגילים, טכניקות טיפול שונות והדרכה לביצוע תרגילים בבית.',
+    answer: 'במפגש הראשון נערכת הערכה מקיפה של המצב הרפואי והפיזי של המטופל. לאחר מכן נקבעת תוכנית טיפול מותאמת אישית. הטיפולים הבאים כוללים תרגילים, טכניקות טיפול שונות והדרכה לביצוע תרגילים בבית. למידע נוסף, ראה את <a href="/blog" className="text-blue-600 hover:underline">המאמרים שלנו</a>.',
   },
   {
     question: 'איפה נמצאת הקליניקה?',
-    answer: 'הקליניקה ממוקמת במרכז כלניות, אשדוד. יש חניה נוחה בסמוך לקליניקה. המיקום מרכזי ונגיש. ניתן לקבל הוראות הגעה מפורטות בטלפון 050-883-8982.',
+    answer: 'הקליניקה ממוקמת במרכז כלניות, אשדוד. יש חניה נוחה בסמוך לקליניקה והמיקום מרכזי ונגיש. ניתן לקבל הוראות הגעה מפורטות בטלפון 050-883-8982 או דרך <a href="/contact" className="text-blue-600 hover:underline">טופס יצירת קשר</a>.',
   },
   {
     question: 'איך אוכל לעקוב אחר ההתקדמות שלי?',
@@ -49,8 +49,26 @@ const faqs = [
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
+  // FAQPage schema with Question entities
+  const faqPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  }
+
   return (
     <div className="bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
+      />
       {/* Hero Section */}
       <section className="relative text-white overflow-hidden py-12 sm:py-16" style={{ background: 'linear-gradient(to bottom right, #2A3080, #2080C0, #40C0F0)' }}>
         {/* Background Pattern */}
@@ -82,10 +100,12 @@ export default function FAQPage() {
                   <button
                     onClick={() => setOpenIndex(openIndex === index ? null : index)}
                     className="w-full px-6 py-4 text-right flex items-center justify-between hover:bg-gray-50 transition-colors"
+                    aria-expanded={openIndex === index}
+                    aria-controls={`faq-answer-${index}`}
                   >
-                    <span className="text-lg font-bold text-gray-900 flex-1">
+                    <h3 className="text-lg font-bold text-gray-900 flex-1">
                       {faq.question}
-                    </span>
+                    </h3>
                     <svg
                       className={`w-6 h-6 text-blue-600 flex-shrink-0 transition-transform ${
                         openIndex === index ? 'rotate-180' : ''
@@ -98,8 +118,11 @@ export default function FAQPage() {
                     </svg>
                   </button>
                   {openIndex === index && (
-                    <div className="px-6 pb-4">
-                      <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                    <div id={`faq-answer-${index}`} className="px-6 pb-4">
+                      <div 
+                        className="text-gray-700 leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: faq.answer }}
+                      />
                     </div>
                   )}
                 </div>

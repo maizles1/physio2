@@ -174,7 +174,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <div className="relative w-full h-64 sm:h-80 md:h-96">
                   <Image
                     src={post.image}
-                    alt={post.title}
+                    alt={`תמונה המלווה את המאמר "${post.title}" - מאמר על פיזיותרפיה מאת אנדריי מייזלס`}
                     fill
                     className="object-cover w-full h-full"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 896px"
@@ -199,6 +199,31 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               }}
               dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content) }}
             />
+            
+            {/* Related Services Links */}
+            <div className="mt-12 mb-8 p-6 bg-blue-50 rounded-xl border border-blue-200">
+              <h2 className="text-2xl font-bold mb-4" style={{ color: '#2A3080' }}>
+                שירותים רלוונטיים
+              </h2>
+              <p className="text-gray-700 mb-4">
+                למדנו על הנושא? נשמח לעזור לך עם טיפול מקצועי. ראה את <Link href="/services" className="text-blue-600 hover:underline font-medium">השירותים שלנו</Link> או <Link href="/faq" className="text-blue-600 hover:underline font-medium">קרא שאלות נפוצות</Link>.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/services"
+                  className="inline-block bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white font-medium py-2 px-6 rounded-lg transition-all duration-200"
+                >
+                  כל השירותים
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-block bg-blue-600 text-white hover:bg-blue-700 font-medium py-2 px-6 rounded-lg transition-all duration-200"
+                >
+                  קבע תור
+                </Link>
+              </div>
+            </div>
+
             <div className="mt-12 mb-8 text-center">
               <Link
                 href="/contact"
