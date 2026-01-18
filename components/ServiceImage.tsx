@@ -62,17 +62,19 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
   const handleError = () => {
     if (!hasError && imgSrc !== fallbackSrc) {
       if (process.env.NODE_ENV === 'development') {
-        console.warn(`Image load error: ${imgSrc}, switching to fallback: ${fallbackSrc}`)
+        console.warn(`Image load error: ${imgSrc}, not showing fallback`)
       }
       setHasError(true)
-      setImgSrc(fallbackSrc)
-      setIsLoading(true)
+      // Don't switch to fallback - just show placeholder
+      setIsLoading(false)
       setHasLoaded(false)
     } else if (hasError && imgSrc === fallbackSrc) {
-      // If fallback also fails, show placeholder but keep trying
+      // If fallback also fails, show placeholder
       if (process.env.NODE_ENV === 'development') {
         console.warn(`Both image and fallback failed for: ${alt}`)
       }
+      setIsLoading(false)
+      setHasLoaded(false)
     }
   }
 
@@ -107,6 +109,17 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
     }
   }, [isLoading, isSvg, hasLoaded])
 
+  // If image failed to load, show placeholder instead of fallback
+  if (hasError && imgSrc !== fallbackSrc) {
+    return (
+      <div className="relative w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+        <div className="text-gray-400 text-sm text-center px-4">
+          תמונה לא זמינה
+        </div>
+      </div>
+    )
+  }
+
   // For SVG, use regular img tag as Next.js Image can have issues with SVG
   if (isSvg) {
     return (
@@ -131,18 +144,20 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
       {isLoading && !hasLoaded && (
         <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse" aria-hidden="true" />
       )}
-      <Image
-        src={imgSrc}
-        alt={alt}
-        fill
-        className={`${className || 'object-cover'} w-full h-full ${isLoading && !hasLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-        sizes={sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
-        priority={priority}
-        loading={priority ? undefined : 'lazy'}
-        onError={handleError}
-        onLoad={handleLoad}
-        onLoadingComplete={handleLoad}
-      />
+      {!hasError && (
+        <Image
+          src={imgSrc}
+          alt={alt}
+          fill
+          className={`${className || 'object-cover'} w-full h-full ${isLoading && !hasLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+          sizes={sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
+          priority={priority}
+          loading={priority ? undefined : 'lazy'}
+          onError={handleError}
+          onLoad={handleLoad}
+          onLoadingComplete={handleLoad}
+        />
+      )}
     </>
   )
 }

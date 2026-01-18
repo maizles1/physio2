@@ -466,7 +466,7 @@ export default function ServicesPage() {
                   <div className={`h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-xl shadow-xl overflow-hidden relative`}>
                     <ServiceImage
                       src={service.imagePath}
-                      fallbackSrc={service.fallbackImagePath}
+                      fallbackSrc={service.imagePath}
                       alt={`${service.title} - טיפול פיזיותרפי מקצועי בקליניקת פיזיותרפיה.פלוס באשדוד`}
                       className="object-cover w-full h-full"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
