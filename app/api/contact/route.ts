@@ -62,15 +62,24 @@ export async function POST(request: Request) {
     }
 
     // Prepare JSON payload for Web3Forms API
-    const payload = {
-      access_key: accessKey,
+    // Note: Web3Forms expects specific field names
+    const payload: Record<string, string> = {
+      access_key: accessKey.trim(),
       subject: subject || 'פנייה חדשה מהאתר',
-      from_name: name,
-      name: name,
-      email: email,
-      phone: phone || '',
-      message: message || '',
-      botcheck: '', // Honeypot field (Web3Forms requires it for spam protection)
+      from_name: name.trim(),
+      name: name.trim(),
+      email: email.trim(),
+      phone: (phone || '').trim(),
+      message: (message || '').trim(),
+      botcheck: '', // Honeypot field (Web3Forms requires it for spam protection) - must be empty string
+    }
+    
+    // Remove empty optional fields to avoid issues
+    if (!payload.phone) {
+      delete payload.phone
+    }
+    if (!payload.message) {
+      delete payload.message
     }
 
     if (isDevelopment) {
@@ -81,6 +90,13 @@ export async function POST(request: Request) {
         hasMessage: !!message,
         accessKeyLength: accessKey.length,
         accessKeyPreview: `${accessKey.substring(0, 8)}...`,
+        payloadKeys: Object.keys(payload),
+        payloadHasAccessKey: 'access_key' in payload,
+        accessKeyInPayload: payload.access_key ? `${payload.access_key.substring(0, 8)}...` : 'missing',
+      })
+      console.log('Full payload (without access_key value):', {
+        ...payload,
+        access_key: '***HIDDEN***',
       })
     }
 
@@ -93,6 +109,10 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify(payload),
     })
+    
+    if (isDevelopment) {
+      console.log('Web3Forms API response status:', response.status, response.statusText)
+    }
 
     // Get response as text first, then parse as JSON
     const responseText = await response.text()
@@ -126,6 +146,16 @@ export async function POST(request: Request) {
         success: data.success,
         message: data.message,
         hasError: !data.success,
+        fullResponse: data,
+      })
+    }
+    
+    // Log the full response in development for debugging
+    if (isDevelopment && !data.success) {
+      console.error('Web3Forms error details:', {
+        responseText,
+        parsedData: data,
+        status: response.status,
       })
     }
 
