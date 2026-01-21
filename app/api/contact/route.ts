@@ -37,16 +37,18 @@ export async function POST(request: Request) {
     }
 
     // Get Web3Forms access key from environment variable
-    const accessKey = process.env.WEB3FORMS_ACCESS_KEY
+    // Try WEB3FORMS_ACCESS_KEY first (new), then fallback to NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY (old) for backward compatibility
+    const accessKey = process.env.WEB3FORMS_ACCESS_KEY || process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
 
     if (!accessKey || accessKey === 'your_access_key_here' || accessKey.trim() === '') {
       const errorMessage = isDevelopment
-        ? 'Web3Forms access key לא מוגדר. אנא הגדר את WEB3FORMS_ACCESS_KEY ב-environment variables.'
+        ? 'Web3Forms access key לא מוגדר. אנא הגדר את WEB3FORMS_ACCESS_KEY (או NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY) ב-environment variables.'
         : 'שירות האימייל לא מוגדר. אנא פנה למנהל האתר.'
 
       if (isDevelopment) {
         console.error('Web3Forms access key missing:', {
-          hasAccessKey: !!accessKey,
+          hasWEB3FORMS_ACCESS_KEY: !!process.env.WEB3FORMS_ACCESS_KEY,
+          hasNEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: !!process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
           accessKeyValue: accessKey ? '***' : 'undefined',
         })
       }
