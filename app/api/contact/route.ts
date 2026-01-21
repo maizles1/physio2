@@ -38,9 +38,10 @@ export async function POST(request: Request) {
 
     // Get Web3Forms access key from environment variable
     // Try WEB3FORMS_ACCESS_KEY first (new), then fallback to NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY (old) for backward compatibility
-    const accessKey = process.env.WEB3FORMS_ACCESS_KEY || process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
+    const rawAccessKey = process.env.WEB3FORMS_ACCESS_KEY || process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
+    const accessKey = rawAccessKey ? rawAccessKey.trim() : ''
 
-    if (!accessKey || accessKey === 'your_access_key_here' || accessKey.trim() === '') {
+    if (!accessKey || accessKey === 'your_access_key_here' || accessKey === '') {
       const errorMessage = isDevelopment
         ? 'Web3Forms access key לא מוגדר. אנא הגדר את WEB3FORMS_ACCESS_KEY (או NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY) ב-environment variables.'
         : 'שירות האימייל לא מוגדר. אנא פנה למנהל האתר.'
@@ -49,7 +50,8 @@ export async function POST(request: Request) {
         console.error('Web3Forms access key missing:', {
           hasWEB3FORMS_ACCESS_KEY: !!process.env.WEB3FORMS_ACCESS_KEY,
           hasNEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: !!process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
-          accessKeyValue: accessKey ? '***' : 'undefined',
+          accessKeyLength: accessKey ? accessKey.length : 0,
+          accessKeyPreview: accessKey ? `${accessKey.substring(0, 8)}...` : 'undefined',
         })
       }
 
@@ -59,19 +61,17 @@ export async function POST(request: Request) {
       )
     }
 
-    // Prepare form data for Web3Forms
-    const formDataToSend = new FormData()
-    formDataToSend.append('access_key', accessKey)
-    formDataToSend.append('subject', subject || 'פנייה חדשה מהאתר')
-    formDataToSend.append('from_name', name)
-    formDataToSend.append('name', name)
-    formDataToSend.append('email', email)
-    formDataToSend.append('phone', phone || '')
-    formDataToSend.append('message', message || '')
-    
-    // Add honeypot field (Web3Forms requires it for spam protection)
-    // This field should be empty - bots will fill it
-    formDataToSend.append('botcheck', '')
+    // Prepare JSON payload for Web3Forms API
+    const payload = {
+      access_key: accessKey,
+      subject: subject || 'פנייה חדשה מהאתר',
+      from_name: name,
+      name: name,
+      email: email,
+      phone: phone || '',
+      message: message || '',
+      botcheck: '', // Honeypot field (Web3Forms requires it for spam protection)
+    }
 
     if (isDevelopment) {
       console.log('Sending request to Web3Forms API...', {
@@ -79,28 +79,32 @@ export async function POST(request: Request) {
         email,
         hasPhone: !!phone,
         hasMessage: !!message,
+        accessKeyLength: accessKey.length,
+        accessKeyPreview: `${accessKey.substring(0, 8)}...`,
       })
     }
 
-    // Call Web3Forms API
+    // Call Web3Forms API with JSON format
     const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: {
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: formDataToSend,
+      body: JSON.stringify(payload),
     })
 
-    if (isDevelopment) {
-      console.log('Web3Forms response status:', response.status)
-    }
-
-    // Get response text first to see what we're dealing with
+    // Get response as text first, then parse as JSON
     const responseText = await response.text()
-
-    if (!response.ok) {
+    let data
+    
+    try {
+      data = JSON.parse(responseText)
+    } catch (parseError) {
+      // If JSON parsing fails, return error with text response
       if (isDevelopment) {
-        console.error('Web3Forms HTTP error:', {
+        console.error('Failed to parse Web3Forms response as JSON:', {
+          error: parseError,
           status: response.status,
           statusText: response.statusText,
           body: responseText,
@@ -108,38 +112,56 @@ export async function POST(request: Request) {
       }
       
       return NextResponse.json(
-        {
-          success: false,
-          message: `שגיאה בשליחת ההודעה (${response.status}: ${response.statusText})`,
+        { 
+          success: false, 
+          message: `תגובה לא תקינה מהשרת: ${responseText || 'אנא נסה שוב מאוחר יותר.'}` 
         },
-        { status: response.status }
-      )
-    }
-
-    // Try to parse as JSON
-    let data
-    try {
-      data = JSON.parse(responseText)
-    } catch (parseError) {
-      if (isDevelopment) {
-        console.error('Failed to parse Web3Forms response as JSON:', parseError)
-      }
-      
-      return NextResponse.json(
-        { success: false, message: 'תגובה לא תקינה מהשרת. אנא נסה שוב מאוחר יותר.' },
         { status: 500 }
       )
     }
 
     if (isDevelopment) {
-      console.log('Web3Forms response data:', data)
+      console.log('Web3Forms response:', {
+        status: response.status,
+        success: data.success,
+        message: data.message,
+        hasError: !data.success,
+      })
     }
 
-    if (!data.success) {
+    // Check if request was successful
+    if (!response.ok) {
       if (isDevelopment) {
-        console.error('Web3Forms returned error:', data)
+        console.error('Web3Forms HTTP error:', {
+          status: response.status,
+          statusText: response.statusText,
+          data: data,
+        })
       }
       
+      // Return the error message from Web3Forms if available, otherwise generic message
+      const errorMessage = data.message || `שגיאה בשליחת ההודעה (${response.status}: ${response.statusText})`
+      
+      return NextResponse.json(
+        {
+          success: false,
+          message: errorMessage,
+        },
+        { status: response.status }
+      )
+    }
+
+    // Check if Web3Forms returned an error in the response body
+    if (!data.success) {
+      if (isDevelopment) {
+        console.error('Web3Forms returned error:', {
+          success: data.success,
+          message: data.message,
+          data: data,
+        })
+      }
+      
+      // Return the specific error message from Web3Forms
       return NextResponse.json(
         {
           success: false,
