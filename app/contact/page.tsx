@@ -170,90 +170,25 @@ export default function ContactPage() {
     setIsSubmitting(true)
     
     try {
-      // Get Web3Forms access key from environment variable
-      // In Next.js, NEXT_PUBLIC_* variables are available at build time
-      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
-      
-      if (!accessKey || accessKey === 'your_access_key_here' || accessKey.trim() === '') {
-        throw new Error('שירות האימייל לא מוגדר. אנא פנה למנהל האתר.')
-      }
-
-      if (process.env.NODE_ENV === 'development') {
-        console.log('Preparing to send form to Web3Forms:', { 
-          name: formData.name, 
-          email: formData.email, 
-          hasAccessKey: !!accessKey
-        })
-      }
-
-      // Prepare form data for Web3Forms
-      const formDataToSend = new FormData()
-      formDataToSend.append('access_key', accessKey)
-      formDataToSend.append('subject', 'פנייה חדשה מהאתר')
-      formDataToSend.append('from_name', formData.name)
-      formDataToSend.append('name', formData.name)
-      formDataToSend.append('email', formData.email)
-      formDataToSend.append('phone', formData.phone || '')
-      formDataToSend.append('message', formData.message)
-      
-      // Add honeypot field (Web3Forms requires it for spam protection)
-      // This field should be empty - bots will fill it
-      formDataToSend.append('botcheck', '')
-
-      if (process.env.NODE_ENV === 'development') {
-        console.log('Sending request to Web3Forms API...')
-      }
-
-      const response = await fetch('https://api.web3forms.com/submit', {
+      // Send form data to our API route
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
+          'Content-Type': 'application/json',
         },
-        body: formDataToSend,
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || '',
+          message: formData.message || '',
+          subject: 'פנייה חדשה מהאתר',
+        }),
       })
-      
-      if (process.env.NODE_ENV === 'development') {
-        console.log('Web3Forms response status:', response.status)
-        console.log('Web3Forms response headers:', Object.fromEntries(response.headers.entries()))
-      }
 
-      // Get response text first to see what we're dealing with
-      const responseText = await response.text()
-      if (process.env.NODE_ENV === 'development') {
-        console.log('Web3Forms response text:', responseText)
-      }
+      const data = await response.json()
 
-      if (!response.ok) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error('Web3Forms HTTP error:', {
-            status: response.status,
-            statusText: response.statusText,
-            body: responseText
-          })
-        }
-        throw new Error(`שגיאה בשליחת ההודעה (${response.status}: ${response.statusText})`)
-      }
-
-      // Try to parse as JSON
-      let data
-      try {
-        data = JSON.parse(responseText)
-      } catch (parseError) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error('Failed to parse Web3Forms response as JSON:', parseError)
-        }
-        throw new Error('תגובה לא תקינה מהשרת. אנא נסה שוב מאוחר יותר.')
-      }
-
-      if (process.env.NODE_ENV === 'development') {
-        console.log('Web3Forms response data:', data)
-      }
-
-      if (!data.success) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error('Web3Forms returned error:', data)
-        }
-        throw new Error(data.message || 'שגיאה בשליחת ההודעה')
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'שגיאה בשליחת ההודעה. אנא נסה שוב מאוחר יותר.')
       }
       
       // Track form submission
