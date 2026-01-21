@@ -10,7 +10,7 @@
 4. לחץ על **Add New**
 5. הוסף את המשתנה הבא:
    - **Name**: `WEB3FORMS_ACCESS_KEY`
-   - **Value**: `508775fc-382e-4616-97d8-c21fa7e907ea`
+   - **Value**: `508775fc-382e-4616-97d8-c21fa7e907ea` ⚠️ **חשוב: העתק את הערך הזה בדיוק**
    - **Environment**: בחר **Production** (וגם **Preview** אם רלוונטי)
 6. לחץ **Save**
 
