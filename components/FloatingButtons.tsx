@@ -3,7 +3,7 @@
 import { gtag } from './GoogleAnalytics'
 
 export default function FloatingButtons() {
-  const phoneNumber = '0508838982'
+  const phoneNumber = '050-883-8982'
   const whatsappNumber = '972508838982'
   const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
 

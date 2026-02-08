@@ -416,11 +416,6 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://i.ytimg.com" />
         <link rel="dns-prefetch" href="https://api.web3forms.com" />
-        
-        {/* Preload Critical Resources */}
-        <link rel="preload" href="/images/andrey-meizels.JPG" as="image" fetchPriority="high" />
-        <link rel="preload" href="/images/carousel/clinic-1.jpg" as="image" fetchPriority="high" />
-        <link rel="preload" href="/images/logo/clinic-logo.png" as="image" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
