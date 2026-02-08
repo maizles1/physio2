@@ -8,7 +8,7 @@ const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת �
 
 export default function CTASection() {
   return (
-    <section className="section-spacing bg-primary-gradient text-white">
+    <section className="cta-section section-spacing bg-primary-gradient text-white">
       <div className="container">
         <div className="max-w-4xl mx-auto">
           <div className="text-center rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm px-6 py-10 sm:px-10 sm:py-12">

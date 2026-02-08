@@ -12,7 +12,7 @@ export default function HeroSection() {
     gtag.event('whatsapp_click', 'engagement', 'hero_section')
   }
   return (
-    <section className="relative text-white overflow-hidden bg-primary-gradient section-spacing">
+    <section className="hero-section relative text-white overflow-hidden bg-primary-gradient section-spacing">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div 
