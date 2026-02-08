@@ -22,9 +22,9 @@ export default function CTASection() {
               <Link
                 href="/contact"
                 className="btn btn-secondary btn-large w-full sm:w-auto"
-                aria-label="צור קשר איתנו - עמוד יצירת קשר"
-              >
-                צור קשר
+aria-label="קבע טיפול עכשיו - עמוד יצירת קשר"
+            >
+              קבע טיפול עכשיו
               </Link>
               <a
                 href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}

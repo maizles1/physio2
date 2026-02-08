@@ -494,7 +494,7 @@ export default function ServicesPage() {
             href="/contact"
             className="inline-block bg-white text-[#2A3080] hover:bg-blue-50 font-bold py-4 px-8 rounded-lg transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105 text-lg"
           >
-            צור קשר
+            קבע טיפול עכשיו
           </Link>
         </div>
       </section>

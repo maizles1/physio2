@@ -114,9 +114,9 @@ export default function HeroSection() {
             <Link
               href="/contact"
               className="btn btn-secondary btn-large w-full sm:w-auto"
-              aria-label="צור קשר עוד היום"
+              aria-label="קבע טיפול עכשיו"
             >
-              צור קשר עוד היום
+              קבע טיפול עכשיו
             </Link>
             <a
               href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}

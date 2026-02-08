@@ -62,7 +62,7 @@ export default function NotFound() {
                 href="/contact"
                 className="text-primary hover:underline"
               >
-                צור קשר
+                קבע טיפול עכשיו
               </Link>
             </div>
           </div>

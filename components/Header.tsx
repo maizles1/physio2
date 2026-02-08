@@ -38,7 +38,7 @@ export default function Header() {
     { name: 'בלוג', href: '/blog' },
     { name: 'המלצות', href: '/testimonials' },
     { name: 'שאלות נפוצות', href: '/faq' },
-    { name: 'צור קשר', href: '/contact' },
+    { name: 'קבע טיפול עכשיו', href: '/contact' },
   ]
 
   return (

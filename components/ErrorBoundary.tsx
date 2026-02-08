@@ -73,9 +73,9 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
               <Link
                 href="/contact"
                 className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg transition-colors text-center"
-                aria-label="צור קשר"
+                aria-label="קבע טיפול עכשיו"
               >
-                צור קשר
+                קבע טיפול עכשיו
               </Link>
             </div>
             {process.env.NODE_ENV === 'development' && this.state.error && (
