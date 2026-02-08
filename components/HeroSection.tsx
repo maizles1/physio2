@@ -133,7 +133,7 @@ export default function HeroSection() {
             </a>
           </div>
           <p className="text-center text-white/90 text-sm mt-4 px-2">
-            טיפול בביטוח · זמינות 24–48 שעות · מקצועי תואר שני
+            זמינות 24–48 שעות · מקצועי תואר שני
           </p>
         </div>
       </div>
