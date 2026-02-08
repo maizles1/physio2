@@ -26,9 +26,10 @@
 
 ### 3. API Authentication
 
-- API routes מוגנים עם API Key authentication (ב-production)
+- כרגיל קיים רק endpoint ציבורי: **GET /api/reviews** (הצגת ביקורות מ-Google) – אינו דורש אימות.
+- API routes נוספים שייווספו בעתיד יכולים להיות מוגנים עם API Key (ב-production).
 - API Key נשלח דרך header: `X-API-Key` או query parameter: `apiKey`
-- ה-API Key מוגדר ב-environment variable: `API_SECRET_KEY`
+- ה-API Key מוגדר ב-environment variable: `API_SECRET_KEY` (רלוונטי ל-routes מוגנים עתידיים)
 
 ### 4. Error Handling
 
@@ -38,15 +39,14 @@
 
 ### 5. Input Validation & Sanitization
 
-- כל ה-inputs עוברים sanitization
-- Validation של email, phone, ו-formats אחרים
-- הגבלת אורך inputs
+- אין טופסים באתר (יצירת קשר מתבצעת בטלפון ו-WhatsApp בלבד).
+- תוכן HTML (בלוג, FAQ) עובר סניטציה לפני הצגה (מניעת XSS).
+- בטפסים או API routes עתידיים: יש להשתמש ב-validation ו-sanitization (אורך, email, טלפון וכו').
 
 ### 6. CORS Configuration
 
 - CORS מוגדר רק ל-domains מורשים
-- Default: `https://physiotherapy.plus`, `https://www.physiotherapy.plus`
-- ניתן להגדיר דרך `ALLOWED_ORIGINS` environment variable
+- Default: `https://physio-plus.co.il`, `https://www.physio-plus.co.il` (ניתן להגדיר דרך `ALLOWED_ORIGINS`)
 
 ## הגדרת Environment Variables
 
@@ -113,25 +113,25 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ### בדיקת Security Headers
 
 ```bash
-curl -I https://physiotherapy.plus | grep -i "x-frame\|x-content\|strict-transport\|content-security"
+curl -I https://physio-plus.co.il | grep -i "x-frame\|x-content\|strict-transport\|content-security"
 ```
 
 ### בדיקת Rate Limiting
 
 ```bash
 # Make multiple rapid requests
-for i in {1..15}; do curl -I https://physiotherapy.plus/api/reviews; done
+for i in {1..15}; do curl -I https://physio-plus.co.il/api/reviews; done
 # Should see 429 after 10 requests
 ```
 
-### בדיקת API Authentication
+### בדיקת API
 
 ```bash
-# Without API key (should fail in production)
-curl https://physiotherapy.plus/api/reviews
+# /api/reviews הוא ציבורי (GET) – לא דורש API key
+curl https://physio-plus.co.il/api/reviews
 
-# With API key
-curl -H "X-API-Key: your-api-key" https://physiotherapy.plus/api/reviews
+# Routes מוגנים (אם יוגדרו בעתיד) ידרשו:
+# curl -H "X-API-Key: your-api-key" https://physio-plus.co.il/api/...
 ```
 
 ## דיווח על פגיעויות

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import { sanitizeHtml } from '@/lib/security'
 
 const faqs = [
   {
@@ -121,7 +122,7 @@ export default function FAQPage() {
                     <div id={`faq-answer-${index}`} className="px-6 pb-4">
                       <div 
                         className="text-gray-700 leading-relaxed"
-                        dangerouslySetInnerHTML={{ __html: faq.answer }}
+                        dangerouslySetInnerHTML={{ __html: sanitizeHtml(faq.answer) }}
                       />
                     </div>
                   )}

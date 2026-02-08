@@ -63,10 +63,6 @@ const nextConfig: NextConfig = {
             value: 'max-age=31536000; includeSubDomains',
           },
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-          {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
