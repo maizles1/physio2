@@ -56,8 +56,7 @@ export default function TermsPage() {
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 mb-6">
               <li>צפייה במידע על השירותים והטיפולים המוצעים</li>
-              <li>יצירת קשר עם הקליניקה</li>
-              <li>קביעת תורים</li>
+              <li>יצירת קשר עם הקליניקה (טלפון או WhatsApp)</li>
               <li>קריאת מאמרים ותוכן מקצועי</li>
               <li>כל שימוש אחר שהותר במפורש על ידינו</li>
             </ul>

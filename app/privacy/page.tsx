@@ -59,8 +59,7 @@ export default function PrivacyPage() {
               <li>שם מלא</li>
               <li>מספר טלפון</li>
               <li>כתובת אימייל</li>
-              <li>הודעות ופרטים נוספים שאתם מספקים בטופסי יצירת קשר</li>
-              <li>פרטי תור (תאריך, שעה, סוג שירות) - בטופס קביעת תור</li>
+              <li>פרטים שאתם בוחרים למסור בעת יצירת קשר (טלפון או WhatsApp)</li>
             </ul>
 
             <h2 className="text-2xl font-bold mb-4 mt-8" style={{ color: '#2A3080' }}>3. מטרות איסוף המידע</h2>
@@ -69,7 +68,7 @@ export default function PrivacyPage() {
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 mb-6">
               <li>יצירת קשר עמכם בתגובה לפניות שלכם</li>
-              <li>קביעת תורים וניהול התורים</li>
+              <li>טיפול בבקשות ליצירת קשר וקביעת תורים (בטלפון או ב-WhatsApp)</li>
               <li>שיפור השירותים שאנו מספקים</li>
               <li>שליחת עדכונים חשובים (רק אם ביקשתם זאת במפורש)</li>
               <li>עמידה בחובות משפטיות וחוקיות</li>
