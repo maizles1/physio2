@@ -491,17 +491,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         <ErrorBoundary>
+          <div className="site-background" aria-hidden="true" />
           <ServiceWorkerRegistration />
           <GoogleAnalytics />
           <PageTracking />
           <PerformanceTracker />
           <ToastContainer />
           <SkipLink />
-          <Header />
-          <main id="main-content" className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
+          <div className="site-content-wrapper relative min-h-screen">
+            <Header />
+            <main id="main-content" className="min-h-screen">
+              {children}
+            </main>
+            <Footer />
+          </div>
           <FloatingButtons />
         </ErrorBoundary>
       </body>
