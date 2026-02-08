@@ -29,7 +29,7 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section className="section-spacing bg-gradient-to-br from-gray-50 to-blue-50">
+    <section className="section-spacing bg-gray-50 section-reveal">
       <div className="container">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">

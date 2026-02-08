@@ -55,6 +55,28 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Optional section fade-in (respects prefers-reduced-motion) */
+@keyframes section-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-reveal {
+  animation: section-fade-in 0.5s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-reveal {
+    animation: none;
+  }
+}
+
 /* Mobile Performance Optimizations */
 @media (max-width: 1024px) {
   * {

@@ -64,7 +64,7 @@ const insuranceOptions: InsuranceOption[] = [
 
 export default function InsuranceSection() {
   return (
-    <section className="section-spacing bg-gradient-to-br from-gray-50 to-blue-50">
+    <section className="section-spacing bg-white">
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
