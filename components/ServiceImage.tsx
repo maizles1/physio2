@@ -21,12 +21,14 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
   const fallbackTimerRef = useRef<NodeJS.Timeout | null>(null)
   const isSvg = imgSrc.endsWith('.svg') || imgSrc.endsWith('.svg?')
 
-  // Reset when src changes
+  // Reset when src changes (deferred to avoid synchronous setState in effect)
   useEffect(() => {
-    setImgSrc(src)
-    setHasError(false)
-    setIsLoading(true)
-    setHasLoaded(false)
+    const id = setTimeout(() => {
+      setImgSrc(src)
+      setHasError(false)
+      setIsLoading(true)
+      setHasLoaded(false)
+    }, 0)
 
     // Clear any existing timeouts
     if (timeoutRef.current) {
@@ -50,6 +52,7 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
     }, 10000)
 
     return () => {
+      clearTimeout(id)
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current)
       }

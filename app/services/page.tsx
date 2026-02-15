@@ -220,7 +220,7 @@ const services = [
 export default function ServicesPage() {
   // Enhanced MedicalProcedure schemas with more details
   const serviceSchemas = services.map((service) => {
-    const schema: any = {
+    const schema: Record<string, unknown> = {
       '@context': 'https://schema.org',
       '@type': 'MedicalProcedure',
       name: service.title,

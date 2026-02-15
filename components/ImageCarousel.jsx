@@ -20,7 +20,7 @@ export default function ImageCarousel() {
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-center mb-6 sm:mb-8 text-primary-dark">
-            ג'ודו מהעולם
+            {`ג'ודו מהעולם`}
           </h2>
           
           <div className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-xl sm:shadow-2xl w-full h-[400px] sm:h-[500px] md:h-[550px] bg-gray-200">
