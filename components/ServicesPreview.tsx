@@ -84,7 +84,7 @@ const services = [
     ),
     href: '/contact',
     color: 'from-[#2080C0] to-[#40C0F0]',
-    imagePath: undefined,
+    imagePath: '/images/services/lectures/service-image.jpeg',
   },
 ]
 
@@ -111,7 +111,14 @@ export default function ServicesPreview() {
             >
               {/* תמונה קטנה */}
               <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 w-full overflow-hidden">
-                {service.imagePath && (
+                {service.imagePath && service.imagePath.includes('lectures') ? (
+                  <img
+                    src={service.imagePath}
+                    alt={service.title}
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                ) : service.imagePath ? (
                   <ServiceImage
                     src={service.imagePath}
                     fallbackSrc={service.imagePath}
@@ -120,8 +127,7 @@ export default function ServicesPreview() {
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     priority={index < 3}
                   />
-                )}
-                {!service.imagePath && (
+                ) : (
                   <div className={`w-full h-full bg-gradient-to-br ${service.color} flex items-center justify-center`}>
                     <div className="text-white text-6xl opacity-50">
                       {service.icon}
