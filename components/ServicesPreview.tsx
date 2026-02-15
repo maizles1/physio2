@@ -74,6 +74,18 @@ const services = [
     color: 'from-[#2A3080] to-[#2080C0]',
     imagePath: '/images/services/sports-teams/service-image.jpg',
   },
+  {
+    title: 'הרצאות',
+    description: 'הרצאות על בריאות, פציעות, הרצאות לחברות, חדרי כושר, סטודיו.',
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+      </svg>
+    ),
+    href: '/contact',
+    color: 'from-[#2080C0] to-[#40C0F0]',
+    imagePath: undefined,
+  },
 ]
 
 export default function ServicesPreview() {
