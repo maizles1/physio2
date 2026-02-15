@@ -187,9 +187,6 @@ export default function TestimonialsContent() {
                       ))}
                     </div>
                   </div>
-                  <div className="text-gray-700 font-medium">
-                    מתוך {reviewsData.totalReviews} ביקורות
-                  </div>
                 </div>
               </div>
             )}
