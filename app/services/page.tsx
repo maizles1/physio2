@@ -333,7 +333,7 @@ export default function ServicesPage() {
                   {/* Summary */}
                   <div className="mb-6 p-4 bg-blue-50 rounded-lg border-r-4" style={{ borderColor: '#2080C0' }}>
                     <p className="text-lg text-gray-700 leading-relaxed">
-                      <strong>סיכום:</strong> {service.description}
+                      {service.description}
                     </p>
                   </div>
 
