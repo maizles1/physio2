@@ -42,7 +42,7 @@ export default function Header() {
   ]
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50 border-b border-gray-200">
+    <header className={`bg-white shadow-md sticky top-0 border-b border-gray-200 z-50 ${mobileMenuOpen ? 'z-[60]' : ''}`}>
       {/* Top Bar - Contact Info */}
       <div className="hidden md:block text-white py-2.5 bg-primary-gradient">
         <div className="container">

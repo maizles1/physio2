@@ -498,7 +498,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <PerformanceTracker />
           <ToastContainer />
           <SkipLink />
-          <div className="site-content-wrapper relative min-h-screen">
+          <div className="site-content-wrapper relative min-h-screen pb-20 md:pb-24">
             <Header />
             <main id="main-content" className="min-h-screen">
               {children}
