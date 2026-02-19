@@ -7,6 +7,7 @@ import {
   CATEGORY_LABELS,
   DEFAULT_DOSAGE,
   buildPrescriptionParam,
+  type Category,
   type Dosage,
 } from "@/app/data/exercises";
 
@@ -16,6 +17,7 @@ export default function AdminBuilderClient() {
   const [authenticated, setAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [selectedDosages, setSelectedDosages] = useState<Record<string, Dosage>>({});
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [copied, setCopied] = useState(false);
 
   const handleSubmit = useCallback(
@@ -88,113 +90,134 @@ export default function AdminBuilderClient() {
     );
   }
 
+  const exercisesInSelectedCategory =
+    selectedCategory !== null
+      ? exercisesData.filter((ex) => ex.category === selectedCategory)
+      : [];
+
   return (
     <div className="min-h-screen pb-28" dir="rtl">
       <div className="mx-auto max-w-2xl px-4 py-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">בונה תוכנית תרגילים</h1>
-        <p className="text-gray-600 mb-6">
-          לחץ על תרגיל כדי לסמן או לבטל. עבור תרגילים נבחרים – הגדר מינון. בסיום צור קישור והעתק ללוח.
-        </p>
-
-        <div className="space-y-8">
-          {CATEGORY_ORDER.map((category) => {
-            const exercisesInCategory = exercisesData.filter((ex) => ex.category === category);
-            return (
-              <section key={category}>
-                <h2 className="text-lg font-bold text-primary-dark mb-3 pb-2 border-b border-gray-200">
-                  {CATEGORY_LABELS[category]}
-                </h2>
-                <ul className="space-y-3">
-                  {exercisesInCategory.length === 0 ? (
-                    <li className="text-gray-500 text-sm py-2">אין תרגילים בקטגוריה זו</li>
-                  ) : exercisesInCategory.map((ex) => {
-                    const selected = !!selectedDosages[ex.id];
-                    const dosage = selected ? selectedDosages[ex.id]! : DEFAULT_DOSAGE;
-                    return (
-                      <li key={ex.id}>
-                        <div
-                          className={`rounded-xl border-2 overflow-hidden transition ${
+        {selectedCategory === null ? (
+          <>
+            <h1 className="text-2xl font-bold text-gray-900 mb-6">בונה תוכנית תרגילים</h1>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              {CATEGORY_ORDER.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => setSelectedCategory(category)}
+                  className="aspect-square rounded-xl border-2 border-gray-200 bg-white hover:border-primary hover:bg-primary/5 transition flex items-center justify-center p-3 text-center"
+                >
+                  <span className="font-medium text-gray-800">{CATEGORY_LABELS[category]}</span>
+                </button>
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={() => setSelectedCategory(null)}
+              className="mb-4 text-primary-dark hover:underline flex items-center gap-1"
+            >
+              <span className="text-lg" aria-hidden="true">←</span>
+              חזור לקטגוריות
+            </button>
+            <h2 className="text-xl font-bold text-primary-dark mb-4 pb-2 border-b border-gray-200">
+              {CATEGORY_LABELS[selectedCategory]}
+            </h2>
+            <ul className="space-y-3">
+              {exercisesInSelectedCategory.length === 0 ? (
+                <li className="text-gray-500 text-sm py-2">אין תרגילים בקטגוריה זו</li>
+              ) : (
+                exercisesInSelectedCategory.map((ex) => {
+                  const selected = !!selectedDosages[ex.id];
+                  const dosage = selected ? selectedDosages[ex.id]! : DEFAULT_DOSAGE;
+                  return (
+                    <li key={ex.id}>
+                      <div
+                        className={`rounded-xl border-2 overflow-hidden transition ${
+                          selected
+                            ? "border-primary bg-primary/5"
+                            : "border-gray-200 bg-white"
+                        }`}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => toggleExercise(ex.id)}
+                          className={`w-full text-right p-4 transition ${
                             selected
-                              ? "border-primary bg-primary/5"
-                              : "border-gray-200 bg-white"
+                              ? "text-primary-darker"
+                              : "hover:bg-gray-50 text-gray-800"
                           }`}
                         >
-                          <button
-                            type="button"
-                            onClick={() => toggleExercise(ex.id)}
-                            className={`w-full text-right p-4 transition ${
-                              selected
-                                ? "text-primary-darker"
-                                : "hover:bg-gray-50 text-gray-800"
-                            }`}
+                          <span className="font-medium block">{ex.title}</span>
+                        </button>
+                        {selected && (
+                          <div
+                            className="px-4 pb-4 pt-0 grid grid-cols-2 sm:grid-cols-4 gap-3"
+                            onClick={(e) => e.stopPropagation()}
                           >
-                            <span className="font-medium block">{ex.title}</span>
-                          </button>
-                          {selected && (
-                            <div
-                              className="px-4 pb-4 pt-0 grid grid-cols-2 sm:grid-cols-4 gap-3"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <label className="flex flex-col gap-1">
-                                <span className="text-xs text-gray-500">סטים</span>
-                                <input
-                                  type="number"
-                                  min={0}
-                                  value={dosage.sets}
-                                  onChange={(e) =>
-                                    updateDosage(ex.id, "sets", parseInt(e.target.value, 10) || 0)
-                                  }
-                                  className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
-                                />
-                              </label>
-                              <label className="flex flex-col gap-1">
-                                <span className="text-xs text-gray-500">חזרות</span>
-                                <input
-                                  type="number"
-                                  min={0}
-                                  value={dosage.reps}
-                                  onChange={(e) =>
-                                    updateDosage(ex.id, "reps", parseInt(e.target.value, 10) || 0)
-                                  }
-                                  className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
-                                />
-                              </label>
-                              <label className="flex flex-col gap-1">
-                                <span className="text-xs text-gray-500">פעמים ביום</span>
-                                <input
-                                  type="number"
-                                  min={0}
-                                  value={dosage.perDay}
-                                  onChange={(e) =>
-                                    updateDosage(ex.id, "perDay", parseInt(e.target.value, 10) || 0)
-                                  }
-                                  className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
-                                />
-                              </label>
-                              <label className="flex flex-col gap-1">
-                                <span className="text-xs text-gray-500">ימים בשבוע</span>
-                                <input
-                                  type="number"
-                                  min={0}
-                                  max={7}
-                                  value={dosage.perWeek}
-                                  onChange={(e) =>
-                                    updateDosage(ex.id, "perWeek", parseInt(e.target.value, 10) || 0)
-                                  }
-                                  className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
-                                />
-                              </label>
-                            </div>
-                          )}
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </section>
-            );
-          })}
-        </div>
+                            <label className="flex flex-col gap-1">
+                              <span className="text-xs text-gray-500">סטים</span>
+                              <input
+                                type="number"
+                                min={0}
+                                value={dosage.sets}
+                                onChange={(e) =>
+                                  updateDosage(ex.id, "sets", parseInt(e.target.value, 10) || 0)
+                                }
+                                className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
+                              />
+                            </label>
+                            <label className="flex flex-col gap-1">
+                              <span className="text-xs text-gray-500">חזרות</span>
+                              <input
+                                type="number"
+                                min={0}
+                                value={dosage.reps}
+                                onChange={(e) =>
+                                  updateDosage(ex.id, "reps", parseInt(e.target.value, 10) || 0)
+                                }
+                                className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
+                              />
+                            </label>
+                            <label className="flex flex-col gap-1">
+                              <span className="text-xs text-gray-500">פעמים ביום</span>
+                              <input
+                                type="number"
+                                min={0}
+                                value={dosage.perDay}
+                                onChange={(e) =>
+                                  updateDosage(ex.id, "perDay", parseInt(e.target.value, 10) || 0)
+                                }
+                                className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
+                              />
+                            </label>
+                            <label className="flex flex-col gap-1">
+                              <span className="text-xs text-gray-500">ימים בשבוע</span>
+                              <input
+                                type="number"
+                                min={0}
+                                max={7}
+                                value={dosage.perWeek}
+                                onChange={(e) =>
+                                  updateDosage(ex.id, "perWeek", parseInt(e.target.value, 10) || 0)
+                                }
+                                className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
+                              />
+                            </label>
+                          </div>
+                        )}
+                      </div>
+                    </li>
+                  );
+                })
+              )}
+            </ul>
+          </>
+        )}
       </div>
 
       <footer className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg safe-area-pb">
