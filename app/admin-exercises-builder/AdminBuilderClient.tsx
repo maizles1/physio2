@@ -1,14 +1,21 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { exercisesData, CATEGORY_ORDER, CATEGORY_LABELS } from "@/app/data/exercises";
+import {
+  exercisesData,
+  CATEGORY_ORDER,
+  CATEGORY_LABELS,
+  DEFAULT_DOSAGE,
+  buildPrescriptionParam,
+  type Dosage,
+} from "@/app/data/exercises";
 
 const ADMIN_PASSWORD = "1234";
 
 export default function AdminBuilderClient() {
   const [authenticated, setAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [selectedDosages, setSelectedDosages] = useState<Record<string, Dosage>>({});
   const [copied, setCopied] = useState(false);
 
   const handleSubmit = useCallback(
@@ -20,24 +27,36 @@ export default function AdminBuilderClient() {
   );
 
   const toggleExercise = useCallback((id: string) => {
-    setSelectedIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
+    setSelectedDosages((prev) => {
+      const next = { ...prev };
+      if (next[id]) {
+        delete next[id];
+        return next;
+      }
+      next[id] = { ...DEFAULT_DOSAGE };
       return next;
     });
   }, []);
 
+  const updateDosage = useCallback((id: string, field: keyof Dosage, value: number) => {
+    setSelectedDosages((prev) => {
+      const current = prev[id] ?? { ...DEFAULT_DOSAGE };
+      return { ...prev, [id]: { ...current, [field]: Math.max(0, value) } };
+    });
+  }, []);
+
   const copyPlanUrl = useCallback(() => {
-    const ids = Array.from(selectedIds).sort((a, b) => Number(a) - Number(b));
+    const ids = Object.keys(selectedDosages).sort((a, b) => Number(a) - Number(b));
     if (ids.length === 0) return;
-    const path = `/plan?ids=${ids.join(",")}`;
+    const items = ids.map((id) => ({ id, dosage: selectedDosages[id]! }));
+    const param = buildPrescriptionParam(items);
+    const path = `/plan?p=${param}`;
     const url = typeof window !== "undefined" ? `${window.location.origin}${path}` : path;
     navigator.clipboard.writeText(url).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
-  }, [selectedIds]);
+  }, [selectedDosages]);
 
   if (!authenticated) {
     return (
@@ -73,7 +92,9 @@ export default function AdminBuilderClient() {
     <div className="min-h-screen pb-28" dir="rtl">
       <div className="mx-auto max-w-2xl px-4 py-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">בונה תוכנית תרגילים</h1>
-        <p className="text-gray-600 mb-6">לחץ על תרגיל כדי לסמן או לבטל. בסיום צור קישור והעתק ללוח.</p>
+        <p className="text-gray-600 mb-6">
+          לחץ על תרגיל כדי לסמן או לבטל. עבור תרגילים נבחרים – הגדר מינון. בסיום צור קישור והעתק ללוח.
+        </p>
 
         <div className="space-y-8">
           {CATEGORY_ORDER.map((category) => {
@@ -86,20 +107,85 @@ export default function AdminBuilderClient() {
                 </h2>
                 <ul className="space-y-3">
                   {exercisesInCategory.map((ex) => {
-                    const selected = selectedIds.has(ex.id);
+                    const selected = !!selectedDosages[ex.id];
+                    const dosage = selected ? selectedDosages[ex.id]! : DEFAULT_DOSAGE;
                     return (
                       <li key={ex.id}>
-                        <button
-                          type="button"
-                          onClick={() => toggleExercise(ex.id)}
-                          className={`w-full text-right rounded-xl border-2 p-4 transition ${
+                        <div
+                          className={`rounded-xl border-2 overflow-hidden transition ${
                             selected
-                              ? "border-primary bg-primary/10 text-primary-darker"
-                              : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50 text-gray-800"
+                              ? "border-primary bg-primary/5"
+                              : "border-gray-200 bg-white"
                           }`}
                         >
-                          <span className="font-medium block">{ex.title}</span>
-                        </button>
+                          <button
+                            type="button"
+                            onClick={() => toggleExercise(ex.id)}
+                            className={`w-full text-right p-4 transition ${
+                              selected
+                                ? "text-primary-darker"
+                                : "hover:bg-gray-50 text-gray-800"
+                            }`}
+                          >
+                            <span className="font-medium block">{ex.title}</span>
+                          </button>
+                          {selected && (
+                            <div
+                              className="px-4 pb-4 pt-0 grid grid-cols-2 sm:grid-cols-4 gap-3"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <label className="flex flex-col gap-1">
+                                <span className="text-xs text-gray-500">סטים</span>
+                                <input
+                                  type="number"
+                                  min={0}
+                                  value={dosage.sets}
+                                  onChange={(e) =>
+                                    updateDosage(ex.id, "sets", parseInt(e.target.value, 10) || 0)
+                                  }
+                                  className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
+                                />
+                              </label>
+                              <label className="flex flex-col gap-1">
+                                <span className="text-xs text-gray-500">חזרות</span>
+                                <input
+                                  type="number"
+                                  min={0}
+                                  value={dosage.reps}
+                                  onChange={(e) =>
+                                    updateDosage(ex.id, "reps", parseInt(e.target.value, 10) || 0)
+                                  }
+                                  className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
+                                />
+                              </label>
+                              <label className="flex flex-col gap-1">
+                                <span className="text-xs text-gray-500">פעמים ביום</span>
+                                <input
+                                  type="number"
+                                  min={0}
+                                  value={dosage.perDay}
+                                  onChange={(e) =>
+                                    updateDosage(ex.id, "perDay", parseInt(e.target.value, 10) || 0)
+                                  }
+                                  className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
+                                />
+                              </label>
+                              <label className="flex flex-col gap-1">
+                                <span className="text-xs text-gray-500">ימים בשבוע</span>
+                                <input
+                                  type="number"
+                                  min={0}
+                                  max={7}
+                                  value={dosage.perWeek}
+                                  onChange={(e) =>
+                                    updateDosage(ex.id, "perWeek", parseInt(e.target.value, 10) || 0)
+                                  }
+                                  className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
+                                />
+                              </label>
+                            </div>
+                          )}
+                        </div>
                       </li>
                     );
                   })}
@@ -113,12 +199,12 @@ export default function AdminBuilderClient() {
       <footer className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg safe-area-pb">
         <div className="mx-auto max-w-2xl px-4 py-4 flex items-center justify-between gap-4">
           <span className="text-sm text-gray-600">
-            נבחרו {selectedIds.size} תרגילים
+            נבחרו {Object.keys(selectedDosages).length} תרגילים
           </span>
           <button
             type="button"
             onClick={copyPlanUrl}
-            disabled={selectedIds.size === 0}
+            disabled={Object.keys(selectedDosages).length === 0}
             className="rounded-xl bg-primary-dark text-white font-medium px-6 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-darker transition"
           >
             {copied ? "הועתק!" : "צור קישור והעתק"}

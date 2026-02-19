@@ -46,9 +46,60 @@ export const exercisesData: Exercise[] = [
   { id: "11", title: "כיווץ סנטר בשכיבה", category: "Neck", youtubeId: "", instructions: "דחוף את הסנטר לאחור כלפי התקרה, שמור 5 שניות. חזור 10 פעמים." },
 ];
 
+export interface Dosage {
+  sets: number;
+  reps: number;
+  perDay: number;
+  perWeek: number;
+}
+
+export const DEFAULT_DOSAGE: Dosage = {
+  sets: 3,
+  reps: 10,
+  perDay: 1,
+  perWeek: 7,
+};
+
+/** Parse ?p= string: "id:sets:reps:perDay:perWeek,id2:..." */
+export function parsePrescriptionParam(p: string): { id: string; dosage: Dosage }[] {
+  if (!p?.trim()) return [];
+  const items: { id: string; dosage: Dosage }[] = [];
+  for (const segment of p.split(",").map((s) => s.trim()).filter(Boolean)) {
+    const parts = segment.split(":");
+    if (parts.length < 5) continue;
+    const [id, sets, reps, perDay, perWeek] = parts;
+    const num = (s: string) => Math.max(0, parseInt(s, 10) || 0);
+    items.push({
+      id: id!.trim(),
+      dosage: {
+        sets: num(sets!),
+        reps: num(reps!),
+        perDay: num(perDay!),
+        perWeek: num(perWeek!),
+      },
+    });
+  }
+  return items;
+}
+
+/** Build URL-safe ?p= string from selected exercises and dosages */
+export function buildPrescriptionParam(
+  items: { id: string; dosage: Dosage }[]
+): string {
+  return items
+    .map(({ id, dosage }) =>
+      [id, dosage.sets, dosage.reps, dosage.perDay, dosage.perWeek].join(":")
+    )
+    .join(",");
+}
+
 export function getExercisesByIds(ids: string[]): Exercise[] {
   const set = new Set(ids);
   return exercisesData.filter((e) => set.has(e.id));
+}
+
+export function getExerciseById(id: string): Exercise | undefined {
+  return exercisesData.find((e) => e.id === id);
 }
 
 /** מחזיר תרגילים מקובצים לפי קטגוריה, עם כותרת בעברית */

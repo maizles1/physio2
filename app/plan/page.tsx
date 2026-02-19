@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { getExercisesByIds } from "@/app/data/exercises";
+import {
+  parsePrescriptionParam,
+  getExerciseById,
+  DEFAULT_DOSAGE,
+  type Exercise,
+  type Dosage,
+} from "@/app/data/exercises";
 import PlanContent from "./PlanContent";
 
 export const metadata: Metadata = {
@@ -7,15 +13,33 @@ export const metadata: Metadata = {
   description: "תוכנית תרגילים מותאמת – פיזיותרפיה פלוס",
 };
 
+export type PlanItem = { exercise: Exercise; dosage: Dosage };
+
 interface PlanPageProps {
-  searchParams: Promise<{ ids?: string }>;
+  searchParams: Promise<{ p?: string; ids?: string }>;
 }
 
 export default async function PlanPage({ searchParams }: PlanPageProps) {
   const params = await searchParams;
+  const pParam = params.p?.trim();
   const idsParam = params.ids?.trim();
-  const ids = idsParam ? idsParam.split(",").map((s) => s.trim()).filter(Boolean) : [];
-  const exercises = getExercisesByIds(ids);
+
+  let planItems: PlanItem[] = [];
+
+  if (pParam) {
+    const decoded = decodeURIComponent(pParam);
+    const parsed = parsePrescriptionParam(decoded);
+    for (const { id, dosage } of parsed) {
+      const exercise = getExerciseById(id);
+      if (exercise) planItems.push({ exercise, dosage });
+    }
+  } else if (idsParam) {
+    const ids = idsParam.split(",").map((s) => s.trim()).filter(Boolean);
+    for (const id of ids) {
+      const exercise = getExerciseById(id);
+      if (exercise) planItems.push({ exercise, dosage: DEFAULT_DOSAGE });
+    }
+  }
 
   return (
     <div className="min-h-screen" dir="rtl">
@@ -28,14 +52,14 @@ export default async function PlanPage({ searchParams }: PlanPageProps) {
       </header>
 
       <div className="mx-auto max-w-2xl px-4 py-6">
-        {exercises.length === 0 ? (
+        {planItems.length === 0 ? (
           <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8 text-center">
             <p className="text-gray-700">
               לא נמצאו תרגילים בתוכנית. אם קיבלתם קישור מהמטפל, בדקו שהקישור מלא ונסו שוב.
             </p>
           </div>
         ) : (
-          <PlanContent exercises={exercises} />
+          <PlanContent planItems={planItems} />
         )}
       </div>
     </div>

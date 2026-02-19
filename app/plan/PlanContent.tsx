@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import type { Exercise } from "@/app/data/exercises";
-import { groupExercisesByCategory } from "@/app/data/exercises";
+import { Repeat, Calendar, Clock } from "lucide-react";
+import type { PlanItem } from "./page";
+import { CATEGORY_ORDER, CATEGORY_LABELS } from "@/app/data/exercises";
 
 interface PlanContentProps {
-  exercises: Exercise[];
+  planItems: PlanItem[];
 }
 
 /** Lightweight lazy YouTube: thumbnail until click, then iframe. No extra deps, fast load. */
@@ -50,18 +51,42 @@ function LazyYouTube({ id, title }: { id: string; title: string }) {
   );
 }
 
-export default function PlanContent({ exercises }: PlanContentProps) {
-  const byCategory = groupExercisesByCategory(exercises);
+function DosageBadges({ dosage }: { dosage: PlanItem["dosage"] }) {
+  const { sets, reps, perDay, perWeek } = dosage;
+  return (
+    <div className="flex flex-wrap gap-2 mt-3" dir="rtl">
+      <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 text-primary-dark px-3 py-1.5 text-sm font-medium">
+        <Repeat className="h-4 w-4" aria-hidden />
+        {sets} סטים × {reps} חזרות
+      </span>
+      <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary/10 text-secondary-dark px-3 py-1.5 text-sm font-medium">
+        <Clock className="h-4 w-4" aria-hidden />
+        {perDay} פעמים ביום
+      </span>
+      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 text-amber-800 px-3 py-1.5 text-sm font-medium">
+        <Calendar className="h-4 w-4" aria-hidden />
+        {perWeek} ימים בשבוע
+      </span>
+    </div>
+  );
+}
+
+export default function PlanContent({ planItems }: PlanContentProps) {
+  const byCategory = CATEGORY_ORDER.map((category) => ({
+    category,
+    categoryLabel: CATEGORY_LABELS[category],
+    items: planItems.filter((item) => item.exercise.category === category),
+  })).filter((g) => g.items.length > 0);
 
   return (
     <div className="space-y-10 pb-8" dir="rtl">
-      {byCategory.map(({ category, categoryLabel, exercises: categoryExercises }) => (
+      {byCategory.map(({ category, categoryLabel, items }) => (
         <section key={category}>
           <h2 className="text-lg font-bold text-primary-dark mb-4 pb-2 border-b border-gray-200">
             {categoryLabel}
           </h2>
           <div className="space-y-6">
-            {categoryExercises.map((ex) => (
+            {items.map(({ exercise: ex, dosage }) => (
               <article
                 key={ex.id}
                 className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden"
@@ -77,7 +102,8 @@ export default function PlanContent({ exercises }: PlanContentProps) {
                 )}
                 <div className="p-4 sm:p-5">
                   <h3 className="text-xl font-bold text-gray-900">{ex.title}</h3>
-                  <p className="mt-3 text-gray-700 leading-relaxed whitespace-pre-line">
+                  <DosageBadges dosage={dosage} />
+                  <p className="mt-4 text-gray-700 leading-relaxed whitespace-pre-line">
                     {ex.instructions}
                   </p>
                 </div>
