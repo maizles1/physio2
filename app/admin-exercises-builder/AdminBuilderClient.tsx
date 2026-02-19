@@ -99,14 +99,15 @@ export default function AdminBuilderClient() {
         <div className="space-y-8">
           {CATEGORY_ORDER.map((category) => {
             const exercisesInCategory = exercisesData.filter((ex) => ex.category === category);
-            if (exercisesInCategory.length === 0) return null;
             return (
               <section key={category}>
                 <h2 className="text-lg font-bold text-primary-dark mb-3 pb-2 border-b border-gray-200">
                   {CATEGORY_LABELS[category]}
                 </h2>
                 <ul className="space-y-3">
-                  {exercisesInCategory.map((ex) => {
+                  {exercisesInCategory.length === 0 ? (
+                    <li className="text-gray-500 text-sm py-2">אין תרגילים בקטגוריה זו</li>
+                  ) : exercisesInCategory.map((ex) => {
                     const selected = !!selectedDosages[ex.id];
                     const dosage = selected ? selectedDosages[ex.id]! : DEFAULT_DOSAGE;
                     return (
