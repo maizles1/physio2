@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Exercise } from "@/app/data/exercises";
+import { groupExercisesByCategory } from "@/app/data/exercises";
 
 interface PlanContentProps {
   exercises: Exercise[];
@@ -50,26 +51,34 @@ function LazyYouTube({ id, title }: { id: string; title: string }) {
 }
 
 export default function PlanContent({ exercises }: PlanContentProps) {
+  const byCategory = groupExercisesByCategory(exercises);
+
   return (
-    <div className="space-y-8 pb-8" dir="rtl">
-      {exercises.map((ex) => (
-        <article
-          key={ex.id}
-          className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden"
-        >
-          <div className="relative aspect-video w-full">
-            <LazyYouTube id={ex.youtubeId} title={ex.title} />
+    <div className="space-y-10 pb-8" dir="rtl">
+      {byCategory.map(({ category, exercises: categoryExercises }) => (
+        <section key={category}>
+          <h2 className="text-lg font-bold text-primary-dark mb-4 pb-2 border-b border-gray-200">
+            {category}
+          </h2>
+          <div className="space-y-6">
+            {categoryExercises.map((ex) => (
+              <article
+                key={ex.id}
+                className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden"
+              >
+                <div className="relative aspect-video w-full">
+                  <LazyYouTube id={ex.youtubeId} title={ex.title} />
+                </div>
+                <div className="p-4 sm:p-5">
+                  <h3 className="text-xl font-bold text-gray-900">{ex.title}</h3>
+                  <p className="mt-3 text-gray-700 leading-relaxed whitespace-pre-line">
+                    {ex.instructions}
+                  </p>
+                </div>
+              </article>
+            ))}
           </div>
-          <div className="p-4 sm:p-5">
-            <span className="text-xs font-medium text-primary-dark uppercase tracking-wide">
-              {ex.category}
-            </span>
-            <h2 className="mt-1 text-xl font-bold text-gray-900">{ex.title}</h2>
-            <p className="mt-3 text-gray-700 leading-relaxed whitespace-pre-line">
-              {ex.instructions}
-            </p>
-          </div>
-        </article>
+        </section>
       ))}
     </div>
   );

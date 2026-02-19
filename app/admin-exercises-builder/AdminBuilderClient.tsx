@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { EXERCISES } from "@/app/data/exercises";
+import { EXERCISES, CATEGORIES } from "@/app/data/exercises";
 
 const ADMIN_PASSWORD = "1234";
 
@@ -75,27 +75,39 @@ export default function AdminBuilderClient() {
         <h1 className="text-2xl font-bold text-gray-900 mb-2">בונה תוכנית תרגילים</h1>
         <p className="text-gray-600 mb-6">לחץ על תרגיל כדי לסמן או לבטל. בסיום צור קישור והעתק ללוח.</p>
 
-        <ul className="space-y-3">
-          {EXERCISES.map((ex) => {
-            const selected = selectedIds.has(ex.id);
+        <div className="space-y-8">
+          {CATEGORIES.map((category) => {
+            const exercisesInCategory = EXERCISES.filter((ex) => ex.category === category);
+            if (exercisesInCategory.length === 0) return null;
             return (
-              <li key={ex.id}>
-                <button
-                  type="button"
-                  onClick={() => toggleExercise(ex.id)}
-                  className={`w-full text-right rounded-xl border-2 p-4 transition ${
-                    selected
-                      ? "border-primary bg-primary/10 text-primary-darker"
-                      : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50 text-gray-800"
-                  }`}
-                >
-                  <span className="font-medium block">{ex.title}</span>
-                  <span className="text-sm text-gray-500 mt-1">{ex.category}</span>
-                </button>
-              </li>
+              <section key={category}>
+                <h2 className="text-lg font-bold text-primary-dark mb-3 pb-2 border-b border-gray-200">
+                  {category}
+                </h2>
+                <ul className="space-y-3">
+                  {exercisesInCategory.map((ex) => {
+                    const selected = selectedIds.has(ex.id);
+                    return (
+                      <li key={ex.id}>
+                        <button
+                          type="button"
+                          onClick={() => toggleExercise(ex.id)}
+                          className={`w-full text-right rounded-xl border-2 p-4 transition ${
+                            selected
+                              ? "border-primary bg-primary/10 text-primary-darker"
+                              : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50 text-gray-800"
+                          }`}
+                        >
+                          <span className="font-medium block">{ex.title}</span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </section>
             );
           })}
-        </ul>
+        </div>
       </div>
 
       <footer className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg safe-area-pb">
