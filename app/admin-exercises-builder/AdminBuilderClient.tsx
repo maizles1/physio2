@@ -95,8 +95,13 @@ export default function AdminBuilderClient() {
       ? exercisesData.filter((ex) => ex.category === selectedCategory)
       : [];
 
+  const selectedIds = Object.keys(selectedDosages).sort((a, b) => Number(a) - Number(b));
+  const selectedExercises = selectedIds
+    .map((id) => exercisesData.find((e) => e.id === id))
+    .filter((ex): ex is (typeof exercisesData)[0] => ex != null);
+
   return (
-    <div className="min-h-screen pb-28" dir="rtl">
+    <div className="min-h-screen pb-40 md:pb-44" dir="rtl">
       <div className="mx-auto max-w-2xl px-4 py-8">
         {selectedCategory === null ? (
           <>
@@ -220,15 +225,101 @@ export default function AdminBuilderClient() {
         )}
       </div>
 
-      <footer className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg safe-area-pb">
+      {selectedExercises.length > 0 && (
+        <div className="fixed bottom-20 left-0 right-0 z-20 mx-auto max-w-2xl px-4">
+          <div className="rounded-t-2xl border border-b-0 border-gray-200 bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.08)] max-h-[50vh] overflow-hidden flex flex-col">
+            <div className="px-4 py-3 border-b border-gray-100 font-bold text-gray-900 shrink-0">
+              התרגילים שנבחרו ({selectedExercises.length})
+            </div>
+            <div className="overflow-y-auto p-4 space-y-3">
+              {selectedExercises.map((ex) => {
+                const dosage = selectedDosages[ex.id]!;
+                return (
+                  <div
+                    key={ex.id}
+                    className="rounded-xl border border-gray-200 bg-gray-50/80 p-3 space-y-2"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="font-medium text-gray-900 text-sm leading-tight">
+                        {ex.title}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => toggleExercise(ex.id)}
+                        className="text-gray-400 hover:text-red-600 shrink-0 p-1"
+                        aria-label="הסר מתוכנית"
+                      >
+                        ×
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-4 gap-2">
+                      <label className="flex flex-col gap-0.5">
+                        <span className="text-xs text-gray-500">סטים</span>
+                        <input
+                          type="number"
+                          min={0}
+                          value={dosage.sets}
+                          onChange={(e) =>
+                            updateDosage(ex.id, "sets", parseInt(e.target.value, 10) || 0)
+                          }
+                          className="rounded-lg border border-gray-300 px-2 py-1.5 text-sm w-full"
+                        />
+                      </label>
+                      <label className="flex flex-col gap-0.5">
+                        <span className="text-xs text-gray-500">חזרות</span>
+                        <input
+                          type="number"
+                          min={0}
+                          value={dosage.reps}
+                          onChange={(e) =>
+                            updateDosage(ex.id, "reps", parseInt(e.target.value, 10) || 0)
+                          }
+                          className="rounded-lg border border-gray-300 px-2 py-1.5 text-sm w-full"
+                        />
+                      </label>
+                      <label className="flex flex-col gap-0.5">
+                        <span className="text-xs text-gray-500">פעמים ביום</span>
+                        <input
+                          type="number"
+                          min={0}
+                          value={dosage.perDay}
+                          onChange={(e) =>
+                            updateDosage(ex.id, "perDay", parseInt(e.target.value, 10) || 0)
+                          }
+                          className="rounded-lg border border-gray-300 px-2 py-1.5 text-sm w-full"
+                        />
+                      </label>
+                      <label className="flex flex-col gap-0.5">
+                        <span className="text-xs text-gray-500">ימים בשבוע</span>
+                        <input
+                          type="number"
+                          min={0}
+                          max={7}
+                          value={dosage.perWeek}
+                          onChange={(e) =>
+                            updateDosage(ex.id, "perWeek", parseInt(e.target.value, 10) || 0)
+                          }
+                          className="rounded-lg border border-gray-300 px-2 py-1.5 text-sm w-full"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <footer className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg safe-area-pb z-10">
         <div className="mx-auto max-w-2xl px-4 py-4 flex items-center justify-between gap-4">
           <span className="text-sm text-gray-600">
-            נבחרו {Object.keys(selectedDosages).length} תרגילים
+            נבחרו {selectedIds.length} תרגילים
           </span>
           <button
             type="button"
             onClick={copyPlanUrl}
-            disabled={Object.keys(selectedDosages).length === 0}
+            disabled={selectedIds.length === 0}
             className="rounded-xl bg-primary-dark text-white font-medium px-6 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-darker transition"
           >
             {copied ? "הועתק!" : "צור קישור והעתק"}
