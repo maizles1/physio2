@@ -14,9 +14,7 @@ interface PlanPageProps {
 export default async function PlanPage({ searchParams }: PlanPageProps) {
   const params = await searchParams;
   const idsParam = params.ids?.trim();
-  const ids = idsParam
-    ? idsParam.split(",").map((s) => parseInt(s, 10)).filter((n) => !Number.isNaN(n))
-    : [];
+  const ids = idsParam ? idsParam.split(",").map((s) => s.trim()).filter(Boolean) : [];
   const exercises = getExercisesByIds(ids);
 
   return (

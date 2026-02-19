@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { EXERCISES, CATEGORIES } from "@/app/data/exercises";
+import { exercisesData, CATEGORY_ORDER, CATEGORY_LABELS } from "@/app/data/exercises";
 
 const ADMIN_PASSWORD = "1234";
 
 export default function AdminBuilderClient() {
   const [authenticated, setAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
-  const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [copied, setCopied] = useState(false);
 
   const handleSubmit = useCallback(
@@ -19,7 +19,7 @@ export default function AdminBuilderClient() {
     [password]
   );
 
-  const toggleExercise = useCallback((id: number) => {
+  const toggleExercise = useCallback((id: string) => {
     setSelectedIds((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
@@ -29,7 +29,7 @@ export default function AdminBuilderClient() {
   }, []);
 
   const copyPlanUrl = useCallback(() => {
-    const ids = Array.from(selectedIds).sort((a, b) => a - b);
+    const ids = Array.from(selectedIds).sort((a, b) => Number(a) - Number(b));
     if (ids.length === 0) return;
     const path = `/plan?ids=${ids.join(",")}`;
     const url = typeof window !== "undefined" ? `${window.location.origin}${path}` : path;
@@ -76,13 +76,13 @@ export default function AdminBuilderClient() {
         <p className="text-gray-600 mb-6">לחץ על תרגיל כדי לסמן או לבטל. בסיום צור קישור והעתק ללוח.</p>
 
         <div className="space-y-8">
-          {CATEGORIES.map((category) => {
-            const exercisesInCategory = EXERCISES.filter((ex) => ex.category === category);
+          {CATEGORY_ORDER.map((category) => {
+            const exercisesInCategory = exercisesData.filter((ex) => ex.category === category);
             if (exercisesInCategory.length === 0) return null;
             return (
               <section key={category}>
                 <h2 className="text-lg font-bold text-primary-dark mb-3 pb-2 border-b border-gray-200">
-                  {category}
+                  {CATEGORY_LABELS[category]}
                 </h2>
                 <ul className="space-y-3">
                   {exercisesInCategory.map((ex) => {

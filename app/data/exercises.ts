@@ -1,128 +1,62 @@
+export type Category = "Neck" | "Back" | "Shoulder" | "Core" | "Hip" | "Knee" | "Ankle" | "Advanced";
+
 export interface Exercise {
-  id: number;
+  id: string;
   title: string;
-  category: string;
+  category: Category;
   youtubeId: string;
   instructions: string;
 }
 
-/** סדר הרובריקות (קטגוריות) בתצוגה – מהצוואר למטה */
-export const CATEGORIES = [
-  "צוואר",
-  "כתף",
-  "מרפק",
-  "שורש כף יד",
-  "גב עליון",
-  "גב תחתון",
-  "ירך",
-  "ברך",
-  "קרסול",
-  "כף רגל",
-  "תרגול וסטיבולארי",
-] as const;
-
-export type CategoryName = (typeof CATEGORIES)[number];
-
-export const EXERCISES: Exercise[] = [
-  {
-    id: 1,
-    title: "מתיחת צוואר לצד",
-    category: "צוואר",
-    youtubeId: "RgKAFK5djSk",
-    instructions:
-      "בישיבה או עמידה, הטו את הראש בעדינות לצד ימין עד תחושת מתיחה קלה. החזיקו 15–20 שניות. חזרו למרכז והטו לצד שמאל. 3 פעמים לכל צד.",
-  },
-  {
-    id: 2,
-    title: "תרגיל פנדולום לכתף",
-    category: "כתף",
-    youtubeId: "9bZkp7q19f0",
-    instructions:
-      "עמדו כשאתם מוטים קדימה קלות, תנו לזרוע להיתלות חופשית. נענעו את הזרוע קדימה ואחורה בעדינות כמו מטוטלת. 30 שניות עד דקה, 2–3 פעמים ביום.",
-  },
-  {
-    id: 3,
-    title: "חיזוק מרפק – כיפוף עם משקל קל",
-    category: "מרפק",
-    youtubeId: "dQw4w9WgXcQ",
-    instructions:
-      "שבו עם אמה על משטח, כף יד כלפי מעלה. כופפו את המרפק והרימו משקל קל (בקבוק מים או משקולת). 10–15 חזרות, 2–3 סטים.",
-  },
-  {
-    id: 4,
-    title: "מתיחת שורש כף יד",
-    category: "שורש כף יד",
-    youtubeId: "jNQXAC9IVRw",
-    instructions:
-      "הושיטו את הזרוע קדימה, משכו בעדינות את אצבעות כף היד כלפי מטה עם היד השנייה. החזיקו 20–30 שניות. חזרו 3 פעמים לכל יד.",
-  },
-  {
-    id: 5,
-    title: "מתיחת גב עליון – פתיחת חזה",
-    category: "גב עליון",
-    youtubeId: "kJq7_2WeJ2E",
-    instructions:
-      "עמדו או שבו. חברו ידיים מאחורי הגב והרימו בעדינות. הרגישו מתיחה בחזה ובגב עליון. החזיקו 20–30 שניות.",
-  },
-  {
-    id: 6,
-    title: "מתיחת גב תחתון בשכיבה",
-    category: "גב תחתון",
-    youtubeId: "jNQXAC9IVRw",
-    instructions:
-      "שכבו על הגב, כופפו ברכיים והניחו כפות רגליים על הרצפה. משכו ברך אחת לעבר החזה בעדינות, החזיקו 20–30 שניות. החליפו רגל. חזרו 3 פעמים לכל צד.",
-  },
-  {
-    id: 7,
-    title: "תרגיל חיזוק ירך – הרחקה בשכיבה",
-    category: "ירך",
-    youtubeId: "dQw4w9WgXcQ",
-    instructions:
-      "שכבו על הצד. הרימו את הרגל העליונה באיטיות והורידו. 10–15 חזרות לכל צד, 2 סטים.",
-  },
-  {
-    id: 8,
-    title: "תרגיל חיזוק ברך – כיפוף ויישור",
-    category: "ברך",
-    youtubeId: "dQw4w9WgXcQ",
-    instructions:
-      "שבו על כיסא עם גב ישר. הרימו את הרגל באיטיות עד ליישור הברך, החזיקו 3 שניות והורידו. בצעו 10–15 חזרות לכל רגל, פעמיים ביום.",
-  },
-  {
-    id: 9,
-    title: "תרגיל תנועתיות קרסול",
-    category: "קרסול",
-    youtubeId: "RgKAFK5djSk",
-    instructions:
-      "בישיבה או שכיבה, סובבו את כף הרגל בעיגולים – 10 פעמים עם כיוון השעון ו-10 נגד. בצעו לכל רגל.",
-  },
-  {
-    id: 10,
-    title: "מתיחת כף רגל – גלגול עם כדור",
-    category: "כף רגל",
-    youtubeId: "9bZkp7q19f0",
-    instructions:
-      "שבו והניחו כדור טניס או גליל מתחת לכף הרגל. גלגלו בעדינות קדימה ואחורה כ-2 דקות לכל רגל.",
-  },
-  {
-    id: 11,
-    title: "תרגיל גזע מוח וסטיבולרי – מעקב עיניים",
-    category: "תרגול וסטיבולארי",
-    youtubeId: "dQw4w9WgXcQ",
-    instructions:
-      "שבו בנוחות. החזיקו אצבע מול העיניים והזיזו אותה באיטיות ימינה־שמאלה ולמעלה־למטה, בלי להזיז את הראש. עקבו אחרי האצבע בעיניים. 1–2 דקות, פעמיים ביום.",
-  },
+/** סדר הקטגוריות בתצוגה */
+export const CATEGORY_ORDER: Category[] = [
+  "Neck",
+  "Shoulder",
+  "Back",
+  "Core",
+  "Hip",
+  "Knee",
+  "Ankle",
+  "Advanced",
 ];
 
-export function getExercisesByIds(ids: number[]): Exercise[] {
+/** תרגום קטגוריה לתצוגה בעברית */
+export const CATEGORY_LABELS: Record<Category, string> = {
+  Neck: "צוואר",
+  Back: "גב",
+  Shoulder: "כתף",
+  Core: "ליבה",
+  Hip: "ירך",
+  Knee: "ברך",
+  Ankle: "קרסול",
+  Advanced: "מתקדם",
+};
+
+export const exercisesData: Exercise[] = [
+  { id: "1", title: "גשר קלאסי (Bridging)", category: "Core", youtubeId: "", instructions: "בשכיבה על הגב עם ברכיים כפופות, הרם אגן כלפי מעלה וכווץ ישבנים בסוף התנועה." },
+  { id: "2", title: "גשר על רגל אחת", category: "Core", youtubeId: "", instructions: "יישר רגל אחת באוויר, ודחוף את האגן למעלה בעזרת הרגל שעל המזרן." },
+  { id: "3", title: "הטיות אגן (Pelvic Tilts)", category: "Core", youtubeId: "", instructions: "הצמד את הגב התחתון למזרן על ידי כיווץ שרירי הבטן התחתונה." },
+  { id: "4", title: "הרמת רגל ישרה (SLR)", category: "Hip", youtubeId: "", instructions: "כווץ את הארבע ראשי והרם רגל ישרה עד לגובה הברך השנייה (הכפופה)." },
+  { id: "5", title: "חרק מת (Deadbug)", category: "Core", youtubeId: "", instructions: "שמור על גב צמוד למזרן ונתק יד ורגל נגדית במקביל." },
+  { id: "6", title: "החלקת עקב (Heel Slides)", category: "Knee", youtubeId: "", instructions: "החלק את העקב על המזרן לכיוון הישבן ויישר חזרה באיטיות." },
+  { id: "7", title: "מתיחת פיריפורמיס (Figure 4)", category: "Hip", youtubeId: "", instructions: "הנח קרסול על ברך נגדית ומשוך את הירך לכיוון החזה." },
+  { id: "8", title: "מתיחת המסטרינג עם גומייה", category: "Knee", youtubeId: "", instructions: "עטוף את כף הרגל בגומייה ויישר את הרגל כלפי התקרה." },
+  { id: "9", title: "רוטציות מותניות", category: "Back", youtubeId: "", instructions: "ברכיים כפופות וצמודות, הפל אותן בעדינות מצד לצד." },
+  { id: "10", title: "כפיפת בטן מקגיל", category: "Core", youtubeId: "", instructions: "ידיים תחת הגב התחתון, רגל אחת כפופה, נתק קלות את הראש והשכמות." },
+  { id: "11", title: "כיווץ סנטר בשכיבה", category: "Neck", youtubeId: "", instructions: "דחוף את הסנטר לאחור כלפי התקרה, שמור 5 שניות. חזור 10 פעמים." },
+];
+
+export function getExercisesByIds(ids: string[]): Exercise[] {
   const set = new Set(ids);
-  return EXERCISES.filter((e) => set.has(e.id));
+  return exercisesData.filter((e) => set.has(e.id));
 }
 
-/** מחזיר תרגילים מקובצים לפי רובריקה, בסדר הרובריקות המוגדר */
-export function groupExercisesByCategory(exercises: Exercise[]): { category: string; exercises: Exercise[] }[] {
-  const map = new Map<string, Exercise[]>();
-  for (const cat of CATEGORIES) {
+/** מחזיר תרגילים מקובצים לפי קטגוריה, עם כותרת בעברית */
+export function groupExercisesByCategory(
+  exercises: Exercise[]
+): { category: Category; categoryLabel: string; exercises: Exercise[] }[] {
+  const map = new Map<Category, Exercise[]>();
+  for (const cat of CATEGORY_ORDER) {
     map.set(cat, []);
   }
   for (const ex of exercises) {
@@ -130,7 +64,9 @@ export function groupExercisesByCategory(exercises: Exercise[]): { category: str
     list.push(ex);
     map.set(ex.category, list);
   }
-  return CATEGORIES.map((category) => ({ category, exercises: map.get(category) ?? [] })).filter(
-    (g) => g.exercises.length > 0
-  );
+  return CATEGORY_ORDER.map((category) => ({
+    category,
+    categoryLabel: CATEGORY_LABELS[category],
+    exercises: map.get(category) ?? [],
+  })).filter((g) => g.exercises.length > 0);
 }
