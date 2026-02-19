@@ -25,8 +25,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 301)
   }
 
-  // Redirect http to https (if not already handled by hosting)
-  if (protocol === 'http') {
+  // Redirect http to https (skip on localhost so local dev works)
+  const isLocalhost = host.includes('localhost') || host.startsWith('127.0.0.1')
+  if (!isLocalhost && protocol === 'http') {
     const url = request.nextUrl.clone()
     url.protocol = 'https:'
     return NextResponse.redirect(url, 301)
