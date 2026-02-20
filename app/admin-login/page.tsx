@@ -1,17 +1,22 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const next = searchParams.get("next") || "/admin-exercises-builder";
+  const [nextPath, setNextPath] = useState("/admin-exercises-builder");
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const next = params.get("next");
+    if (next) setNextPath(next);
+  }, []);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +32,7 @@ export default function AdminLoginPage() {
         setError("שם משתמש או סיסמה שגויים");
         return;
       }
-      router.push(next);
+      router.push(nextPath);
     } catch {
       setError("אירעה שגיאה. נסה שוב.");
     } finally {
