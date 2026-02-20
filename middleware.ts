@@ -7,6 +7,7 @@ import {
   createRateLimitResponse,
 } from '@/lib/security'
 import { getRateLimitConfig, securityConfig } from '@/config/security.config'
+import { ADMIN_COOKIE_NAME, getAdminSessionToken } from '@/lib/adminAuth'
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -31,6 +32,18 @@ export function middleware(request: NextRequest) {
     const url = request.nextUrl.clone()
     url.protocol = 'https:'
     return NextResponse.redirect(url, 301)
+  }
+
+  // Protect admin builder with server-side session cookie
+  if (pathname.startsWith('/admin-exercises-builder')) {
+    const sessionCookie = request.cookies.get(ADMIN_COOKIE_NAME)?.value
+    const isAuthenticated = sessionCookie === getAdminSessionToken()
+    if (!isAuthenticated) {
+      const loginUrl = request.nextUrl.clone()
+      loginUrl.pathname = '/admin-login'
+      loginUrl.searchParams.set('next', pathname)
+      return NextResponse.redirect(loginUrl)
+    }
   }
 
   // Skip rate limiting for static files and Next.js internals

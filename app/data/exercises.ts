@@ -87,6 +87,7 @@ export interface Dosage {
   reps: number;
   perDay: number;
   perWeek: number;
+  note: string;
 }
 
 export const DEFAULT_DOSAGE: Dosage = {
@@ -94,6 +95,7 @@ export const DEFAULT_DOSAGE: Dosage = {
   reps: 10,
   perDay: 1,
   perWeek: 7,
+  note: "",
 };
 
 /** Parse ?p= string: "id:sets:reps:perDay:perWeek,id2:..." */
@@ -104,6 +106,15 @@ export function parsePrescriptionParam(p: string): { id: string; dosage: Dosage 
     const parts = segment.split(":");
     if (parts.length < 5) continue;
     const [id, sets, reps, perDay, perWeek] = parts;
+    const noteEncoded = parts.slice(5).join(":");
+    let note = "";
+    if (noteEncoded) {
+      try {
+        note = decodeURIComponent(noteEncoded);
+      } catch {
+        note = "";
+      }
+    }
     const num = (s: string) => Math.max(0, parseInt(s, 10) || 0);
     items.push({
       id: id!.trim(),
@@ -112,6 +123,7 @@ export function parsePrescriptionParam(p: string): { id: string; dosage: Dosage 
         reps: num(reps!),
         perDay: num(perDay!),
         perWeek: num(perWeek!),
+        note,
       },
     });
   }
@@ -123,9 +135,12 @@ export function buildPrescriptionParam(
   items: { id: string; dosage: Dosage }[]
 ): string {
   return items
-    .map(({ id, dosage }) =>
-      [id, dosage.sets, dosage.reps, dosage.perDay, dosage.perWeek].join(":")
-    )
+    .map(({ id, dosage }) => {
+      const base = [id, dosage.sets, dosage.reps, dosage.perDay, dosage.perWeek];
+      const note = dosage.note.trim();
+      if (!note) return base.join(":");
+      return [...base, encodeURIComponent(note)].join(":");
+    })
     .join(",");
 }
 

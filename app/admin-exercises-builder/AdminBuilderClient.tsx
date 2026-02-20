@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import {
   exercisesData,
   CATEGORY_ORDER,
@@ -11,22 +12,12 @@ import {
   type Dosage,
 } from "@/app/data/exercises";
 
-const ADMIN_PASSWORD = "1234";
-
 export default function AdminBuilderClient() {
-  const [authenticated, setAuthenticated] = useState(false);
-  const [password, setPassword] = useState("");
+  const router = useRouter();
   const [selectedDosages, setSelectedDosages] = useState<Record<string, Dosage>>({});
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const [copied, setCopied] = useState(false);
-
-  const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault();
-      if (password === ADMIN_PASSWORD) setAuthenticated(true);
-    },
-    [password]
-  );
 
   const toggleExercise = useCallback((id: string) => {
     setSelectedDosages((prev) => {
@@ -40,11 +31,23 @@ export default function AdminBuilderClient() {
     });
   }, []);
 
-  const updateDosage = useCallback((id: string, field: keyof Dosage, value: number) => {
+  const updateNumericDosage = useCallback((id: string, field: "sets" | "reps" | "perDay" | "perWeek", value: number) => {
     setSelectedDosages((prev) => {
       const current = prev[id] ?? { ...DEFAULT_DOSAGE };
       return { ...prev, [id]: { ...current, [field]: Math.max(0, value) } };
     });
+  }, []);
+
+  const updateNote = useCallback((id: string, note: string) => {
+    setSelectedDosages((prev) => {
+      const current = prev[id] ?? { ...DEFAULT_DOSAGE };
+      return { ...prev, [id]: { ...current, note } };
+    });
+  }, []);
+
+  const clearAll = useCallback(() => {
+    setSelectedDosages({});
+    setCopied(false);
   }, []);
 
   const copyPlanUrl = useCallback(() => {
@@ -60,52 +63,41 @@ export default function AdminBuilderClient() {
     });
   }, [selectedDosages]);
 
-  if (!authenticated) {
-    return (
-      <div className="min-h-[60vh] flex items-center justify-center px-4" dir="rtl">
-        <form
-          onSubmit={handleSubmit}
-          className="w-full max-w-sm rounded-2xl bg-white shadow-lg border border-gray-200 p-8"
-        >
-          <label htmlFor="admin-password" className="block text-lg font-medium text-gray-800 mb-3">
-            סיסמה
-          </label>
-          <input
-            id="admin-password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="הזן סיסמה"
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
-            autoComplete="off"
-          />
-          <button
-            type="submit"
-            className="mt-4 w-full rounded-xl bg-primary-dark text-white font-medium py-3 hover:bg-primary-darker transition"
-          >
-            כניסה
-          </button>
-        </form>
-      </div>
-    );
-  }
-
   const exercisesInSelectedCategory =
     selectedCategory !== null
       ? exercisesData.filter((ex) => ex.category === selectedCategory)
       : [];
+  const filteredExercisesInSelectedCategory = useMemo(() => {
+    if (!searchTerm.trim()) return exercisesInSelectedCategory;
+    const q = searchTerm.trim().toLowerCase();
+    return exercisesInSelectedCategory.filter((ex) => ex.title.toLowerCase().includes(q));
+  }, [exercisesInSelectedCategory, searchTerm]);
 
   const selectedIds = Object.keys(selectedDosages).sort((a, b) => Number(a) - Number(b));
   const selectedExercises = selectedIds
     .map((id) => exercisesData.find((e) => e.id === id))
     .filter((ex): ex is (typeof exercisesData)[0] => ex != null);
 
+  const logout = useCallback(async () => {
+    await fetch("/api/admin-logout", { method: "POST" });
+    router.push("/admin-login");
+  }, [router]);
+
   return (
     <div className="min-h-screen pb-56 md:pb-60" dir="rtl">
       <div className="mx-auto max-w-2xl px-4 py-8">
         {selectedCategory === null ? (
           <>
-            <h1 className="text-2xl font-bold text-gray-900 mb-6">בונה תוכנית תרגילים</h1>
+            <div className="mb-6 flex items-center justify-between gap-3">
+              <h1 className="text-2xl font-bold text-gray-900">בונה תוכנית תרגילים</h1>
+              <button
+                type="button"
+                onClick={logout}
+                className="text-sm rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
+              >
+                יציאה
+              </button>
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {CATEGORY_ORDER.map((category) => (
                 <button
@@ -132,11 +124,20 @@ export default function AdminBuilderClient() {
             <h2 className="text-xl font-bold text-primary-dark mb-4 pb-2 border-b border-gray-200">
               {CATEGORY_LABELS[selectedCategory]}
             </h2>
+            <div className="mb-4">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="חיפוש תרגיל בקטגוריה..."
+                className="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
+              />
+            </div>
             <ul className="space-y-3">
-              {exercisesInSelectedCategory.length === 0 ? (
+              {filteredExercisesInSelectedCategory.length === 0 ? (
                 <li className="text-gray-500 text-sm py-2">אין תרגילים בקטגוריה זו</li>
               ) : (
-                exercisesInSelectedCategory.map((ex) => {
+                filteredExercisesInSelectedCategory.map((ex) => {
                   const selected = !!selectedDosages[ex.id];
                   const dosage = selected ? selectedDosages[ex.id]! : DEFAULT_DOSAGE;
                   return (
@@ -171,7 +172,7 @@ export default function AdminBuilderClient() {
                                 min={0}
                                 value={dosage.sets}
                                 onChange={(e) =>
-                                  updateDosage(ex.id, "sets", parseInt(e.target.value, 10) || 0)
+                                  updateNumericDosage(ex.id, "sets", parseInt(e.target.value, 10) || 0)
                                 }
                                 className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
                               />
@@ -183,7 +184,7 @@ export default function AdminBuilderClient() {
                                 min={0}
                                 value={dosage.reps}
                                 onChange={(e) =>
-                                  updateDosage(ex.id, "reps", parseInt(e.target.value, 10) || 0)
+                                  updateNumericDosage(ex.id, "reps", parseInt(e.target.value, 10) || 0)
                                 }
                                 className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
                               />
@@ -195,7 +196,7 @@ export default function AdminBuilderClient() {
                                 min={0}
                                 value={dosage.perDay}
                                 onChange={(e) =>
-                                  updateDosage(ex.id, "perDay", parseInt(e.target.value, 10) || 0)
+                                  updateNumericDosage(ex.id, "perDay", parseInt(e.target.value, 10) || 0)
                                 }
                                 className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
                               />
@@ -208,9 +209,19 @@ export default function AdminBuilderClient() {
                                 max={7}
                                 value={dosage.perWeek}
                                 onChange={(e) =>
-                                  updateDosage(ex.id, "perWeek", parseInt(e.target.value, 10) || 0)
+                                  updateNumericDosage(ex.id, "perWeek", parseInt(e.target.value, 10) || 0)
                                 }
                                 className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
+                              />
+                            </label>
+                            <label className="col-span-2 sm:col-span-4 flex flex-col gap-1">
+                              <span className="text-xs text-gray-500">הערה אישית למטופל</span>
+                              <textarea
+                                value={dosage.note}
+                                onChange={(e) => updateNote(ex.id, e.target.value)}
+                                rows={2}
+                                placeholder="לדוגמה: לשים לב לנשימה ולבצע לאט"
+                                className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full resize-y"
                               />
                             </label>
                           </div>
@@ -261,7 +272,7 @@ export default function AdminBuilderClient() {
                             min={0}
                             value={dosage.sets}
                             onChange={(e) =>
-                              updateDosage(ex.id, "sets", parseInt(e.target.value, 10) || 0)
+                              updateNumericDosage(ex.id, "sets", parseInt(e.target.value, 10) || 0)
                             }
                             className="rounded-md border border-gray-300 px-1.5 py-1 text-xs w-full"
                           />
@@ -273,7 +284,7 @@ export default function AdminBuilderClient() {
                             min={0}
                             value={dosage.reps}
                             onChange={(e) =>
-                              updateDosage(ex.id, "reps", parseInt(e.target.value, 10) || 0)
+                              updateNumericDosage(ex.id, "reps", parseInt(e.target.value, 10) || 0)
                             }
                             className="rounded-md border border-gray-300 px-1.5 py-1 text-xs w-full"
                           />
@@ -286,12 +297,19 @@ export default function AdminBuilderClient() {
                             max={7}
                             value={dosage.perWeek}
                             onChange={(e) =>
-                              updateDosage(ex.id, "perWeek", parseInt(e.target.value, 10) || 0)
+                              updateNumericDosage(ex.id, "perWeek", parseInt(e.target.value, 10) || 0)
                             }
                             className="rounded-md border border-gray-300 px-1.5 py-1 text-xs w-full"
                           />
                         </label>
                       </div>
+                    <textarea
+                      value={dosage.note}
+                      onChange={(e) => updateNote(ex.id, e.target.value)}
+                      rows={1}
+                      placeholder="הערה אישית..."
+                      className="rounded-md border border-gray-300 px-2 py-1 text-xs w-full resize-none"
+                    />
                     </div>
                   );
                 })}
@@ -313,6 +331,14 @@ export default function AdminBuilderClient() {
             className="rounded-xl bg-primary-dark text-white font-medium px-6 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-darker transition"
           >
             {copied ? "הועתק!" : "צור קישור והעתק"}
+          </button>
+          <button
+            type="button"
+            onClick={clearAll}
+            disabled={selectedIds.length === 0}
+            className="rounded-xl border border-gray-300 bg-white text-gray-700 font-medium px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition"
+          >
+            נקה הכל
           </button>
         </div>
       </footer>

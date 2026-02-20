@@ -52,21 +52,28 @@ function LazyYouTube({ id, title }: { id: string; title: string }) {
 }
 
 function DosageBadges({ dosage }: { dosage: PlanItem["dosage"] }) {
-  const { sets, reps, perDay, perWeek } = dosage;
+  const { sets, reps, perDay, perWeek, note } = dosage;
   return (
-    <div className="flex flex-wrap gap-2 mt-3" dir="rtl">
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 text-primary-dark px-3 py-1.5 text-sm font-medium">
-        <Repeat className="h-4 w-4" aria-hidden />
-        {sets} סטים × {reps} חזרות
-      </span>
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary/10 text-secondary-dark px-3 py-1.5 text-sm font-medium">
-        <Clock className="h-4 w-4" aria-hidden />
-        {perDay} פעמים ביום
-      </span>
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 text-amber-800 px-3 py-1.5 text-sm font-medium">
-        <Calendar className="h-4 w-4" aria-hidden />
-        {perWeek} ימים בשבוע
-      </span>
+    <div className="mt-3" dir="rtl">
+      <div className="flex flex-wrap gap-2">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 text-primary-dark px-3 py-1.5 text-sm font-medium">
+          <Repeat className="h-4 w-4" aria-hidden />
+          {sets} סטים × {reps} חזרות
+        </span>
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary/10 text-secondary-dark px-3 py-1.5 text-sm font-medium">
+          <Clock className="h-4 w-4" aria-hidden />
+          {perDay} פעמים ביום
+        </span>
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 text-amber-800 px-3 py-1.5 text-sm font-medium">
+          <Calendar className="h-4 w-4" aria-hidden />
+          {perWeek} ימים בשבוע
+        </span>
+      </div>
+      {note.trim() && (
+        <div className="mt-3 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900 whitespace-pre-line">
+          <span className="font-semibold">הערת המטפל:</span> {note}
+        </div>
+      )}
     </div>
   );
 }
