@@ -101,7 +101,7 @@ export default function AdminBuilderClient() {
     .filter((ex): ex is (typeof exercisesData)[0] => ex != null);
 
   return (
-    <div className="min-h-screen pb-40 md:pb-44" dir="rtl">
+    <div className="min-h-screen pb-56 md:pb-60" dir="rtl">
       <div className="mx-auto max-w-2xl px-4 py-8">
         {selectedCategory === null ? (
           <>
@@ -227,85 +227,75 @@ export default function AdminBuilderClient() {
 
       {selectedExercises.length > 0 && (
         <div className="fixed bottom-20 left-0 right-0 z-20 mx-auto max-w-2xl px-4">
-          <div className="rounded-t-2xl border border-b-0 border-gray-200 bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.08)] max-h-[50vh] overflow-hidden flex flex-col">
-            <div className="px-4 py-3 border-b border-gray-100 font-bold text-gray-900 shrink-0">
+          <div className="rounded-2xl border border-gray-200 bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.08)] h-36 overflow-hidden flex flex-col">
+            <div className="px-4 py-2 border-b border-gray-100 font-bold text-gray-900 text-sm shrink-0">
               התרגילים שנבחרו ({selectedExercises.length})
             </div>
-            <div className="overflow-y-auto p-4 space-y-3">
-              {selectedExercises.map((ex) => {
-                const dosage = selectedDosages[ex.id]!;
-                return (
-                  <div
-                    key={ex.id}
-                    className="rounded-xl border border-gray-200 bg-gray-50/80 p-3 space-y-2"
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <span className="font-medium text-gray-900 text-sm leading-tight">
-                        {ex.title}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => toggleExercise(ex.id)}
-                        className="text-gray-400 hover:text-red-600 shrink-0 p-1"
-                        aria-label="הסר מתוכנית"
-                      >
-                        ×
-                      </button>
+            <div className="p-2 overflow-x-auto overflow-y-hidden">
+              <div className="flex gap-2 h-full">
+                {selectedExercises.map((ex) => {
+                  const dosage = selectedDosages[ex.id]!;
+                  return (
+                    <div
+                      key={ex.id}
+                      className="shrink-0 w-56 rounded-xl border border-gray-200 bg-gray-50 p-2 flex flex-col gap-1"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <span className="font-medium text-gray-900 text-xs leading-tight line-clamp-2">
+                          {ex.title}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => toggleExercise(ex.id)}
+                          className="text-gray-400 hover:text-red-600 shrink-0 p-1 leading-none"
+                          aria-label="הסר מתוכנית"
+                        >
+                          ×
+                        </button>
+                      </div>
+                      <div className="grid grid-cols-3 gap-1.5 mt-auto">
+                        <label className="flex flex-col gap-0.5">
+                          <span className="text-[10px] text-gray-500">סטים</span>
+                          <input
+                            type="number"
+                            min={0}
+                            value={dosage.sets}
+                            onChange={(e) =>
+                              updateDosage(ex.id, "sets", parseInt(e.target.value, 10) || 0)
+                            }
+                            className="rounded-md border border-gray-300 px-1.5 py-1 text-xs w-full"
+                          />
+                        </label>
+                        <label className="flex flex-col gap-0.5">
+                          <span className="text-[10px] text-gray-500">חזרות</span>
+                          <input
+                            type="number"
+                            min={0}
+                            value={dosage.reps}
+                            onChange={(e) =>
+                              updateDosage(ex.id, "reps", parseInt(e.target.value, 10) || 0)
+                            }
+                            className="rounded-md border border-gray-300 px-1.5 py-1 text-xs w-full"
+                          />
+                        </label>
+                        <label className="flex flex-col gap-0.5">
+                          <span className="text-[10px] text-gray-500">ימים/שבוע</span>
+                          <input
+                            type="number"
+                            min={0}
+                            max={7}
+                            value={dosage.perWeek}
+                            onChange={(e) =>
+                              updateDosage(ex.id, "perWeek", parseInt(e.target.value, 10) || 0)
+                            }
+                            className="rounded-md border border-gray-300 px-1.5 py-1 text-xs w-full"
+                          />
+                        </label>
+                      </div>
                     </div>
-                    <div className="grid grid-cols-4 gap-2">
-                      <label className="flex flex-col gap-0.5">
-                        <span className="text-xs text-gray-500">סטים</span>
-                        <input
-                          type="number"
-                          min={0}
-                          value={dosage.sets}
-                          onChange={(e) =>
-                            updateDosage(ex.id, "sets", parseInt(e.target.value, 10) || 0)
-                          }
-                          className="rounded-lg border border-gray-300 px-2 py-1.5 text-sm w-full"
-                        />
-                      </label>
-                      <label className="flex flex-col gap-0.5">
-                        <span className="text-xs text-gray-500">חזרות</span>
-                        <input
-                          type="number"
-                          min={0}
-                          value={dosage.reps}
-                          onChange={(e) =>
-                            updateDosage(ex.id, "reps", parseInt(e.target.value, 10) || 0)
-                          }
-                          className="rounded-lg border border-gray-300 px-2 py-1.5 text-sm w-full"
-                        />
-                      </label>
-                      <label className="flex flex-col gap-0.5">
-                        <span className="text-xs text-gray-500">פעמים ביום</span>
-                        <input
-                          type="number"
-                          min={0}
-                          value={dosage.perDay}
-                          onChange={(e) =>
-                            updateDosage(ex.id, "perDay", parseInt(e.target.value, 10) || 0)
-                          }
-                          className="rounded-lg border border-gray-300 px-2 py-1.5 text-sm w-full"
-                        />
-                      </label>
-                      <label className="flex flex-col gap-0.5">
-                        <span className="text-xs text-gray-500">ימים בשבוע</span>
-                        <input
-                          type="number"
-                          min={0}
-                          max={7}
-                          value={dosage.perWeek}
-                          onChange={(e) =>
-                            updateDosage(ex.id, "perWeek", parseInt(e.target.value, 10) || 0)
-                          }
-                          className="rounded-lg border border-gray-300 px-2 py-1.5 text-sm w-full"
-                        />
-                      </label>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
