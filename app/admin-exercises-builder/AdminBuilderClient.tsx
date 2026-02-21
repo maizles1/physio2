@@ -1,26 +1,42 @@
 "use client";
 
 import { useState, useCallback, useMemo, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   CATEGORY_ORDER,
   CATEGORY_LABELS,
   DEFAULT_DOSAGE,
   buildPrescriptionParam,
+  parsePrescriptionParam,
   type Category,
   type Dosage,
   type Exercise,
 } from "@/app/data/exercises";
 
+interface SavedPlanItem {
+  id: string;
+  patientName: string;
+  prescriptionParam: string;
+  createdAt: string;
+  updatedAt?: string;
+}
+
 export default function AdminBuilderClient() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [allExercises, setAllExercises] = useState<Exercise[]>([]);
   const [exercisesLoading, setExercisesLoading] = useState(true);
   const [selectedDosages, setSelectedDosages] = useState<Record<string, Dosage>>({});
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [copied, setCopied] = useState(false);
+  const [saveModalOpen, setSaveModalOpen] = useState(false);
+  const [patientName, setPatientName] = useState("");
+  const [updatePlanId, setUpdatePlanId] = useState<string>("");
+  const [savedPlans, setSavedPlans] = useState<SavedPlanItem[]>([]);
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "success" | "error">("idle");
+  const [saveError, setSaveError] = useState("");
 
   useEffect(() => {
     fetch("/api/exercises")
@@ -31,6 +47,32 @@ export default function AdminBuilderClient() {
       .catch(() => setAllExercises([]))
       .finally(() => setExercisesLoading(false));
   }, []);
+
+  const loadPlanId = searchParams.get("load");
+  useEffect(() => {
+    if (!loadPlanId) return;
+    let cancelled = false;
+    fetch("/api/admin-saved-plans", { credentials: "include" })
+      .then((r) => (r.ok ? r.json() : { plans: [] }))
+      .then((data) => {
+        if (cancelled || !Array.isArray(data?.plans)) return;
+        const plan = data.plans.find((p: SavedPlanItem) => p.id === loadPlanId);
+        if (!plan) return;
+        const items = parsePrescriptionParam(plan.prescriptionParam);
+        const dosages: Record<string, Dosage> = {};
+        for (const { id, dosage } of items) {
+          dosages[id] = dosage;
+        }
+        setSelectedDosages(dosages);
+        setPatientName(plan.patientName);
+        setUpdatePlanId(plan.id);
+        router.replace("/admin-exercises-builder", { scroll: false });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [loadPlanId, router]);
 
   const toggleExercise = useCallback((id: string) => {
     setSelectedDosages((prev) => {
@@ -76,6 +118,61 @@ export default function AdminBuilderClient() {
     });
   }, [selectedDosages]);
 
+  useEffect(() => {
+    if (!saveModalOpen) return;
+    fetch("/api/admin-saved-plans", { credentials: "include" })
+      .then((r) => (r.ok ? r.json() : { plans: [] }))
+      .then((data) => {
+        setSavedPlans(Array.isArray(data?.plans) ? data.plans : []);
+      })
+      .catch(() => setSavedPlans([]));
+  }, [saveModalOpen]);
+
+  const savePlanUnderPatient = useCallback(async () => {
+    const name = patientName.trim();
+    if (!name) {
+      setSaveError("הזן שם מטופל");
+      return;
+    }
+    const ids = Object.keys(selectedDosages).sort((a, b) => {
+      const aNum = Number(a);
+      const bNum = Number(b);
+      if (!Number.isNaN(aNum) && !Number.isNaN(bNum)) return aNum - bNum;
+      return String(a).localeCompare(String(b));
+    });
+    const items = ids.map((id) => ({ id, dosage: selectedDosages[id]! }));
+    const prescriptionParam = buildPrescriptionParam(items);
+    setSaveStatus("saving");
+    setSaveError("");
+    try {
+      const body: { patientName: string; prescriptionParam: string; id?: string } = {
+        patientName: name,
+        prescriptionParam,
+      };
+      if (updatePlanId) body.id = updatePlanId;
+      const res = await fetch("/api/admin-saved-plans", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(body),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setSaveError((data?.error as string) ?? "שמירה נכשלה");
+        setSaveStatus("error");
+        return;
+      }
+      setSaveStatus("success");
+      setSaveModalOpen(false);
+      setPatientName("");
+      setUpdatePlanId("");
+      setTimeout(() => setSaveStatus("idle"), 3000);
+    } catch {
+      setSaveError("שגיאת רשת");
+      setSaveStatus("error");
+    }
+  }, [patientName, updatePlanId, selectedDosages]);
+
   const exercisesInSelectedCategory =
     selectedCategory !== null ? allExercises.filter((e) => e.category === selectedCategory) : [];
   const filteredExercisesInSelectedCategory = useMemo(() => {
@@ -107,6 +204,12 @@ export default function AdminBuilderClient() {
             <div className="mb-6 flex items-center justify-between gap-3">
               <h1 className="text-2xl font-bold text-gray-900">בונה תוכנית תרגילים</h1>
               <div className="flex items-center gap-2">
+                <Link
+                  href="/admin-exercises-builder/plans"
+                  className="text-sm rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
+                >
+                  תוכניות שמורות
+                </Link>
                 <Link
                   href="/admin-exercises-builder/youtube"
                   className="text-sm rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
@@ -346,28 +449,109 @@ export default function AdminBuilderClient() {
       )}
 
       <footer className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg safe-area-pb z-10">
-        <div className="mx-auto max-w-2xl px-4 py-4 flex items-center justify-between gap-4">
+        <div className="mx-auto max-w-2xl px-4 py-4 flex flex-wrap items-center justify-between gap-3">
           <span className="text-sm text-gray-600">
             נבחרו {selectedIds.length} תרגילים
           </span>
-          <button
-            type="button"
-            onClick={copyPlanUrl}
-            disabled={selectedIds.length === 0}
-            className="rounded-xl bg-primary-dark text-white font-medium px-6 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-darker transition"
-          >
-            {copied ? "הועתק!" : "צור קישור והעתק"}
-          </button>
-          <button
-            type="button"
-            onClick={clearAll}
-            disabled={selectedIds.length === 0}
-            className="rounded-xl border border-gray-300 bg-white text-gray-700 font-medium px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition"
-          >
-            נקה הכל
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setSaveModalOpen(true)}
+              disabled={selectedIds.length === 0}
+              className="rounded-xl border border-primary-dark text-primary-dark font-medium px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/10 transition"
+            >
+              שמור תוכנית תחת שם המטופל
+            </button>
+            <button
+              type="button"
+              onClick={copyPlanUrl}
+              disabled={selectedIds.length === 0}
+              className="rounded-xl bg-primary-dark text-white font-medium px-6 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-darker transition"
+            >
+              {copied ? "הועתק!" : "צור קישור והעתק"}
+            </button>
+            <button
+              type="button"
+              onClick={clearAll}
+              disabled={selectedIds.length === 0}
+              className="rounded-xl border border-gray-300 bg-white text-gray-700 font-medium px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition"
+            >
+              נקה הכל
+            </button>
+          </div>
         </div>
       </footer>
+
+      {saveModalOpen && (
+        <div
+          className="fixed inset-0 z-30 flex items-center justify-center p-4 bg-black/50"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="save-plan-title"
+          onClick={() => {
+            setSaveModalOpen(false);
+            setSaveError("");
+            setSaveStatus("idle");
+          }}
+        >
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6" dir="rtl" onClick={(e) => e.stopPropagation()}>
+            <h2 id="save-plan-title" className="text-lg font-bold text-gray-900 mb-4">שמור תוכנית תחת שם המטופל</h2>
+            <label className="block text-sm font-medium text-gray-700 mb-1">שם המטופל</label>
+            <input
+              type="text"
+              value={patientName}
+              onChange={(e) => setPatientName(e.target.value)}
+              placeholder="לדוגמה: ישראל ישראלי"
+              className="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none mb-4"
+            />
+            {savedPlans.length > 0 && (
+              <>
+                <label className="block text-sm font-medium text-gray-700 mb-1">עדכן תוכנית קיימת (אופציונלי)</label>
+                <select
+                  value={updatePlanId}
+                  onChange={(e) => {
+                    const id = e.target.value;
+                    setUpdatePlanId(id);
+                    const plan = savedPlans.find((p) => p.id === id);
+                    if (plan) setPatientName(plan.patientName);
+                  }}
+                  className="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none mb-4"
+                >
+                  <option value="">תוכנית חדשה</option>
+                  {savedPlans.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.patientName} ({new Date(p.updatedAt ?? p.createdAt).toLocaleDateString("he-IL")})
+                    </option>
+                  ))}
+                </select>
+              </>
+            )}
+            {saveError && <p className="text-sm text-red-600 mb-2">{saveError}</p>}
+            {saveStatus === "success" && <p className="text-sm text-green-700 mb-2">התוכנית נשמרה בהצלחה.</p>}
+            <div className="flex gap-2 justify-end">
+              <button
+                type="button"
+                onClick={() => {
+                  setSaveModalOpen(false);
+                  setSaveError("");
+                  setSaveStatus("idle");
+                }}
+                className="rounded-xl border border-gray-300 px-4 py-2.5 text-gray-700 hover:bg-gray-50"
+              >
+                ביטול
+              </button>
+              <button
+                type="button"
+                onClick={savePlanUnderPatient}
+                disabled={saveStatus === "saving" || !patientName.trim()}
+                className="rounded-xl bg-primary-dark text-white font-medium px-5 py-2.5 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-darker"
+              >
+                {saveStatus === "saving" ? "שומר..." : "שמור"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
