@@ -68,7 +68,7 @@ export default function AdminYoutubeClient() {
 
   const updateTitle = useCallback((id: string, title: string) => {
     setCustomExercises((prev) =>
-      prev.map((e) => (e.id === id ? { ...e, title: title.trim() || e.title } : e))
+      prev.map((e) => (e.id === id ? { ...e, title } : e))
     );
   }, []);
 
