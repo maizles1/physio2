@@ -1,4 +1,5 @@
 import youtubeOverridesData from "./youtube-ids.json";
+import customExercisesData from "./custom-exercises.json";
 
 export type Category =
   | "Neck"
@@ -89,6 +90,34 @@ const youtubeOverrides: Record<string, string> =
     ? (youtubeOverridesData as Record<string, string>)
     : {};
 
+export interface CustomExerciseData {
+  exercises: { id: string; category: string; title: string; youtubeId: string }[];
+}
+
+const customExercisesRaw =
+  typeof customExercisesData === "object" &&
+  customExercisesData !== null &&
+  "exercises" in customExercisesData &&
+  Array.isArray((customExercisesData as CustomExerciseData).exercises)
+    ? (customExercisesData as CustomExerciseData).exercises
+    : [];
+
+const customExercises: Exercise[] = customExercisesRaw
+  .filter(
+    (e) =>
+      e &&
+      typeof e.id === "string" &&
+      typeof e.category === "string" &&
+      CATEGORY_ORDER.includes(e.category as Category)
+  )
+  .map((e) => ({
+    id: e.id,
+    title: e.title.trim() || "תרגיל",
+    category: e.category as Category,
+    youtubeId: typeof e.youtubeId === "string" ? e.youtubeId.trim() : "",
+    instructions: "",
+  }));
+
 export interface Dosage {
   sets: number;
   reps: number;
@@ -151,12 +180,28 @@ export function buildPrescriptionParam(
     .join(",");
 }
 
+/** All exercises (predefined + custom) for a category. */
+export function getExercisesByCategory(category: Category): Exercise[] {
+  const fromData = exercisesData.filter((e) => e.category === category);
+  const fromCustom = customExercises.filter((e) => e.category === category);
+  return [...fromData, ...fromCustom];
+}
+
+/** All exercises (predefined + custom). */
+export function getAllExercises(): Exercise[] {
+  return [...exercisesData, ...customExercises];
+}
+
 export function getExercisesByIds(ids: string[]): Exercise[] {
   const set = new Set(ids);
-  return exercisesData.filter((e) => set.has(e.id));
+  return ids
+    .map((id) => getExerciseById(id))
+    .filter((ex): ex is Exercise => ex != null);
 }
 
 export function getExerciseById(id: string): Exercise | undefined {
+  const custom = customExercises.find((e) => e.id === id);
+  if (custom) return custom;
   const exercise = exercisesData.find((e) => e.id === id);
   if (!exercise) return undefined;
   const overrideId = youtubeOverrides[id];

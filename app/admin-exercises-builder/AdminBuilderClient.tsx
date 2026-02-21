@@ -4,7 +4,8 @@ import { useState, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
-  exercisesData,
+  getExercisesByCategory,
+  getExerciseById,
   CATEGORY_ORDER,
   CATEGORY_LABELS,
   DEFAULT_DOSAGE,
@@ -65,19 +66,22 @@ export default function AdminBuilderClient() {
   }, [selectedDosages]);
 
   const exercisesInSelectedCategory =
-    selectedCategory !== null
-      ? exercisesData.filter((ex) => ex.category === selectedCategory)
-      : [];
+    selectedCategory !== null ? getExercisesByCategory(selectedCategory) : [];
   const filteredExercisesInSelectedCategory = useMemo(() => {
     if (!searchTerm.trim()) return exercisesInSelectedCategory;
     const q = searchTerm.trim().toLowerCase();
     return exercisesInSelectedCategory.filter((ex) => ex.title.toLowerCase().includes(q));
   }, [exercisesInSelectedCategory, searchTerm]);
 
-  const selectedIds = Object.keys(selectedDosages).sort((a, b) => Number(a) - Number(b));
+  const selectedIds = Object.keys(selectedDosages).sort((a, b) => {
+    const aNum = Number(a);
+    const bNum = Number(b);
+    if (!Number.isNaN(aNum) && !Number.isNaN(bNum)) return aNum - bNum;
+    return String(a).localeCompare(String(b));
+  });
   const selectedExercises = selectedIds
-    .map((id) => exercisesData.find((e) => e.id === id))
-    .filter((ex): ex is (typeof exercisesData)[0] => ex != null);
+    .map((id) => getExerciseById(id))
+    .filter((ex): ex is NonNullable<ReturnType<typeof getExerciseById>> => ex != null);
 
   const logout = useCallback(async () => {
     await fetch("/api/admin-logout", { method: "POST" });
