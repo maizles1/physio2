@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function AdminLoginPage() {
-  const router = useRouter();
   const [nextPath, setNextPath] = useState("/admin-exercises-builder");
 
   const [username, setUsername] = useState("");
@@ -27,12 +25,14 @@ export default function AdminLoginPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
+        credentials: "include",
       });
       if (!res.ok) {
-        setError("שם משתמש או סיסמה שגויים");
+        const data = await res.json().catch(() => ({}));
+        setError(data.error === "Invalid credentials" ? "שם משתמש או סיסמה שגויים" : "אירעה שגיאה. נסה שוב.");
         return;
       }
-      router.push(nextPath);
+      window.location.assign(nextPath);
     } catch {
       setError("אירעה שגיאה. נסה שוב.");
     } finally {

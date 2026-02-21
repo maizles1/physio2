@@ -37,3 +37,8 @@ export function validateAdminCredentials(username: string, password: string): bo
 export function isUsingCustomAdminCredentials(): boolean {
   return !!(process.env.ADMIN_USERNAME?.trim() || process.env.ADMIN_PASSWORD?.trim());
 }
+
+/** For debugging: true if ADMIN_SESSION_TOKEN is set in env (middleware can validate cookie). */
+export function isSessionTokenConfigured(): boolean {
+  return !!(process.env.ADMIN_SESSION_TOKEN?.trim());
+}

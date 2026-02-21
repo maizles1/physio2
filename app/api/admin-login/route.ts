@@ -15,10 +15,11 @@ export async function POST(request: Request) {
   }
 
   const response = NextResponse.json({ ok: true });
+  const isProd = process.env.NODE_ENV === "production";
   response.cookies.set(ADMIN_COOKIE_NAME, getAdminSessionToken(), {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    secure: isProd,
+    sameSite: "lax", // so cookie is sent on next full navigation
     path: "/",
     maxAge: 60 * 60 * 8, // 8 hours
   });
