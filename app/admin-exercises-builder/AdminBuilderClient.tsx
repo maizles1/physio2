@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   exercisesData,
   CATEGORY_ORDER,
@@ -90,13 +91,21 @@ export default function AdminBuilderClient() {
           <>
             <div className="mb-6 flex items-center justify-between gap-3">
               <h1 className="text-2xl font-bold text-gray-900">בונה תוכנית תרגילים</h1>
-              <button
-                type="button"
-                onClick={logout}
-                className="text-sm rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
-              >
-                יציאה
-              </button>
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/admin-exercises-builder/youtube"
+                  className="text-sm rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
+                >
+                  הגדרת סרטונים
+                </Link>
+                <button
+                  type="button"
+                  onClick={logout}
+                  className="text-sm rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
+                >
+                  יציאה
+                </button>
+              </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {CATEGORY_ORDER.map((category) => (

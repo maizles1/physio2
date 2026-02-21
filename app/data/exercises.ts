@@ -1,3 +1,5 @@
+import youtubeOverridesData from "./youtube-ids.json";
+
 export type Category =
   | "Neck"
   | "Shoulder"
@@ -82,6 +84,11 @@ export const exercisesData: Exercise[] = [
   { id: "17", title: "תרגיל מעקב עיניים (וסטיבולרי)", category: "Vestibular", youtubeId: "", instructions: "החזיקו אצבע מול העיניים והזיזו באיטיות. עקבו בעיניים בלי להזיז את הראש. 1–2 דקות." },
 ];
 
+const youtubeOverrides: Record<string, string> =
+  typeof youtubeOverridesData === "object" && youtubeOverridesData !== null
+    ? (youtubeOverridesData as Record<string, string>)
+    : {};
+
 export interface Dosage {
   sets: number;
   reps: number;
@@ -150,7 +157,13 @@ export function getExercisesByIds(ids: string[]): Exercise[] {
 }
 
 export function getExerciseById(id: string): Exercise | undefined {
-  return exercisesData.find((e) => e.id === id);
+  const exercise = exercisesData.find((e) => e.id === id);
+  if (!exercise) return undefined;
+  const overrideId = youtubeOverrides[id];
+  return {
+    ...exercise,
+    youtubeId: overrideId !== undefined && overrideId !== "" ? overrideId : exercise.youtubeId,
+  };
 }
 
 /** מחזיר תרגילים מקובצים לפי קטגוריה, עם כותרת בעברית */

@@ -99,6 +99,7 @@ export function middleware(request: NextRequest) {
       '/api/admin-login',
       '/api/admin-logout',
       '/api/admin-check-env',
+      '/api/admin-youtube-ids',
     ]
     const isPublicEndpoint = publicEndpoints.includes(pathname)
 
