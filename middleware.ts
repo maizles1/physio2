@@ -96,6 +96,7 @@ export function middleware(request: NextRequest) {
     // Public endpoints that don't require authentication
     const publicEndpoints = [
       '/api/reviews',
+      '/api/exercises',
       '/api/admin-login',
       '/api/admin-logout',
       '/api/admin-check-env',

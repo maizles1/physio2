@@ -1,25 +1,36 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
-  getExercisesByCategory,
-  getExerciseById,
   CATEGORY_ORDER,
   CATEGORY_LABELS,
   DEFAULT_DOSAGE,
   buildPrescriptionParam,
   type Category,
   type Dosage,
+  type Exercise,
 } from "@/app/data/exercises";
 
 export default function AdminBuilderClient() {
   const router = useRouter();
+  const [allExercises, setAllExercises] = useState<Exercise[]>([]);
+  const [exercisesLoading, setExercisesLoading] = useState(true);
   const [selectedDosages, setSelectedDosages] = useState<Record<string, Dosage>>({});
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/exercises")
+      .then((r) => (r.ok ? r.json() : { exercises: [] }))
+      .then((data) => {
+        setAllExercises(Array.isArray(data?.exercises) ? data.exercises : []);
+      })
+      .catch(() => setAllExercises([]))
+      .finally(() => setExercisesLoading(false));
+  }, []);
 
   const toggleExercise = useCallback((id: string) => {
     setSelectedDosages((prev) => {
@@ -66,7 +77,7 @@ export default function AdminBuilderClient() {
   }, [selectedDosages]);
 
   const exercisesInSelectedCategory =
-    selectedCategory !== null ? getExercisesByCategory(selectedCategory) : [];
+    selectedCategory !== null ? allExercises.filter((e) => e.category === selectedCategory) : [];
   const filteredExercisesInSelectedCategory = useMemo(() => {
     if (!searchTerm.trim()) return exercisesInSelectedCategory;
     const q = searchTerm.trim().toLowerCase();
@@ -80,8 +91,8 @@ export default function AdminBuilderClient() {
     return String(a).localeCompare(String(b));
   });
   const selectedExercises = selectedIds
-    .map((id) => getExerciseById(id))
-    .filter((ex): ex is NonNullable<ReturnType<typeof getExerciseById>> => ex != null);
+    .map((id) => allExercises.find((e) => e.id === id))
+    .filter((ex): ex is Exercise => ex != null);
 
   const logout = useCallback(async () => {
     await fetch("/api/admin-logout", { method: "POST" });
@@ -147,8 +158,10 @@ export default function AdminBuilderClient() {
               />
             </div>
             <ul className="space-y-3">
-              {filteredExercisesInSelectedCategory.length === 0 ? (
-                <li className="text-gray-500 text-sm py-2">אין תרגילים בקטגוריה זו</li>
+              {exercisesLoading ? (
+                <li className="text-gray-500 text-sm py-2">טוען תרגילים...</li>
+              ) : filteredExercisesInSelectedCategory.length === 0 ? (
+                <li className="text-gray-500 text-sm py-2">אין תרגילים בקטגוריה זו. הוסף תרגילים בהגדרת סרטונים.</li>
               ) : (
                 filteredExercisesInSelectedCategory.map((ex) => {
                   const selected = !!selectedDosages[ex.id];

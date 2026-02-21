@@ -35,6 +35,8 @@ export default function AdminYoutubeClient() {
   const [customExercises, setCustomExercises] = useState<CustomExerciseEntry[]>([]);
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "success" | "error">("idle");
+  const [saveError, setSaveError] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -78,8 +80,43 @@ export default function AdminYoutubeClient() {
     const payload = { exercises: customExercises };
     navigator.clipboard.writeText(JSON.stringify(payload, null, 2)).then(() => {
       setCopied(true);
-      setTimeout(() => setCopied(false), 3000);
+      setTimeout(() => setCopied(false), 5000);
     });
+  }, [customExercises]);
+
+  const downloadCustomJson = useCallback(() => {
+    const payload = { exercises: customExercises };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "custom-exercises.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  }, [customExercises]);
+
+  const saveToServer = useCallback(async () => {
+    setSaveStatus("saving");
+    setSaveError("");
+    try {
+      const res = await fetch("/api/admin-custom-exercises", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ exercises: customExercises }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setSaveError(data?.error ?? "שמירה נכשלה");
+        setSaveStatus("error");
+        return;
+      }
+      setSaveStatus("success");
+      setTimeout(() => setSaveStatus("idle"), 4000);
+    } catch {
+      setSaveError("שגיאת רשת");
+      setSaveStatus("error");
+    }
   }, [customExercises]);
 
   const logout = useCallback(async () => {
@@ -107,7 +144,7 @@ export default function AdminYoutubeClient() {
         </div>
 
         <p className="text-gray-600 text-sm mb-4">
-          תחת כל חלק גוף: הכנס כתובת יוטיוב והוסף – ייפתח כרטיס תרגיל. ערוך את שם התרגיל בכרטיס. בסיום העתק והדבק ב־app/data/custom-exercises.json.
+          תחת כל חלק גוף: הכנס כתובת יוטיוב והוסף – ייפתח כרטיס תרגיל. ערוך את שם התרגיל בכרטיס, ולחץ <strong>שמור</strong> כדי שהתרגילים יישמרו באתר ויופיעו בבניית התוכנית.
         </p>
 
         {loading ? (
@@ -117,17 +154,39 @@ export default function AdminYoutubeClient() {
             <div className="mb-6 flex flex-wrap items-center gap-2">
               <button
                 type="button"
-                onClick={copyCustomJson}
-                className="rounded-xl bg-primary-dark text-white font-medium px-4 py-2.5 hover:bg-primary-darker transition"
+                onClick={saveToServer}
+                disabled={saveStatus === "saving"}
+                className="rounded-xl bg-primary-dark text-white font-medium px-4 py-2.5 hover:bg-primary-darker transition disabled:opacity-60"
               >
-                {copied ? "הועתק!" : "העתק custom-exercises.json"}
+                {saveStatus === "saving" ? "שומר..." : "שמור"}
               </button>
-              {copied && (
-                <span className="text-sm text-green-600">
-                  הדבק בקובץ app/data/custom-exercises.json ושמור.
-                </span>
+              {saveStatus === "success" && (
+                <span className="text-sm text-green-700 font-medium">נשמר בהצלחה. התרגילים יופיעו בבניית התוכנית.</span>
+              )}
+              {saveStatus === "error" && saveError && (
+                <span className="text-sm text-red-600">{saveError}</span>
               )}
             </div>
+            <details className="mb-6 text-sm text-gray-600">
+              <summary className="cursor-pointer font-medium">אם שמירה באתר אינה זמינה (גיבוי ידני)</summary>
+              <p className="mt-2">העתק או הורד את הקובץ והדבק ב־app/data/custom-exercises.json בפרויקט, שמור ודחוף.</p>
+              <div className="mt-2 flex gap-2">
+                <button
+                  type="button"
+                  onClick={copyCustomJson}
+                  className="rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
+                >
+                  {copied ? "הועתק!" : "העתק"}
+                </button>
+                <button
+                  type="button"
+                  onClick={downloadCustomJson}
+                  className="rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
+                >
+                  הורד קובץ
+                </button>
+              </div>
+            </details>
 
             <div className="space-y-10">
               {CATEGORY_ORDER.map((category) => {

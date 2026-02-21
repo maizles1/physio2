@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import {
   parsePrescriptionParam,
-  getExerciseById,
   DEFAULT_DOSAGE,
+  exercisesData,
+  CATEGORY_ORDER,
   type Exercise,
   type Dosage,
+  type Category,
 } from "@/app/data/exercises";
+import { readCustomExercises } from "@/lib/exercisesStorage";
 import PlanContent from "./PlanContent";
 
 export const metadata: Metadata = {
@@ -19,10 +22,26 @@ interface PlanPageProps {
   searchParams: Promise<{ p?: string; ids?: string }>;
 }
 
+function toExercise(entry: { id: string; category: string; title: string; youtubeId: string }): Exercise {
+  return {
+    id: entry.id,
+    title: entry.title.trim() || "תרגיל",
+    category: entry.category as Category,
+    youtubeId: typeof entry.youtubeId === "string" ? entry.youtubeId.trim() : "",
+    instructions: "",
+  };
+}
+
 export default async function PlanPage({ searchParams }: PlanPageProps) {
   const params = await searchParams;
   const pParam = params.p?.trim();
   const idsParam = params.ids?.trim();
+
+  const custom = await readCustomExercises();
+  const customExercises = custom
+    .filter((e) => e && typeof e.category === "string" && CATEGORY_ORDER.includes(e.category as Category))
+    .map(toExercise);
+  const allExercises: Exercise[] = [...exercisesData, ...customExercises];
 
   let planItems: PlanItem[] = [];
 
@@ -30,13 +49,13 @@ export default async function PlanPage({ searchParams }: PlanPageProps) {
     const decoded = decodeURIComponent(pParam);
     const parsed = parsePrescriptionParam(decoded);
     for (const { id, dosage } of parsed) {
-      const exercise = getExerciseById(id);
+      const exercise = allExercises.find((e) => e.id === id);
       if (exercise) planItems.push({ exercise, dosage });
     }
   } else if (idsParam) {
     const ids = idsParam.split(",").map((s) => s.trim()).filter(Boolean);
     for (const id of ids) {
-      const exercise = getExerciseById(id);
+      const exercise = allExercises.find((e) => e.id === id);
       if (exercise) planItems.push({ exercise, dosage: DEFAULT_DOSAGE });
     }
   }
