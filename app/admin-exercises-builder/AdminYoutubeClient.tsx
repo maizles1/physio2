@@ -46,7 +46,7 @@ export default function AdminYoutubeClient() {
         .then((r) => (r.ok ? r.json() : { exercises: [] }))
         .then((data) => (cancelled ? null : setCustomExercises(Array.isArray(data?.exercises) ? data.exercises : []))),
       fetch("/api/admin-check-env")
-        .then((r) => (r.ok ? r.json() : {}))
+        .then((r) => (r.ok ? r.json() : null) as Promise<{ blobConfigured?: boolean } | null>)
         .then((data) => { if (!cancelled && typeof data?.blobConfigured === "boolean") setBlobConfigured(data.blobConfigured); }),
     ]).catch(() => {}).finally(() => {
       if (!cancelled) setLoading(false);
