@@ -37,20 +37,20 @@ export default function AdminYoutubeClient() {
   const [loading, setLoading] = useState(true);
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "success" | "error">("idle");
   const [saveError, setSaveError] = useState("");
+  const [blobConfigured, setBlobConfigured] = useState<boolean | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    fetch("/api/admin-custom-exercises", { credentials: "include" })
-      .then((r) => (r.ok ? r.json() : { exercises: [] }))
-      .then((data) => {
-        if (!cancelled && Array.isArray(data?.exercises)) {
-          setCustomExercises(data.exercises);
-        }
-      })
-      .catch(() => {})
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
+    Promise.all([
+      fetch("/api/admin-custom-exercises", { credentials: "include" })
+        .then((r) => (r.ok ? r.json() : { exercises: [] }))
+        .then((data) => (cancelled ? null : setCustomExercises(Array.isArray(data?.exercises) ? data.exercises : []))),
+      fetch("/api/admin-check-env")
+        .then((r) => (r.ok ? r.json() : {}))
+        .then((data) => { if (!cancelled && typeof data?.blobConfigured === "boolean") setBlobConfigured(data.blobConfigured); }),
+    ]).catch(() => {}).finally(() => {
+      if (!cancelled) setLoading(false);
+    });
     return () => {
       cancelled = true;
     };
@@ -165,6 +165,23 @@ export default function AdminYoutubeClient() {
           )}
           {loading && <span className="text-gray-500 text-sm">טוען...</span>}
         </div>
+
+        {blobConfigured === false && (
+          <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900" role="alert">
+            <p className="font-medium mb-1">שמירה מהאתר לא פעילה – חסר חיבור ל־Blob</p>
+            <p className="text-sm mb-2">
+              כדי ש&quot;שמור תרגילים&quot; יעבוד ב־Vercel, צריך ליצור Blob Store ולחבר אותו לפרויקט:
+            </p>
+            <ol className="text-sm list-decimal list-inside space-y-1">
+              <li>ב־Vercel: פרויקט → <strong>Storage</strong> → Create Database → <strong>Blob</strong></li>
+              <li>לחבר את ה־Blob לפרויקט (Connect to Project)</li>
+              <li>לעשות <strong>Redeploy</strong> לפרויקט</li>
+            </ol>
+            <p className="text-sm mt-2">
+              בינתיים אפשר להשתמש ב&quot;העתק&quot; או &quot;הורד קובץ&quot; למטה ולהדביק ב־<code className="bg-amber-100 px-1 rounded">app/data/custom-exercises.json</code>.
+            </p>
+          </div>
+        )}
 
         <p className="text-gray-600 text-sm mb-4">
           תחת כל חלק גוף: הכנס כתובת יוטיוב והוסף – ייפתח כרטיס תרגיל. ערוך את שם התרגיל בכרטיס. <strong>לחץ &quot;שמור תרגילים&quot; למעלה</strong> כדי שהתרגילים יישמרו ויופיעו בבניית התוכנית.

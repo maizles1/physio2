@@ -72,7 +72,7 @@ export async function writeCustomExercises(exercises: CustomExerciseEntry[]): Pr
   if (process.env.VERCEL) {
     return {
       ok: false,
-      error: `שמירה באתר (Vercel) דורשת Blob store. ${VERCEL_BLOB_INSTRUCTIONS}`,
+      error: `שמירה לא זמינה: חסר BLOB_READ_WRITE_TOKEN. ב־Vercel: Storage → Blob → לחבר לפרויקט → Redeploy. ${VERCEL_BLOB_INSTRUCTIONS}`,
     };
   }
 
