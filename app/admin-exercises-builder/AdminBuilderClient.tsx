@@ -158,7 +158,11 @@ export default function AdminBuilderClient() {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setSaveError((data?.error as string) ?? "שמירה נכשלה");
+        const msg =
+          res.status === 401
+            ? "התחבר מחדש לאדמין ונסה שוב"
+            : (typeof data?.error === "string" ? data.error : "שמירה נכשלה");
+        setSaveError(msg);
         setSaveStatus("error");
         return;
       }
@@ -496,13 +500,15 @@ export default function AdminBuilderClient() {
         >
           <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6" dir="rtl" onClick={(e) => e.stopPropagation()}>
             <h2 id="save-plan-title" className="text-lg font-bold text-gray-900 mb-4">שמור תוכנית תחת שם המטופל</h2>
-            <label className="block text-sm font-medium text-gray-700 mb-1">שם המטופל</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">שם המטופל (חובה)</label>
             <input
               type="text"
               value={patientName}
               onChange={(e) => setPatientName(e.target.value)}
               placeholder="לדוגמה: ישראל ישראלי"
               className="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none mb-4"
+              autoFocus
+              aria-required="true"
             />
             {savedPlans.length > 0 && (
               <>
@@ -526,7 +532,11 @@ export default function AdminBuilderClient() {
                 </select>
               </>
             )}
-            {saveError && <p className="text-sm text-red-600 mb-2">{saveError}</p>}
+            {saveError && (
+              <div className="mb-2 p-2 rounded-lg bg-red-50 border border-red-200 max-h-24 overflow-y-auto">
+                <p className="text-sm text-red-700 whitespace-pre-wrap">{saveError}</p>
+              </div>
+            )}
             {saveStatus === "success" && <p className="text-sm text-green-700 mb-2">התוכנית נשמרה בהצלחה.</p>}
             <div className="flex gap-2 justify-end">
               <button

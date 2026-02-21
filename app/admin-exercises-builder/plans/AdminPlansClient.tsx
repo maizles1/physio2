@@ -30,6 +30,7 @@ export default function AdminPlansClient() {
   const [plans, setPlans] = useState<SavedPlan[]>([]);
   const [loading, setLoading] = useState(true);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -58,6 +59,26 @@ export default function AdminPlansClient() {
       setCopiedId(plan.id);
       setTimeout(() => setCopiedId(null), 2000);
     });
+  }, []);
+
+  const deletePlan = useCallback(async (plan: SavedPlan) => {
+    if (!confirm(`למחוק את התוכנית של ${plan.patientName}?`)) return;
+    setDeletingId(plan.id);
+    try {
+      const res = await fetch("/api/admin-saved-plans", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ id: plan.id }),
+      });
+      if (res.ok) {
+        setPlans((prev) => prev.filter((p) => p.id !== plan.id));
+      }
+    } catch {
+      // ignore
+    } finally {
+      setDeletingId(null);
+    }
   }, []);
 
   const logout = useCallback(async () => {
@@ -136,6 +157,15 @@ export default function AdminPlansClient() {
                   >
                     ערוך
                   </Link>
+                  <button
+                    type="button"
+                    onClick={() => deletePlan(plan)}
+                    disabled={deletingId === plan.id}
+                    className="rounded-lg border border-red-200 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50 disabled:opacity-50"
+                    aria-label={`מחק תוכנית של ${plan.patientName}`}
+                  >
+                    {deletingId === plan.id ? "מוחק..." : "מחק"}
+                  </button>
                 </div>
               </li>
             ))}
