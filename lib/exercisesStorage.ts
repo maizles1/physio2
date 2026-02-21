@@ -1,4 +1,4 @@
-import { get, put, list } from "@vercel/blob";
+import { put, list } from "@vercel/blob";
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 
@@ -34,9 +34,12 @@ export async function readCustomExercises(): Promise<CustomExerciseEntry[]> {
     const { blobs } = await list({ prefix: "data/" });
     const blob = blobs.find((b) => b.pathname === BLOB_PATHNAME);
     if (!blob) return readFromFile();
-    const res = await get(blob.url, { access: "private" });
-    if (!res || !res.stream) return readFromFile();
-    const text = await new Response(res.stream).text();
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
+    const res = await fetch(blob.url, {
+      ...(token && { headers: { Authorization: `Bearer ${token}` } }),
+    });
+    if (!res.ok) return readFromFile();
+    const text = await res.text();
     const data = JSON.parse(text);
     if (typeof data === "object" && data !== null && Array.isArray(data.exercises)) {
       return data.exercises;
