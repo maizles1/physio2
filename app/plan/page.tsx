@@ -62,11 +62,14 @@ export default async function PlanPage({ searchParams }: PlanPageProps) {
 
   return (
     <div className="min-h-screen" dir="rtl">
-      <header className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-gray-200">
-        <div className="mx-auto max-w-2xl px-4 py-4">
-          <h1 className="text-lg sm:text-xl font-bold text-gray-900">
+      <header className="sticky top-0 z-10 bg-primary-gradient text-white shadow-md">
+        <div className="mx-auto max-w-2xl px-4 py-5">
+          <h1 className="text-lg sm:text-xl font-bold">
             פיזיותרפיה פלוס – תוכנית התרגול שלך
           </h1>
+          <p className="text-white/90 text-sm mt-1">
+            התוכנית האישית שלך מהמטפל
+          </p>
         </div>
       </header>
 

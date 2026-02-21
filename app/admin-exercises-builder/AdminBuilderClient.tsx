@@ -205,37 +205,39 @@ export default function AdminBuilderClient() {
       <div className="mx-auto max-w-2xl px-4 py-8">
         {selectedCategory === null ? (
           <>
-            <div className="mb-6 flex items-center justify-between gap-3">
-              <h1 className="text-2xl font-bold text-gray-900">בונה תוכנית תרגילים</h1>
-              <div className="flex items-center gap-2">
-                <Link
-                  href="/admin-exercises-builder/plans"
-                  className="text-sm rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
-                >
-                  תוכניות שמורות
-                </Link>
-                <Link
-                  href="/admin-exercises-builder/youtube"
-                  className="text-sm rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
-                >
-                  הגדרת סרטונים
-                </Link>
-                <button
-                  type="button"
-                  onClick={logout}
-                  className="text-sm rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
-                >
-                  יציאה
-                </button>
+            <header className="mb-6 rounded-2xl bg-primary-gradient text-white px-4 py-5 shadow-md">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h1 className="text-2xl font-bold">בונה תוכנית תרגילים</h1>
+                <div className="flex items-center gap-2">
+                  <Link
+                    href="/admin-exercises-builder/plans"
+                    className="text-sm rounded-xl border-2 border-white/80 px-3 py-2 text-white hover:bg-white/20 transition min-h-[44px] flex items-center"
+                  >
+                    תוכניות שמורות
+                  </Link>
+                  <Link
+                    href="/admin-exercises-builder/youtube"
+                    className="text-sm rounded-xl border-2 border-white/80 px-3 py-2 text-white hover:bg-white/20 transition min-h-[44px] flex items-center"
+                  >
+                    הגדרת סרטונים
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={logout}
+                    className="text-sm rounded-xl border-2 border-white/80 px-3 py-2 text-white hover:bg-white/20 transition min-h-[44px]"
+                  >
+                    יציאה
+                  </button>
+                </div>
               </div>
-            </div>
+            </header>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {CATEGORY_ORDER.map((category) => (
                 <button
                   key={category}
                   type="button"
                   onClick={() => setSelectedCategory(category)}
-                  className="aspect-square rounded-xl border-2 border-gray-200 bg-white hover:border-primary hover:bg-primary/5 transition flex items-center justify-center p-3 text-center"
+                  className="aspect-square min-h-[80px] rounded-2xl border-2 border-gray-200 bg-white hover:border-primary hover:bg-primary/5 hover:shadow-md transition flex items-center justify-center p-3 text-center"
                 >
                   <span className="font-medium text-gray-800">{CATEGORY_LABELS[category]}</span>
                 </button>
@@ -276,9 +278,9 @@ export default function AdminBuilderClient() {
                   return (
                     <li key={ex.id}>
                       <div
-                        className={`rounded-xl border-2 overflow-hidden transition ${
+                        className={`rounded-xl border-2 overflow-hidden transition duration-200 ${
                           selected
-                            ? "border-primary bg-primary/5"
+                            ? "border-primary bg-primary/5 shadow-sm"
                             : "border-gray-200 bg-white"
                         }`}
                       >
@@ -371,9 +373,9 @@ export default function AdminBuilderClient() {
 
       {selectedExercises.length > 0 && (
         <div className="fixed bottom-20 left-0 right-0 z-20 mx-auto max-w-2xl px-4">
-          <div className="rounded-2xl border border-gray-200 bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.08)] h-36 overflow-hidden flex flex-col">
-            <div className="px-4 py-2 border-b border-gray-100 font-bold text-gray-900 text-sm shrink-0">
-              התרגילים שנבחרו ({selectedExercises.length})
+          <div className="rounded-2xl border border-gray-200 bg-white shadow-lg h-36 overflow-hidden flex flex-col">
+            <div className="px-4 py-2.5 border-b border-gray-100 font-bold text-gray-900 text-sm shrink-0 bg-gray-50/80">
+              התרגילים בתוכנית ({selectedExercises.length})
             </div>
             <div className="p-2 overflow-x-auto overflow-y-hidden">
               <div className="flex gap-2 h-full">
@@ -457,28 +459,28 @@ export default function AdminBuilderClient() {
           <span className="text-sm text-gray-600">
             נבחרו {selectedIds.length} תרגילים
           </span>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setSaveModalOpen(true)}
-              disabled={selectedIds.length === 0}
-              className="rounded-xl border border-primary-dark text-primary-dark font-medium px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/10 transition"
-            >
-              שמור תוכנית תחת שם המטופל
-            </button>
+          <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
               onClick={copyPlanUrl}
               disabled={selectedIds.length === 0}
-              className="rounded-xl bg-primary-dark text-white font-medium px-6 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-darker transition"
+              className="rounded-xl bg-primary-dark text-white font-medium px-6 py-3 min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-darker transition shadow-sm"
             >
               {copied ? "הועתק!" : "צור קישור והעתק"}
             </button>
             <button
               type="button"
+              onClick={() => setSaveModalOpen(true)}
+              disabled={selectedIds.length === 0}
+              className="rounded-xl border-2 border-primary-dark text-primary-dark font-medium px-4 py-3 min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/10 transition"
+            >
+              שמור תוכנית תחת שם המטופל
+            </button>
+            <button
+              type="button"
               onClick={clearAll}
               disabled={selectedIds.length === 0}
-              className="rounded-xl border border-gray-300 bg-white text-gray-700 font-medium px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition"
+              className="rounded-xl border border-gray-300 bg-white text-gray-700 font-medium px-4 py-3 min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition"
             >
               נקה הכל
             </button>

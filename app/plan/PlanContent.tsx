@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { Repeat, Calendar, Clock } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Repeat, Calendar, Clock, Check } from "lucide-react";
 import type { PlanItem } from "./page";
 import { CATEGORY_ORDER, CATEGORY_LABELS } from "@/app/data/exercises";
+
+const DONE_KEY_PREFIX = "physio-plan-done-";
 
 interface PlanContentProps {
   planItems: PlanItem[];
@@ -40,12 +42,13 @@ function LazyYouTube({ id, title }: { id: string; title: string }) {
         className="absolute inset-0 h-full w-full object-cover"
         loading="lazy"
       />
-      <span className="absolute inset-0 flex items-center justify-center bg-black/30 transition group-hover:bg-black/40">
+      <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/30 transition group-hover:bg-black/40">
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-red-600 text-white shadow-lg transition group-hover:scale-110">
           <svg className="mr-1 h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
             <path d="M8 5v14l11-7z" />
           </svg>
         </span>
+        <span className="text-white text-sm font-medium drop-shadow">לחץ להפעלה</span>
       </span>
     </button>
   );
@@ -85,18 +88,64 @@ export default function PlanContent({ planItems }: PlanContentProps) {
     items: planItems.filter((item) => item.exercise.category === category),
   })).filter((g) => g.items.length > 0);
 
+  const planIdsKey = planItems.map((p) => p.exercise.id).join(",");
+  const [doneIds, setDoneIds] = useState<Set<string>>(() => new Set());
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const stored: string[] = [];
+    planItems.forEach(({ exercise }) => {
+      try {
+        if (window.localStorage.getItem(DONE_KEY_PREFIX + exercise.id) === "1") {
+          stored.push(exercise.id);
+        }
+      } catch {
+        // ignore
+      }
+    });
+    setDoneIds(new Set(stored));
+  }, [planIdsKey]);
+
+  const toggleDone = useCallback((exerciseId: string) => {
+    setDoneIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(exerciseId)) {
+        next.delete(exerciseId);
+        try {
+          window.localStorage.removeItem(DONE_KEY_PREFIX + exerciseId);
+        } catch {
+          // ignore
+        }
+      } else {
+        next.add(exerciseId);
+        try {
+          window.localStorage.setItem(DONE_KEY_PREFIX + exerciseId, "1");
+        } catch {
+          // ignore
+        }
+      }
+      return next;
+    });
+  }, []);
+
   return (
     <div className="space-y-10 pb-8" dir="rtl">
-      {byCategory.map(({ category, categoryLabel, items }) => (
+      {byCategory.map(({ category, categoryLabel, items }, sectionIndex) => (
         <section key={category}>
-          <h2 className="text-lg font-bold text-primary-dark mb-4 pb-2 border-b border-gray-200">
+          <h2 className="text-lg font-bold text-primary-dark mb-4 pb-2 border-b-2 border-primary/20 bg-primary/5 rounded-t-xl px-4 pt-3 flex items-center gap-2">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-dark text-white text-sm font-bold">
+              {sectionIndex + 1}
+            </span>
             {categoryLabel}
           </h2>
           <div className="space-y-6">
             {items.map(({ exercise: ex, dosage }) => (
               <article
                 key={ex.id}
-                className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden"
+                className={`rounded-2xl border overflow-hidden transition ${
+                  doneIds.has(ex.id)
+                    ? "border-green-200 bg-green-50/50 shadow-sm"
+                    : "border-gray-200 bg-white shadow-sm"
+                }`}
               >
                 {ex.youtubeId ? (
                   <div className="relative aspect-video w-full">
@@ -113,6 +162,20 @@ export default function PlanContent({ planItems }: PlanContentProps) {
                   <p className="mt-4 text-gray-700 leading-relaxed whitespace-pre-line">
                     {ex.instructions}
                   </p>
+                  <button
+                    type="button"
+                    onClick={() => toggleDone(ex.id)}
+                    className={`mt-4 inline-flex items-center gap-2 rounded-xl border-2 px-4 py-2 text-sm font-medium transition min-h-[44px] ${
+                      doneIds.has(ex.id)
+                        ? "border-green-500 bg-green-500/10 text-green-800"
+                        : "border-gray-300 bg-gray-50 text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    <span className={doneIds.has(ex.id) ? "text-green-600" : "text-gray-400"}>
+                      <Check className="h-5 w-5" strokeWidth={2.5} aria-hidden />
+                    </span>
+                    {doneIds.has(ex.id) ? "בוצע" : "סיימתי"}
+                  </button>
                 </div>
               </article>
             ))}

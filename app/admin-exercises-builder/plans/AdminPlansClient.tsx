@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Calendar } from "lucide-react";
 
 interface SavedPlan {
   id: string;
@@ -114,14 +115,17 @@ export default function AdminPlansClient() {
         {loading ? (
           <p className="text-gray-500 py-4">טוען...</p>
         ) : plans.length === 0 ? (
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8 text-center">
-            <p className="text-gray-700">אין עדיין תוכניות שמורות.</p>
-            <p className="text-sm text-gray-500 mt-2">
-              בבניית תוכנית לחץ &quot;שמור תוכנית תחת שם המטופל&quot; כדי לשמור.
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-10 text-center shadow-sm">
+            <div className="mx-auto w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary-dark mb-4" aria-hidden>
+              <Calendar className="w-7 h-7" />
+            </div>
+            <p className="text-gray-800 font-medium">אין עדיין תוכניות שמורות</p>
+            <p className="text-sm text-gray-600 mt-1">
+              בנה תוכנית ושמור תחת שם המטופל – אז תוכל לחזור אליה ולערוך בכל זמן.
             </p>
             <Link
               href="/admin-exercises-builder"
-              className="inline-block mt-4 rounded-xl bg-primary-dark text-white font-medium px-5 py-2.5 hover:bg-primary-darker"
+              className="inline-block mt-6 rounded-xl bg-primary-dark text-white font-medium px-6 py-3 min-h-[44px] hover:bg-primary-darker shadow-sm transition"
             >
               בונה תוכנית
             </Link>
@@ -131,13 +135,14 @@ export default function AdminPlansClient() {
             {plans.map((plan) => (
               <li
                 key={plan.id}
-                className="rounded-xl border border-gray-200 bg-white p-4 flex flex-wrap items-center justify-between gap-3"
+                className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-5 shadow-md flex flex-wrap items-center justify-between gap-3"
               >
                 <div className="min-w-0">
                   <p className="font-medium text-gray-900 truncate">
                     {plan.patientName}
                   </p>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                    <Calendar className="w-3.5 h-3.5 shrink-0" aria-hidden />
                     {plan.updatedAt
                       ? `עודכן: ${formatDate(plan.updatedAt)}`
                       : formatDate(plan.createdAt)}
@@ -147,13 +152,13 @@ export default function AdminPlansClient() {
                   <button
                     type="button"
                     onClick={() => copyPlanLink(plan)}
-                    className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50"
+                    className="rounded-xl border border-gray-300 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 min-h-[44px] flex items-center"
                   >
                     {copiedId === plan.id ? "הועתק!" : "פתח קישור / העתק"}
                   </button>
                   <Link
                     href={`/admin-exercises-builder?load=${encodeURIComponent(plan.id)}`}
-                    className="rounded-lg border border-primary-dark bg-white px-3 py-1.5 text-sm text-primary-dark hover:bg-primary/10"
+                    className="rounded-xl bg-primary-dark text-white px-4 py-2 text-sm font-medium hover:bg-primary-darker min-h-[44px] flex items-center shadow-sm"
                   >
                     ערוך
                   </Link>
@@ -161,7 +166,7 @@ export default function AdminPlansClient() {
                     type="button"
                     onClick={() => deletePlan(plan)}
                     disabled={deletingId === plan.id}
-                    className="rounded-lg border border-red-200 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50 disabled:opacity-50"
+                    className="rounded-xl border border-red-200 px-3 py-2 text-sm text-red-600 hover:bg-red-50 disabled:opacity-50 min-h-[44px] flex items-center"
                     aria-label={`מחק תוכנית של ${plan.patientName}`}
                   >
                     {deletingId === plan.id ? "מוחק..." : "מחק"}
