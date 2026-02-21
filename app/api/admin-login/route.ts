@@ -3,11 +3,13 @@ import { ADMIN_COOKIE_NAME, getAdminSessionToken, validateAdminCredentials } fro
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null) as { username?: string; password?: string } | null;
-  if (!body?.username || !body?.password) {
+  const username = typeof body?.username === "string" ? body.username.trim() : "";
+  const password = typeof body?.password === "string" ? body.password.trim() : "";
+  if (!username || !password) {
     return NextResponse.json({ error: "Missing credentials" }, { status: 400 });
   }
 
-  const isValid = validateAdminCredentials(body.username, body.password);
+  const isValid = validateAdminCredentials(username, password);
   if (!isValid) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
