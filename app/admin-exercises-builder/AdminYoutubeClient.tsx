@@ -107,7 +107,10 @@ export default function AdminYoutubeClient() {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setSaveError(data?.error ?? "שמירה נכשלה");
+        const msg = res.status === 401
+          ? "התחבר מחדש לאדמין ונסה שוב"
+          : (data?.error ?? "שמירה נכשלה");
+        setSaveError(msg);
         setSaveStatus("error");
         return;
       }
@@ -133,6 +136,7 @@ export default function AdminYoutubeClient() {
               ← בונה תוכנית
             </Link>
             <h1 className="text-2xl font-bold text-gray-900">הגדרת סרטונים</h1>
+            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">אזור אדמין</span>
           </div>
           <button
             type="button"
@@ -143,52 +147,54 @@ export default function AdminYoutubeClient() {
           </button>
         </div>
 
+        {/* שמור – תמיד גלוי בראש הדף */}
+        <div className="sticky top-0 z-20 -mx-4 px-4 py-3 mb-6 bg-white border-b border-gray-200 shadow-sm flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={saveToServer}
+            disabled={saveStatus === "saving" || loading}
+            className="rounded-xl bg-primary-dark text-white font-medium px-5 py-3 hover:bg-primary-darker transition disabled:opacity-60 text-base"
+          >
+            {saveStatus === "saving" ? "שומר..." : "שמור תרגילים"}
+          </button>
+          {saveStatus === "success" && (
+            <span className="text-sm text-green-700 font-medium">נשמר בהצלחה. התרגילים יופיעו בבניית התוכנית.</span>
+          )}
+          {saveStatus === "error" && saveError && (
+            <span className="text-sm text-red-600">{saveError}</span>
+          )}
+          {loading && <span className="text-gray-500 text-sm">טוען...</span>}
+        </div>
+
         <p className="text-gray-600 text-sm mb-4">
-          תחת כל חלק גוף: הכנס כתובת יוטיוב והוסף – ייפתח כרטיס תרגיל. ערוך את שם התרגיל בכרטיס, ולחץ <strong>שמור</strong> כדי שהתרגילים יישמרו באתר ויופיעו בבניית התוכנית.
+          תחת כל חלק גוף: הכנס כתובת יוטיוב והוסף – ייפתח כרטיס תרגיל. ערוך את שם התרגיל בכרטיס. <strong>לחץ &quot;שמור תרגילים&quot; למעלה</strong> כדי שהתרגילים יישמרו ויופיעו בבניית התוכנית.
         </p>
 
-        {loading ? (
-          <p className="text-gray-500 py-4">טוען...</p>
-        ) : (
-          <>
-            <div className="mb-6 flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={saveToServer}
-                disabled={saveStatus === "saving"}
-                className="rounded-xl bg-primary-dark text-white font-medium px-4 py-2.5 hover:bg-primary-darker transition disabled:opacity-60"
-              >
-                {saveStatus === "saving" ? "שומר..." : "שמור"}
-              </button>
-              {saveStatus === "success" && (
-                <span className="text-sm text-green-700 font-medium">נשמר בהצלחה. התרגילים יופיעו בבניית התוכנית.</span>
-              )}
-              {saveStatus === "error" && saveError && (
-                <span className="text-sm text-red-600">{saveError}</span>
-              )}
-            </div>
-            <details className="mb-6 text-sm text-gray-600">
-              <summary className="cursor-pointer font-medium">אם שמירה באתר אינה זמינה (גיבוי ידני)</summary>
-              <p className="mt-2">העתק או הורד את הקובץ והדבק ב־app/data/custom-exercises.json בפרויקט, שמור ודחוף.</p>
-              <div className="mt-2 flex gap-2">
-                <button
-                  type="button"
-                  onClick={copyCustomJson}
-                  className="rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
-                >
-                  {copied ? "הועתק!" : "העתק"}
-                </button>
-                <button
-                  type="button"
-                  onClick={downloadCustomJson}
-                  className="rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
-                >
-                  הורד קובץ
-                </button>
-              </div>
-            </details>
+        <details className="mb-6 text-sm text-gray-600">
+          <summary className="cursor-pointer font-medium">גיבוי ידני (העתק/הורד קובץ)</summary>
+          <p className="mt-2">העתק או הורד את הקובץ והדבק ב־app/data/custom-exercises.json בפרויקט, שמור ודחוף.</p>
+          <div className="mt-2 flex gap-2">
+            <button
+              type="button"
+              onClick={copyCustomJson}
+              className="rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
+            >
+              {copied ? "הועתק!" : "העתק"}
+            </button>
+            <button
+              type="button"
+              onClick={downloadCustomJson}
+              className="rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
+            >
+              הורד קובץ
+            </button>
+          </div>
+        </details>
 
-            <div className="space-y-10">
+        {loading ? (
+          <p className="text-gray-500 py-4">טוען רשימת תרגילים...</p>
+        ) : (
+          <div className="space-y-10">
               {CATEGORY_ORDER.map((category) => {
                 const label = CATEGORY_LABELS[category];
                 const customInCategory = customExercises.filter((e) => e.category === category);
@@ -252,7 +258,6 @@ export default function AdminYoutubeClient() {
                 );
               })}
             </div>
-          </>
         )}
       </div>
     </div>

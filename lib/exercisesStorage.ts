@@ -47,6 +47,9 @@ export async function readCustomExercises(): Promise<CustomExerciseEntry[]> {
   return readFromFile();
 }
 
+const VERCEL_BLOB_INSTRUCTIONS =
+  "באזור הניהול של Vercel: Storage → Create Database → Blob. אחרי יצירת ה-Blob לעשות Redeploy לפרויקט.";
+
 /** Write custom exercises: Vercel Blob if token set, otherwise try writing to file (works locally). */
 export async function writeCustomExercises(exercises: CustomExerciseEntry[]): Promise<{ ok: boolean; error?: string }> {
   const body = JSON.stringify({ exercises }, null, 2);
@@ -62,8 +65,15 @@ export async function writeCustomExercises(exercises: CustomExerciseEntry[]): Pr
       return { ok: true };
     } catch (e) {
       const message = e instanceof Error ? e.message : "Unknown error";
-      return { ok: false, error: message };
+      return { ok: false, error: `שמירה ל-Blob נכשלה: ${message}` };
     }
+  }
+
+  if (process.env.VERCEL) {
+    return {
+      ok: false,
+      error: `שמירה באתר (Vercel) דורשת Blob store. ${VERCEL_BLOB_INSTRUCTIONS}`,
+    };
   }
 
   try {
@@ -80,7 +90,7 @@ export async function writeCustomExercises(exercises: CustomExerciseEntry[]): Pr
     const message = e instanceof Error ? e.message : "Unknown error";
     return {
       ok: false,
-      error: "לא ניתן לכתוב לקובץ. בהרצה מקומית: בדוק הרשאות. ב-Vercel: הוסף Blob store (Storage) לפרויקט.",
+      error: `לא ניתן לכתוב לקובץ: ${message}. ${VERCEL_BLOB_INSTRUCTIONS}`,
     };
   }
 }
