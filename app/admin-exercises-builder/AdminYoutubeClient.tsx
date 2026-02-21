@@ -140,12 +140,15 @@ export default function AdminYoutubeClient() {
                       {label}
                     </h2>
 
-                    {/* Single bar: YouTube URL + Add */}
-                    <AddExerciseBar category={category} onAdd={addCustomExercise} />
+                    {/* Bar stays at top so you can keep adding links under same body part */}
+                    <div className="sticky top-0 z-10 bg-white py-2 -mx-1 px-1 mb-3 border-b border-gray-100">
+                      <p className="text-xs text-gray-500 mb-2">הוסף לינק יוטיוב – ניתן להמשיך להוסיף עוד תחת אותו איבר</p>
+                      <AddExerciseBar category={category} onAdd={addCustomExercise} />
+                    </div>
 
                     {/* Exercise cards: thumbnail + editable title + remove */}
                     {customInCategory.length > 0 && (
-                      <ul className="mt-4 space-y-4">
+                      <ul className="space-y-4">
                         {customInCategory.map((ex) => (
                           <li
                             key={ex.id}
