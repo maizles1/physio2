@@ -12,9 +12,7 @@ export type Category =
   | "Knee"
   | "Ankle"
   | "Foot"
-  | "Vestibular"
-  | "Core"
-  | "Advanced";
+  | "Vestibular";
 
 export interface Exercise {
   id: string;
@@ -37,8 +35,6 @@ export const CATEGORY_ORDER: Category[] = [
   "Ankle",      // קרסול
   "Foot",       // כף רגל
   "Vestibular", // תרגול וסטיבולארי
-  "Core",       // ליבה
-  "Advanced",   // מתקדם
 ];
 
 /** תרגום קטגוריה לתצוגה בעברית */
@@ -54,8 +50,6 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   Ankle: "קרסול",
   Foot: "כף רגל",
   Vestibular: "תרגול וסטיבולארי",
-  Core: "ליבה",
-  Advanced: "מתקדם",
 };
 
 export const exercisesData: Exercise[] = [];
