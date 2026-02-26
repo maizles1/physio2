@@ -1,14 +1,47 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { seoConfig } from '@/config/seo.config'
 import { gtag } from './GoogleAnalytics'
+import { toast } from '@/lib/toast'
 
 export default function Footer() {
   const phoneNumber = '050-883-8982'
   const whatsappNumber = '972508838982'
   const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
   const address = 'מרכז כלניות, אשדוד'
+  const [newsletterEmail, setNewsletterEmail] = useState('')
+  const [newsletterLoading, setNewsletterLoading] = useState(false)
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const email = newsletterEmail.trim()
+    if (!email || newsletterLoading) return
+    setNewsletterLoading(true)
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) {
+        toast.error(data?.error || 'שגיאה בהרשמה. נסו שוב.')
+        return
+      }
+      if (data.message === 'already_subscribed') {
+        toast.info('כתובת המייל כבר רשומה אצלנו.')
+      } else {
+        toast.success('נרשמתם בהצלחה לעדכונים.')
+        setNewsletterEmail('')
+      }
+    } catch {
+      toast.error('שגיאה בהרשמה. נסו שוב.')
+    } finally {
+      setNewsletterLoading(false)
+    }
+  }
 
   return (
     <footer className="bg-white text-gray-900 border-t border-gray-200">
@@ -218,6 +251,30 @@ export default function Footer() {
               </a>
             </div>
           </div>
+        </div>
+
+        {/* Newsletter signup */}
+        <div className="border-t border-gray-200 mt-8 pt-8">
+          <h3 className="text-xl font-bold mb-4 text-gray-900">הירשמו לעדכונים ולמאמרי הבלוג</h3>
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md">
+            <input
+              type="email"
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
+              placeholder="כתובת המייל שלכם"
+              required
+              disabled={newsletterLoading}
+              className="flex-1 rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#2080C0] focus:ring-2 focus:ring-[#2080C0]/20 outline-none disabled:opacity-70"
+              aria-label="כתובת מייל להרשמה לעדכונים"
+            />
+            <button
+              type="submit"
+              disabled={newsletterLoading}
+              className="rounded-lg bg-[#2A3080] hover:bg-[#004080] text-white font-medium px-5 py-2.5 text-sm min-h-[44px] disabled:opacity-70 disabled:cursor-not-allowed transition-colors"
+            >
+              {newsletterLoading ? 'שולח...' : 'הרשמה'}
+            </button>
+          </form>
         </div>
 
         {/* Bottom Bar */}
