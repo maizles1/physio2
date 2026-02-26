@@ -3,7 +3,14 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Calendar } from "lucide-react";
+import { Calendar, MessageSquare, Send } from "lucide-react";
+
+interface PlanFeedbackMessage {
+  id: string;
+  author: "patient" | "therapist";
+  text: string;
+  createdAt: string;
+}
 
 interface SavedPlan {
   id: string;
@@ -11,6 +18,7 @@ interface SavedPlan {
   prescriptionParam: string;
   createdAt: string;
   updatedAt?: string;
+  feedback?: PlanFeedbackMessage[];
 }
 
 function formatDate(iso: string): string {
@@ -32,9 +40,22 @@ export default function AdminPlansClient() {
   const [loading, setLoading] = useState(true);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [expandedFeedbackId, setExpandedFeedbackId] = useState<string | null>(null);
+  const [replyText, setReplyText] = useState("");
+  const [replyingPlanId, setReplyingPlanId] = useState<string | null>(null);
+
+  const fetchPlans = useCallback(() => {
+    fetch("/api/admin-saved-plans", { credentials: "include" })
+      .then((r) => (r.ok ? r.json() : { plans: [] }))
+      .then((data) => {
+        if (Array.isArray(data?.plans)) setPlans(data.plans);
+      })
+      .catch(() => setPlans([]));
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
+    setLoading(true);
     fetch("/api/admin-saved-plans", { credentials: "include" })
       .then((r) => (r.ok ? r.json() : { plans: [] }))
       .then((data) => {
@@ -42,7 +63,7 @@ export default function AdminPlansClient() {
           setPlans(data.plans);
         }
       })
-      .catch(() => setPlans([]))
+      .catch(() => { if (!cancelled) setPlans([]); })
       .finally(() => {
         if (!cancelled) setLoading(false);
       });
@@ -52,15 +73,40 @@ export default function AdminPlansClient() {
   }, []);
 
   const copyPlanLink = useCallback((plan: SavedPlan) => {
+    const params = new URLSearchParams();
+    params.set("planId", plan.id);
+    params.set("p", plan.prescriptionParam);
     const url =
       typeof window !== "undefined"
-        ? `${window.location.origin}/plan?p=${encodeURIComponent(plan.prescriptionParam)}`
+        ? `${window.location.origin}/plan?${params.toString()}`
         : "";
     navigator.clipboard.writeText(url).then(() => {
       setCopiedId(plan.id);
       setTimeout(() => setCopiedId(null), 2000);
     });
   }, []);
+
+  const sendReply = useCallback(async (planId: string, text: string) => {
+    const t = text.trim();
+    if (!t || replyingPlanId) return;
+    setReplyingPlanId(planId);
+    try {
+      const res = await fetch("/api/admin-plan-feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ planId, text: t }),
+      });
+      if (res.ok) {
+        setReplyText("");
+        fetchPlans();
+      }
+    } catch {
+      // ignore
+    } finally {
+      setReplyingPlanId(null);
+    }
+  }, [replyingPlanId, fetchPlans]);
 
   const deletePlan = useCallback(async (plan: SavedPlan) => {
     if (!confirm(`למחוק את התוכנית של ${plan.patientName}?`)) return;
@@ -171,6 +217,72 @@ export default function AdminPlansClient() {
                   >
                     {deletingId === plan.id ? "מוחק..." : "מחק"}
                   </button>
+                </div>
+                <div className="w-full flex flex-col gap-2 mt-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setExpandedFeedbackId((prev) => (prev === plan.id ? null : plan.id));
+                      if (expandedFeedbackId !== plan.id) setReplyText("");
+                    }}
+                    className="rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 min-h-[44px] flex items-center gap-2 w-fit"
+                  >
+                    <MessageSquare className="h-4 w-4" aria-hidden />
+                    הערות המטופל
+                    {(plan.feedback?.length ?? 0) > 0 && (
+                      <span className="bg-primary/20 text-primary-darker text-xs px-1.5 py-0.5 rounded-full">
+                        {plan.feedback!.length}
+                      </span>
+                    )}
+                  </button>
+                  {expandedFeedbackId === plan.id && (
+                    <div className="rounded-xl border border-gray-200 bg-gray-50/80 p-3 space-y-3">
+                      {!(plan.feedback && plan.feedback.length > 0) ? (
+                        <p className="text-gray-500 text-sm">אין עדיין הודעות מהמטופל.</p>
+                      ) : (
+                        <ul className="space-y-2">
+                          {plan.feedback!.map((msg) => (
+                            <li
+                              key={msg.id}
+                              className={`flex ${msg.author === "therapist" ? "justify-start" : "justify-end"}`}
+                            >
+                              <div
+                                className={`max-w-[85%] rounded-lg px-2.5 py-1.5 text-sm ${
+                                  msg.author === "therapist"
+                                    ? "bg-primary/15 text-primary-darker border border-primary/25"
+                                    : "bg-white border border-gray-200 text-gray-900"
+                                }`}
+                              >
+                                <p className="whitespace-pre-wrap">{msg.text}</p>
+                                <p className="text-xs mt-1 opacity-80">
+                                  {msg.author === "therapist" ? "אני" : "המטופל"} · {new Date(msg.createdAt).toLocaleDateString("he-IL", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+                                </p>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      <div className="flex gap-2">
+                        <textarea
+                          value={replyText}
+                          onChange={(e) => setReplyText(e.target.value)}
+                          placeholder="השב למטופל..."
+                          rows={2}
+                          className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm resize-y focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+                          disabled={replyingPlanId !== null}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => sendReply(plan.id, replyText)}
+                          disabled={replyingPlanId !== null || !replyText.trim()}
+                          className="rounded-xl bg-primary-dark text-white px-3 py-2 text-sm font-medium min-h-[44px] flex items-center gap-1.5 shrink-0 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-darker transition"
+                        >
+                          <Send className="h-4 w-4" aria-hidden />
+                          {replyingPlanId === plan.id ? "שולח..." : "שלח"}
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </li>
             ))}

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export type PlanItem = { exercise: Exercise; dosage: Dosage };
 
 interface PlanPageProps {
-  searchParams: Promise<{ p?: string; ids?: string }>;
+  searchParams: Promise<{ p?: string; ids?: string; planId?: string }>;
 }
 
 function toExercise(entry: { id: string; category: string; title: string; youtubeId: string }): Exercise {
@@ -37,6 +37,7 @@ export default async function PlanPage({ searchParams }: PlanPageProps) {
   const params = await searchParams;
   const pParam = params.p?.trim();
   const idsParam = params.ids?.trim();
+  const planIdParam = params.planId?.trim();
 
   const custom = await readCustomExercises();
   const customExercises = custom
@@ -86,7 +87,7 @@ export default async function PlanPage({ searchParams }: PlanPageProps) {
             </p>
           </div>
         ) : (
-          <PlanContent planItems={planItems} />
+          <PlanContent planItems={planItems} planId={planIdParam || undefined} />
         )}
       </div>
     </div>

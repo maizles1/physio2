@@ -9,12 +9,20 @@ import { join } from "path";
 
 const BLOB_PATHNAME = "data/saved-plans.json";
 
+export interface PlanFeedbackMessage {
+  id: string;
+  author: "patient" | "therapist";
+  text: string;
+  createdAt: string;
+}
+
 export interface SavedPlan {
   id: string;
   patientName: string;
   prescriptionParam: string;
   createdAt: string;
   updatedAt?: string;
+  feedback?: PlanFeedbackMessage[];
 }
 
 function readFromFile(): SavedPlan[] {
@@ -99,4 +107,31 @@ export async function writeSavedPlans(plans: SavedPlan[]): Promise<{ ok: boolean
       error: `לא ניתן לכתוב לקובץ: ${message}. ${VERCEL_BLOB_INSTRUCTIONS}`,
     };
   }
+}
+
+/** Append a feedback message to a plan. Returns ok and updated plans, or error. */
+export async function addPlanFeedback(
+  planId: string,
+  message: { author: "patient" | "therapist"; text: string }
+): Promise<{ ok: boolean; error?: string; plans?: SavedPlan[] }> {
+  const plans = await readSavedPlans();
+  const idx = plans.findIndex((p) => p.id === planId);
+  if (idx === -1) {
+    return { ok: false, error: "Plan not found" };
+  }
+  const plan = plans[idx]!;
+  const feedback = plan.feedback ?? [];
+  const newMessage: PlanFeedbackMessage = {
+    id: crypto.randomUUID(),
+    author: message.author,
+    text: message.text.trim(),
+    createdAt: new Date().toISOString(),
+  };
+  const nextPlans = [...plans];
+  nextPlans[idx] = { ...plan, feedback: [...feedback, newMessage], updatedAt: newMessage.createdAt };
+  const result = await writeSavedPlans(nextPlans);
+  if (!result.ok) {
+    return { ok: false, error: result.error };
+  }
+  return { ok: true, plans: nextPlans };
 }

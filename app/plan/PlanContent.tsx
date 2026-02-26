@@ -1,14 +1,22 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Repeat, Calendar, Clock, Check } from "lucide-react";
+import { Repeat, Calendar, Clock, Check, MessageSquare, Send } from "lucide-react";
 import type { PlanItem } from "./page";
 import { CATEGORY_ORDER, CATEGORY_LABELS } from "@/app/data/exercises";
 
 const DONE_KEY_PREFIX = "physio-plan-done-";
 
+export interface PlanFeedbackMessage {
+  id: string;
+  author: "patient" | "therapist";
+  text: string;
+  createdAt: string;
+}
+
 interface PlanContentProps {
   planItems: PlanItem[];
+  planId?: string;
 }
 
 /** Lightweight lazy YouTube: thumbnail until click, then iframe. Uses same thumbnail as YouTube (maxresdefault → hqdefault fallback). */
@@ -92,7 +100,7 @@ function DosageBadges({ dosage }: { dosage: PlanItem["dosage"] }) {
   );
 }
 
-export default function PlanContent({ planItems }: PlanContentProps) {
+export default function PlanContent({ planItems, planId }: PlanContentProps) {
   const byCategory = CATEGORY_ORDER.map((category) => ({
     category,
     categoryLabel: CATEGORY_LABELS[category],
@@ -139,6 +147,49 @@ export default function PlanContent({ planItems }: PlanContentProps) {
       return next;
     });
   }, []);
+
+  const [feedbackMessages, setFeedbackMessages] = useState<PlanFeedbackMessage[]>([]);
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [feedbackText, setFeedbackText] = useState("");
+  const [feedbackSending, setFeedbackSending] = useState(false);
+
+  const fetchFeedback = useCallback(async () => {
+    if (!planId) return;
+    setFeedbackLoading(true);
+    try {
+      const res = await fetch(`/api/plan-feedback?planId=${encodeURIComponent(planId)}`);
+      const data = await res.json().catch(() => ({}));
+      if (Array.isArray(data?.messages)) setFeedbackMessages(data.messages);
+    } catch {
+      // ignore
+    } finally {
+      setFeedbackLoading(false);
+    }
+  }, [planId]);
+
+  useEffect(() => {
+    fetchFeedback();
+  }, [fetchFeedback]);
+
+  const sendFeedback = useCallback(async () => {
+    const text = feedbackText.trim();
+    if (!planId || !text || feedbackSending) return;
+    setFeedbackSending(true);
+    try {
+      const res = await fetch("/api/plan-feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ planId, text }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (data?.messages) setFeedbackMessages(data.messages);
+      setFeedbackText("");
+    } catch {
+      // ignore
+    } finally {
+      setFeedbackSending(false);
+    }
+  }, [planId, feedbackText, feedbackSending]);
 
   return (
     <div className="space-y-10 pb-8" dir="rtl">
@@ -195,6 +246,62 @@ export default function PlanContent({ planItems }: PlanContentProps) {
           </div>
         </section>
       ))}
+      {planId && (
+        <section className="rounded-2xl border border-gray-200 bg-white shadow-md overflow-hidden">
+          <h2 className="text-lg font-bold text-primary-dark px-4 py-3 border-b border-gray-100 flex items-center gap-2">
+            <MessageSquare className="h-5 w-5" aria-hidden />
+            איך היה התרגול? – התכתבות עם המטפל
+          </h2>
+          <div className="p-4 space-y-4">
+            {feedbackLoading ? (
+              <p className="text-gray-500 text-sm">טוען הודעות...</p>
+            ) : feedbackMessages.length === 0 ? (
+              <p className="text-gray-500 text-sm">אין עדיין הודעות. כתוב איך היה התרגול והמטפל יוכל לראות ולהיענות.</p>
+            ) : (
+              <ul className="space-y-3">
+                {feedbackMessages.map((msg) => (
+                  <li
+                    key={msg.id}
+                    className={`flex ${msg.author === "therapist" ? "justify-start" : "justify-end"}`}
+                  >
+                    <div
+                      className={`max-w-[85%] rounded-xl px-3 py-2 text-sm ${
+                        msg.author === "therapist"
+                          ? "bg-primary/10 text-primary-darker border border-primary/20"
+                          : "bg-gray-100 text-gray-900 border border-gray-200"
+                      }`}
+                    >
+                      <p className="whitespace-pre-wrap">{msg.text}</p>
+                      <p className="text-xs mt-1 opacity-80">
+                        {msg.author === "therapist" ? "המטפל" : "אני"} · {new Date(msg.createdAt).toLocaleDateString("he-IL", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <div className="flex gap-2">
+              <textarea
+                value={feedbackText}
+                onChange={(e) => setFeedbackText(e.target.value)}
+                placeholder="כתוב איך היה התרגול או שאלה למטפל..."
+                rows={2}
+                className="flex-1 rounded-xl border border-gray-300 px-3 py-2 text-sm resize-y focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+                disabled={feedbackSending}
+              />
+              <button
+                type="button"
+                onClick={sendFeedback}
+                disabled={feedbackSending || !feedbackText.trim()}
+                className="rounded-xl bg-primary-dark text-white px-4 py-2 min-h-[44px] flex items-center gap-1.5 font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-darker transition shrink-0"
+              >
+                <Send className="h-4 w-4" aria-hidden />
+                {feedbackSending ? "שולח..." : "שלח"}
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
