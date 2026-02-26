@@ -12,6 +12,8 @@ export interface PlanFeedbackMessage {
   author: "patient" | "therapist";
   text: string;
   createdAt: string;
+  exerciseId?: string;
+  exerciseTitle?: string;
 }
 
 interface PlanContentProps {
@@ -152,6 +154,8 @@ export default function PlanContent({ planItems, planId }: PlanContentProps) {
   const [feedbackLoading, setFeedbackLoading] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
   const [feedbackSending, setFeedbackSending] = useState(false);
+  const [exerciseTexts, setExerciseTexts] = useState<Record<string, string>>({});
+  const [sendingExerciseId, setSendingExerciseId] = useState<string | null>(null);
 
   const fetchFeedback = useCallback(async () => {
     if (!planId) return;
@@ -190,6 +194,33 @@ export default function PlanContent({ planItems, planId }: PlanContentProps) {
       setFeedbackSending(false);
     }
   }, [planId, feedbackText, feedbackSending]);
+
+  const sendExerciseFeedback = useCallback(
+    async (exerciseId: string, exerciseTitle: string, text: string) => {
+      const t = text.trim();
+      if (!planId || !t || sendingExerciseId) return;
+      setSendingExerciseId(exerciseId);
+      try {
+        const res = await fetch("/api/plan-feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ planId, text: t, exerciseId, exerciseTitle }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (data?.messages) setFeedbackMessages(data.messages);
+        setExerciseTexts((prev) => {
+          const next = { ...prev };
+          delete next[exerciseId];
+          return next;
+        });
+      } catch {
+        // ignore
+      } finally {
+        setSendingExerciseId(null);
+      }
+    },
+    [planId, sendingExerciseId]
+  );
 
   return (
     <div className="space-y-10 pb-8" dir="rtl">
@@ -240,6 +271,57 @@ export default function PlanContent({ planItems, planId }: PlanContentProps) {
                     </span>
                     {doneIds.has(ex.id) ? "בוצע" : "סמן כבוצע"}
                   </button>
+                  {planId && (
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <p className="text-sm font-medium text-gray-700 mb-2">איך היה התרגיל? – הערה למטפל</p>
+                      {feedbackMessages.filter((m) => m.exerciseId === ex.id).length > 0 && (
+                        <ul className="space-y-2 mb-3">
+                          {feedbackMessages
+                            .filter((m) => m.exerciseId === ex.id)
+                            .map((msg) => (
+                              <li
+                                key={msg.id}
+                                className={`flex ${msg.author === "therapist" ? "justify-start" : "justify-end"}`}
+                              >
+                                <div
+                                  className={`max-w-[90%] rounded-lg px-2.5 py-1.5 text-sm ${
+                                    msg.author === "therapist"
+                                      ? "bg-primary/10 text-primary-darker border border-primary/20"
+                                      : "bg-gray-100 text-gray-900 border border-gray-200"
+                                  }`}
+                                >
+                                  <p className="whitespace-pre-wrap">{msg.text}</p>
+                                  <p className="text-xs mt-1 opacity-80">
+                                    {msg.author === "therapist" ? "המטפל" : "אני"} · {new Date(msg.createdAt).toLocaleDateString("he-IL", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+                                  </p>
+                                </div>
+                              </li>
+                            ))}
+                        </ul>
+                      )}
+                      <div className="flex gap-2">
+                        <textarea
+                          value={exerciseTexts[ex.id] ?? ""}
+                          onChange={(e) =>
+                            setExerciseTexts((prev) => ({ ...prev, [ex.id]: e.target.value }))
+                          }
+                          placeholder="כתוב איך היה התרגיל או שאלה..."
+                          rows={2}
+                          className="flex-1 rounded-xl border border-gray-300 px-3 py-2 text-sm resize-y focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+                          disabled={sendingExerciseId !== null}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => sendExerciseFeedback(ex.id, ex.title, exerciseTexts[ex.id] ?? "")}
+                          disabled={sendingExerciseId !== null || !(exerciseTexts[ex.id] ?? "").trim()}
+                          className="rounded-xl bg-primary-dark text-white px-3 py-2 min-h-[44px] flex items-center gap-1.5 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-darker transition shrink-0"
+                        >
+                          <Send className="h-4 w-4" aria-hidden />
+                          {sendingExerciseId === ex.id ? "שולח..." : "שלח"}
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </article>
             ))}

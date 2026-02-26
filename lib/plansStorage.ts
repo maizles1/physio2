@@ -14,6 +14,9 @@ export interface PlanFeedbackMessage {
   author: "patient" | "therapist";
   text: string;
   createdAt: string;
+  /** When set, this message is about a specific exercise in the plan. */
+  exerciseId?: string;
+  exerciseTitle?: string;
 }
 
 export interface SavedPlan {
@@ -112,7 +115,12 @@ export async function writeSavedPlans(plans: SavedPlan[]): Promise<{ ok: boolean
 /** Append a feedback message to a plan. Returns ok and updated plans, or error. */
 export async function addPlanFeedback(
   planId: string,
-  message: { author: "patient" | "therapist"; text: string }
+  message: {
+    author: "patient" | "therapist";
+    text: string;
+    exerciseId?: string;
+    exerciseTitle?: string;
+  }
 ): Promise<{ ok: boolean; error?: string; plans?: SavedPlan[] }> {
   const plans = await readSavedPlans();
   const idx = plans.findIndex((p) => p.id === planId);
@@ -126,6 +134,8 @@ export async function addPlanFeedback(
     author: message.author,
     text: message.text.trim(),
     createdAt: new Date().toISOString(),
+    ...(message.exerciseId && { exerciseId: message.exerciseId }),
+    ...(message.exerciseTitle && { exerciseTitle: message.exerciseTitle }),
   };
   const nextPlans = [...plans];
   nextPlans[idx] = { ...plan, feedback: [...feedback, newMessage], updatedAt: newMessage.createdAt };

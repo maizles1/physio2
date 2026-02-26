@@ -10,6 +10,8 @@ interface PlanFeedbackMessage {
   author: "patient" | "therapist";
   text: string;
   createdAt: string;
+  exerciseId?: string;
+  exerciseTitle?: string;
 }
 
 interface SavedPlan {
@@ -253,6 +255,9 @@ export default function AdminPlansClient() {
                                     : "bg-white border border-gray-200 text-gray-900"
                                 }`}
                               >
+                                {msg.exerciseTitle && (
+                                  <p className="text-xs text-gray-600 mb-1">לגבי תרגיל: {msg.exerciseTitle}</p>
+                                )}
                                 <p className="whitespace-pre-wrap">{msg.text}</p>
                                 <p className="text-xs mt-1 opacity-80">
                                   {msg.author === "therapist" ? "אני" : "המטופל"} · {new Date(msg.createdAt).toLocaleDateString("he-IL", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}

@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   if (!sessionCookie || sessionCookie !== token) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  let body: { planId?: string; text?: string };
+  let body: { planId?: string; text?: string; exerciseId?: string; exerciseTitle?: string };
   try {
     body = await request.json();
   } catch {
@@ -19,13 +19,20 @@ export async function POST(request: Request) {
   }
   const planId = typeof body?.planId === "string" ? body.planId.trim() : "";
   const text = typeof body?.text === "string" ? body.text.trim() : "";
+  const exerciseId = typeof body?.exerciseId === "string" ? body.exerciseId.trim() : undefined;
+  const exerciseTitle = typeof body?.exerciseTitle === "string" ? body.exerciseTitle.trim() : undefined;
   if (!planId) {
     return NextResponse.json({ error: "planId required" }, { status: 400 });
   }
   if (!text) {
     return NextResponse.json({ error: "text required" }, { status: 400 });
   }
-  const result = await addPlanFeedback(planId, { author: "therapist", text });
+  const result = await addPlanFeedback(planId, {
+    author: "therapist",
+    text,
+    ...(exerciseId && { exerciseId }),
+    ...(exerciseTitle && { exerciseTitle }),
+  });
   if (!result.ok) {
     const status = result.error === "Plan not found" ? 404 : 500;
     return NextResponse.json({ error: result.error ?? "Failed" }, { status });
