@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { createPortal } from "react-dom";
 
 const STORAGE_KEY = "cookie_consent";
 const GTM_ID = "GTM-58XQH9KN";
@@ -37,9 +38,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 export default function CookieConsent() {
-  const [consent, setConsent] = useState<"accepted" | "declined" | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const [consent, setConsent] = useState<"accepted" | "declined" | null | "pending">("pending");
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     try {
       const stored = localStorage.getItem(STORAGE_KEY) as "accepted" | "declined" | null;
       if (stored === "accepted" || stored === "declined") {
@@ -51,7 +58,7 @@ export default function CookieConsent() {
     } catch {
       setConsent(null);
     }
-  }, []);
+  }, [mounted]);
 
   const accept = useCallback(() => {
     try {
@@ -72,15 +79,18 @@ export default function CookieConsent() {
     setConsent("declined");
   }, []);
 
-  if (consent !== null) {
+  if (consent === "accepted" || consent === "declined") {
+    return null;
+  }
+  if (!mounted || typeof document === "undefined") {
     return null;
   }
 
-  return (
+  const banner = (
     <div
       role="region"
       aria-label="הסכמה לשימוש בעוגיות"
-      className="fixed bottom-0 left-0 right-0 z-[100] bg-white border-t-2 border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]"
+      className="fixed bottom-0 left-0 right-0 z-[9998] bg-white border-t-2 border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.15)] pb-[env(safe-area-inset-bottom)]"
       dir="rtl"
     >
       <div className="container mx-auto px-4 py-4">
@@ -114,4 +124,7 @@ export default function CookieConsent() {
       </div>
     </div>
   );
+
+  if (typeof document === "undefined") return null;
+  return createPortal(banner, document.body);
 }
