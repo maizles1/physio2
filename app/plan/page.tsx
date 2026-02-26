@@ -9,6 +9,7 @@ import {
   type Category,
 } from "@/app/data/exercises";
 import { readCustomExercises } from "@/lib/exercisesStorage";
+import { ClipboardList } from "lucide-react";
 import PlanContent from "./PlanContent";
 
 export const metadata: Metadata = {
@@ -43,22 +44,25 @@ export default async function PlanPage({ searchParams }: PlanPageProps) {
     .map(toExercise);
   const allExercises: Exercise[] = [...exercisesData, ...customExercises];
 
-  let planItems: PlanItem[] = [];
-
-  if (pParam) {
-    const decoded = decodeURIComponent(pParam);
-    const parsed = parsePrescriptionParam(decoded);
-    for (const { id, dosage } of parsed) {
-      const exercise = allExercises.find((e) => e.id === id);
-      if (exercise) planItems.push({ exercise, dosage });
-    }
-  } else if (idsParam) {
-    const ids = idsParam.split(",").map((s) => s.trim()).filter(Boolean);
-    for (const id of ids) {
-      const exercise = allExercises.find((e) => e.id === id);
-      if (exercise) planItems.push({ exercise, dosage: DEFAULT_DOSAGE });
-    }
-  }
+  const planItems: PlanItem[] = pParam
+    ? (() => {
+        const decoded = decodeURIComponent(pParam);
+        const parsed = parsePrescriptionParam(decoded);
+        return parsed.flatMap(({ id, dosage }) => {
+          const exercise = allExercises.find((e) => e.id === id);
+          return exercise ? [{ exercise, dosage }] : [];
+        });
+      })()
+    : idsParam
+      ? idsParam
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
+          .flatMap((id) => {
+            const exercise = allExercises.find((e) => e.id === id);
+            return exercise ? [{ exercise, dosage: DEFAULT_DOSAGE }] : [];
+          })
+      : [];
 
   return (
     <div className="min-h-screen" dir="rtl">
@@ -75,8 +79,9 @@ export default async function PlanPage({ searchParams }: PlanPageProps) {
 
       <div className="mx-auto max-w-2xl px-4 py-6">
         {planItems.length === 0 ? (
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8 text-center">
-            <p className="text-gray-700">
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-10 sm:p-12 text-center">
+            <ClipboardList className="mx-auto h-14 w-14 text-gray-400 mb-4" aria-hidden />
+            <p className="text-gray-700 text-base sm:text-lg leading-relaxed max-w-md mx-auto">
               לא נמצאו תרגילים בתוכנית. אם קיבלתם קישור מהמטפל, בדקו שהקישור מלא ונסו שוב.
             </p>
           </div>

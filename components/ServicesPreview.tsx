@@ -112,6 +112,7 @@ export default function ServicesPreview() {
               {/* תמונה קטנה */}
               <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 w-full overflow-hidden">
                 {service.imagePath && service.imagePath.includes('lectures') ? (
+                  // eslint-disable-next-line @next/next/no-img-element -- dynamic path from data
                   <img
                     src={service.imagePath}
                     alt={service.title}

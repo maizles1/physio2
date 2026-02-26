@@ -130,6 +130,7 @@ export default function ServiceImage({ src, fallbackSrc, alt, className, sizes, 
         {isLoading && !hasLoaded && (
           <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse" aria-hidden="true" />
         )}
+        {/* eslint-disable-next-line @next/next/no-img-element -- SVG/dynamic src; Next Image not used for SVG */}
         <img
           src={imgSrc}
           alt={alt}

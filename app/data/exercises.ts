@@ -162,7 +162,6 @@ export function getAllExercises(): Exercise[] {
 }
 
 export function getExercisesByIds(ids: string[]): Exercise[] {
-  const set = new Set(ids);
   return ids
     .map((id) => getExerciseById(id))
     .filter((ex): ex is Exercise => ex != null);

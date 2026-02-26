@@ -450,7 +450,7 @@ export default function RootLayout({
           }) }}
         />
       </head>
-      <body className="antialiased">
+      <body className={`antialiased ${assistant.variable}`}>
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe

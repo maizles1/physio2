@@ -14,7 +14,6 @@ export function middleware(request: NextRequest) {
   const headers = request.headers
   const searchParams = request.nextUrl.searchParams
   const host = headers.get('host') || ''
-  const origin = headers.get('origin')
   const protocol = headers.get('x-forwarded-proto') || 'https'
 
   // URL Canonicalization: Redirect www to non-www and http to https
@@ -192,7 +191,7 @@ export function middleware(request: NextRequest) {
             }
           })
         }
-      } catch (error) {
+      } catch {
         // Invalid origin URL - reject
         isAllowedOrigin = false
       }

@@ -135,7 +135,7 @@ export default function AdminPlansClient() {
             {plans.map((plan) => (
               <li
                 key={plan.id}
-                className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-5 shadow-md flex flex-wrap items-center justify-between gap-3"
+                className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-5 shadow-md hover:shadow-lg hover:border-primary/30 transition flex flex-wrap items-center justify-between gap-3"
               >
                 <div className="min-w-0">
                   <p className="font-medium text-gray-900 truncate">

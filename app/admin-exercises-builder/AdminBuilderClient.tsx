@@ -177,8 +177,13 @@ export default function AdminBuilderClient() {
     }
   }, [patientName, updatePlanId, selectedDosages]);
 
-  const exercisesInSelectedCategory =
-    selectedCategory !== null ? allExercises.filter((e) => e.category === selectedCategory) : [];
+  const exercisesInSelectedCategory = useMemo(
+    () =>
+      selectedCategory !== null
+        ? allExercises.filter((e) => e.category === selectedCategory)
+        : [],
+    [allExercises, selectedCategory]
+  );
   const filteredExercisesInSelectedCategory = useMemo(() => {
     if (!searchTerm.trim()) return exercisesInSelectedCategory;
     const q = searchTerm.trim().toLowerCase();
@@ -237,7 +242,7 @@ export default function AdminBuilderClient() {
                   key={category}
                   type="button"
                   onClick={() => setSelectedCategory(category)}
-                  className="aspect-square min-h-[80px] rounded-2xl border-2 border-gray-200 bg-white hover:border-primary hover:bg-primary/5 hover:shadow-md transition flex items-center justify-center p-3 text-center"
+                  className="aspect-square min-h-[80px] rounded-2xl border-2 border-gray-200 bg-white hover:border-primary hover:bg-primary/5 hover:shadow-md active:scale-[0.98] transition flex items-center justify-center p-3 text-center"
                 >
                   <span className="font-medium text-gray-800">{CATEGORY_LABELS[category]}</span>
                 </button>
@@ -374,7 +379,7 @@ export default function AdminBuilderClient() {
       {selectedExercises.length > 0 && (
         <div className="fixed bottom-20 left-0 right-0 z-20 mx-auto max-w-2xl px-4">
           <div className="rounded-2xl border border-gray-200 bg-white shadow-lg h-36 overflow-hidden flex flex-col">
-            <div className="px-4 py-2.5 border-b border-gray-100 font-bold text-gray-900 text-sm shrink-0 bg-gray-50/80">
+            <div className="px-4 py-2.5 border-b border-gray-200 font-bold text-gray-900 text-sm shrink-0 bg-gray-100">
               התרגילים בתוכנית ({selectedExercises.length})
             </div>
             <div className="p-2 overflow-x-auto overflow-y-hidden">

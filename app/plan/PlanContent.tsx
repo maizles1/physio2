@@ -11,11 +11,18 @@ interface PlanContentProps {
   planItems: PlanItem[];
 }
 
-/** Lightweight lazy YouTube: thumbnail until click, then iframe. No extra deps, fast load. */
+/** Lightweight lazy YouTube: thumbnail until click, then iframe. Uses same thumbnail as YouTube (maxresdefault → hqdefault fallback). */
 function LazyYouTube({ id, title }: { id: string; title: string }) {
   const [loaded, setLoaded] = useState(false);
-  const thumb = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+  const [thumbSrc, setThumbSrc] = useState(`https://img.youtube.com/vi/${id}/maxresdefault.jpg`);
   const embedUrl = `https://www.youtube.com/embed/${id}?autoplay=1`;
+  const handleThumbError = useCallback(() => {
+    setThumbSrc(`https://img.youtube.com/vi/${id}/hqdefault.jpg`);
+  }, [id]);
+
+  useEffect(() => {
+    setThumbSrc(`https://img.youtube.com/vi/${id}/maxresdefault.jpg`);
+  }, [id]);
 
   if (loaded) {
     return (
@@ -33,22 +40,26 @@ function LazyYouTube({ id, title }: { id: string; title: string }) {
     <button
       type="button"
       onClick={() => setLoaded(true)}
-      className="group relative block w-full aspect-video bg-gray-900 rounded-t-2xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+      className="group relative block w-full aspect-video bg-gray-900 rounded-t-2xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       aria-label={`הפעל סרטון: ${title}`}
     >
+      {/* eslint-disable-next-line @next/next/no-img-element -- YouTube thumbnail URL is dynamic external */}
       <img
-        src={thumb}
+        src={thumbSrc}
         alt=""
         className="absolute inset-0 h-full w-full object-cover"
         loading="lazy"
+        onError={handleThumbError}
       />
-      <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/30 transition group-hover:bg-black/40">
-        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-red-600 text-white shadow-lg transition group-hover:scale-110">
+      <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/30 transition group-hover:bg-black/40">
+        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-red-600 text-white shadow-lg transition group-hover:scale-110 group-hover:animate-pulse">
           <svg className="mr-1 h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
             <path d="M8 5v14l11-7z" />
           </svg>
         </span>
-        <span className="text-white text-sm font-medium drop-shadow">לחץ להפעלה</span>
+        <span className="rounded-md bg-black/40 px-3 py-1.5 text-base font-medium text-white shadow-sm">
+          לחץ להפעלה
+        </span>
       </span>
     </button>
   );
@@ -102,8 +113,10 @@ export default function PlanContent({ planItems }: PlanContentProps) {
         // ignore
       }
     });
-    setDoneIds(new Set(stored));
-  }, [planIdsKey]);
+    const next = new Set(stored);
+    const t = setTimeout(() => setDoneIds(next), 0);
+    return () => clearTimeout(t);
+  }, [planIdsKey, planItems]);
 
   const toggleDone = useCallback((exerciseId: string) => {
     setDoneIds((prev) => {
@@ -143,12 +156,12 @@ export default function PlanContent({ planItems }: PlanContentProps) {
                 key={ex.id}
                 className={`rounded-2xl border overflow-hidden transition ${
                   doneIds.has(ex.id)
-                    ? "border-green-200 bg-green-50/50 shadow-sm"
-                    : "border-gray-200 bg-white shadow-sm"
+                    ? "border-green-300 bg-green-50/70 shadow-sm"
+                    : "border-gray-200 bg-white shadow-md hover:shadow-lg"
                 }`}
               >
                 {ex.youtubeId ? (
-                  <div className="relative aspect-video w-full">
+                  <div className="relative aspect-video w-full overflow-hidden rounded-t-2xl">
                     <LazyYouTube id={ex.youtubeId} title={ex.title} />
                   </div>
                 ) : (
@@ -156,8 +169,8 @@ export default function PlanContent({ planItems }: PlanContentProps) {
                     אין סרטון
                   </div>
                 )}
-                <div className="p-4 sm:p-5">
-                  <h3 className="text-xl font-bold text-gray-900">{ex.title}</h3>
+                <div className="p-5 sm:p-6">
+                  <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">{ex.title}</h3>
                   <DosageBadges dosage={dosage} />
                   <p className="mt-4 text-gray-700 leading-relaxed whitespace-pre-line">
                     {ex.instructions}
@@ -165,16 +178,16 @@ export default function PlanContent({ planItems }: PlanContentProps) {
                   <button
                     type="button"
                     onClick={() => toggleDone(ex.id)}
-                    className={`mt-4 inline-flex items-center gap-2 rounded-xl border-2 px-4 py-2 text-sm font-medium transition min-h-[44px] ${
+                    className={`mt-4 inline-flex items-center gap-2 rounded-xl border-2 px-4 py-2.5 text-sm font-medium transition min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                       doneIds.has(ex.id)
-                        ? "border-green-500 bg-green-500/10 text-green-800"
+                        ? "border-green-600 bg-green-100 text-green-900"
                         : "border-gray-300 bg-gray-50 text-gray-700 hover:bg-gray-100"
                     }`}
                   >
-                    <span className={doneIds.has(ex.id) ? "text-green-600" : "text-gray-400"}>
-                      <Check className="h-5 w-5" strokeWidth={2.5} aria-hidden />
+                    <span className={doneIds.has(ex.id) ? "text-green-700" : "text-gray-400"}>
+                      <Check className={doneIds.has(ex.id) ? "h-6 w-6" : "h-5 w-5"} strokeWidth={2.5} aria-hidden />
                     </span>
-                    {doneIds.has(ex.id) ? "בוצע" : "סיימתי"}
+                    {doneIds.has(ex.id) ? "בוצע" : "סמן כבוצע"}
                   </button>
                 </div>
               </article>

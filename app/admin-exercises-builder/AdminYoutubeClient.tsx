@@ -243,6 +243,7 @@ export default function AdminYoutubeClient() {
                                 rel="noopener noreferrer"
                                 className="shrink-0 block w-40 h-24 rounded-lg overflow-hidden bg-gray-200"
                               >
+                                {/* eslint-disable-next-line @next/next/no-img-element -- YouTube thumbnail URL is dynamic */}
                                 <img
                                   src={`https://img.youtube.com/vi/${ex.youtubeId}/hqdefault.jpg`}
                                   alt=""
