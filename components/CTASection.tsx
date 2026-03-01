@@ -42,7 +42,7 @@ aria-label="קבע טיפול עכשיו - עמוד יצירת קשר"
               </a>
               {seoConfig.contact.email && (
                 <a
-                  href={`mailto:${encodeURIComponent(getContactEmailTo())}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
+                  href={`mailto:${getContactEmailTo()}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
                   onClick={() => gtag.event('email_click', 'engagement', 'cta_section')}
                   className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-white bg-white/20 hover:bg-white/30 border border-white/40 transition-all duration-200 shadow-lg hover:shadow-xl"
                   aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}

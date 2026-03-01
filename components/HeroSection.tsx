@@ -134,7 +134,7 @@ export default function HeroSection() {
             </a>
             {seoConfig.contact.email && (
               <a
-                href={`mailto:${encodeURIComponent(getContactEmailTo())}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
+                href={`mailto:${getContactEmailTo()}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
                 onClick={() => {
                   try {
                     gtag.event('email_click', 'engagement', 'hero_section')

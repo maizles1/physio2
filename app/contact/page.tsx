@@ -141,7 +141,7 @@ export default function ContactPage() {
                     <h3 className="font-bold text-lg text-gray-900 mb-1">אימייל</h3>
                     <p className="text-gray-700 mb-2">שלחו לנו מייל ליצירת קשר או לקביעת תור</p>
                     <a
-                      href={`mailto:${encodeURIComponent(getContactEmailTo())}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
+                      href={`mailto:${getContactEmailTo()}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
                       onClick={() => {
                         try {
                           gtag.event('email_click', 'engagement', 'contact_page')
