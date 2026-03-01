@@ -84,6 +84,20 @@
 - ✅ אין hardcoded secrets בקוד
 - ✅ כל ה-API keys ב-environment variables
 
+### 7.1 Google API – אין מפתחות חשופים ללקוח ✅
+**בדיקה:** וידוא שמפתח Google (Maps/Places) לא נחשף באתר הכללי.
+
+- ✅ **GOOGLE_MAPS_API_KEY** – ללא `NEXT_PUBLIC_`; משמש רק בצד שרת:
+  - `config/google-business.config.ts` → `getGoogleMapsApiKey()` קורא מ-`process.env.GOOGLE_MAPS_API_KEY`
+  - `lib/google-reviews.ts` משתמש במפתח רק בתוך קריאות ל-API (נקרא מ-`app/api/reviews/route.ts` – Route Handler בשרת)
+  - קומפוננטות הלקוח (למשל `TestimonialsPreview`, `LeaveReviewButton`) מייבאות רק `getReviewUrl` ו-`getPlaceId` – לא את המפתח
+- ✅ **NEXT_PUBLIC_GOOGLE_PLACE_ID** – Place ID (מזהה עסק) – גלוי במכוון, לא מפתח סודי
+- ✅ **Google Analytics** – `seoConfig.googleAnalyticsId` (מזהה מדידה, למשל G-xxx) – מזהה מדידה נועד להיות גלוי; לא מוגדר כרגע ב-`seo.config.ts`
+- ✅ **סקריפטים** (`scripts/check-google-reviews.js`, `scripts/find-place-id.js`) – רצים ב-Node בלבד, קוראים מ-`process.env`, לא נכללים בבאנדל הלקוח
+- ✅ **env.example** – מכיל רק placeholders (למשל `AIza...`), לא מפתחות אמיתיים
+
+**מסקנה:** מפתח Google Maps/Places API לא נשלח ללקוח ולא מוטמע בבאנדל האתר.
+
 ### 8. Dependencies Security ✅
 **מיקום:** `package.json`
 

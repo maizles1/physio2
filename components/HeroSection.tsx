@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { gtag } from '@/components/GoogleAnalytics'
+import { seoConfig, getContactEmailTo } from '@/config/seo.config'
 
 const whatsappNumber = '972508838982'
 const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
@@ -131,6 +132,25 @@ export default function HeroSection() {
               </svg>
               WhatsApp
             </a>
+            {seoConfig.contact.email && (
+              <a
+                href={`mailto:${encodeURIComponent(getContactEmailTo())}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
+                onClick={() => {
+                  try {
+                    gtag.event('email_click', 'engagement', 'hero_section')
+                  } catch {
+                    // ignore
+                  }
+                }}
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-white bg-white/20 hover:bg-white/30 border border-white/40 transition-all duration-200 shadow-lg hover:shadow-xl"
+                aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                שלח אימייל
+              </a>
+            )}
           </div>
           <p className="text-center text-white/90 text-sm mt-4 px-2">
             זמינות 24–48 שעות · מקצועי תואר שני

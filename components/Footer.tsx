@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { seoConfig } from '@/config/seo.config'
+import { seoConfig, getContactEmailTo } from '@/config/seo.config'
 import { gtag } from './GoogleAnalytics'
 import { toast } from '@/lib/toast'
 
@@ -227,6 +227,27 @@ export default function Footer() {
                   {phoneNumber}
                 </a>
               </li>
+              {seoConfig.contact.email && (
+                <li className="flex items-center gap-3">
+                  <svg className="w-5 h-5 flex-shrink-0 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <a
+                    href={`mailto:${encodeURIComponent(getContactEmailTo())}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
+                    onClick={() => {
+                      try {
+                        gtag.event('email_click', 'engagement', 'footer')
+                      } catch {
+                        // ignore
+                      }
+                    }}
+                    className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium"
+                    aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}
+                  >
+                    {seoConfig.contact.email}
+                  </a>
+                </li>
+              )}
               <li className="flex items-start gap-3">
                 <svg className="w-5 h-5 mt-1 flex-shrink-0 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -237,7 +258,7 @@ export default function Footer() {
                 </span>
               </li>
             </ul>
-            <div className="mt-4 flex gap-2">
+            <div className="mt-4 flex flex-wrap gap-2">
               <a
                 href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
                 target="_blank"
@@ -249,6 +270,25 @@ export default function Footer() {
                 </svg>
                 WhatsApp
               </a>
+              {seoConfig.contact.email && (
+                <a
+                  href={`mailto:${encodeURIComponent(getContactEmailTo())}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
+                  onClick={() => {
+                    try {
+                      gtag.event('email_click', 'engagement', 'footer_button')
+                    } catch {
+                      // ignore
+                    }
+                  }}
+                  className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 text-sm"
+                  aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  שלח אימייל
+                </a>
+              )}
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import ClinicLogo from './ClinicLogo'
 import { gtag } from './GoogleAnalytics'
-import { seoConfig } from '@/config/seo.config'
+import { seoConfig, getContactEmailTo } from '@/config/seo.config'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -182,6 +182,25 @@ export default function Header() {
               </svg>
               WhatsApp
             </a>
+            {seoConfig.contact.email && (
+              <a
+                href={`mailto:${encodeURIComponent(getContactEmailTo())}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
+                onClick={() => {
+                  try {
+                    gtag.event('email_click', 'engagement', 'header')
+                  } catch {
+                    // ignore
+                  }
+                }}
+                className="btn bg-gray-600 hover:bg-gray-700 text-white text-sm"
+                aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span className="hidden sm:inline">שלח אימייל</span>
+              </a>
+            )}
             <a
               href={`tel:${phoneNumber}`}
               onClick={() => {
@@ -321,6 +340,26 @@ export default function Header() {
                     </svg>
                     WhatsApp
                   </a>
+                  {seoConfig.contact.email && (
+                    <a
+                      href={`mailto:${encodeURIComponent(getContactEmailTo())}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
+                      onClick={() => {
+                        setMobileMenuOpen(false)
+                        try {
+                          gtag.event('email_click', 'engagement', 'header_mobile')
+                        } catch {
+                          // ignore
+                        }
+                      }}
+                      className="w-full text-center bg-gray-600 hover:bg-gray-700 text-white px-4 py-3 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                      aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      שלח אימייל
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

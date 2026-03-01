@@ -24,7 +24,10 @@ export interface SEOConfig {
   }
   contact: {
     phone: string
+    /** כתובת לתצוגה למטופל */
     email?: string
+    /** כתובת אמיתית לשליחת המייל (mailto) – אם לא מוגדר משתמשים ב-email */
+    emailTo?: string
   }
   openingHours: {
     [key: string]: { opens: string; closes: string } | null
@@ -71,6 +74,8 @@ export const seoConfig: SEOConfig = {
   },
   contact: {
     phone: '050-883-8982',
+    email: 'info@physio-plus.co.il',
+    emailTo: 'amphysiotherapy1@gmail.com',
   },
   openingHours: {
     monday: { opens: '08:00', closes: '20:00' },
@@ -88,6 +93,12 @@ export const seoConfig: SEOConfig = {
   // הוסף את ה-IDs כשזמינים
   // googleAnalyticsId: 'G-XXXXXXXXXX',
   // googleSearchConsoleId: 'your-verification-code',
+}
+
+/** כתובת המייל שאליה נשלח ה-mailto (emailTo אם מוגדר, אחרת email) */
+export function getContactEmailTo(): string {
+  const c = seoConfig.contact
+  return (c.emailTo ?? c.email) ?? ''
 }
 
 /**

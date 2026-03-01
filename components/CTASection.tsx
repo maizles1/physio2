@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { gtag } from '@/components/GoogleAnalytics'
+import { seoConfig, getContactEmailTo } from '@/config/seo.config'
 
 const whatsappNumber = '972508838982'
 const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
@@ -39,6 +40,19 @@ aria-label="קבע טיפול עכשיו - עמוד יצירת קשר"
                 </svg>
                 WhatsApp
               </a>
+              {seoConfig.contact.email && (
+                <a
+                  href={`mailto:${encodeURIComponent(getContactEmailTo())}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
+                  onClick={() => gtag.event('email_click', 'engagement', 'cta_section')}
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-white bg-white/20 hover:bg-white/30 border border-white/40 transition-all duration-200 shadow-lg hover:shadow-xl"
+                  aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  שלח אימייל
+                </a>
+              )}
             </div>
             <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-white/90">
               <div className="flex items-center gap-2">
