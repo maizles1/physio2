@@ -289,17 +289,35 @@ export default function AdminBuilderClient() {
                             : "border-gray-200 bg-white"
                         }`}
                       >
-                        <button
-                          type="button"
-                          onClick={() => toggleExercise(ex.id)}
-                          className={`w-full text-right p-4 transition ${
-                            selected
-                              ? "text-primary-darker"
-                              : "hover:bg-gray-50 text-gray-800"
-                          }`}
-                        >
-                          <span className="font-medium block">{ex.title}</span>
-                        </button>
+                        <div className="flex items-stretch min-h-0">
+                          {ex.youtubeId && (
+                            <div
+                              className="shrink-0 w-36 aspect-video rounded-l-lg overflow-hidden bg-gray-100 border-l-2 border-transparent"
+                              style={{ borderColor: 'inherit' }}
+                              onClick={(e) => e.stopPropagation()}
+                              role="presentation"
+                            >
+                              <iframe
+                                src={`https://www.youtube.com/embed/${ex.youtubeId}?rel=0`}
+                                title={`סרטון תרגיל: ${ex.title}`}
+                                className="w-full h-full pointer-events-auto"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              />
+                            </div>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => toggleExercise(ex.id)}
+                            className={`flex-1 min-w-0 text-right p-4 transition ${
+                              selected
+                                ? "text-primary-darker"
+                                : "hover:bg-gray-50 text-gray-800"
+                            }`}
+                          >
+                            <span className="font-medium block">{ex.title}</span>
+                          </button>
+                        </div>
                         {selected && (
                           <div
                             className="px-4 pb-4 pt-0 grid grid-cols-2 sm:grid-cols-4 gap-3"
@@ -392,7 +410,23 @@ export default function AdminBuilderClient() {
                       className="shrink-0 w-56 rounded-xl border border-gray-200 bg-gray-50 p-2 flex flex-col gap-1"
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <span className="font-medium text-gray-900 text-xs leading-tight line-clamp-2">
+                        {ex.youtubeId && (
+                          <a
+                            href={`https://www.youtube.com/watch?v=${ex.youtubeId}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="shrink-0 w-12 h-8 rounded overflow-hidden bg-gray-200 block"
+                            aria-label="צפה בסרטון"
+                          >
+                            {/* eslint-disable-next-line @next/next/no-img-element -- YouTube thumbnail URL is dynamic */}
+                            <img
+                              src={`https://img.youtube.com/vi/${ex.youtubeId}/default.jpg`}
+                              alt=""
+                              className="w-full h-full object-cover"
+                            />
+                          </a>
+                        )}
+                        <span className="font-medium text-gray-900 text-xs leading-tight line-clamp-2 flex-1 min-w-0">
                           {ex.title}
                         </span>
                         <button

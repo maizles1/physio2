@@ -237,19 +237,18 @@ export default function AdminYoutubeClient() {
                             className="rounded-xl border border-gray-200 bg-gray-50 overflow-hidden"
                           >
                             <div className="flex gap-4 p-4">
-                              <a
-                                href={`https://www.youtube.com/watch?v=${ex.youtubeId}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="shrink-0 block w-40 h-24 rounded-lg overflow-hidden bg-gray-200"
+                              <div
+                                className="shrink-0 w-40 aspect-video rounded-lg overflow-hidden bg-gray-200"
+                                title={`סרטון תרגיל: ${ex.title}`}
                               >
-                                {/* eslint-disable-next-line @next/next/no-img-element -- YouTube thumbnail URL is dynamic */}
-                                <img
-                                  src={`https://img.youtube.com/vi/${ex.youtubeId}/hqdefault.jpg`}
-                                  alt=""
-                                  className="w-full h-full object-cover"
+                                <iframe
+                                  src={`https://www.youtube.com/embed/${ex.youtubeId}?rel=0`}
+                                  title={`סרטון תרגיל: ${ex.title}`}
+                                  className="w-full h-full"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                  allowFullScreen
                                 />
-                              </a>
+                              </div>
                               <div className="flex-1 min-w-0 flex flex-col gap-2">
                                 <label className="text-xs text-gray-500">שם התרגיל</label>
                                 <input
