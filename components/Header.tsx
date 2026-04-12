@@ -6,6 +6,9 @@ import ClinicLogo from './ClinicLogo'
 import { gtag } from './GoogleAnalytics'
 import { seoConfig, getContactEmailTo } from '@/config/seo.config'
 
+type NavSubItem = { name: string; href: string }
+type NavItem = { name: string; href: string; dropdown?: NavSubItem[] }
+
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
@@ -16,9 +19,12 @@ export default function Header() {
   const address = 'מרכז כלניות, אשדוד'
   const hasSocial = !!(seoConfig.social?.facebook || seoConfig.social?.instagram)
 
-  const navigation = [
+  /** קישור יחיד ליצירת קשר — מרונדר פעם אחת בדסקטופ כדי למנוע כפילות */
+  const bookingNavItem: NavItem = { name: 'קבע טיפול עכשיו', href: '/contact' }
+
+  const primaryNavigation: NavItem[] = [
     { name: 'דף בית', href: '/' },
-    { 
+    {
       name: 'אודות',
       href: '/about',
     },
@@ -34,13 +40,14 @@ export default function Header() {
         { name: 'שיקום וסטיבולרי - טיפול בסחרחורות', href: '/services#vestibular' },
         { name: 'טיפול במפרק הלסת (TMJ)', href: '/services#tmj' },
         { name: 'ליווי קבוצות ספורט וספורטאים', href: '/services#sports-teams' },
-      ]
+      ],
     },
     { name: 'בלוג', href: '/blog' },
     { name: 'המלצות', href: '/testimonials' },
     { name: 'שאלות נפוצות', href: '/faq' },
-    { name: 'קבע טיפול עכשיו', href: '/contact' },
   ]
+
+  const navigation = [...primaryNavigation, bookingNavItem]
 
   return (
     <header className={`bg-white shadow-md sticky top-0 border-b border-gray-200 z-50 ${mobileMenuOpen ? 'z-[60]' : ''}`}>
@@ -124,7 +131,7 @@ export default function Header() {
 
       {/* Main Navigation Bar */}
       <nav className="container mx-auto px-4">
-        <div className="flex min-w-0 items-center justify-between gap-3 py-2.5 sm:py-3 md:gap-4 md:py-4">
+        <div className="flex min-w-0 items-center gap-5 py-2.5 sm:py-3 md:py-4">
           {/* Logo Section */}
           <Link href="/" className="flex shrink-0 items-center gap-3 hover:opacity-90 transition-opacity" aria-label="פיזיותרפיה.פלוס - דף בית">
             <ClinicLogo />
@@ -134,19 +141,19 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* דסקטופ: ניווט (כולל "קבע טיפול עכשיו" כקישור) + כפתורים — grid מונע חפיפה; wrap ברובריקות אם הצר */}
-          <div className="hidden min-w-0 flex-1 items-center gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_auto]">
-            <div className="flex min-w-0 flex-wrap content-center justify-center gap-x-2 gap-y-1.5 xl:gap-x-2.5">
-              {navigation.map((item) => (
+          {/* דסקטופ: שורה אחת — flex, align-items center, gap 20px בין אזורים; גלילה אופקית אם אין רוחב */}
+          <div className="relative z-10 hidden min-h-[48px] min-w-0 flex-1 items-center gap-5 lg:flex">
+            <div className="flex min-w-0 flex-1 flex-nowrap items-center justify-center gap-5 overflow-x-auto overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {primaryNavigation.map((item) => (
                 <div
                   key={item.name}
-                  className="relative shrink-0 group"
+                  className="group relative shrink-0"
                   onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
                   onMouseLeave={() => setActiveDropdown(null)}
                 >
                   <Link
                     href={item.href}
-                    className="rounded-lg px-2 py-2 text-xs font-medium text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] xl:px-3 xl:text-sm"
+                    className="block rounded-lg px-2 py-2 text-sm font-medium whitespace-nowrap text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] xl:px-3"
                     aria-label={item.dropdown ? `${item.name} - תפריט עם אפשרויות נוספות` : item.name}
                     aria-expanded={item.dropdown ? activeDropdown === item.name : undefined}
                     aria-haspopup={item.dropdown ? 'true' : undefined}
@@ -154,7 +161,7 @@ export default function Header() {
                     {item.name}
                   </Link>
                   {item.dropdown && activeDropdown === item.name && (
-                    <div 
+                    <div
                       className="absolute top-full right-0 z-50 mt-2 w-64 rounded-xl border border-gray-100 bg-white py-2 shadow-2xl"
                       role="menu"
                       aria-label={`תפריט משנה של ${item.name}`}
@@ -174,9 +181,21 @@ export default function Header() {
                   )}
                 </div>
               ))}
+              <div
+                className="group relative shrink-0"
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <Link
+                  href={bookingNavItem.href}
+                  className="block rounded-lg px-2 py-2 text-sm font-medium whitespace-nowrap text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] xl:px-3"
+                  aria-label={bookingNavItem.name}
+                >
+                  {bookingNavItem.name}
+                </Link>
+              </div>
             </div>
 
-            <div className="relative z-10 flex shrink-0 items-center gap-2 bg-white">
+            <div className="flex shrink-0 items-center gap-5 bg-white">
               <a
                 href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
                 target="_blank"
@@ -231,7 +250,7 @@ export default function Header() {
           </div>
 
           {/* Mobile Action Buttons & Menu Toggle */}
-          <div className="flex lg:hidden items-center gap-2">
+          <div className="ms-auto flex items-center gap-2 lg:hidden">
             <a
               href={`tel:${phoneNumber}`}
               onClick={() => {
