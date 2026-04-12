@@ -95,8 +95,13 @@ export default function BlogPage() {
                     </span>
                     <span className="text-sm text-gray-500">{post.date}</span>
                   </div>
-                  <h2 className="text-xl font-bold mb-3 hover:opacity-80 transition-opacity" style={{ color: '#2A3080' }}>
-                    {post.title}
+                  <h2 className="text-xl font-bold mb-3">
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="block text-[#2A3080] no-underline hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0] focus-visible:ring-offset-2 rounded-sm"
+                    >
+                      {post.title}
+                    </Link>
                   </h2>
                   <p className="text-gray-600 mb-4 leading-relaxed">
                     {post.excerpt}
