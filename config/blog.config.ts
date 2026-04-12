@@ -31,7 +31,7 @@ export const blogPosts: BlogPost[] = [
     date: '12 באפריל 2026',
     category: 'תהליך הטיפול',
     categoryId: 'treatment-process',
-    image: '/images/blog/shockwave-therapy-eswt.png',
+    image: '/images/blog/shockwave-eswt-physio-plus-hero.png',
     keywords: [
       'גלי הלם פיזיותרפיה',
       'ESWT',

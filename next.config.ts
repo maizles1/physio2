@@ -24,7 +24,8 @@ const nextConfig: NextConfig = {
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000, // 1 year cache for images
+    // Keep optimizer cache bounded so replaced /public images get fresh variants sooner.
+    minimumCacheTTL: 604800, // 7 days (was 1y; paired with blog static headers)
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -81,6 +82,17 @@ const nextConfig: NextConfig = {
               "frame-ancestors 'none'",
               "upgrade-insecure-requests",
             ].join('; '),
+          },
+        ],
+      },
+      {
+        // Blog images are replaced in place; avoid immutable 1y cache so updates propagate.
+        source: '/images/blog/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value:
+              'public, max-age=3600, s-maxage=7200, stale-while-revalidate=86400',
           },
         ],
       },
