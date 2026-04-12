@@ -16,9 +16,9 @@ export default function Header() {
   const address = 'מרכז כלניות, אשדוד'
   const hasSocial = !!(seoConfig.social?.facebook || seoConfig.social?.instagram)
 
-  const mainNavLinks = [
+  const navigation = [
     { name: 'דף בית', href: '/' },
-    {
+    { 
       name: 'אודות',
       href: '/about',
     },
@@ -34,21 +34,13 @@ export default function Header() {
         { name: 'שיקום וסטיבולרי - טיפול בסחרחורות', href: '/services#vestibular' },
         { name: 'טיפול במפרק הלסת (TMJ)', href: '/services#tmj' },
         { name: 'ליווי קבוצות ספורט וספורטאים', href: '/services#sports-teams' },
-      ],
+      ]
     },
     { name: 'בלוג', href: '/blog' },
     { name: 'המלצות', href: '/testimonials' },
     { name: 'שאלות נפוצות', href: '/faq' },
-  ]
-
-  const navigation = [
-    ...mainNavLinks,
     { name: 'קבע טיפול עכשיו', href: '/contact' },
   ]
-
-  /** אחיד לדסקטופ: גובה, ריווח פנימי, ללא גלישה על שכנים ב-RTL */
-  const desktopCtaClass =
-    'inline-flex h-11 min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-lg px-3 text-sm font-semibold whitespace-nowrap shadow-sm transition-[filter,box-shadow] hover:brightness-[0.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0] focus-visible:ring-offset-2 xl:px-3.5'
 
   return (
     <header className={`bg-white shadow-md sticky top-0 border-b border-gray-200 z-50 ${mobileMenuOpen ? 'z-[60]' : ''}`}>
@@ -142,106 +134,100 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Navigation — בלי "קבע טיפול" כדי שלא ייגלוש לעמודת ה-CTA */}
-          <div className="hidden min-w-0 flex-1 items-center justify-center gap-2 pe-2 lg:flex xl:gap-2.5">
-            {mainNavLinks.map((item) => (
-              <div
-                key={item.name}
-                className="relative shrink-0 group"
-                onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <Link
-                  href={item.href}
-                  className="rounded-lg px-2 py-2 text-xs font-medium text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] xl:px-3 xl:text-sm"
-                  aria-label={item.dropdown ? `${item.name} - תפריט עם אפשרויות נוספות` : item.name}
-                  aria-expanded={item.dropdown ? activeDropdown === item.name : undefined}
-                  aria-haspopup={item.dropdown ? 'true' : undefined}
+          {/* דסקטופ: ניווט (כולל "קבע טיפול עכשיו" כקישור) + כפתורים — grid מונע חפיפה; wrap ברובריקות אם הצר */}
+          <div className="hidden min-w-0 flex-1 items-center gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_auto]">
+            <div className="flex min-w-0 flex-wrap content-center justify-center gap-x-2 gap-y-1.5 xl:gap-x-2.5">
+              {navigation.map((item) => (
+                <div
+                  key={item.name}
+                  className="relative shrink-0 group"
+                  onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  {item.name}
-                </Link>
-                {item.dropdown && activeDropdown === item.name && (
-                  <div 
-                    className="absolute top-full right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50"
-                    role="menu"
-                    aria-label={`תפריט משנה של ${item.name}`}
+                  <Link
+                    href={item.href}
+                    className="rounded-lg px-2 py-2 text-xs font-medium text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] xl:px-3 xl:text-sm"
+                    aria-label={item.dropdown ? `${item.name} - תפריט עם אפשרויות נוספות` : item.name}
+                    aria-expanded={item.dropdown ? activeDropdown === item.name : undefined}
+                    aria-haspopup={item.dropdown ? 'true' : undefined}
                   >
-                    {item.dropdown.map((subItem) => (
-                      <Link
-                        key={subItem.name}
-                        href={subItem.href}
-                        className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#2080C0] transition-colors"
-                        role="menuitem"
-                        aria-label={`${subItem.name} - ${item.name}`}
-                      >
-                        {subItem.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+                    {item.name}
+                  </Link>
+                  {item.dropdown && activeDropdown === item.name && (
+                    <div 
+                      className="absolute top-full right-0 z-50 mt-2 w-64 rounded-xl border border-gray-100 bg-white py-2 shadow-2xl"
+                      role="menu"
+                      aria-label={`תפריט משנה של ${item.name}`}
+                    >
+                      {item.dropdown.map((subItem) => (
+                        <Link
+                          key={subItem.name}
+                          href={subItem.href}
+                          className="block px-4 py-2.5 text-sm text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0]"
+                          role="menuitem"
+                          aria-label={`${subItem.name} - ${item.name}`}
+                        >
+                          {subItem.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
 
-          {/* Action Buttons - Desktop: גובה וריווח אחידים, מופרדים מהניווט */}
-          <div className="relative z-20 hidden shrink-0 items-center gap-2 bg-white ps-2 lg:flex xl:gap-2.5">
-            <Link
-              href="/contact"
-              className={`${desktopCtaClass} bg-[#2080C0] text-white hover:bg-[#004080]`}
-              aria-label="קבע טיפול עכשיו"
-            >
-              קבע טיפול עכשיו
-            </Link>
-            <a
-              href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${desktopCtaClass} bg-[#25D366] text-white hover:bg-[#20BA5A]`}
-              aria-label="שלח הודעת WhatsApp"
-            >
-              <svg className="h-5 w-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-              </svg>
-              WhatsApp
-            </a>
-            {seoConfig.contact.email && (
+            <div className="relative z-10 flex shrink-0 items-center gap-2 bg-white">
               <a
-                href={`mailto:${getContactEmailTo()}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
+                href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn bg-[#25D366] text-sm text-white hover:bg-[#20BA5A]"
+                aria-label="שלח הודעת WhatsApp"
+              >
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                </svg>
+                WhatsApp
+              </a>
+              {seoConfig.contact.email && (
+                <a
+                  href={`mailto:${getContactEmailTo()}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
+                  onClick={() => {
+                    try {
+                      gtag.event('email_click', 'engagement', 'header')
+                    } catch {
+                      // ignore
+                    }
+                  }}
+                  className="btn bg-gray-600 text-sm text-white hover:bg-gray-700"
+                  aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}
+                >
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span className="hidden sm:inline">שלח אימייל</span>
+                </a>
+              )}
+              <a
+                href={`tel:${phoneNumber}`}
                 onClick={() => {
                   try {
-                    gtag.event('email_click', 'engagement', 'header')
-                  } catch {
-                    // ignore
+                    gtag.clickToCall(phoneNumber)
+                  } catch (error) {
+                    if (process.env.NODE_ENV === 'development') {
+                      console.warn('Google Analytics tracking failed:', error)
+                    }
                   }
                 }}
-                className={`${desktopCtaClass} bg-gray-600 text-white hover:bg-gray-700`}
-                aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}
+                className="btn btn-primary text-sm"
+                aria-label={`התקשר אלינו: ${phoneNumber}`}
               >
-                <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                שלח אימייל
+                <span className="hidden sm:inline">התקשר</span>
               </a>
-            )}
-            <a
-              href={`tel:${phoneNumber}`}
-              onClick={() => {
-                try {
-                  gtag.clickToCall(phoneNumber)
-                } catch (error) {
-                  if (process.env.NODE_ENV === 'development') {
-                    console.warn('Google Analytics tracking failed:', error)
-                  }
-                }
-              }}
-              className={`${desktopCtaClass} border-2 border-[#2080C0] bg-white text-[#2080C0] hover:bg-blue-50`}
-              aria-label={`התקשר אלינו: ${phoneNumber}`}
-            >
-              <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              התקשר
-            </a>
+            </div>
           </div>
 
           {/* Mobile Action Buttons & Menu Toggle */}
