@@ -131,7 +131,7 @@ export default function Header() {
 
       {/* Main Navigation Bar */}
       <nav className="container mx-auto px-4">
-        <div className="flex min-w-0 items-center gap-5 py-2.5 sm:py-3 md:py-4">
+        <div className="flex min-w-0 items-center justify-between gap-4 py-2.5 sm:py-3 md:py-4">
           {/* Logo Section */}
           <Link href="/" className="flex shrink-0 items-center gap-3 hover:opacity-90 transition-opacity" aria-label="פיזיותרפיה.פלוס - דף בית">
             <ClinicLogo />
@@ -142,23 +142,23 @@ export default function Header() {
           </Link>
 
           {/* דסקטופ: ניווט אחיד וברור עם מרווחים שווים בין כל הרובריקות */}
-          <div className="relative z-10 hidden min-h-[48px] min-w-0 flex-1 items-center gap-5 lg:flex">
-            <div className="grid min-w-0 flex-1 grid-cols-7 items-center gap-2 xl:gap-3">
+          <div className="relative z-10 hidden min-h-[48px] min-w-0 flex-1 items-center justify-between gap-4 xl:flex">
+            <div className="flex min-w-0 flex-1 items-center justify-center gap-1.5 2xl:gap-2">
               {primaryNavigation.map((item) => (
                 <div
                   key={item.name}
-                  className="group relative min-w-0"
+                  className="group relative shrink-0"
                   onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
                   onMouseLeave={() => setActiveDropdown(null)}
                 >
                   <Link
                     href={item.href}
-                    className="flex min-h-[44px] w-full items-center justify-center rounded-lg px-2 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0]/60"
+                    className="flex min-h-[42px] items-center justify-center whitespace-nowrap rounded-lg px-2.5 py-2 text-[0.87rem] font-medium leading-none text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0]/60 2xl:px-3 2xl:text-sm"
                     aria-label={item.dropdown ? `${item.name} - תפריט עם אפשרויות נוספות` : item.name}
                     aria-expanded={item.dropdown ? activeDropdown === item.name : undefined}
                     aria-haspopup={item.dropdown ? 'true' : undefined}
                   >
-                    <span className="block w-full truncate">{item.name}</span>
+                    {item.name}
                   </Link>
                   {item.dropdown && activeDropdown === item.name && (
                     <div
@@ -182,25 +182,25 @@ export default function Header() {
                 </div>
               ))}
               <div
-                className="group relative min-w-0"
+                className="group relative shrink-0"
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <Link
                   href={bookingNavItem.href}
-                  className="flex min-h-[44px] w-full items-center justify-center rounded-lg px-2 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0]/60"
+                  className="flex min-h-[42px] items-center justify-center whitespace-nowrap rounded-lg px-2.5 py-2 text-[0.87rem] font-medium leading-none text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0]/60 2xl:px-3 2xl:text-sm"
                   aria-label={bookingNavItem.name}
                 >
-                  <span className="block w-full truncate">{bookingNavItem.name}</span>
+                  {bookingNavItem.name}
                 </Link>
               </div>
             </div>
 
-            <div className="flex shrink-0 items-center gap-5 bg-white">
+            <div className="flex shrink-0 items-center gap-2.5 bg-white 2xl:gap-3">
               <a
                 href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn bg-[#25D366] text-sm text-white hover:bg-[#20BA5A]"
+                className="btn whitespace-nowrap bg-[#25D366] px-3 text-[0.87rem] leading-none text-white hover:bg-[#20BA5A]"
                 aria-label="שלח הודעת WhatsApp"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -218,7 +218,7 @@ export default function Header() {
                       // ignore
                     }
                   }}
-                  className="btn bg-gray-600 text-sm text-white hover:bg-gray-700"
+                  className="btn whitespace-nowrap bg-gray-600 px-3 text-[0.87rem] leading-none text-white hover:bg-gray-700"
                   aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}
                 >
                   <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -238,7 +238,7 @@ export default function Header() {
                     }
                   }
                 }}
-                className="btn btn-primary text-sm"
+                className="btn btn-primary whitespace-nowrap px-3 text-[0.87rem] leading-none"
                 aria-label={`התקשר אלינו: ${phoneNumber}`}
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -250,7 +250,7 @@ export default function Header() {
           </div>
 
           {/* Mobile Action Buttons & Menu Toggle */}
-          <div className="ms-auto flex items-center gap-2 lg:hidden">
+          <div className="ms-auto flex items-center gap-2 xl:hidden">
             <a
               href={`tel:${phoneNumber}`}
               onClick={() => {
@@ -292,7 +292,7 @@ export default function Header() {
         {mobileMenuOpen && (
           <div 
             id="mobile-menu"
-            className="lg:hidden pb-4 border-t border-gray-200 animate-in slide-in-from-top"
+            className="xl:hidden pb-4 border-t border-gray-200 animate-in slide-in-from-top"
             role="menu"
             aria-label="תפריט ניווט ראשי"
             aria-live="polite"
