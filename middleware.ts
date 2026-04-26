@@ -35,8 +35,18 @@ export function middleware(request: NextRequest) {
 
   // Protect admin builder with server-side session cookie
   if (pathname.startsWith('/admin-exercises-builder')) {
+    let expectedToken: string
+    try {
+      expectedToken = getAdminSessionToken()
+    } catch {
+      const loginUrl = request.nextUrl.clone()
+      loginUrl.pathname = '/admin-login'
+      loginUrl.searchParams.set('next', pathname)
+      loginUrl.searchParams.set('error', 'config')
+      return NextResponse.redirect(loginUrl)
+    }
     const sessionCookie = request.cookies.get(ADMIN_COOKIE_NAME)?.value
-    const isAuthenticated = sessionCookie === getAdminSessionToken()
+    const isAuthenticated = sessionCookie === expectedToken
     if (!isAuthenticated) {
       const loginUrl = request.nextUrl.clone()
       loginUrl.pathname = '/admin-login'

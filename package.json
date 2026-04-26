@@ -2,7 +2,9 @@
   "name": "physio2",
   "version": "0.1.0",
   "private": true,
-  "engines": { "node": ">=18.0.0" },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -20,7 +22,7 @@
     "dotenv": "^17.2.3",
     "lucide-react": "^0.575.0",
     "next": "^16.1.1",
-    "nodemailer": "^7.0.12",
+    "nodemailer": "^8.0.5",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-lite-youtube-embed": "^3.5.0",

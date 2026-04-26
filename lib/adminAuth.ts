@@ -12,6 +12,17 @@ function normalize(s: string): string {
 }
 
 export function getAdminCredentials() {
+  if (process.env.NODE_ENV === "production") {
+    const rawPass = process.env.ADMIN_PASSWORD;
+    if (!rawPass?.trim()) {
+      return { username: "", password: "" };
+    }
+    const rawUser = process.env.ADMIN_USERNAME ?? ADMIN_DEFAULT_USER;
+    return {
+      username: normalize(typeof rawUser === "string" ? rawUser : String(rawUser)),
+      password: normalize(typeof rawPass === "string" ? rawPass : String(rawPass)),
+    };
+  }
   const rawUser = process.env.ADMIN_USERNAME ?? ADMIN_DEFAULT_USER;
   const rawPass = process.env.ADMIN_PASSWORD ?? ADMIN_DEFAULT_PASSWORD;
   return {
@@ -20,7 +31,14 @@ export function getAdminCredentials() {
   };
 }
 
-export function getAdminSessionToken() {
+export function getAdminSessionToken(): string {
+  if (process.env.NODE_ENV === "production") {
+    const raw = process.env.ADMIN_SESSION_TOKEN;
+    if (!raw?.trim()) {
+      throw new Error("ADMIN_SESSION_TOKEN is required in production");
+    }
+    return normalize(typeof raw === "string" ? raw : String(raw));
+  }
   const raw = process.env.ADMIN_SESSION_TOKEN || ADMIN_DEFAULT_SESSION_TOKEN;
   return normalize(typeof raw === "string" ? raw : String(raw));
 }

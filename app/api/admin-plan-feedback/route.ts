@@ -1,16 +1,11 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { ADMIN_COOKIE_NAME, getAdminSessionToken } from "@/lib/adminAuth";
+import { requireAdminSession } from "@/lib/adminSessionGuard";
 import { addPlanFeedback } from "@/lib/plansStorage";
 
 /** POST: add a therapist reply to plan feedback. Body: { planId: string; text: string }. Admin only. */
 export async function POST(request: Request) {
-  const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
-  const token = getAdminSessionToken();
-  if (!sessionCookie || sessionCookie !== token) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdminSession();
+  if (denied) return denied;
   let body: { planId?: string; text?: string; exerciseId?: string; exerciseTitle?: string };
   try {
     body = await request.json();

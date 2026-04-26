@@ -8,12 +8,18 @@ export default function AdminLoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [configBanner, setConfigBanner] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const next = params.get("next");
     if (next) setNextPath(next);
+    if (params.get("error") === "config") {
+      setConfigBanner(
+        "השרת לא מוגדר לכניסת אדמין: הגדרו בפרודקשן את ADMIN_SESSION_TOKEN ואת ADMIN_PASSWORD (למשל ב-Vercel → Environment Variables)."
+      );
+    }
   }, []);
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -28,8 +34,14 @@ export default function AdminLoginPage() {
         credentials: "include",
       });
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        setError(data.error === "Invalid credentials" ? "שם משתמש או סיסמה שגויים" : "אירעה שגיאה. נסה שוב.");
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        if (res.status === 503) {
+          setError("כניסת אדמין לא זמינה בשרת (חסר ADMIN_SESSION_TOKEN או הגדרות אחרות).");
+          return;
+        }
+        setError(
+          data.error === "Invalid credentials" ? "שם משתמש או סיסמה שגויים" : "אירעה שגיאה. נסה שוב."
+        );
         return;
       }
       window.location.assign(nextPath);
@@ -44,6 +56,11 @@ export default function AdminLoginPage() {
     <div className="min-h-[60vh] flex items-center justify-center px-4" dir="rtl">
       <form onSubmit={onSubmit} className="w-full max-w-sm rounded-2xl bg-white shadow-lg border border-gray-200 p-8">
         <h1 className="text-xl font-bold text-gray-900 mb-4">כניסת אדמין</h1>
+        {configBanner && (
+          <p className="text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 mb-4">
+            {configBanner}
+          </p>
+        )}
         <label htmlFor="admin-username" className="block text-sm font-medium text-gray-700 mb-1">
           שם משתמש
         </label>

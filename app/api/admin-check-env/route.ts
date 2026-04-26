@@ -3,9 +3,12 @@ import {
   isSessionTokenConfigured,
 } from "@/lib/adminAuth";
 import { NextResponse } from "next/server";
+import { requireAdminSession } from "@/lib/adminSessionGuard";
 
-/** GET: debug only – are admin env vars present on this server? No secrets. */
+/** GET: debug only – env flags (no secrets). Requires admin session. */
 export async function GET() {
+  const denied = await requireAdminSession();
+  if (denied) return denied;
   return NextResponse.json({
     usingCustomCredentials: isUsingCustomAdminCredentials(),
     sessionTokenConfigured: isSessionTokenConfigured(),

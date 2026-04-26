@@ -1,28 +1,19 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { ADMIN_COOKIE_NAME, getAdminSessionToken } from "@/lib/adminAuth";
+import { requireAdminSession } from "@/lib/adminSessionGuard";
 import { readSavedPlans, writeSavedPlans, type SavedPlan } from "@/lib/plansStorage";
 
 /** GET: return all saved plans (admin only). */
 export async function GET() {
-  const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
-  const token = getAdminSessionToken();
-  if (!sessionCookie || sessionCookie !== token) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdminSession();
+  if (denied) return denied;
   const plans = await readSavedPlans();
   return NextResponse.json({ plans });
 }
 
 /** POST: create or update a saved plan (admin only). Body: { id?: string; patientName: string; prescriptionParam: string } */
 export async function POST(request: Request) {
-  const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
-  const token = getAdminSessionToken();
-  if (!sessionCookie || sessionCookie !== token) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdminSession();
+  if (denied) return denied;
   let body: { id?: string; patientName?: string; prescriptionParam?: string };
   try {
     body = await request.json();
@@ -68,12 +59,8 @@ export async function POST(request: Request) {
 
 /** DELETE: remove a saved plan (admin only). Body: { id: string } */
 export async function DELETE(request: Request) {
-  const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
-  const token = getAdminSessionToken();
-  if (!sessionCookie || sessionCookie !== token) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdminSession();
+  if (denied) return denied;
   let body: { id?: string };
   try {
     body = await request.json();

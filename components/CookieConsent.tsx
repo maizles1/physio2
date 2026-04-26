@@ -42,23 +42,22 @@ export default function CookieConsent() {
   const [consent, setConsent] = useState<"accepted" | "declined" | null | "pending">("pending");
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY) as "accepted" | "declined" | null;
-      if (stored === "accepted" || stored === "declined") {
-        setConsent(stored);
-        if (stored === "accepted") injectAnalyticsScripts();
-      } else {
+    const id = requestAnimationFrame(() => {
+      setMounted(true);
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY) as "accepted" | "declined" | null;
+        if (stored === "accepted" || stored === "declined") {
+          setConsent(stored);
+          if (stored === "accepted") injectAnalyticsScripts();
+        } else {
+          setConsent(null);
+        }
+      } catch {
         setConsent(null);
       }
-    } catch {
-      setConsent(null);
-    }
-  }, [mounted]);
+    });
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   const accept = useCallback(() => {
     try {

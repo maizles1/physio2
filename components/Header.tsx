@@ -141,24 +141,24 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* דסקטופ: שורה אחת — flex, align-items center, gap 20px בין אזורים; גלילה אופקית אם אין רוחב */}
+          {/* דסקטופ: ניווט אחיד וברור עם מרווחים שווים בין כל הרובריקות */}
           <div className="relative z-10 hidden min-h-[48px] min-w-0 flex-1 items-center gap-5 lg:flex">
-            <div className="flex min-w-0 flex-1 flex-nowrap items-center justify-center gap-5 overflow-x-auto overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="grid min-w-0 flex-1 grid-cols-7 items-center gap-2 xl:gap-3">
               {primaryNavigation.map((item) => (
                 <div
                   key={item.name}
-                  className="group relative shrink-0"
+                  className="group relative min-w-0"
                   onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
                   onMouseLeave={() => setActiveDropdown(null)}
                 >
                   <Link
                     href={item.href}
-                    className="block rounded-lg px-2 py-2 text-sm font-medium whitespace-nowrap text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] xl:px-3"
+                    className="flex min-h-[44px] w-full items-center justify-center rounded-lg px-2 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0]/60"
                     aria-label={item.dropdown ? `${item.name} - תפריט עם אפשרויות נוספות` : item.name}
                     aria-expanded={item.dropdown ? activeDropdown === item.name : undefined}
                     aria-haspopup={item.dropdown ? 'true' : undefined}
                   >
-                    {item.name}
+                    <span className="block w-full truncate">{item.name}</span>
                   </Link>
                   {item.dropdown && activeDropdown === item.name && (
                     <div
@@ -182,15 +182,15 @@ export default function Header() {
                 </div>
               ))}
               <div
-                className="group relative shrink-0"
+                className="group relative min-w-0"
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <Link
                   href={bookingNavItem.href}
-                  className="block rounded-lg px-2 py-2 text-sm font-medium whitespace-nowrap text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] xl:px-3"
+                  className="flex min-h-[44px] w-full items-center justify-center rounded-lg px-2 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0]/60"
                   aria-label={bookingNavItem.name}
                 >
-                  {bookingNavItem.name}
+                  <span className="block w-full truncate">{bookingNavItem.name}</span>
                 </Link>
               </div>
             </div>

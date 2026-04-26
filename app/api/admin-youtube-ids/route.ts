@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { readFileSync } from "fs";
 import { join } from "path";
-import { cookies } from "next/headers";
-import { ADMIN_COOKIE_NAME, getAdminSessionToken } from "@/lib/adminAuth";
+import { requireAdminSession } from "@/lib/adminSessionGuard";
 
 function getYoutubeIdsFromFile(): Record<string, string> {
   try {
@@ -17,12 +16,8 @@ function getYoutubeIdsFromFile(): Record<string, string> {
 
 /** GET: return current youtube-ids.json (admin only). */
 export async function GET() {
-  const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
-  const token = getAdminSessionToken();
-  if (!sessionCookie || sessionCookie !== token) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdminSession();
+  if (denied) return denied;
   const data = getYoutubeIdsFromFile();
   return NextResponse.json(data);
 }

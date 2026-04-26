@@ -14,9 +14,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
 
+  let sessionToken: string;
+  try {
+    sessionToken = getAdminSessionToken();
+  } catch {
+    return NextResponse.json(
+      { error: "Admin login is not configured (set ADMIN_SESSION_TOKEN in production)" },
+      { status: 503 }
+    );
+  }
+
   const response = NextResponse.json({ ok: true });
   const isProd = process.env.NODE_ENV === "production";
-  response.cookies.set(ADMIN_COOKIE_NAME, getAdminSessionToken(), {
+  response.cookies.set(ADMIN_COOKIE_NAME, sessionToken, {
     httpOnly: true,
     secure: isProd,
     sameSite: "lax", // so cookie is sent on next full navigation
