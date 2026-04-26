@@ -130,8 +130,8 @@ export default function Header() {
       </div>
 
       {/* Main Navigation Bar */}
-      <nav className="container mx-auto px-4">
-        <div className="flex min-w-0 items-center justify-between gap-4 py-2.5 sm:py-3 md:py-4">
+      <nav className="container mx-auto px-4 xl:px-5">
+        <div className="flex min-w-0 items-center justify-between gap-3 py-2.5 sm:py-3 md:py-4">
           {/* Logo Section */}
           <Link href="/" className="flex shrink-0 items-center gap-3 hover:opacity-90 transition-opacity" aria-label="פיזיותרפיה.פלוס - דף בית">
             <ClinicLogo />
@@ -142,8 +142,8 @@ export default function Header() {
           </Link>
 
           {/* דסקטופ: ניווט אחיד וברור עם מרווחים שווים בין כל הרובריקות */}
-          <div className="relative z-10 hidden min-h-[48px] min-w-0 flex-1 items-center justify-between gap-4 xl:flex">
-            <div className="flex min-w-0 flex-1 items-center justify-center gap-1.5 2xl:gap-2">
+          <div className="relative z-10 hidden min-h-[48px] min-w-0 flex-1 items-center justify-between gap-3 xl:flex 2xl:gap-4">
+            <div className="flex min-w-0 flex-1 items-center justify-center gap-1 px-1 xl:gap-1.5 2xl:gap-2">
               {primaryNavigation.map((item) => (
                 <div
                   key={item.name}
@@ -153,7 +153,7 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className="flex min-h-[42px] items-center justify-center whitespace-nowrap rounded-lg px-2.5 py-2 text-[0.87rem] font-medium leading-none text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0]/60 2xl:px-3 2xl:text-sm"
+                    className="flex shrink-0 min-h-[42px] items-center justify-center whitespace-nowrap rounded-lg px-2 py-2 text-[0.82rem] font-medium leading-none text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0]/60 xl:px-2.5 2xl:px-3 2xl:text-sm"
                     aria-label={item.dropdown ? `${item.name} - תפריט עם אפשרויות נוספות` : item.name}
                     aria-expanded={item.dropdown ? activeDropdown === item.name : undefined}
                     aria-haspopup={item.dropdown ? 'true' : undefined}
@@ -187,7 +187,7 @@ export default function Header() {
               >
                 <Link
                   href={bookingNavItem.href}
-                  className="flex min-h-[42px] items-center justify-center whitespace-nowrap rounded-lg px-2.5 py-2 text-[0.87rem] font-medium leading-none text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0]/60 2xl:px-3 2xl:text-sm"
+                  className="flex shrink-0 min-h-[42px] items-center justify-center whitespace-nowrap rounded-lg px-2 py-2 text-[0.82rem] font-medium leading-none text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0]/60 xl:px-2.5 2xl:px-3 2xl:text-sm"
                   aria-label={bookingNavItem.name}
                 >
                   {bookingNavItem.name}
@@ -195,12 +195,12 @@ export default function Header() {
               </div>
             </div>
 
-            <div className="flex shrink-0 items-center gap-2.5 bg-white 2xl:gap-3">
+            <div className="flex shrink-0 items-center gap-2 bg-white ps-1 xl:gap-2.5 2xl:gap-3">
               <a
                 href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn whitespace-nowrap bg-[#25D366] px-3 text-[0.87rem] leading-none text-white hover:bg-[#20BA5A]"
+                className="btn shrink-0 whitespace-nowrap bg-[#25D366] px-2.5 text-[0.82rem] leading-none text-white hover:bg-[#20BA5A] xl:px-3 2xl:text-[0.87rem]"
                 aria-label="שלח הודעת WhatsApp"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -218,7 +218,7 @@ export default function Header() {
                       // ignore
                     }
                   }}
-                  className="btn whitespace-nowrap bg-gray-600 px-3 text-[0.87rem] leading-none text-white hover:bg-gray-700"
+                  className="btn shrink-0 whitespace-nowrap bg-gray-600 px-2.5 text-[0.82rem] leading-none text-white hover:bg-gray-700 xl:px-3 2xl:text-[0.87rem]"
                   aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}
                 >
                   <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -238,7 +238,7 @@ export default function Header() {
                     }
                   }
                 }}
-                className="btn btn-primary whitespace-nowrap px-3 text-[0.87rem] leading-none"
+                className="btn btn-primary shrink-0 whitespace-nowrap px-2.5 text-[0.82rem] leading-none xl:px-3 2xl:text-[0.87rem]"
                 aria-label={`התקשר אלינו: ${phoneNumber}`}
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
