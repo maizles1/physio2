@@ -142,7 +142,7 @@ export default function Header() {
           </Link>
 
           {/* דסקטופ: ניווט אחיד וברור עם מרווחים שווים בין כל הרובריקות */}
-          <div className="relative z-10 hidden min-h-[48px] min-w-0 flex-1 items-center justify-between gap-3 2xl:flex 2xl:gap-4">
+          <div className="relative z-10 hidden min-h-[48px] min-w-0 flex-1 items-center justify-between gap-3 lg:flex xl:gap-3 2xl:gap-4">
             <div className="flex min-w-0 flex-1 items-center justify-center gap-1 px-1 xl:gap-1.5 2xl:gap-2">
               {primaryNavigation.map((item) => (
                 <div
@@ -250,7 +250,7 @@ export default function Header() {
           </div>
 
           {/* Mobile Action Buttons & Menu Toggle */}
-          <div className="ms-auto flex items-center gap-2 2xl:hidden">
+          <div className="ms-auto flex items-center gap-2 lg:hidden">
             <a
               href={`tel:${phoneNumber}`}
               onClick={() => {
