@@ -156,6 +156,22 @@ export const blogCategories: BlogCategory[] = [
     backgroundColor: '#E3F2FD',
     description: 'הדרכה על מתי לפנות לאורתופד ומתי לפיזיותרפיסט',
   },
+  {
+    id: 'sports-injuries',
+    name: 'פציעות ספורט',
+    slug: 'sports-injuries',
+    color: '#2080C0',
+    backgroundColor: '#E3F2FD',
+    description: 'מאמרים על פציעות ספורט ושיקום ספורטאים',
+  },
+  {
+    id: 'foot-pain',
+    name: 'כאבי כף רגל',
+    slug: 'foot-pain',
+    color: '#2080C0',
+    backgroundColor: '#E3F2FD',
+    description: 'מאמרים על כאבי כף רגל וטיפול',
+  },
 ]
 
 export function getCategoryById(id: string): BlogCategory | undefined {

@@ -136,7 +136,7 @@ export default function Header() {
           <Link href="/" className="flex shrink-0 items-center gap-3 hover:opacity-90 transition-opacity" aria-label="פיזיותרפיה.פלוס - דף בית">
             <ClinicLogo />
             <div className="hidden sm:block">
-              <h1 className="text-base font-bold leading-tight text-primary-dark xl:text-lg 2xl:text-xl">פיזיותרפיה.פלוס</h1>
+              <span className="block text-base font-bold leading-tight text-primary-dark xl:text-lg 2xl:text-xl">פיזיותרפיה.פלוס</span>
               <p className="hidden text-xs leading-tight text-primary 2xl:block">מקצוענות שמרגישים בגוף</p>
             </div>
           </Link>

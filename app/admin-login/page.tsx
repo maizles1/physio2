@@ -2,6 +2,14 @@
 
 import { useEffect, useState } from "react";
 
+function isSafeNextPath(value: string): boolean {
+  if (!value) return false;
+  if (!value.startsWith("/")) return false;
+  if (value.startsWith("//")) return false;
+  if (value.startsWith("/\\")) return false;
+  return true;
+}
+
 export default function AdminLoginPage() {
   const [nextPath, setNextPath] = useState("/admin-exercises-builder");
 
@@ -14,7 +22,7 @@ export default function AdminLoginPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const next = params.get("next");
-    if (next) setNextPath(next);
+    if (next && isSafeNextPath(next)) setNextPath(next);
     if (params.get("error") === "config") {
       setConfigBanner(
         "השרת לא מוגדר לכניסת אדמין: הגדרו בפרודקשן את ADMIN_SESSION_TOKEN ואת ADMIN_PASSWORD (למשל ב-Vercel → Environment Variables)."
