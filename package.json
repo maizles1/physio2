@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
     "check-reviews": "node scripts/check-google-reviews.js",
     "find-place-id": "node scripts/find-place-id.js",
     "seo-audit": "node scripts/seo-audit.js",

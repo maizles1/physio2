@@ -31,7 +31,7 @@ export const blogPosts: BlogPost[] = [
     date: '3 במאי 2026',
     category: 'פציעות ריצה',
     categoryId: 'running-injuries',
-    image: '/images/blog/running-injuries-guide.png',
+    image: '/images/blog/barefoot-minimalist-shoes-running-walking-guide.png',
     keywords: [
       'נעלי ברפוט',
       'Barefoot running',
