@@ -157,11 +157,15 @@ export function middleware(request: NextRequest) {
           ''
         const projectSlug = projectVercelHost.split('.')[0] // e.g. "physio2-abc"
         const projectBaseSlug = projectSlug.split('-')[0] // e.g. "physio2"
-        const isOwnVercelDomain = !!projectBaseSlug && (
-          originHostname === projectVercelHost ||
-          originHostname.startsWith(`${projectBaseSlug}-`) &&
-            originHostname.endsWith('.vercel.app')
-        )
+        const isVercelAppHost = originHostname.endsWith('.vercel.app')
+        const isOwnVercelDomain =
+          !!projectBaseSlug &&
+          isVercelAppHost &&
+          (
+            originHostname === projectVercelHost ||
+            originHostname === `${projectBaseSlug}.vercel.app` ||
+            originHostname.startsWith(`${projectBaseSlug}-`)
+          )
         
         // If host matches origin, it's same-origin (always allow)
         // This allows custom domains configured in Vercel

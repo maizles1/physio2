@@ -109,7 +109,10 @@ export default function FAQPage() {
                     aria-expanded={openIndex === index}
                     aria-controls={`faq-answer-${index}`}
                   >
-                    <h3 className="text-lg font-bold text-gray-900 flex-1">
+                    <h3
+                      id={`faq-question-${index}`}
+                      className="text-lg font-bold text-gray-900 flex-1"
+                    >
                       {faq.question}
                     </h3>
                     <svg

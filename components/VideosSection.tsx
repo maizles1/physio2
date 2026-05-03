@@ -233,19 +233,15 @@ export default function VideosSection() {
                       <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
                         {video.description}
                       </p>
-                      <button
-                        className="text-[#2080C0] font-medium hover:text-[#2A3080] flex items-center gap-2 transition-colors"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          openVideo(video)
-                        }}
-                        aria-label={`צפה בסרטון: ${video.title}`}
+                      <span
+                        className="text-[#2080C0] font-medium flex items-center gap-2 transition-colors"
+                        aria-hidden="true"
                       >
                         צפה בסרטון
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
-                      </button>
+                      </span>
                     </div>
                   </article>
                 )
