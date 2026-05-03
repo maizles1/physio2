@@ -23,7 +23,7 @@ export default function ImageCarousel() {
             {`ג'ודו מהעולם`}
           </h2>
           
-          <div className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-xl sm:shadow-2xl w-full h-[400px] sm:h-[500px] md:h-[550px] bg-gray-200">
+          <div className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-xl sm:shadow-2xl w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] max-h-[70vh] bg-gray-200">
             <Swiper
               modules={[Autoplay, Navigation, Pagination]}
               spaceBetween={0}
@@ -42,7 +42,7 @@ export default function ImageCarousel() {
             >
               {images.map((src, index) => (
                 <SwiperSlide key={index}>
-                  <div className="relative w-full h-[400px] sm:h-[500px] md:h-[550px] flex items-center justify-center bg-gray-200">
+                  <div className="relative w-full h-full flex items-center justify-center bg-gray-200">
                     <Image
                       src={src}
                       alt={`תמונת קליניקת פיזיותרפיה.פלוס במרכז כלניות אשדוד - תמונה ${index + 1} מתוך ${images.length}`}

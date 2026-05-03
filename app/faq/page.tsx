@@ -148,10 +148,7 @@ export default function FAQPage() {
               <p className="text-gray-700 mb-6">
                 נשמח לענות על כל שאלה נוספת. צרו איתנו קשר ונחזור אליכם בהקדם.
               </p>
-              <Link
-                href="/contact"
-                className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
-              >
+              <Link href="/contact" className="btn btn-primary">
                 קבע טיפול עכשיו
               </Link>
             </div>

@@ -113,15 +113,21 @@ export async function getAllFormattedReviews(): Promise<FormattedReview[]> {
     const googleReviews = await fetchGoogleReviews()
     
     if (googleReviews.length === 0) {
-      console.warn('[Google Reviews] לא התקבלו ביקורות מ-Google')
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('[Google Reviews] לא התקבלו ביקורות מ-Google')
+      }
       return []
     }
 
     const formattedReviews = googleReviews.map(formatGoogleReview)
-    console.log(`[Google Reviews] עוצבו ${formattedReviews.length} ביקורות בהצלחה`)
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[Google Reviews] עוצבו ${formattedReviews.length} ביקורות בהצלחה`)
+    }
     return formattedReviews
   } catch (error) {
-    console.error('[Google Reviews] שגיאה בעיצוב ביקורות:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('[Google Reviews] שגיאה בעיצוב ביקורות:', error)
+    }
     return []
   }
 }

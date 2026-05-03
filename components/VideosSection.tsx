@@ -256,7 +256,7 @@ export default function VideosSection() {
             <div className="text-center mt-8 sm:mt-12">
               <Link
                 href="/about"
-                className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="btn btn-primary"
                 aria-label="לסרטונים נוספים"
               >
                 סרטונים נוספים

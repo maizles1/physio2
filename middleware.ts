@@ -148,11 +148,20 @@ export function middleware(request: NextRequest) {
         const originUrl = new URL(origin)
         const originHostname = originUrl.hostname
         
-        // Check if it's a Vercel domain (automatic allow)
-        const isVercelDomain = 
-          originHostname.endsWith('.vercel.app') ||
-          originHostname.endsWith('.vercel-dns.com') ||
-          originHostname.includes('.vercel.app')
+        // Allow only this project's own Vercel deployments (preview/prod),
+        // not arbitrary third-party *.vercel.app sites. Project name comes
+        // from VERCEL_PROJECT_PRODUCTION_URL or VERCEL_URL at runtime.
+        const projectVercelHost =
+          process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+          process.env.VERCEL_URL ||
+          ''
+        const projectSlug = projectVercelHost.split('.')[0] // e.g. "physio2-abc"
+        const projectBaseSlug = projectSlug.split('-')[0] // e.g. "physio2"
+        const isOwnVercelDomain = !!projectBaseSlug && (
+          originHostname === projectVercelHost ||
+          originHostname.startsWith(`${projectBaseSlug}-`) &&
+            originHostname.endsWith('.vercel.app')
+        )
         
         // If host matches origin, it's same-origin (always allow)
         // This allows custom domains configured in Vercel
@@ -171,9 +180,9 @@ export function middleware(request: NextRequest) {
         // Exact match check first
         if (securityConfig.cors.allowedOrigins.includes(origin)) {
           isAllowedOrigin = true
-        } else if (isVercelDomain || isSameOrigin || isCustomDomainOnVercel) {
+        } else if (isOwnVercelDomain || isSameOrigin || isCustomDomainOnVercel) {
           // Automatically allow:
-          // 1. Vercel domains (.vercel.app)
+          // 1. This project's own Vercel preview/prod URLs
           // 2. Same-origin requests
           // 3. Custom domains on Vercel (validated by Vercel)
           isAllowedOrigin = true
