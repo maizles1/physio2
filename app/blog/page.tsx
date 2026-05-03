@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: 'https://physio-plus.co.il/blog',
     images: [
       {
-        url: 'https://physio-plus.co.il/images/og/blog.jpg',
+        url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
         width: 1200,
         height: 630,
         alt: 'בלוג פיזיותרפיה - פיזיותרפיה.פלוס',

@@ -82,7 +82,7 @@ export default function InsuranceSection() {
                 key={index}
                 className={`${option.bgColor} rounded-xl p-4 sm:p-6 border border-gray-200 hover:shadow-lg transition-shadow`}
               >
-                <div className="mb-3 sm:mb-4 h-16 sm:h-20 md:h-24 flex items-center justify-center relative px-2 w-full" aria-hidden="true">
+                <div className="mb-3 sm:mb-4 h-16 sm:h-20 md:h-24 flex items-center justify-center relative px-2 w-full">
                   <div className="relative w-full h-full flex items-center justify-center">
                     <Image
                       src={option.logoPath}

@@ -179,9 +179,17 @@ export default function VideosSection() {
                 return (
                   <article
                     key={video.id}
-                    className={`bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow cursor-pointer ${isProminent ? 'max-w-4xl mx-auto' : 'max-w-3xl mx-auto'}`}
+                    className={`bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0] focus-visible:ring-offset-2 ${isProminent ? 'max-w-4xl mx-auto' : 'max-w-3xl mx-auto'}`}
+                    role="button"
+                    tabIndex={0}
                     aria-label={`סרטון: ${video.title}`}
                     onClick={() => openVideo(video)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        openVideo(video)
+                      }
+                    }}
                   >
                     <div className="relative aspect-video bg-gradient-to-br from-[#2080C0] to-[#2A3080] overflow-hidden group w-full">
                       {hasValidVideoId && thumbnailUrl ? (

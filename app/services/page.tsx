@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     locale: 'he_IL',
     images: [
       {
-        url: 'https://physio-plus.co.il/images/og/services.jpg',
+        url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
         width: 1200,
         height: 630,
         alt: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
     description: 'טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
-    images: ['https://physio-plus.co.il/images/og/services.jpg'],
+    images: ['https://physio-plus.co.il/images/logo/clinic-logo.png'],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/services',

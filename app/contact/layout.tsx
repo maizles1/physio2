@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: 'https://physio-plus.co.il/contact',
     images: [
       {
-        url: 'https://physio-plus.co.il/images/og/contact.jpg',
+        url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
         width: 1200,
         height: 630,
         alt: 'צור קשר - פיזיותרפיה.פלוס',

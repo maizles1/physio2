@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 
 const faqs = [
   {
@@ -87,13 +88,13 @@ export default function FAQSection() {
           {/* CTA */}
           <div className="mt-8 text-center">
             <p className="text-gray-600 mb-4">לא מצאתם תשובה לשאלה שלכם?</p>
-            <a
+            <Link
               href="/faq"
               className="inline-block text-[#2080C0] font-semibold hover:text-[#2A3080] transition-colors underline"
               aria-label="צפה בכל השאלות הנפוצות"
             >
               צפה בכל השאלות הנפוצות
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
 import { readSavedPlans, addPlanFeedback } from "@/lib/plansStorage";
+import { checkRateLimit, getClientIdentifier } from "@/lib/security";
+
+const MAX_TEXT_LENGTH = 2000;
+const FEEDBACK_RATE_LIMIT = 10; // per IP per window
+const FEEDBACK_RATE_WINDOW_MS = 60 * 1000; // 1 minute
 
 /** GET: return feedback messages for a plan. Query: planId (required). Public. */
 export async function GET(request: Request) {
@@ -16,6 +21,20 @@ export async function GET(request: Request) {
 
 /** POST: add a patient feedback message. Body: { planId: string; text: string; exerciseId?: string; exerciseTitle?: string }. Public. */
 export async function POST(request: Request) {
+  const clientId = `plan-feedback:${getClientIdentifier(request.headers)}`;
+  const rl = checkRateLimit(clientId, FEEDBACK_RATE_LIMIT, FEEDBACK_RATE_WINDOW_MS);
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: "Too many requests" },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": Math.ceil((rl.resetTime - Date.now()) / 1000).toString(),
+        },
+      }
+    );
+  }
+
   let body: { planId?: string; text?: string; exerciseId?: string; exerciseTitle?: string };
   try {
     body = await request.json();
@@ -23,18 +42,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
   const planId = typeof body?.planId === "string" ? body.planId.trim() : "";
-  const text = typeof body?.text === "string" ? body.text.trim() : "";
+  const rawText = typeof body?.text === "string" ? body.text.trim() : "";
   const exerciseId = typeof body?.exerciseId === "string" ? body.exerciseId.trim() : undefined;
   const exerciseTitle = typeof body?.exerciseTitle === "string" ? body.exerciseTitle.trim() : undefined;
   if (!planId) {
     return NextResponse.json({ error: "planId required" }, { status: 400 });
   }
-  if (!text) {
+  if (!rawText) {
     return NextResponse.json({ error: "text required" }, { status: 400 });
+  }
+  if (rawText.length > MAX_TEXT_LENGTH) {
+    return NextResponse.json(
+      { error: `text too long (max ${MAX_TEXT_LENGTH} characters)` },
+      { status: 413 }
+    );
   }
   const result = await addPlanFeedback(planId, {
     author: "patient",
-    text,
+    text: rawText,
     ...(exerciseId && { exerciseId }),
     ...(exerciseTitle && { exerciseTitle }),
   });

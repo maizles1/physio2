@@ -1,17 +1,18 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { sanitizeHtml } from '@/lib/security'
 
 const faqs = [
   {
     question: 'איך אני יכול ליצור קשר?',
-    answer: 'ניתן ליצור קשר בטלפון 050-883-8982, דרך <a href="/contact" className="text-blue-600 hover:underline">טופס יצירת קשר באתר</a> או דרך WhatsApp. אנו זמינים בימים ראשון-חמישי בין השעות 08:00-20:00, ובימי שישי בין 08:00-14:00.',
+    answer: 'ניתן ליצור קשר בטלפון 050-883-8982, דרך <a href="/contact" class="text-blue-600 hover:underline">טופס יצירת קשר באתר</a> או דרך WhatsApp. אנו זמינים בימים ראשון-חמישי בין השעות 08:00-20:00, ובימי שישי בין 08:00-14:00.',
   },
   {
     question: 'כיצד אפשר לקבל החזרים?',
-    answer: 'החזרים מכללית, ועובדים עם מבוטחי מאוחדת שיא. שאר הקופות באופן פרטי. החזרים מהביטוחים הפרטיים תלויים בפוליסה של המטופל. למידע נוסף על <a href="/services" className="text-blue-600 hover:underline">השירותים שלנו</a>.',
+    answer: 'החזרים מכללית, ועובדים עם מבוטחי מאוחדת שיא. שאר הקופות באופן פרטי. החזרים מהביטוחים הפרטיים תלויים בפוליסה של המטופל. למידע נוסף על <a href="/services" class="text-blue-600 hover:underline">השירותים שלנו</a>.',
   },
   {
     question: 'כמה זמן נמשך כל טיפול?',
@@ -23,7 +24,7 @@ const faqs = [
   },
   {
     question: 'כמה טיפולים נדרשים?',
-    answer: 'מספר הטיפולים משתנה בהתאם לבעיה, חומרתה ולקצב ההתקדמות של המטופל. לאחר ההערכה הראשונית, נקבעת תוכנית טיפול מותאמת אישית. בדרך כלל, תוכנית טיפול כוללת בין 6-12 מפגשים. למידע נוסף על <a href="/services" className="text-blue-600 hover:underline">תהליך הטיפול</a>.',
+    answer: 'מספר הטיפולים משתנה בהתאם לבעיה, חומרתה ולקצב ההתקדמות של המטופל. לאחר ההערכה הראשונית, נקבעת תוכנית טיפול מותאמת אישית. בדרך כלל, תוכנית טיפול כוללת בין 6-12 מפגשים. למידע נוסף על <a href="/services" class="text-blue-600 hover:underline">תהליך הטיפול</a>.',
   },
   {
     question: 'מה ההבדל בין פיזיותרפיה לאימון כושר?',
@@ -35,17 +36,21 @@ const faqs = [
   },
   {
     question: 'איך מתבצע תהליך הטיפול?',
-    answer: 'במפגש הראשון נערכת הערכה מקיפה של המצב הרפואי והפיזי של המטופל. לאחר מכן נקבעת תוכנית טיפול מותאמת אישית. הטיפולים הבאים כוללים תרגילים, טכניקות טיפול שונות והדרכה לביצוע תרגילים בבית. למידע נוסף, ראה את <a href="/blog" className="text-blue-600 hover:underline">המאמרים שלנו</a>.',
+    answer: 'במפגש הראשון נערכת הערכה מקיפה של המצב הרפואי והפיזי של המטופל. לאחר מכן נקבעת תוכנית טיפול מותאמת אישית. הטיפולים הבאים כוללים תרגילים, טכניקות טיפול שונות והדרכה לביצוע תרגילים בבית. למידע נוסף, ראה את <a href="/blog" class="text-blue-600 hover:underline">המאמרים שלנו</a>.',
   },
   {
     question: 'איפה נמצאת הקליניקה?',
-    answer: 'הקליניקה ממוקמת במרכז כלניות, אשדוד. יש חניה נוחה בסמוך לקליניקה והמיקום מרכזי ונגיש. ניתן לקבל הוראות הגעה מפורטות בטלפון 050-883-8982 או דרך <a href="/contact" className="text-blue-600 hover:underline">טופס יצירת קשר</a>.',
+    answer: 'הקליניקה ממוקמת במרכז כלניות, אשדוד. יש חניה נוחה בסמוך לקליניקה והמיקום מרכזי ונגיש. ניתן לקבל הוראות הגעה מפורטות בטלפון 050-883-8982 או דרך <a href="/contact" class="text-blue-600 hover:underline">טופס יצירת קשר</a>.',
   },
   {
     question: 'איך אוכל לעקוב אחר ההתקדמות שלי?',
     answer: 'הפיזיותרפיסט עוקב אחר ההתקדמות שלך בכל מפגש ומעדכן אותך על השיפור. כמו כן, תוכלו לקבל תרגילים לבית ותוכנית טיפול שתוכלו לעקוב אחריה. אנו זמינים לשאלות והתייעצויות גם בין הטיפולים.',
   },
 ]
+
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
+}
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
@@ -59,7 +64,7 @@ export default function FAQPage() {
       name: faq.question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: faq.answer,
+        text: stripHtml(faq.answer),
       },
     })),
   }
@@ -100,7 +105,7 @@ export default function FAQPage() {
                 >
                   <button
                     onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                    className="w-full px-6 py-4 text-right flex items-center justify-between hover:bg-gray-50 transition-colors"
+                    className="w-full px-6 py-4 text-right flex items-center justify-between hover:bg-gray-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset"
                     aria-expanded={openIndex === index}
                     aria-controls={`faq-answer-${index}`}
                   >
@@ -114,18 +119,23 @@ export default function FAQPage() {
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  {openIndex === index && (
-                    <div id={`faq-answer-${index}`} className="px-6 pb-4">
-                      <div 
-                        className="text-gray-700 leading-relaxed"
-                        dangerouslySetInnerHTML={{ __html: sanitizeHtml(faq.answer) }}
-                      />
-                    </div>
-                  )}
+                  <div
+                    id={`faq-answer-${index}`}
+                    role="region"
+                    aria-labelledby={`faq-question-${index}`}
+                    hidden={openIndex !== index}
+                    className="px-6 pb-4"
+                  >
+                    <div
+                      className="text-gray-700 leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: sanitizeHtml(faq.answer) }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -138,12 +148,12 @@ export default function FAQPage() {
               <p className="text-gray-700 mb-6">
                 נשמח לענות על כל שאלה נוספת. צרו איתנו קשר ונחזור אליכם בהקדם.
               </p>
-              <a
+              <Link
                 href="/contact"
                 className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 קבע טיפול עכשיו
-              </a>
+              </Link>
             </div>
           </div>
         </div>

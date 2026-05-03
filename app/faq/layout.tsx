@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     locale: 'he_IL',
     images: [
       {
-        url: 'https://physio-plus.co.il/images/og/faq.jpg',
+        url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
         width: 1200,
         height: 630,
         alt: 'שאלות נפוצות - פיזיותרפיה.פלוס',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'שאלות נפוצות - פיזיותרפיה.פלוס',
     description: 'תשובות לשאלות הנפוצות ביותר על הטיפולים והשירותים',
-    images: ['https://physio-plus.co.il/images/og/faq.jpg'],
+    images: ['https://physio-plus.co.il/images/logo/clinic-logo.png'],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/faq',

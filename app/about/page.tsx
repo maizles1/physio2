@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     locale: 'he_IL',
     images: [
       {
-        url: 'https://physio-plus.co.il/images/og/about.jpg',
+        url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
         width: 1200,
         height: 630,
         alt: 'אודות פיזיותרפיה.פלוס - אנדריי מייזלס',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'אודות פיזיותרפיה.פלוס - אנדריי מייזלס',
     description: 'אנדריי מייזלס - פיזיותרפיסט מקצועי בעל תואר שני, לשעבר נבחרת ישראל בג\'ודו.',
-    images: ['https://physio-plus.co.il/images/og/about.jpg'],
+    images: ['https://physio-plus.co.il/images/logo/clinic-logo.png'],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/about',

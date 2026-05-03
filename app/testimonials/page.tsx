@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     locale: 'he_IL',
     images: [
       {
-        url: 'https://physio-plus.co.il/images/og/testimonials.jpg',
+        url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
         width: 1200,
         height: 630,
         alt: 'המלצות מטופלים - פיזיותרפיה.פלוס',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'המלצות מטופלים - פיזיותרפיה.פלוס',
     description: 'חוות דעת והמלצות אמיתיות של מטופלים על הטיפול בקליניקה',
-    images: ['https://physio-plus.co.il/images/og/testimonials.jpg'],
+    images: ['https://physio-plus.co.il/images/logo/clinic-logo.png'],
   },
   alternates: {
     canonical: 'https://physio-plus.co.il/testimonials',
