@@ -1,6 +1,6 @@
 // Service Worker for פיזיותרפיה.פלוס
-// Version 1.0.0
-const CACHE_NAME = 'physio-plus-v1';
+// Version 1.1.0 — skip cross-origin requests so analytics/GTM are not broken
+const CACHE_NAME = 'physio-plus-v2';
 const OFFLINE_PAGE = '/offline';
 
 // Assets to cache on install
@@ -47,6 +47,15 @@ self.addEventListener('fetch', (event) => {
 
   // Skip chrome-extension and other protocols
   if (!url.protocol.startsWith('http')) {
+    return;
+  }
+
+  // Cross-origin requests bypass the SW entirely.
+  // Re-fetching them from inside the SW would be subject to this site's CSP
+  // `connect-src`, which would block third-party scripts (Google Tag Manager,
+  // Google Analytics, Google Ads, YouTube, etc.) and surface as net::ERR_FAILED
+  // on the script/img tag that originally requested them.
+  if (url.origin !== self.location.origin) {
     return;
   }
 
