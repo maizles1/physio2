@@ -14,13 +14,21 @@ const GA_ID = seoConfig.googleAnalyticsId
 
 // Map custom event names to Meta Pixel standard events so Ads Manager can
 // optimize against them; anything not in this map falls back to trackCustom.
+//
+// NOTE: For health-vertical pixels Meta silently suppresses certain standard
+// events (Contact, Lead, etc.) with a console warning ("restricted event...
+// suppressed"). For those we send a trackCustom with the same intent name so
+// Meta still receives the signal and we can build a Custom Audience around it.
 const META_STANDARD_EVENT: Record<string, string> = {
-  whatsapp_click: 'Contact',
-  click_to_call: 'Contact',
-  email_click: 'Contact',
-  form_submit: 'Lead',
   purchase: 'Purchase',
   view_item: 'ViewContent',
+}
+
+const META_CUSTOM_EVENT_NAME: Record<string, string> = {
+  whatsapp_click: 'WhatsAppClick',
+  click_to_call: 'PhoneCall',
+  email_click: 'EmailClick',
+  form_submit: 'FormSubmit',
 }
 
 function fireFbqEvent(action: string, params: Record<string, unknown>) {
@@ -28,11 +36,12 @@ function fireFbqEvent(action: string, params: Record<string, unknown>) {
   const w = window as unknown as { fbq?: (...args: unknown[]) => void }
   if (!w.fbq) return
   const standard = META_STANDARD_EVENT[action]
+  const customName = META_CUSTOM_EVENT_NAME[action] ?? action
   try {
     if (standard) {
       w.fbq('track', standard, params)
     } else {
-      w.fbq('trackCustom', action, params)
+      w.fbq('trackCustom', customName, params)
     }
   } catch {
     // ignore pixel errors
