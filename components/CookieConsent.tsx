@@ -172,7 +172,9 @@ export default function CookieConsent() {
     <div
       role="region"
       aria-label="הסכמה לשימוש בעוגיות"
-      className="fixed bottom-0 left-0 right-0 z-[9998] bg-white border-t-2 border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.15)] pb-[env(safe-area-inset-bottom)]"
+      // z-[10001] sits above FloatingButtons (z-[10000]) so the consent
+      // controls are never blocked by the floating phone/WhatsApp CTAs.
+      className="fixed bottom-0 left-0 right-0 z-[10001] bg-white border-t-2 border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.15)] pb-[env(safe-area-inset-bottom)]"
       dir="rtl"
     >
       <div className="container mx-auto px-4 py-4">
