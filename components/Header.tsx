@@ -200,6 +200,13 @@ export default function Header() {
                 href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  try {
+                    gtag.event('whatsapp_click', 'engagement', 'header_desktop')
+                  } catch {
+                    // ignore
+                  }
+                }}
                 className="btn shrink-0 whitespace-nowrap bg-[#25D366] px-2.5 text-[0.82rem] leading-none text-white hover:bg-[#20BA5A] xl:px-3 2xl:text-[0.87rem]"
                 aria-label="שלח הודעת WhatsApp"
               >
@@ -357,7 +364,14 @@ export default function Header() {
                     href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      try {
+                        gtag.event('whatsapp_click', 'engagement', 'header_mobile')
+                      } catch {
+                        // ignore
+                      }
+                    }}
                     className="w-full text-center bg-[#25D366] hover:bg-[#20BA5A] text-white px-4 py-3 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
                     aria-label="שלח הודעת WhatsApp"
                   >

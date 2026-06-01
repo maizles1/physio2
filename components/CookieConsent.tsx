@@ -7,11 +7,60 @@ import { createPortal } from "react-dom";
 const STORAGE_KEY = "cookie_consent";
 const GTM_ID = "GTM-58XQH9KN";
 const GTAW_ID = "AW-705216601";
+const GA4_ID = "G-ETG7YT4SBR";
 
-function injectAnalyticsScripts() {
+type ConsentState = "granted" | "denied";
+type StoredConsent = "accepted" | "declined";
+
+// Update consent on already-loaded gtag (used when user changes their choice later).
+function updateConsent(state: ConsentState) {
+  if (typeof window === "undefined") return;
+  const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+  if (!w.gtag) return;
+  w.gtag("consent", "update", {
+    ad_storage: state,
+    ad_user_data: state,
+    ad_personalization: state,
+    analytics_storage: state,
+  });
+}
+
+// Load Google tags exactly once. Consent Mode v2 is initialized BEFORE any
+// gtag.js / GTM loads so Google sees the correct default state on page load,
+// even for users who never interact with the banner.
+function injectAnalyticsScripts(defaultState: ConsentState) {
   if (typeof document === "undefined") return;
-  if (document.getElementById("google-tag-manager")) return;
+  if (document.getElementById("gtag-consent-init")) return;
 
+  // 1. dataLayer + gtag stub + Consent Mode v2 defaults (must be first).
+  const initScript = document.createElement("script");
+  initScript.id = "gtag-consent-init";
+  initScript.innerHTML = `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('consent', 'default', {
+      ad_storage: '${defaultState}',
+      ad_user_data: '${defaultState}',
+      ad_personalization: '${defaultState}',
+      analytics_storage: '${defaultState}',
+      wait_for_update: 500
+    });
+    gtag('set', 'ads_data_redaction', ${defaultState === "granted" ? "false" : "true"});
+    gtag('js', new Date());
+    gtag('config', '${GA4_ID}');
+    gtag('config', '${GTAW_ID}');
+  `;
+  document.head.appendChild(initScript);
+
+  // 2. gtag.js loader (serves GA4 + Google Ads).
+  const gtagScript = document.createElement("script");
+  gtagScript.id = "gtag-loader";
+  gtagScript.async = true;
+  gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
+  document.head.appendChild(gtagScript);
+
+  // 3. GTM container (runs any additional tags configured server-side).
   const gtmScript = document.createElement("script");
   gtmScript.id = "google-tag-manager";
   gtmScript.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -19,42 +68,38 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','${GTM_ID}');`;
-  document.body.appendChild(gtmScript);
+  document.head.appendChild(gtmScript);
 
-  const gtagScript = document.createElement("script");
-  gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GTAW_ID}`;
-  gtagScript.async = true;
-  document.body.appendChild(gtagScript);
-
-  const gtagConfig = document.createElement("script");
-  gtagConfig.id = "google-analytics";
-  gtagConfig.innerHTML = `
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '${GTAW_ID}');
-  `;
-  document.body.appendChild(gtagConfig);
+  // 4. GTM <noscript> iframe fallback for users without JS.
+  const noscript = document.createElement("noscript");
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://www.googletagmanager.com/ns.html?id=${GTM_ID}`;
+  iframe.height = "0";
+  iframe.width = "0";
+  iframe.style.display = "none";
+  iframe.style.visibility = "hidden";
+  noscript.appendChild(iframe);
+  document.body.insertBefore(noscript, document.body.firstChild);
 }
 
 export default function CookieConsent() {
   const [mounted, setMounted] = useState(false);
-  const [consent, setConsent] = useState<"accepted" | "declined" | null | "pending">("pending");
+  const [stored, setStored] = useState<StoredConsent | null | "pending">("pending");
 
   useEffect(() => {
     const id = requestAnimationFrame(() => {
       setMounted(true);
+      let initial: StoredConsent | null = null;
       try {
-        const stored = localStorage.getItem(STORAGE_KEY) as "accepted" | "declined" | null;
-        if (stored === "accepted" || stored === "declined") {
-          setConsent(stored);
-          if (stored === "accepted") injectAnalyticsScripts();
-        } else {
-          setConsent(null);
-        }
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw === "accepted" || raw === "declined") initial = raw;
       } catch {
-        setConsent(null);
+        // ignore storage errors
       }
+      setStored(initial);
+      // Load tags with the correct default consent on every page load so
+      // Tag Assistant / GTM Preview can detect the container immediately.
+      injectAnalyticsScripts(initial === "accepted" ? "granted" : "denied");
     });
     return () => cancelAnimationFrame(id);
   }, []);
@@ -65,8 +110,8 @@ export default function CookieConsent() {
     } catch {
       // ignore
     }
-    setConsent("accepted");
-    injectAnalyticsScripts();
+    setStored("accepted");
+    updateConsent("granted");
   }, []);
 
   const decline = useCallback(() => {
@@ -75,10 +120,11 @@ export default function CookieConsent() {
     } catch {
       // ignore
     }
-    setConsent("declined");
+    setStored("declined");
+    updateConsent("denied");
   }, []);
 
-  if (consent === "accepted" || consent === "declined") {
+  if (stored === "accepted" || stored === "declined") {
     return null;
   }
   if (!mounted || typeof document === "undefined") {

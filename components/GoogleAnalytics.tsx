@@ -7,7 +7,6 @@
 
 import { useEffect, Suspense } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
-import Script from 'next/script'
 import { seoConfig } from '@/config/seo.config'
 
 // רק אם יש Google Analytics ID
@@ -108,35 +107,11 @@ declare global {
 }
 
 /**
- * Google Analytics Script Component
+ * Deprecated: tag loading moved to components/CookieConsent.tsx (Consent Mode v2).
+ * Kept as a no-op so accidental imports don't double-load gtag.js.
  */
 export default function GoogleAnalytics() {
-  if (!GA_ID) {
-    return null
-  }
-
-  return (
-    <>
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-      />
-      <Script
-        id="google-analytics"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_ID}', {
-              page_path: window.location.pathname,
-            });
-          `,
-        }}
-      />
-    </>
-  )
+  return null
 }
 
 /**

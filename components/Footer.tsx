@@ -263,6 +263,13 @@ export default function Footer() {
                 href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  try {
+                    gtag.event('whatsapp_click', 'engagement', 'footer')
+                  } catch {
+                    // ignore
+                  }
+                }}
                 className="bg-[#25D366] hover:bg-[#20BA5A] text-white px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 text-sm"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">

@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import SkipLink from "@/components/SkipLink";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import FloatingButtons from "@/components/FloatingButtons";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
 import PageTracking from "@/components/PageTracking";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import ToastContainer from "@/components/Toast";
@@ -454,7 +453,6 @@ export default function RootLayout({
         <ErrorBoundary>
           <div className="site-background" aria-hidden="true" />
           <ServiceWorkerRegistration />
-          <GoogleAnalytics />
           <PageTracking />
           <PerformanceTracker />
           <ToastContainer />

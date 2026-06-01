@@ -90,8 +90,10 @@ export const seoConfig: SEOConfig = {
     facebook: 'https://www.facebook.com/a.mphysiotherapy1',
     instagram: 'https://www.instagram.com/physiotherapy.plus/',
   },
-  // הוסף את ה-IDs כשזמינים
-  // googleAnalyticsId: 'G-XXXXXXXXXX',
+  // GA4 Measurement ID. The actual <script> loader is injected by
+  // components/CookieConsent.tsx together with Consent Mode v2 defaults,
+  // so this value is only used by client-side helpers (gtag.pageview etc.).
+  googleAnalyticsId: 'G-ETG7YT4SBR',
   // googleSearchConsoleId: 'your-verification-code',
 }
 
