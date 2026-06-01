@@ -8,21 +8,30 @@ const STORAGE_KEY = "cookie_consent";
 const GTM_ID = "GTM-58XQH9KN";
 const GTAW_ID = "AW-705216601";
 const GA4_ID = "G-ETG7YT4SBR";
+const FB_PIXEL_ID = "810694104390285";
 
 type ConsentState = "granted" | "denied";
 type StoredConsent = "accepted" | "declined";
 
-// Update consent on already-loaded gtag (used when user changes their choice later).
+// Update consent on already-loaded tags (used when user changes their choice).
 function updateConsent(state: ConsentState) {
   if (typeof window === "undefined") return;
-  const w = window as unknown as { gtag?: (...args: unknown[]) => void };
-  if (!w.gtag) return;
-  w.gtag("consent", "update", {
-    ad_storage: state,
-    ad_user_data: state,
-    ad_personalization: state,
-    analytics_storage: state,
-  });
+  const w = window as unknown as {
+    gtag?: (...args: unknown[]) => void;
+    fbq?: (...args: unknown[]) => void;
+  };
+  if (w.gtag) {
+    w.gtag("consent", "update", {
+      ad_storage: state,
+      ad_user_data: state,
+      ad_personalization: state,
+      analytics_storage: state,
+    });
+  }
+  if (w.fbq) {
+    // Meta Pixel: grant flushes buffered events; revoke pauses tracking.
+    w.fbq("consent", state === "granted" ? "grant" : "revoke");
+  }
 }
 
 // Load Google tags exactly once. Consent Mode v2 is initialized BEFORE any
@@ -71,15 +80,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   document.head.appendChild(gtmScript);
 
   // 4. GTM <noscript> iframe fallback for users without JS.
-  const noscript = document.createElement("noscript");
-  const iframe = document.createElement("iframe");
-  iframe.src = `https://www.googletagmanager.com/ns.html?id=${GTM_ID}`;
-  iframe.height = "0";
-  iframe.width = "0";
-  iframe.style.display = "none";
-  iframe.style.visibility = "hidden";
-  noscript.appendChild(iframe);
-  document.body.insertBefore(noscript, document.body.firstChild);
+  const gtmNoscript = document.createElement("noscript");
+  const gtmIframe = document.createElement("iframe");
+  gtmIframe.src = `https://www.googletagmanager.com/ns.html?id=${GTM_ID}`;
+  gtmIframe.height = "0";
+  gtmIframe.width = "0";
+  gtmIframe.style.display = "none";
+  gtmIframe.style.visibility = "hidden";
+  gtmNoscript.appendChild(gtmIframe);
+  document.body.insertBefore(gtmNoscript, document.body.firstChild);
+
+  // 5. Meta Pixel. Consent is revoked first so init/track calls are buffered
+  // until updateConsent('granted') flushes them, mirroring Google Consent Mode.
+  const fbScript = document.createElement("script");
+  fbScript.id = "meta-pixel-init";
+  fbScript.innerHTML = `!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('consent', '${defaultState === "granted" ? "grant" : "revoke"}');
+fbq('init', '${FB_PIXEL_ID}');
+fbq('track', 'PageView');`;
+  document.head.appendChild(fbScript);
+
+  // 6. Meta Pixel <noscript> tracking image fallback.
+  const fbNoscript = document.createElement("noscript");
+  const fbImg = document.createElement("img");
+  fbImg.height = 1;
+  fbImg.width = 1;
+  fbImg.style.display = "none";
+  fbImg.src = `https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`;
+  fbImg.alt = "";
+  fbNoscript.appendChild(fbImg);
+  document.body.insertBefore(fbNoscript, document.body.firstChild);
 }
 
 export default function CookieConsent() {

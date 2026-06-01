@@ -61,7 +61,7 @@ export function initWebVitalsTracking() {
 declare global {
   interface Window {
     gtag?: (
-      command: 'config' | 'event' | 'js' | 'set',
+      command: 'config' | 'event' | 'js' | 'set' | 'consent',
       targetId: string | Date,
       config?: Record<string, unknown>
     ) => void

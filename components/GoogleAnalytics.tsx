@@ -12,6 +12,33 @@ import { seoConfig } from '@/config/seo.config'
 // רק אם יש Google Analytics ID
 const GA_ID = seoConfig.googleAnalyticsId
 
+// Map custom event names to Meta Pixel standard events so Ads Manager can
+// optimize against them; anything not in this map falls back to trackCustom.
+const META_STANDARD_EVENT: Record<string, string> = {
+  whatsapp_click: 'Contact',
+  click_to_call: 'Contact',
+  email_click: 'Contact',
+  form_submit: 'Lead',
+  purchase: 'Purchase',
+  view_item: 'ViewContent',
+}
+
+function fireFbqEvent(action: string, params: Record<string, unknown>) {
+  if (typeof window === 'undefined') return
+  const w = window as unknown as { fbq?: (...args: unknown[]) => void }
+  if (!w.fbq) return
+  const standard = META_STANDARD_EVENT[action]
+  try {
+    if (standard) {
+      w.fbq('track', standard, params)
+    } else {
+      w.fbq('trackCustom', action, params)
+    }
+  } catch {
+    // ignore pixel errors
+  }
+}
+
 /**
  * Event tracking functions
  */
@@ -22,6 +49,16 @@ export const gtag = {
       window.gtag('config', GA_ID, {
         page_path: url,
       })
+    }
+    // Meta Pixel: fire PageView on SPA route changes; the initial PageView is
+    // already sent by the loader in CookieConsent.tsx.
+    if (typeof window !== 'undefined') {
+      const w = window as unknown as { fbq?: (...args: unknown[]) => void }
+      try {
+        w.fbq?.('track', 'PageView')
+      } catch {
+        // ignore
+      }
     }
   },
 
@@ -35,6 +72,12 @@ export const gtag = {
         ...additionalParams,
       })
     }
+    fireFbqEvent(action, {
+      category,
+      label,
+      value,
+      ...additionalParams,
+    })
   },
 
   // Track click to call
@@ -98,10 +141,11 @@ export const gtag = {
 declare global {
   interface Window {
     gtag?: (
-      command: 'config' | 'event' | 'js' | 'set',
+      command: 'config' | 'event' | 'js' | 'set' | 'consent',
       targetId: string | Date,
       config?: Record<string, unknown>
     ) => void
+    fbq?: (...args: unknown[]) => void
     dataLayer?: unknown[]
   }
 }
