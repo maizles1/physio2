@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import MeuhedetLeadForm from '@/components/MeuhedetLeadForm'
@@ -86,25 +87,27 @@ const injuries = [
 const steps = [
   {
     n: 1,
-    title: 'מתקשרים או משאירים פרטים',
-    description: 'יוצרים איתנו קשר טלפוני, בוואטסאפ או דרך הטופס בעמוד.',
+    title: 'הוצאת הפניה מרופא מאוחדת',
+    description:
+      'מקבלים הפניה לפיזיותרפיה מהרופא במאוחדת, ובה מצוין שהפציעה אירעה במהלך פעילות ספורט.',
   },
   {
     n: 2,
-    title: 'אישור מול מאוחדת',
+    title: 'הוצאת התחייבות לקליניקה שלנו',
     description:
-      'מקבלים הפניה/אישור מהרופא במאוחדת לטיפולי פיזיותרפיה במסגרת הקופה.',
+      'דרך הסניף של מאוחדת שבו אתם רשומים – מבקשים התחייבות לקליניקה שלנו בשם "פיזיותרפיה.פלוס".',
   },
   {
     n: 3,
-    title: 'תיאום תור גמיש',
-    description: 'מתאמים תור מהיר בקליניקה באשדוד בשעות שמתאימות לכם.',
+    title: 'תיאום תור מהיר',
+    description:
+      'יוצרים איתנו קשר ומתאמים תור קרוב בקליניקה באשדוד בשעות שנוחות לכם.',
   },
   {
     n: 4,
-    title: 'טיפול ושיקום מלא',
+    title: 'כאן בשבילכם לכל שאלה',
     description:
-      'תכנית טיפול אישית, החזרה הדרגתית לפעילות וליווי עד חזרה מלאה לספורט.',
+      'במידה ויש בעיות בתהליך מול מאוחדת או שאלות כלשהן – אל תהססו ליצור איתנו קשר ונשמח לעזור.',
   },
 ]
 
@@ -195,45 +198,60 @@ export default function MeuhedetPage() {
           />
         </div>
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl">
-            <Breadcrumbs
-              items={[
-                { label: 'דף בית', href: '/' },
-                { label: 'מאוחדת – פציעות ספורט', href: '/meuhedet' },
-              ]}
-            />
-            <span className="inline-block rounded-full bg-white/15 px-4 py-1.5 text-sm font-semibold text-white backdrop-blur-sm mb-4">
-              ספק מוכר של מאוחדת
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 text-white leading-tight">
-              פיזיותרפיה לפציעות ספורט במסגרת מאוחדת
-            </h1>
-            <p className="text-lg sm:text-xl text-white/95 max-w-3xl leading-relaxed mb-8">
-              אם אתם חברי <strong>מאוחדת</strong> ויש לכם פציעת ספורט – אתם בידיים טובות. הקליניקה
-              היא ספק מוכר של מאוחדת ומציעה טיפול אישי, מקצועי וזמין באשדוד, על ידי פיזיותרפיסט
-              בעל תואר שני שהיה פיזיותרפיסט נבחרת ישראל.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <a
-                href="#lead-form"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-7 py-3.5 text-base font-bold text-[#2A3080] shadow-lg hover:bg-gray-100 transition-colors"
-              >
-                השאר פרטים
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-              </a>
-              <a
-                href={`https://wa.me/${whatsappNumber}?text=${whatsappMessageMeuhedet}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-7 py-3.5 text-base font-bold text-white shadow-lg hover:bg-[#1ebe57] transition-colors"
-              >
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
-                </svg>
-                שיחה בוואטסאפ
-              </a>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-center">
+            <div className="max-w-3xl">
+              <Breadcrumbs
+                items={[
+                  { label: 'דף בית', href: '/' },
+                  { label: 'מאוחדת – פציעות ספורט', href: '/meuhedet' },
+                ]}
+              />
+              <span className="inline-block rounded-full bg-white/15 px-4 py-1.5 text-sm font-semibold text-white backdrop-blur-sm mb-4">
+                ספק מוכר של מאוחדת
+              </span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 text-white leading-tight">
+                פיזיותרפיה לפציעות ספורט במסגרת מאוחדת
+              </h1>
+              <p className="text-lg sm:text-xl text-white/95 leading-relaxed mb-8">
+                אם אתם חברי <strong>מאוחדת</strong> ויש לכם פציעת ספורט – אתם בידיים טובות. הקליניקה
+                היא ספק מוכר של מאוחדת ומציעה טיפול אישי, מקצועי וזמין באשדוד, על ידי פיזיותרפיסט
+                בעל תואר שני שהיה פיזיותרפיסט נבחרת ישראל.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a
+                  href="#lead-form"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-7 py-3.5 text-base font-bold text-[#2A3080] shadow-lg hover:bg-gray-100 transition-colors"
+                >
+                  השאר פרטים
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </a>
+                <a
+                  href={`https://wa.me/${whatsappNumber}?text=${whatsappMessageMeuhedet}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-7 py-3.5 text-base font-bold text-white shadow-lg hover:bg-[#1ebe57] transition-colors"
+                >
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                  </svg>
+                  שיחה בוואטסאפ
+                </a>
+              </div>
+            </div>
+            <div className="flex justify-center lg:justify-end">
+              <div className="inline-flex items-center justify-center rounded-2xl bg-white/95 backdrop-blur-sm shadow-2xl ring-1 ring-white/40 px-6 py-5 sm:px-8 sm:py-6">
+                <Image
+                  src="/images/insurance/Meuhedet-Logo.png"
+                  alt="לוגו מאוחדת – ספק רשמי"
+                  width={320}
+                  height={102}
+                  priority
+                  sizes="(min-width: 1024px) 320px, (min-width: 640px) 280px, 220px"
+                  className="h-20 sm:h-24 md:h-28 w-auto object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>
