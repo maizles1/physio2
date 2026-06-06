@@ -115,6 +115,7 @@ export function middleware(request: NextRequest) {
       '/api/newsletter',
       '/api/plan-feedback',
       '/api/admin-plan-feedback',
+      '/api/lead',
     ]
     const isPublicEndpoint = publicEndpoints.includes(pathname)
 

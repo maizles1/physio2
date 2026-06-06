@@ -42,6 +42,7 @@ export default function Header() {
         { name: 'ליווי קבוצות ספורט וספורטאים', href: '/services#sports-teams' },
       ],
     },
+    { name: 'מאוחדת', href: '/meuhedet' },
     { name: 'בלוג', href: '/blog' },
     { name: 'המלצות', href: '/testimonials' },
     { name: 'שאלות נפוצות', href: '/faq' },

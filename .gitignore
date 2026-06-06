@@ -4,3 +4,7 @@ node_modules/
 .env.local
 .DS_Store
 *.tsbuildinfo
+
+# Local fallback stores for customer PII (production uses Vercel Blob).
+app/data/meuhedet-leads.json
+app/data/newsletter-subscribers.json
