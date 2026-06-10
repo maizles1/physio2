@@ -83,6 +83,21 @@ const injuries = [
   },
 ]
 
+const clinicPhotos = [
+  {
+    src: '/images/carousel/clinic-1.jpg',
+    alt: 'חדר טיפול בקליניקת פיזיותרפיה.פלוס באשדוד',
+  },
+  {
+    src: '/images/carousel/clinic-2.jpg',
+    alt: 'ציוד פיזיותרפיה מקצועי בקליניקה',
+  },
+  {
+    src: '/images/carousel/clinic-4.jpg',
+    alt: 'אזור קבלה וטיפול בקליניקה במרכז כלניות אשדוד',
+  },
+]
+
 const steps = [
   {
     n: 1,
@@ -304,87 +319,77 @@ export default function MeuhedetPage() {
         </div>
       </section>
 
-      {/* 3. About the therapist */}
-      <section className="py-16">
+      {/* 3. Therapist photo + clinic gallery */}
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3" style={{ color: '#2A3080' }}>
                 מי מטפל בכם?
               </h2>
               <p className="text-lg text-gray-700">
-                הכירו את הפיזיותרפיסט שמאחורי הקליניקה
+                אנדריי מייזלס · מרכז כלניות, אשדוד · ספק מאוחדת רשמי
               </p>
             </div>
-            <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-2/5 w-full">
-                  <div className="relative h-72 sm:h-80 md:h-full md:min-h-[360px]">
-                    <Image
-                      src="/images/andrey-meizels.JPG"
-                      alt="אנדריי מייזלס – פיזיותרפיסט, ספק מאוחדת לפציעות ספורט באשדוד"
-                      fill
-                      className="object-cover object-top"
-                      sizes="(max-width: 768px) 100vw, 40vw"
-                      quality={90}
-                      loading="lazy"
-                    />
-                  </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,340px)_1fr] gap-6 items-start mb-8">
+              <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+                <div className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5]">
+                  <Image
+                    src="/images/andrey-meizels.JPG"
+                    alt="אנדריי מייזלס – פיזיותרפיסט, ספק מאוחדת לפציעות ספורט באשדוד"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 1024px) 100vw, 340px"
+                    quality={90}
+                    priority
+                  />
                 </div>
-                <div className="md:w-3/5 p-6 sm:p-8">
-                  <h3 className="text-2xl font-bold mb-1" style={{ color: '#2A3080' }}>
+                <div className="p-5 sm:p-6">
+                  <h3 className="text-xl font-bold mb-1" style={{ color: '#2A3080' }}>
                     אנדריי מייזלס
                   </h3>
-                  <p className="text-lg font-medium mb-4" style={{ color: '#2080C0' }}>
-                    פיזיותרפיסט מוסמך (M.Sc) · מנהל פיזיותרפיה.פלוס
+                  <p className="text-sm font-medium mb-3" style={{ color: '#2080C0' }}>
+                    פיזיותרפיסט (M.Sc) · פיזיותרפיה.פלוס – אנדריי מייזלס
                   </p>
-                  <p className="text-gray-700 leading-relaxed mb-4">
-                    שמי אנדריי מייזלס, פיזיותרפיסט בעל תואר שני בפיזיותרפיה. שימשתי כפיזיותרפיסט
-                    של נבחרת ישראל בג&apos;ודו וצברתי ניסיון עשיר בשיקום ספורטאי עילית וחזרה
-                    מהירה לפעילות לאחר פציעות.
+                  <p className="text-gray-700 text-sm leading-relaxed mb-3">
+                    פיזיותרפיסט לשעבר של נבחרת ישראל בג&apos;ודו, מתמחה בשיקום פציעות ספורט
+                    וחזרה לפעילות. מטפל בחברי מאוחדת במסגרת הקופה.
                   </p>
-                  <p className="text-gray-700 leading-relaxed mb-5">
-                    הקליניקה באשדוד רשומה במאוחדת בשם{' '}
-                    <strong>פיזיותרפיה.פלוס – אנדריי מייזלס</strong>, ומטפלת בחברי הקופה
-                    בפציעות ספורט – מנקעים ודלקות גידים ועד שיקום לאחר ניתוח.
-                  </p>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-gray-700 text-sm">
-                    <li className="flex items-center gap-2">
-                      <svg className="h-5 w-5 shrink-0 text-[#2080C0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      תואר שני בפיזיותרפיה
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <svg className="h-5 w-5 shrink-0 text-[#2080C0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      פיזיותרפיסט נבחרת ישראל לשעבר
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <svg className="h-5 w-5 shrink-0 text-[#2080C0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      ספק מאוחדת רשמי
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <svg className="h-5 w-5 shrink-0 text-[#2080C0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      התמחות בפציעות ספורט
-                    </li>
-                  </ul>
-                  <p className="mt-5">
-                    <Link
-                      href="/about"
-                      className="text-[#2080C0] font-semibold hover:underline"
-                    >
-                      קראו עוד עליי ←
-                    </Link>
-                  </p>
+                  <Link
+                    href="/about"
+                    className="text-sm text-[#2080C0] font-semibold hover:underline"
+                  >
+                    עוד עליי ←
+                  </Link>
                 </div>
               </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 h-full">
+                {clinicPhotos.map((photo) => (
+                  <div
+                    key={photo.src}
+                    className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
+                  >
+                    <div className="relative aspect-[4/3]">
+                      <Image
+                        src={photo.src}
+                        alt={photo.alt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        quality={85}
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
+
+            <p className="text-center text-sm text-gray-600">
+              קליניקה מקצועית ונעימה באשדוד – טיפול אישי בסביבה שקטה ומאובזרת
+            </p>
           </div>
         </div>
       </section>
