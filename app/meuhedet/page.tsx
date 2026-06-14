@@ -332,62 +332,82 @@ export default function MeuhedetPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,340px)_1fr] gap-6 items-start mb-8">
-              <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-                <div className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6 lg:items-stretch">
+              {/* Therapist column */}
+              <div className="flex flex-col gap-5">
+                <div className="group relative aspect-[4/5] sm:aspect-[5/6] lg:aspect-auto lg:flex-1 lg:min-h-[320px] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md ring-1 ring-black/5">
                   <Image
                     src="/images/andrey-meizels.JPG"
                     alt="אנדריי מייזלס – פיזיותרפיסט, ספק מאוחדת לפציעות ספורט באשדוד"
                     fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 1024px) 100vw, 340px"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     quality={90}
                     priority
                   />
                 </div>
-                <div className="p-5 sm:p-6">
+                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
                   <h3 className="text-xl font-bold mb-1" style={{ color: '#2A3080' }}>
                     אנדריי מייזלס
                   </h3>
                   <p className="text-sm font-medium mb-3" style={{ color: '#2080C0' }}>
                     פיזיותרפיסט (M.Sc) · פיזיותרפיה.פלוס – אנדריי מייזלס
                   </p>
-                  <p className="text-gray-700 text-sm leading-relaxed mb-3">
+                  <p className="text-gray-700 text-sm leading-relaxed mb-4">
                     פיזיותרפיסט לשעבר של נבחרת ישראל בג&apos;ודו, מתמחה בשיקום פציעות ספורט
                     וחזרה לפעילות. מטפל בחברי מאוחדת במסגרת הקופה.
                   </p>
                   <Link
                     href="/about"
-                    className="text-sm text-[#2080C0] font-semibold hover:underline"
+                    className="inline-flex items-center gap-1 text-sm text-[#2080C0] font-semibold hover:underline"
                   >
-                    עוד עליי ←
+                    עוד עליי
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
                   </Link>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 h-full">
-                {clinicPhotos.map((photo) => (
-                  <div
-                    key={photo.src}
-                    className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
-                  >
-                    <div className="relative aspect-[4/3]">
-                      <Image
-                        src={photo.src}
-                        alt={photo.alt}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        quality={85}
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
-                ))}
+              {/* Clinic bento gallery – balanced mosaic */}
+              <div className="grid grid-cols-2 grid-rows-2 gap-4 lg:gap-5 min-h-[300px] sm:min-h-[380px] lg:min-h-[520px]">
+                <div className="group relative row-span-2 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md ring-1 ring-black/5">
+                  <Image
+                    src={clinicPhotos[0].src}
+                    alt={clinicPhotos[0].alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    quality={85}
+                    loading="lazy"
+                  />
+                </div>
+                <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md ring-1 ring-black/5">
+                  <Image
+                    src={clinicPhotos[1].src}
+                    alt={clinicPhotos[1].alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    quality={85}
+                    loading="lazy"
+                  />
+                </div>
+                <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md ring-1 ring-black/5">
+                  <Image
+                    src={clinicPhotos[2].src}
+                    alt={clinicPhotos[2].alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    quality={85}
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
 
-            <p className="text-center text-sm text-gray-600">
+            <p className="mt-8 text-center text-sm text-gray-600">
               קליניקה מקצועית ונעימה באשדוד – טיפול אישי בסביבה שקטה ומאובזרת
             </p>
           </div>
