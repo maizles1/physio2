@@ -9,12 +9,14 @@ interface InsuranceOption {
   logoPath: string
   color: string
   bgColor: string
+  href: string
+  linkLabel: string
 }
 
 const insuranceOptions: InsuranceOption[] = [
   {
     title: 'עובדים עם מאוחדת',
-    description: 'ניתן לקבל טיפולי פיזיותרפיה דרך המסלול הפרטי של הקופה.',
+    description: 'ספק מאוחדת רשמי לפיזיותרפיה ופציעות ספורט באשדוד.',
     icon: (
       <svg className="w-10 h-10 sm:w-12 sm:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -23,6 +25,8 @@ const insuranceOptions: InsuranceOption[] = [
     logoPath: '/images/insurance/Meuhedet-Logo.png',
     color: 'text-blue-600',
     bgColor: 'bg-blue-50',
+    href: '/meuhedet',
+    linkLabel: 'פציעות ספורט – מאוחדת',
   },
   {
     title: 'החזרים של הכללית',
@@ -35,6 +39,8 @@ const insuranceOptions: InsuranceOption[] = [
     logoPath: '/images/insurance/Clalit-Logo.png',
     color: 'text-green-600',
     bgColor: 'bg-green-50',
+    href: '/contact',
+    linkLabel: 'לפרטים נוספים',
   },
   {
     title: 'החזרים מביטוחים פרטיים',
@@ -47,6 +53,8 @@ const insuranceOptions: InsuranceOption[] = [
     logoPath: '/images/insurance/private-insurance-logo.svg',
     color: 'text-purple-600',
     bgColor: 'bg-purple-50',
+    href: '/contact',
+    linkLabel: 'לפרטים נוספים',
   },
   {
     title: 'ספק של משרד הביטחון',
@@ -59,6 +67,8 @@ const insuranceOptions: InsuranceOption[] = [
     logoPath: '/images/insurance/Ministry-of-defense-logo.png',
     color: 'text-orange-600',
     bgColor: 'bg-orange-50',
+    href: '/contact',
+    linkLabel: 'לפרטים נוספים',
   },
 ]
 
@@ -102,11 +112,11 @@ export default function InsuranceSection() {
                   {option.description}
                 </p>
                 <Link
-                  href="/contact"
+                  href={option.href}
                   className={`${option.color} font-medium hover:opacity-80 transition-opacity inline-flex items-center gap-2 text-sm sm:text-base`}
-                  aria-label={`${option.title} - לפרטים נוספים`}
+                  aria-label={`${option.title} - ${option.linkLabel}`}
                 >
-                  לפרטים נוספים
+                  {option.linkLabel}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>

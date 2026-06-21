@@ -315,6 +315,20 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* Meuhedet sports injuries */}
+      <section className="py-8 bg-blue-50/60 border-y border-blue-100">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-gray-700 leading-relaxed">
+              מבוטחי <strong>מאוחדת</strong> עם פציעת ספורט?{' '}
+              <Link href="/meuhedet" className="text-[#2080C0] font-semibold hover:underline">
+                לדף פיזיותרפיה לפציעות ספורט במסגרת מאוחדת
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Services List */}
       <section className="py-16">
         <div className="container mx-auto px-4">
