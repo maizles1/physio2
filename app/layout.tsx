@@ -112,6 +112,7 @@ const organizationSchema = {
   sameAs: [
     'https://www.facebook.com/a.mphysiotherapy1',
     'https://www.instagram.com/physiotherapy.plus/',
+    'https://maps.app.goo.gl/Yoq3HMBmmg8bpMbL7',
   ],
 }
 
@@ -267,8 +268,7 @@ const structuredData = {
   sameAs: [
     'https://www.facebook.com/a.mphysiotherapy1',
     'https://www.instagram.com/physiotherapy.plus/',
-    // Add Google Business Profile URL when available
-    // Example: 'https://www.google.com/maps/place/...',
+    'https://maps.app.goo.gl/Yoq3HMBmmg8bpMbL7',
   ],
   // Google Business Profile ID (if available)
   // Add this when you have the Google Business Profile ID
@@ -315,6 +315,12 @@ const localBusinessSchema = {
   priceRange: '₪₪',
   paymentAccepted: ['ביטוח משלים כללית', 'קופת חולים מאוחדת', 'משרד הביטחון', 'ביטוחים פרטיים'],
   currenciesAccepted: 'ILS',
+  hasMap: 'https://maps.app.goo.gl/Yoq3HMBmmg8bpMbL7',
+  sameAs: [
+    'https://maps.app.goo.gl/Yoq3HMBmmg8bpMbL7',
+    'https://www.facebook.com/a.mphysiotherapy1',
+    'https://www.instagram.com/physiotherapy.plus/',
+  ],
 }
 
 const professionalServiceSchema = {
