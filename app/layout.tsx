@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     default: "פיזיותרפיה פרטית באשדוד - פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס",
     template: "%s | פיזיותרפיה.פלוס",
   },
-  description: "פיזיותרפיה פרטית באשדוד - פיזיותרפיה.פלוס. מכון פיזיותרפיה פרטי באשדוד. אנדריי מייזלס, פיזיותרפיסט פרטי באשדוד, פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג&apos;ודו, מתמחה בטיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי וטיפול במפרק הלסת. מרכז כלניות, אשדוד. 050-883-8982",
+  description: "פיזיותרפיה פרטית באשדוד - אנדריי מייזלס, פיזיותרפיסט פרטי מומלץ (M.Sc). טיפול בכאבי גב, כתף, צוואר, TMJ ושיקום אורתופדי ווסטיבולרי. מרכז כלניות, אשדוד.",
   keywords: [
     "פיזיותרפיה",
     "פיזיותרפיה.פלוס",
@@ -260,12 +260,10 @@ const structuredData = {
     { '@type': 'PaymentMethod', name: 'משרד הביטחון' },
     { '@type': 'PaymentMethod', name: 'ביטוחים פרטיים' },
   ],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5.0',
-    reviewCount: '150',
-    bestRating: '5',
-  },
+  // NOTE: aggregateRating intentionally lives only on pages that actually
+  // render reviews (the testimonials page). Google requires the rating to
+  // reference review content visible on the same page, so a site-wide rating
+  // in the shared layout (shown even on /terms, /privacy) is non-compliant.
   sameAs: [
     'https://www.facebook.com/a.mphysiotherapy1',
     'https://www.instagram.com/physiotherapy.plus/',
