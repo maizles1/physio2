@@ -36,8 +36,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
   }
 
+  const postImage = post.image
+    ? `https://physio-plus.co.il${post.image}`
+    : 'https://physio-plus.co.il/images/logo/clinic-logo.png'
+
   return {
-    title: `${post.title} | פיזיותרפיה.פלוס`,
+    title: post.title,
     description: post.excerpt,
     authors: [{ name: 'אנדריי מייזלס' }],
     openGraph: {
@@ -48,6 +52,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       publishedTime: post.date,
       authors: ['אנדריי מייזלס'],
       tags: post.keywords || [],
+      images: [
+        {
+          url: postImage,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: [postImage],
     },
     alternates: {
       canonical: `https://physio-plus.co.il/blog/${post.slug}`,

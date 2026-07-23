@@ -110,7 +110,8 @@ const organizationSchema = {
     availableLanguage: ['Hebrew'],
   },
   sameAs: [
-    // Add social media links here when available
+    'https://www.facebook.com/a.mphysiotherapy1',
+    'https://www.instagram.com/physiotherapy.plus/',
   ],
 }
 
@@ -266,8 +267,8 @@ const structuredData = {
     bestRating: '5',
   },
   sameAs: [
-    'https://www.facebook.com/yourpage',
-    'https://www.instagram.com/yourpage',
+    'https://www.facebook.com/a.mphysiotherapy1',
+    'https://www.instagram.com/physiotherapy.plus/',
     // Add Google Business Profile URL when available
     // Example: 'https://www.google.com/maps/place/...',
   ],

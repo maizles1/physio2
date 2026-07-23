@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'מדיניות פרטיות - פיזיותרפיה.פלוס',
+  title: 'מדיניות פרטיות',
   description: 'מדיניות הפרטיות של אתר פיזיותרפיה.פלוס - מידע על איסוף, שימוש והגנה על המידע האישי שלכם.',
   alternates: {
     canonical: 'https://physio-plus.co.il/privacy',

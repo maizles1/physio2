@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { gtag } from '@/components/GoogleAnalytics'
@@ -9,6 +10,7 @@ const whatsappNumber = '972508838982'
 const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
 
 export default function HeroSection() {
+  const [imgError, setImgError] = useState(false)
   const handleWhatsAppClick = () => {
     gtag.event('whatsapp_click', 'engagement', 'hero_section')
   }
@@ -68,22 +70,24 @@ export default function HeroSection() {
             {/* Image */}
             <div className="flex-shrink-0 order-1 lg:order-1">
               <div className="relative w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl bg-white/10">
-                <Image
-                  src="/images/andrey-meizels.JPG"
-                  alt="אנדריי מייזלס, פיזיותרפיסט מקצועי"
-                  fill
-                  className="object-cover w-full h-full"
-                  sizes="(max-width: 640px) 160px, (max-width: 768px) 192px, (max-width: 1024px) 256px, 320px"
-                  priority
-                  quality={90}
-                />
-                <div className="w-full h-full hidden items-center justify-center" role="img" aria-label="אנדריי מייזלס, פיזיותרפיסט מקצועי">
+                {!imgError && (
+                  <Image
+                    src="/images/andrey-meizels.JPG"
+                    alt="אנדריי מייזלס, פיזיותרפיסט מקצועי"
+                    fill
+                    className="object-cover w-full h-full"
+                    sizes="(max-width: 640px) 160px, (max-width: 768px) 192px, (max-width: 1024px) 256px, 320px"
+                    priority
+                    quality={90}
+                    onError={() => setImgError(true)}
+                  />
+                )}
+                <div className={`w-full h-full ${imgError ? 'flex' : 'hidden'} items-center justify-center`} role="img" aria-label="אנדריי מייזלס, פיזיותרפיסט מקצועי">
                   <div className="text-center text-white">
                     <svg className="w-24 h-24 mx-auto mb-2 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    <p className="text-sm opacity-75">תמונת אנדריי מייזלס</p>
-                    <p className="text-xs opacity-50 mt-1">הוסף תמונה: /public/images/andrey-meizels.jpg</p>
+                    <p className="text-sm opacity-75">אנדריי מייזלס</p>
                   </div>
                 </div>
               </div>

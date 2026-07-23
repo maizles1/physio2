@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { getPlaceId, getReviewUrl } from '@/config/google-business.config'
 
 export const metadata: Metadata = {
-  title: 'השאר ביקורת - פיזיותרפיה.פלוס',
+  title: 'השאר ביקורת',
   description: 'עזור לנו ולאחרים - השאר ביקורת על השירותים שלנו ב-Google',
   robots: {
     index: false, // Don't index this page

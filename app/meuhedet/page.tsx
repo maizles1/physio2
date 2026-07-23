@@ -8,7 +8,7 @@ import MeuhedetContactLink from '@/components/MeuhedetContactLink'
 import { manualReviews } from '@/config/manual-reviews.config'
 
 export const metadata: Metadata = {
-  title: 'פיזיותרפיה לפציעות ספורט – מאוחדת | אשדוד | פיזיותרפיה.פלוס',
+  title: 'פיזיותרפיה לפציעות ספורט – מאוחדת | אשדוד',
   description:
     'ספק מאוחדת רשמי לפיזיותרפיה ופציעות ספורט באשדוד. פיזיותרפיה.פלוס – אנדריי מייזלס, M.Sc, פיזיותרפיסט לשעבר של נבחרת ישראל. התקשרו או שלחו WhatsApp לקביעת תור.',
   keywords: [

@@ -6,7 +6,7 @@ import ThankYouMessage from '@/components/ThankYouMessage'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'המלצות מטופלים - המלצות על פיזיותרפיה.פלוס',
+  title: 'המלצות מטופלים - חוות דעת אמיתיות',
   description: 'קראו המלצות אמיתיות ממטופלים על הטיפול בפיזיותרפיה.פלוס באשדוד. חוות דעת מפורטות על שירותי הפיזיותרפיה והתוצאות.',
   openGraph: {
     title: 'המלצות מטופלים - פיזיותרפיה.פלוס',

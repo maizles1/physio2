@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'אודות - פיזיותרפיה.פלוס',
+  title: 'אודות הקליניקה',
   description: 'אנדריי מייזלס - פיזיותרפיסט מקצועי בעל תואר שני, לשעבר נבחרת ישראל בג\'ודו. מכון פיזיותרפיה פרטי באשדוד עם ניסיון עשיר.',
   authors: [{ name: 'אנדריי מייזלס' }],
   openGraph: {

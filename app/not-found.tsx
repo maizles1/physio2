@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'דף לא נמצא - 404 | פיזיותרפיה.פלוס',
+  title: 'דף לא נמצא - 404',
   description: 'הדף שביקשת לא נמצא. חזור לדף הבית או עיין בתפריט הניווט.',
   robots: {
     index: false,

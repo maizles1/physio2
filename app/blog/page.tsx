@@ -5,7 +5,7 @@ import { getAllPosts } from '@/config/blog.config'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'בלוג פיזיותרפיה - מאמרים מקצועיים וטיפים | פיזיותרפיה.פלוס',
+  title: 'בלוג פיזיותרפיה - מאמרים מקצועיים וטיפים',
   description: 'מאמרים מקצועיים על פיזיותרפיה, טיפים לבריאות ושיקום, תרגילי פיזיותרפיה ומידע מקצועי על טיפולים. פיזיותרפיה.פלוס - מכון פיזיותרפיה פרטי באשדוד.',
   keywords: [
     'מאמרים פיזיותרפיה',

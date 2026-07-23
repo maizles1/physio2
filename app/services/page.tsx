@@ -4,7 +4,7 @@ import ServiceImage from '@/components/ServiceImage'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'שירותי פיזיותרפיה - טיפול בכאבי גב, כתף, צוואר וברך | פיזיותרפיה.פלוס',
+  title: 'שירותי פיזיותרפיה - טיפול בכאבי גב, כתף, צוואר וברך',
   description: 'שירותי פיזיותרפיה מקצועיים באשדוד: טיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי וטיפול במפרק הלסת. מכון פיזיותרפיה פרטי.',
   keywords: [
     'טיפול בכאבי גב',

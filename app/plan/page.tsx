@@ -15,6 +15,11 @@ import PlanContent from "./PlanContent";
 export const metadata: Metadata = {
   title: "תוכנית התרגול שלך",
   description: "תוכנית תרגילים מותאמת – פיזיותרפיה פלוס",
+  // Personalized, query-param driven tool page — no stable content to index.
+  robots: { index: false, follow: false },
+  alternates: {
+    canonical: "https://physio-plus.co.il/plan",
+  },
 };
 
 export type PlanItem = { exercise: Exercise; dosage: Dosage };
