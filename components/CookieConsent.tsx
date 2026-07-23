@@ -5,9 +5,10 @@ import Link from "next/link";
 import { createPortal } from "react-dom";
 
 const STORAGE_KEY = "cookie_consent";
+// GA4 (G-ETG7YT4SBR) and Google Ads (AW-705216601) are configured inside this
+// GTM container, so we must NOT also configure them here with gtag('config').
+// Doing both caused GA4/Ads to load twice and double-count every page_view.
 const GTM_ID = "GTM-58XQH9KN";
-const GTAW_ID = "AW-705216601";
-const GA4_ID = "G-ETG7YT4SBR";
 const FB_PIXEL_ID = "810694104390285";
 
 type ConsentState = "granted" | "denied";
@@ -42,6 +43,10 @@ function injectAnalyticsScripts(defaultState: ConsentState) {
   if (document.getElementById("gtag-consent-init")) return;
 
   // 1. dataLayer + gtag stub + Consent Mode v2 defaults (must be first).
+  // We intentionally do NOT call gtag('config', ...) for GA4/Ads here or load
+  // gtag.js directly — GTM owns those tags. gtag.js is loaded by the GTM
+  // container below, and page-level gtag('event', ...) helpers still reach GA4
+  // through the Google tag that GTM registers.
   const initScript = document.createElement("script");
   initScript.id = "gtag-consent-init";
   initScript.innerHTML = `
@@ -57,19 +62,10 @@ function injectAnalyticsScripts(defaultState: ConsentState) {
     });
     gtag('set', 'ads_data_redaction', ${defaultState === "granted" ? "false" : "true"});
     gtag('js', new Date());
-    gtag('config', '${GA4_ID}');
-    gtag('config', '${GTAW_ID}');
   `;
   document.head.appendChild(initScript);
 
-  // 2. gtag.js loader (serves GA4 + Google Ads).
-  const gtagScript = document.createElement("script");
-  gtagScript.id = "gtag-loader";
-  gtagScript.async = true;
-  gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
-  document.head.appendChild(gtagScript);
-
-  // 3. GTM container (runs any additional tags configured server-side).
+  // 2. GTM container (loads gtag.js and runs the GA4 + Google Ads tags).
   const gtmScript = document.createElement("script");
   gtmScript.id = "google-tag-manager";
   gtmScript.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -79,7 +75,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${GTM_ID}');`;
   document.head.appendChild(gtmScript);
 
-  // 4. GTM <noscript> iframe fallback for users without JS.
+  // 3. GTM <noscript> iframe fallback for users without JS.
   const gtmNoscript = document.createElement("noscript");
   const gtmIframe = document.createElement("iframe");
   gtmIframe.src = `https://www.googletagmanager.com/ns.html?id=${GTM_ID}`;
@@ -90,7 +86,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   gtmNoscript.appendChild(gtmIframe);
   document.body.insertBefore(gtmNoscript, document.body.firstChild);
 
-  // 5. Meta Pixel. Consent is revoked first so init/track calls are buffered
+  // 4. Meta Pixel. Consent is revoked first so init/track calls are buffered
   // until updateConsent('granted') flushes them, mirroring Google Consent Mode.
   const fbScript = document.createElement("script");
   fbScript.id = "meta-pixel-init";
@@ -107,7 +103,7 @@ fbq('init', '${FB_PIXEL_ID}');
 fbq('track', 'PageView');`;
   document.head.appendChild(fbScript);
 
-  // 6. Meta Pixel <noscript> tracking image fallback.
+  // 5. Meta Pixel <noscript> tracking image fallback.
   const fbNoscript = document.createElement("noscript");
   const fbImg = document.createElement("img");
   fbImg.height = 1;
