@@ -5,7 +5,7 @@
 
 'use client'
 
-import { useEffect, Suspense } from 'react'
+import { useEffect, Suspense, useRef } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { seoConfig } from '@/config/seo.config'
 
@@ -52,15 +52,17 @@ function fireFbqEvent(action: string, params: Record<string, unknown>) {
  * Event tracking functions
  */
 export const gtag = {
-  // Track page view
+  // SPA route changes. Initial page_view should come from the GA4 Google Tag
+  // inside GTM (All Pages). This only fires after the first render.
   pageview: (url: string) => {
     if (typeof window !== 'undefined' && window.gtag && GA_ID) {
-      window.gtag('config', GA_ID, {
+      window.gtag('event', 'page_view', {
         page_path: url,
+        page_location: window.location.href,
+        page_title: document.title,
       })
     }
-    // Meta Pixel: fire PageView on SPA route changes; the initial PageView is
-    // already sent by the loader in CookieConsent.tsx.
+    // Meta Pixel PageView for client-side route changes only.
     if (typeof window !== 'undefined') {
       const w = window as unknown as { fbq?: (...args: unknown[]) => void }
       try {
@@ -173,12 +175,18 @@ export default function GoogleAnalytics() {
 function PageTrackingInner() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  // Skip first render: initial page_view / Meta PageView come from GTM tags
+  // (All Pages). This effect only covers client-side SPA navigations.
+  const isFirstRender = useRef(true)
 
   useEffect(() => {
-    if (GA_ID) {
-      const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '')
-      gtag.pageview(url)
+    if (!GA_ID) return
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
     }
+    const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '')
+    gtag.pageview(url)
   }, [pathname, searchParams])
   
   return null

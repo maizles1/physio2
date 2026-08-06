@@ -90,9 +90,9 @@ export const seoConfig: SEOConfig = {
     facebook: 'https://www.facebook.com/a.mphysiotherapy1',
     instagram: 'https://www.instagram.com/physiotherapy.plus/',
   },
-  // GA4 Measurement ID. The actual <script> loader is injected by
-  // components/CookieConsent.tsx together with Consent Mode v2 defaults,
-  // so this value is only used by client-side helpers (gtag.pageview etc.).
+  // GA4 Measurement ID for client helpers (gtag.pageview / gtag.event).
+  // The tag itself must be configured inside GTM (GTM-MK3F6SVQ), not loaded
+  // directly from the site. Consent Mode defaults live in CookieConsent.tsx.
   googleAnalyticsId: 'G-ETG7YT4SBR',
   // googleSearchConsoleId: 'your-verification-code',
 }

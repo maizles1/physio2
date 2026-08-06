@@ -5,11 +5,9 @@ import Link from "next/link";
 import { createPortal } from "react-dom";
 
 const STORAGE_KEY = "cookie_consent";
-// GA4 (G-ETG7YT4SBR) and Google Ads (AW-705216601) are configured inside this
-// GTM container, so we must NOT also configure them here with gtag('config').
-// Doing both caused GA4/Ads to load twice and double-count every page_view.
-const GTM_ID = "GTM-58XQH9KN";
-const FB_PIXEL_ID = "810694104390285";
+// Single source of truth: GTM owns GA4, Google Ads, Meta Pixel, TikTok, etc.
+// Do NOT also load those tags from this file (double-counting).
+const GTM_ID = "GTM-MK3F6SVQ";
 
 type ConsentState = "granted" | "denied";
 type StoredConsent = "accepted" | "declined";
@@ -29,24 +27,20 @@ function updateConsent(state: ConsentState) {
       analytics_storage: state,
     });
   }
+  // If GTM loaded Meta Pixel, mirror consent to fbq when available.
   if (w.fbq) {
-    // Meta Pixel: grant flushes buffered events; revoke pauses tracking.
     w.fbq("consent", state === "granted" ? "grant" : "revoke");
   }
 }
 
-// Load Google tags exactly once. Consent Mode v2 is initialized BEFORE any
-// gtag.js / GTM loads so Google sees the correct default state on page load,
-// even for users who never interact with the banner.
+// Load GTM exactly once. Consent Mode v2 is initialized BEFORE GTM so Google
+// sees the correct default state on page load, even if the user never clicks
+// the banner.
 function injectAnalyticsScripts(defaultState: ConsentState) {
   if (typeof document === "undefined") return;
   if (document.getElementById("gtag-consent-init")) return;
 
   // 1. dataLayer + gtag stub + Consent Mode v2 defaults (must be first).
-  // We intentionally do NOT call gtag('config', ...) for GA4/Ads here or load
-  // gtag.js directly — GTM owns those tags. gtag.js is loaded by the GTM
-  // container below, and page-level gtag('event', ...) helpers still reach GA4
-  // through the Google tag that GTM registers.
   const initScript = document.createElement("script");
   initScript.id = "gtag-consent-init";
   initScript.innerHTML = `
@@ -65,7 +59,7 @@ function injectAnalyticsScripts(defaultState: ConsentState) {
   `;
   document.head.appendChild(initScript);
 
-  // 2. GTM container (loads gtag.js and runs the GA4 + Google Ads tags).
+  // 2. GTM container (all marketing tags live here).
   const gtmScript = document.createElement("script");
   gtmScript.id = "google-tag-manager";
   gtmScript.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -85,34 +79,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   gtmIframe.style.visibility = "hidden";
   gtmNoscript.appendChild(gtmIframe);
   document.body.insertBefore(gtmNoscript, document.body.firstChild);
-
-  // 4. Meta Pixel. Consent is revoked first so init/track calls are buffered
-  // until updateConsent('granted') flushes them, mirroring Google Consent Mode.
-  const fbScript = document.createElement("script");
-  fbScript.id = "meta-pixel-init";
-  fbScript.innerHTML = `!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('consent', '${defaultState === "granted" ? "grant" : "revoke"}');
-fbq('init', '${FB_PIXEL_ID}');
-fbq('track', 'PageView');`;
-  document.head.appendChild(fbScript);
-
-  // 5. Meta Pixel <noscript> tracking image fallback.
-  const fbNoscript = document.createElement("noscript");
-  const fbImg = document.createElement("img");
-  fbImg.height = 1;
-  fbImg.width = 1;
-  fbImg.style.display = "none";
-  fbImg.src = `https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`;
-  fbImg.alt = "";
-  fbNoscript.appendChild(fbImg);
-  document.body.insertBefore(fbNoscript, document.body.firstChild);
 }
 
 export default function CookieConsent() {
