@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   other: {
     'geo.region': 'IL',
     'geo.placename': 'אשדוד',
-    'geo.position': '31.8044;34.6553',
-    'ICBM': '31.8044, 34.6553',
+    'geo.position': '31.783106159195388;34.65489203389065',
+    'ICBM': '31.783106159195388, 34.65489203389065',
   },
 }
 

@@ -4,8 +4,11 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getAllPosts, type BlogPost } from '@/config/blog.config'
 import { getRelatedPosts } from '@/lib/blog-utils'
+import { toIsoDate } from '@/lib/date-utils'
+import { authorEntity, getMedicalTopic } from '@/config/geo.config'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import SocialSharing from '@/components/SocialSharing'
+import ArticleAuthor from '@/components/ArticleAuthor'
 import { sanitizeHtml } from '@/lib/security'
 
 // פונקציה ליצירת map מהמערך
@@ -39,17 +42,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const postImage = post.image
     ? `https://physio-plus.co.il${post.image}`
     : 'https://physio-plus.co.il/images/logo/clinic-logo.png'
+  const publishedIso = toIsoDate(post.date)
 
   return {
     title: post.title,
     description: post.excerpt,
-    authors: [{ name: 'אנדריי מייזלס' }],
+    authors: [{ name: 'אנדריי מייזלס', url: 'https://physio-plus.co.il/about' }],
     openGraph: {
       title: post.title,
       description: post.excerpt,
       url: `https://physio-plus.co.il/blog/${post.slug}`,
       type: 'article',
-      publishedTime: post.date,
+      publishedTime: publishedIso,
+      modifiedTime: publishedIso,
       authors: ['אנדריי מייזלס'],
       tags: post.keywords || [],
       images: [
@@ -72,8 +77,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     other: {
       'article:author': 'אנדריי מייזלס',
-      'article:published_time': post.date,
-      'article:modified_time': post.date,
+      'article:published_time': publishedIso,
+      'article:modified_time': publishedIso,
       'article:section': post.category,
     },
   }
@@ -88,59 +93,63 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound()
   }
 
-  // Check if post is a guide/tutorial (contains "מדריך", "איך", "guide", "how to")
-  const isGuide = post.title.toLowerCase().includes('מדריך') || 
-                  post.title.toLowerCase().includes('איך') ||
-                  post.title.toLowerCase().includes('guide') ||
-                  post.title.toLowerCase().includes('how to') ||
-                  post.category.toLowerCase().includes('מדריך')
+  const publishedIso = toIsoDate(post.date)
+  const medicalTopic = getMedicalTopic(post.slug)
+  const articleUrl = `https://physio-plus.co.il/blog/${post.slug}`
 
-  // Article Schema for SEO
   const articleSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': ['Article', 'MedicalWebPage'],
     headline: post.title,
     description: post.excerpt,
+    inLanguage: 'he-IL',
     image: post.image ? `https://physio-plus.co.il${post.image}` : 'https://physio-plus.co.il/images/logo/clinic-logo.png',
-    datePublished: post.date,
-    dateModified: post.date,
+    datePublished: publishedIso,
+    dateModified: publishedIso,
     author: {
       '@type': 'Person',
-      name: 'אנדריי מייזלס',
-      url: 'https://physio-plus.co.il/about',
+      '@id': 'https://physio-plus.co.il/about#andrey-meizels',
+      name: authorEntity.name,
+      url: authorEntity.url,
+      jobTitle: authorEntity.jobTitle,
+      image: authorEntity.image,
     },
+    reviewedBy: {
+      '@type': 'Person',
+      '@id': 'https://physio-plus.co.il/about#andrey-meizels',
+      name: authorEntity.name,
+    },
+    lastReviewed: publishedIso,
     publisher: {
-      '@type': 'MedicalBusiness',
+      '@type': 'Organization',
+      '@id': 'https://physio-plus.co.il/#organization',
       name: 'פיזיותרפיה.פלוס',
       url: 'https://physio-plus.co.il',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
+      },
     },
     articleSection: post.category,
     keywords: post.keywords?.join(', ') || '',
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://physio-plus.co.il/blog/${post.slug}`,
+      '@id': articleUrl,
     },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['.geo-headline', '.geo-excerpt'],
+    },
+    ...(medicalTopic
+      ? {
+          about: {
+            '@type': 'MedicalCondition',
+            name: medicalTopic.he,
+            alternateName: medicalTopic.en,
+          },
+        }
+      : {}),
   }
-
-  // HowTo Schema for guides
-  const howToSchema = isGuide ? {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: post.title,
-    description: post.excerpt,
-    image: post.image ? `https://physio-plus.co.il${post.image}` : 'https://physio-plus.co.il/images/logo/clinic-logo.png',
-    step: [
-      {
-        '@type': 'HowToStep',
-        name: 'קרא את המאמר המלא',
-        text: post.excerpt,
-        url: `https://physio-plus.co.il/blog/${post.slug}`,
-      },
-    ],
-    totalTime: 'PT30M', // Estimated reading time
-    supply: [],
-    tool: [],
-  } : null
 
   return (
     <>
@@ -148,12 +157,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
-      {howToSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
-        />
-      )}
       <article className="bg-white">
       {/* Hero Section */}
       <section className="relative text-white overflow-hidden py-12 sm:py-16" style={{ background: 'linear-gradient(to bottom right, #2A3080, #2080C0, #40C0F0)' }}>
@@ -176,8 +179,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium mb-4 inline-block">
               {post.category}
             </span>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">{post.title}</h1>
-            <p className="text-white text-base sm:text-lg">{post.date}</p>
+            <h1 className="geo-headline text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">{post.title}</h1>
+            <p className="text-white text-base sm:text-lg">{post.date} · אנדריי מייזלס, פיזיותרפיסט (M.Sc)</p>
           </div>
         </div>
       </section>
@@ -203,6 +206,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             )}
             <div className="mb-6 pb-6 border-b border-gray-200">
+              <p className="geo-excerpt text-lg leading-relaxed text-gray-700 mb-6">
+                {post.excerpt}
+              </p>
               <SocialSharing 
                 title={post.title}
                 description={post.excerpt}
@@ -217,6 +223,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               }}
               dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content) }}
             />
+
+            <ArticleAuthor />
             
             {/* Related Services Links */}
             <div className="mt-12 mb-8 p-6 bg-blue-50 rounded-xl border border-blue-200">

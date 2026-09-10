@@ -57,6 +57,18 @@ export function parseHebrewDate(hebrewDate: string): Date {
 }
 
 /**
+ * ממיר תאריך עברי ל-ISO 8601 (YYYY-MM-DD) עבור schema.org ו-Open Graph.
+ * לא משתמשים ב-toISOString כדי להימנע מהסטת יום בגלל אזור זמן.
+ */
+export function toIsoDate(hebrewDate: string): string {
+  const d = parseHebrewDate(hebrewDate)
+  const year = d.getFullYear()
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+/**
  * השוואת שני תאריכים עבריים
  * מחזיר מספר חיובי אם a חדש יותר מ-b, שלילי אם a ישן יותר, ו-0 אם שווים
  */

@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         destination: '/contact',
         permanent: true,
       },
+      {
+        source: '/ai.txt',
+        destination: '/llms.txt',
+        permanent: false,
+      },
     ];
   },
   images: {

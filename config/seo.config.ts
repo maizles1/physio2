@@ -69,8 +69,8 @@ export const seoConfig: SEOConfig = {
     country: 'IL',
   },
   coordinates: {
-    latitude: '31.8044',
-    longitude: '34.6553',
+    latitude: '31.783106159195388',
+    longitude: '34.65489203389065',
   },
   contact: {
     phone: '050-883-8982',

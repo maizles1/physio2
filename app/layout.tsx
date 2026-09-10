@@ -11,6 +11,7 @@ import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import ToastContainer from "@/components/Toast";
 import PerformanceTracker from "@/components/PerformanceTracker";
 import CookieConsent from "@/components/CookieConsent";
+import { getOpeningHoursSpecification } from "@/config/geo.config";
 
 const assistant = Assistant({
   subsets: ["latin", "hebrew"],
@@ -94,9 +95,12 @@ export const metadata: Metadata = {
   },
 };
 
+const openingHoursSpecification = getOpeningHoursSpecification()
+
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': 'https://physio-plus.co.il/#organization',
   name: 'פיזיותרפיה.פלוס - פיזיותרפיה פרטית באשדוד',
   alternateName: 'Physiotherapy.Plus',
   description: 'פיזיותרפיה פרטית באשדוד - מכון פיזיותרפיה פרטי באשדוד',
@@ -119,6 +123,7 @@ const organizationSchema = {
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'MedicalBusiness',
+  '@id': 'https://physio-plus.co.il/#medicalbusiness',
   name: 'פיזיותרפיה.פלוס',
   alternateName: 'Physio Plus',
   description: 'פיזיותרפיה פרטית באשדוד - קליניקת פיזיותרפיה מקצועית. פיזיותרפיסט פרטי באשדוד, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו.',
@@ -137,30 +142,26 @@ const structuredData = {
     latitude: '31.783106159195388',
     longitude: '34.65489203389065',
   },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
-      opens: '08:00',
-      closes: '20:00',
-    },
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: 'Friday',
-      opens: '08:00',
-      closes: '14:00',
-    },
-  ],
+  openingHoursSpecification,
   priceRange: '₪₪',
   medicalSpecialty: ['Physical Therapy', 'Sports Medicine', 'Vestibular Rehabilitation'],
   founder: {
     '@type': 'Person',
+    '@id': 'https://physio-plus.co.il/about#andrey-meizels',
     name: 'אנדריי מייזלס',
-    jobTitle: 'פיזיותרפיסט מומחה',
-    description: 'פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו',
+    url: 'https://physio-plus.co.il/about',
+    jobTitle: 'פיזיותרפיסט מוסמך',
+    description: 'פיזיותרפיסט מוסמך בעל תואר שני (M.Sc), לשעבר פיזיותרפיסט נבחרת ישראל בג\'ודו וסיירת חרוב',
+    hasCredential: {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'degree',
+      educationalLevel: "Master's Degree",
+      name: 'תואר שני בפיזיותרפיה (M.Sc)',
+    },
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
+    name: 'שירותי פיזיותרפיה',
     itemListElement: [
       {
         '@type': 'Offer',
@@ -168,22 +169,6 @@ const structuredData = {
           '@type': 'Service',
           name: 'טיפול בכאבי גב',
           url: 'https://physio-plus.co.il/services#back-pain',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'שיקום וסטיבולרי - טיפול בסחרחורות',
-          url: 'https://physio-plus.co.il/services#vestibular',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'שיקום לאחר ניתוחים',
-          url: 'https://physio-plus.co.il/services#post-surgery',
         },
       },
       {
@@ -198,8 +183,56 @@ const structuredData = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
+          name: 'טיפול בכאבי צוואר',
+          url: 'https://physio-plus.co.il/services#neck-pain',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'טיפול בכאבי ברך',
+          url: 'https://physio-plus.co.il/services#knee-pain',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'שיקום לאחר ניתוחים',
+          url: 'https://physio-plus.co.il/services#post-surgery',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'שיקום וסטיבולרי - טיפול בסחרחורות',
+          url: 'https://physio-plus.co.il/services#vestibular',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
           name: 'טיפול במפרק הלסת TMJ',
           url: 'https://physio-plus.co.il/services#tmj',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'ליווי ספורטאים וקבוצות',
+          url: 'https://physio-plus.co.il/services#sports-teams',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'ביקורי בית',
+          url: 'https://physio-plus.co.il/services#home-visits',
         },
       },
     ],
@@ -298,20 +331,7 @@ const localBusinessSchema = {
     latitude: '31.783106159195388',
     longitude: '34.65489203389065',
   },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
-      opens: '08:00',
-      closes: '20:00',
-    },
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: 'Friday',
-      opens: '08:00',
-      closes: '14:00',
-    },
-  ],
+  openingHoursSpecification,
   priceRange: '₪₪',
   paymentAccepted: ['ביטוח משלים כללית', 'קופת חולים מאוחדת', 'משרד הביטחון', 'ביטוחים פרטיים'],
   currenciesAccepted: 'ILS',
@@ -441,15 +461,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
+            '@id': 'https://physio-plus.co.il/#website',
             name: 'פיזיותרפיה.פלוס',
+            alternateName: ['Physiotherapy.Plus', 'Physio Plus'],
             url: 'https://physio-plus.co.il',
-            potentialAction: {
-              '@type': 'SearchAction',
-              target: {
-                '@type': 'EntryPoint',
-                urlTemplate: 'https://physio-plus.co.il/search?q={search_term_string}',
-              },
-              'query-input': 'required name=search_term_string',
+            inLanguage: 'he-IL',
+            publisher: {
+              '@id': 'https://physio-plus.co.il/#organization',
             },
           }) }}
         />

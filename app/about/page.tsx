@@ -42,13 +42,9 @@ export default function AboutPage() {
     '@context': 'https://schema.org',
     '@type': 'EducationalOccupationalCredential',
     credentialCategory: 'degree',
-    educationalLevel: 'Master\'s Degree',
+    educationalLevel: "Master's Degree",
     name: 'תואר שני בפיזיותרפיה',
     description: 'תואר שני (M.Sc) בפיזיותרפיה',
-    recognizedBy: {
-      '@type': 'Organization',
-      name: 'אוניברסיטה',
-    },
     about: {
       '@type': 'EducationalOccupationalProgram',
       programType: 'Graduate Program',
@@ -59,13 +55,18 @@ export default function AboutPage() {
   const personSchema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
+    '@id': 'https://physio-plus.co.il/about#andrey-meizels',
     name: 'אנדריי מייזלס',
-    jobTitle: 'פיזיותרפיסט מקצועי',
-    description: 'פיזיותרפיסט מקצועי בעל תואר שני, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו, מתמחה בטיפול בכאבים, שיקום לאחר ניתוחים ושיקום וסטיבולרי',
+    alternateName: 'Andrey Meizels',
+    jobTitle: 'פיזיותרפיסט מוסמך, מנהל הקליניקה',
+    description: 'פיזיותרפיסט מקצועי בעל תואר שני (M.Sc), פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו ושל סיירת חרוב. מתמחה בטיפול בכאבים, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
     url: 'https://physio-plus.co.il/about',
     image: 'https://physio-plus.co.il/images/andrey-meizels.JPG',
+    telephone: '+972-50-883-8982',
+    knowsLanguage: ['he', 'Hebrew'],
     worksFor: {
       '@type': 'MedicalBusiness',
+      '@id': 'https://physio-plus.co.il/#medicalbusiness',
       name: 'פיזיותרפיה.פלוס',
       url: 'https://physio-plus.co.il',
     },
@@ -82,12 +83,8 @@ export default function AboutPage() {
     hasCredential: {
       '@type': 'EducationalOccupationalCredential',
       credentialCategory: 'degree',
-      educationalLevel: 'Master\'s Degree',
-      name: 'תואר שני בפיזיותרפיה',
-    },
-    alumniOf: {
-      '@type': 'EducationalOrganization',
-      name: 'אוניברסיטה (תואר שני בפיזיותרפיה)',
+      educationalLevel: "Master's Degree",
+      name: 'תואר שני בפיזיותרפיה (M.Sc)',
     },
     memberOf: {
       '@type': 'SportsTeam',
@@ -96,6 +93,7 @@ export default function AboutPage() {
     },
     hasOccupation: {
       '@type': 'Occupation',
+      name: 'Physiotherapist',
       occupationLocation: {
         '@type': 'City',
         name: 'אשדוד',
@@ -156,6 +154,35 @@ export default function AboutPage() {
               </p>
             </div>
 
+            <dl className="geo-facts grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12 rounded-xl border border-gray-200 bg-gray-50 p-6">
+              <div>
+                <dt className="text-sm font-semibold text-gray-500">שם הקליניקה</dt>
+                <dd className="text-lg font-bold text-gray-900">פיזיותרפיה.פלוס</dd>
+              </div>
+              <div>
+                <dt className="text-sm font-semibold text-gray-500">המטפל</dt>
+                <dd className="text-lg font-bold text-gray-900">אנדריי מייזלס, M.Sc. PT</dd>
+              </div>
+              <div>
+                <dt className="text-sm font-semibold text-gray-500">כתובת</dt>
+                <dd className="text-lg font-bold text-gray-900">מרכז כלניות, אשדוד</dd>
+              </div>
+              <div>
+                <dt className="text-sm font-semibold text-gray-500">טלפון</dt>
+                <dd className="text-lg font-bold text-gray-900">
+                  <a href="tel:0508838982" className="hover:underline" style={{ color: '#2080C0' }}>050-883-8982</a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm font-semibold text-gray-500">שעות פעילות</dt>
+                <dd className="text-base font-medium text-gray-900">ראשון–חמישי 08:00–20:00 · שישי 08:00–14:00 · שבת סגור</dd>
+              </div>
+              <div>
+                <dt className="text-sm font-semibold text-gray-500">ביטוחים</dt>
+                <dd className="text-base font-medium text-gray-900">החזרים מכללית · מאוחדת שיא · משרד הביטחון · ביטוחים פרטיים</dd>
+              </div>
+            </dl>
+
             {/* Vision Section */}
             <div id="vision" className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 mb-12 border border-blue-100">
               <h2 className="text-3xl font-bold mb-4" style={{ color: '#2A3080' }}>החזון שלנו</h2>
@@ -213,7 +240,7 @@ export default function AboutPage() {
 
           <div className="max-w-4xl mx-auto">
             {/* Andrey Meizels */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div id="andrey-meizels" className="bg-white rounded-xl shadow-lg overflow-hidden">
               <div className="flex flex-col md:flex-row">
                 <div className="md:w-1/3 w-full">
                   <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[500px] overflow-hidden">
