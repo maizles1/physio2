@@ -11,7 +11,7 @@ import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import ToastContainer from "@/components/Toast";
 import PerformanceTracker from "@/components/PerformanceTracker";
 import CookieConsent from "@/components/CookieConsent";
-import { getOpeningHoursSpecification } from "@/config/geo.config";
+import { getOpeningHoursSpecification, getMastersCredentialSchema } from "@/config/geo.config";
 
 const assistant = Assistant({
   subsets: ["latin", "hebrew"],
@@ -151,13 +151,8 @@ const structuredData = {
     name: 'אנדריי מייזלס',
     url: 'https://physio-plus.co.il/about',
     jobTitle: 'פיזיותרפיסט מוסמך',
-    description: 'פיזיותרפיסט מוסמך בעל תואר שני (M.Sc), לשעבר פיזיותרפיסט נבחרת ישראל בג\'ודו וסיירת חרוב',
-    hasCredential: {
-      '@type': 'EducationalOccupationalCredential',
-      credentialCategory: 'degree',
-      educationalLevel: "Master's Degree",
-      name: 'תואר שני בפיזיותרפיה (M.Sc)',
-    },
+    description: 'פיזיותרפיסט מוסמך בעל תואר שני (M.Sc) בפיזיותרפיה מאוניברסיטת אריאל, לשעבר פיזיותרפיסט נבחרת ישראל בג\'ודו וסיירת חרוב',
+    hasCredential: getMastersCredentialSchema(),
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',

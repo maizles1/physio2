@@ -6,6 +6,7 @@ import MeuhedetReviewsStrip from '@/components/MeuhedetReviewsStrip'
 import MeuhedetStickyCTA from '@/components/MeuhedetStickyCTA'
 import MeuhedetContactLink from '@/components/MeuhedetContactLink'
 import { manualReviews } from '@/config/manual-reviews.config'
+import { getUniversitySchema } from '@/config/geo.config'
 
 export const metadata: Metadata = {
   title: 'פיזיותרפיה לפציעות ספורט – מאוחדת | אשדוד',
@@ -226,7 +227,8 @@ export default function MeuhedetPage() {
     name: 'אנדריי מייזלס',
     jobTitle: 'פיזיותרפיסט (M.Sc)',
     image: 'https://physio-plus.co.il/images/andrey-meizels.JPG',
-    description: 'פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו, ספק מאוחדת לפציעות ספורט באשדוד.',
+    description: 'פיזיותרפיסט בעל תואר שני (M.Sc) מאוניברסיטת אריאל, לשעבר פיזיותרפיסט נבחרת ישראל בג\'ודו, ספק מאוחדת לפציעות ספורט באשדוד.',
+    alumniOf: getUniversitySchema(),
     worksFor: {
       '@type': 'MedicalBusiness',
       '@id': 'https://physio-plus.co.il/meuhedet#business',
@@ -391,7 +393,7 @@ export default function MeuhedetPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-bold text-[#2A3080] mb-1">תואר שני בפיזיותרפיה</h3>
+                <h3 className="font-bold text-[#2A3080] mb-1">תואר שני בפיזיותרפיה, אוניברסיטת אריאל</h3>
                 <p className="text-gray-700 text-sm leading-relaxed">
                   טיפול מבוסס ידע מתקדם ושיטות מוכחות מחקרית.
                 </p>

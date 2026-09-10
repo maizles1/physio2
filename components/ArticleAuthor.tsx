@@ -26,7 +26,7 @@ export default function ArticleAuthor() {
             {authorEntity.name}
           </p>
           <p className="mb-2 text-sm font-medium" style={{ color: '#2080C0' }}>
-            {authorEntity.jobTitle} · {clinicEntity.clinician.credentials}
+            {authorEntity.jobTitle} · {clinicEntity.clinician.credentials} · {clinicEntity.clinician.university.nameHe}
           </p>
           <p className="mb-3 text-sm leading-relaxed text-gray-700">
             {authorEntity.description}

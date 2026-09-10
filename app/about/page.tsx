@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import { getMastersCredentialSchema, getUniversitySchema } from '@/config/geo.config'
 
 export const metadata: Metadata = {
   title: 'אודות הקליניקה',
@@ -40,11 +41,8 @@ export default function AboutPage() {
   // EducationalOccupationalCredential schema for Master's degree
   const credentialSchema = {
     '@context': 'https://schema.org',
-    '@type': 'EducationalOccupationalCredential',
-    credentialCategory: 'degree',
-    educationalLevel: "Master's Degree",
-    name: 'תואר שני בפיזיותרפיה',
-    description: 'תואר שני (M.Sc) בפיזיותרפיה',
+    ...getMastersCredentialSchema(),
+    description: 'תואר שני (M.Sc) בפיזיותרפיה מאוניברסיטת אריאל',
     about: {
       '@type': 'EducationalOccupationalProgram',
       programType: 'Graduate Program',
@@ -59,7 +57,7 @@ export default function AboutPage() {
     name: 'אנדריי מייזלס',
     alternateName: 'Andrey Meizels',
     jobTitle: 'פיזיותרפיסט מוסמך, מנהל הקליניקה',
-    description: 'פיזיותרפיסט מקצועי בעל תואר שני (M.Sc), פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו ושל סיירת חרוב. מתמחה בטיפול בכאבים, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
+    description: 'פיזיותרפיסט מקצועי בעל תואר שני (M.Sc) בפיזיותרפיה מאוניברסיטת אריאל, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו ושל סיירת חרוב. מתמחה בטיפול בכאבים, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
     url: 'https://physio-plus.co.il/about',
     image: 'https://physio-plus.co.il/images/andrey-meizels.JPG',
     telephone: '+972-50-883-8982',
@@ -80,12 +78,8 @@ export default function AboutPage() {
       'Post-Surgical Rehabilitation',
       'TMJ Treatment',
     ],
-    hasCredential: {
-      '@type': 'EducationalOccupationalCredential',
-      credentialCategory: 'degree',
-      educationalLevel: "Master's Degree",
-      name: 'תואר שני בפיזיותרפיה (M.Sc)',
-    },
+    hasCredential: getMastersCredentialSchema(),
+    alumniOf: getUniversitySchema(),
     memberOf: {
       '@type': 'SportsTeam',
       name: 'נבחרת ישראל בג\'ודו',
@@ -162,6 +156,10 @@ export default function AboutPage() {
               <div>
                 <dt className="text-sm font-semibold text-gray-500">המטפל</dt>
                 <dd className="text-lg font-bold text-gray-900">אנדריי מייזלס, M.Sc. PT</dd>
+              </div>
+              <div>
+                <dt className="text-sm font-semibold text-gray-500">השכלה</dt>
+                <dd className="text-lg font-bold text-gray-900">תואר שני בפיזיותרפיה, אוניברסיטת אריאל</dd>
               </div>
               <div>
                 <dt className="text-sm font-semibold text-gray-500">כתובת</dt>
@@ -263,7 +261,7 @@ export default function AboutPage() {
                     <h4 className="text-xl font-bold mb-2" style={{ color: '#2A3080' }}>נעים להכיר, אנדריי מייזלס</h4>
                     <p className="text-gray-700 leading-relaxed">
                       כמי שמחפש <strong>פיזיותרפיסט פרטי באשדוד</strong>, חשוב שתדע שאתה מפקיד את הגוף שלך בידיים מנוסות ומקצועיות. 
-                      שמי אנדריי מייזלס, פיזיותרפיסט מוסמך בעל תואר שני (M.Sc) בפיזיותרפיה.
+                      שמי אנדריי מייזלס, פיזיותרפיסט מוסמך בעל תואר שני (M.Sc) בפיזיותרפיה מאוניברסיטת אריאל.
                     </p>
                     <p className="text-gray-700 leading-relaxed">
                       את הניסיון הקליני והמעשי שלי צברתי במקומות התובעניים ביותר: שימשתי כפיזיותרפיסט של נבחרת ישראל בג&apos;ודו, 
