@@ -21,6 +21,7 @@ import {
   getMastersCredentialSchema,
   getOpeningHoursSpecification,
 } from "@/config/geo.config";
+import { getServiceCatalogOffers } from "@/config/service-pages.config";
 
 const assistant = Assistant({
   subsets: ["latin", "hebrew"],
@@ -163,81 +164,15 @@ const structuredData = {
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'שירותי פיזיותרפיה',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'טיפול בכאבי גב',
-          url: 'https://physio-plus.co.il/services#back-pain',
-        },
+    itemListElement: getServiceCatalogOffers().map((service) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: service.name,
+        url: service.url,
+        ...(service.areaServed ? { areaServed: getAshdodAreaServed() } : {}),
       },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'טיפול בכאבי כתף',
-          url: 'https://physio-plus.co.il/services#shoulder-pain',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'טיפול בכאבי צוואר',
-          url: 'https://physio-plus.co.il/services#neck-pain',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'טיפול בכאבי ברך',
-          url: 'https://physio-plus.co.il/services#knee-pain',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'שיקום לאחר ניתוחים',
-          url: 'https://physio-plus.co.il/services#post-surgery',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'שיקום וסטיבולרי - טיפול בסחרחורות',
-          url: 'https://physio-plus.co.il/services#vestibular',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'טיפול במפרק הלסת TMJ',
-          url: 'https://physio-plus.co.il/services#tmj',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'ליווי ספורטאים וקבוצות',
-          url: 'https://physio-plus.co.il/services#sports-teams',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'ביקורי בית',
-          url: 'https://physio-plus.co.il/services#home-visits',
-          areaServed: getAshdodAreaServed(),
-        },
-      },
-    ],
+    })),
   },
   areaServed: getAshdodAreaServed(),
   acceptedPaymentMethod: [

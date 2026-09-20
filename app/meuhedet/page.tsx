@@ -67,7 +67,7 @@ const injuries = [
   {
     title: 'כאבי גב תחתון ופציעות גב',
     description: 'פציעות גב הקשורות לעומסי אימון, ריצה, הרמת משקולות והליכה ממושכת.',
-    href: '/services#back-pain',
+    href: '/services/back-pain-ashdod',
   },
   {
     title: 'פציעות ברך',
@@ -93,7 +93,7 @@ const injuries = [
     title: 'שיקום פוסט-ניתוחי',
     description:
       'החזרה הדרגתית לפעילות לאחר ניתוחי ברך, כתף וקרסול – עד חזרה מלאה לספורט.',
-    href: '/services#post-surgery',
+    href: '/services/post-surgery-ashdod',
   },
 ]
 

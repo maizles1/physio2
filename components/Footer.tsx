@@ -136,7 +136,7 @@ export default function Footer() {
             <h3 className="text-xl font-bold mb-4 text-gray-900">השירותים שלנו</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/services#back-pain" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                <Link href="/services/back-pain-ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
                   טיפול בכאבי גב
                 </Link>
               </li>
@@ -156,18 +156,23 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/services#post-surgery" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                <Link href="/services/post-surgery-ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
                   שיקום לאחר ניתוחים
                 </Link>
               </li>
               <li>
-                <Link href="/services#vestibular" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                <Link href="/services/vestibular-ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
                   שיקום וסטיבולרי
                 </Link>
               </li>
               <li>
-                <Link href="/services#tmj" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                <Link href="/services/tmj-ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
                   טיפול במפרק הלסת
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/home-visits-ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                  ביקורי בית באשדוד
                 </Link>
               </li>
               <li>
