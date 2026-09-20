@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import ClinicLogo from './ClinicLogo'
 import { gtag } from './GoogleAnalytics'
-import { seoConfig, getContactEmailTo } from '@/config/seo.config'
+import { seoConfig, getContactEmailTo, getContactPhoneTel } from '@/config/seo.config'
 
 type NavSubItem = { name: string; href: string }
 type NavItem = { name: string; href: string; dropdown?: NavSubItem[] }
@@ -13,7 +13,8 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
 
-  const phoneNumber = '050-883-8982'
+  const phoneNumber = seoConfig.contact.phone
+  const phoneTel = getContactPhoneTel()
   const whatsappNumber = '972508838982'
   const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
   const address = 'מרכז כלניות, אשדוד'
@@ -64,7 +65,7 @@ export default function Header() {
           >
             <div className="flex min-w-0 flex-nowrap items-center gap-3 sm:gap-4 justify-self-start">
               <a 
-                href={`tel:${phoneNumber}`} 
+                href={`tel:${phoneTel}`} 
                 onClick={() => {
                   try {
                     gtag.clickToCall(phoneNumber)
@@ -224,7 +225,7 @@ export default function Header() {
                 </a>
               )}
               <a
-                href={`tel:${phoneNumber}`}
+                href={`tel:${phoneTel}`}
                 onClick={() => {
                   try {
                     gtag.clickToCall(phoneNumber)
@@ -248,7 +249,7 @@ export default function Header() {
           {/* טאבלט ומסכים בינוניים: תפריט המבורגר במקום שורת ניווט דחוסה */}
           <div className="ms-auto flex items-center gap-2 xl:hidden">
             <a
-              href={`tel:${phoneNumber}`}
+              href={`tel:${phoneTel}`}
               onClick={() => {
                 try {
                   gtag.clickToCall(phoneNumber)

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import { getMastersCredentialSchema, getUniversitySchema } from '@/config/geo.config'
+import { getMastersCredentialSchema, getUniversitySchema, getClinicEntityRef } from '@/config/geo.config'
 
 export const metadata: Metadata = {
   title: 'אודות הקליניקה',
@@ -62,12 +62,7 @@ export default function AboutPage() {
     image: 'https://physio-plus.co.il/images/andrey-meizels.JPG',
     telephone: '+972-50-883-8982',
     knowsLanguage: ['he', 'Hebrew'],
-    worksFor: {
-      '@type': 'MedicalBusiness',
-      '@id': 'https://physio-plus.co.il/#medicalbusiness',
-      name: 'פיזיותרפיה.פלוס',
-      url: 'https://physio-plus.co.il',
-    },
+    worksFor: getClinicEntityRef(),
     knowsAbout: [
       'Physical Therapy',
       'Rehabilitation',
@@ -168,7 +163,7 @@ export default function AboutPage() {
               <div>
                 <dt className="text-sm font-semibold text-gray-500">טלפון</dt>
                 <dd className="text-lg font-bold text-gray-900">
-                  <a href="tel:0508838982" className="hover:underline" style={{ color: '#2080C0' }}>050-883-8982</a>
+                  <a href="tel:+972-50-883-8982" className="hover:underline" style={{ color: '#2080C0' }}>050-883-8982</a>
                 </dd>
               </div>
               <div>

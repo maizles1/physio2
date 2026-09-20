@@ -126,6 +126,7 @@ export default function VideosSection() {
         embedUrl: `https://www.youtube.com/embed/${videoId}`,
         publisher: {
           '@type': 'Organization',
+          '@id': 'https://physio-plus.co.il/#organization',
           name: 'פיזיותרפיה.פלוס',
           logo: {
             '@type': 'ImageObject',

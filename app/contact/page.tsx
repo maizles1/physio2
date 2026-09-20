@@ -2,9 +2,10 @@
 
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { gtag } from '@/components/GoogleAnalytics'
-import { seoConfig, getContactEmailTo } from '@/config/seo.config'
+import { seoConfig, getContactEmailTo, getContactPhoneTel } from '@/config/seo.config'
 
-const phoneNumber = '050-883-8982'
+const phoneNumber = seoConfig.contact.phone
+const phoneTel = getContactPhoneTel()
 const whatsappNumber = '972508838982'
 const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
 const address = 'מרכז כלניות, אשדוד'
@@ -87,7 +88,7 @@ export default function ContactPage() {
                   <h3 className="font-bold text-lg text-gray-900 mb-1">טלפון</h3>
                   <p className="text-gray-700">
                     <a
-                      href={`tel:${phoneNumber}`}
+                      href={`tel:${phoneTel}`}
                       onClick={() => {
                         try {
                           gtag.clickToCall(phoneNumber)
@@ -139,12 +140,27 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg text-gray-900 mb-1">אימייל</h3>
-                    <p className="text-gray-700 mb-2">שלחו לנו מייל ליצירת קשר או לקביעת תור</p>
+                    <p className="text-gray-700 mb-2">
+                      <a
+                        href={`mailto:${getContactEmailTo()}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
+                        onClick={() => {
+                          try {
+                            gtag.event('email_click', 'engagement', 'contact_page')
+                          } catch {
+                            // ignore
+                          }
+                        }}
+                        className="hover:text-blue-600 font-medium"
+                        aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}
+                      >
+                        {seoConfig.contact.email}
+                      </a>
+                    </p>
                     <a
                       href={`mailto:${getContactEmailTo()}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
                       onClick={() => {
                         try {
-                          gtag.event('email_click', 'engagement', 'contact_page')
+                          gtag.event('email_click', 'engagement', 'contact_page_button')
                         } catch {
                           // ignore
                         }

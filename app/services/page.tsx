@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import ServiceImage from '@/components/ServiceImage'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import { getAshdodAreaServed, getClinicEntityRef } from '@/config/geo.config'
 
 export const metadata: Metadata = {
   title: 'שירותי פיזיותרפיה - טיפול בכאבי גב, כתף, צוואר וברך',
@@ -230,11 +231,7 @@ export default function ServicesPage() {
         '@type': 'MedicalSpecialty',
         name: 'Physical Therapy',
       },
-      provider: {
-        '@type': 'MedicalBusiness',
-        name: 'פיזיותרפיה.פלוס',
-        url: 'https://physio-plus.co.il',
-      },
+      provider: getClinicEntityRef(),
       url: `https://physio-plus.co.il/services#${service.id}`,
     }
 
@@ -261,6 +258,10 @@ export default function ServicesPage() {
     
     if (conditionMap[service.id]) {
       schema.condition = conditionMap[service.id]
+    }
+
+    if (service.id === 'home-visits') {
+      schema.areaServed = getAshdodAreaServed()
     }
 
     return schema

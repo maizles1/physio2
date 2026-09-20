@@ -50,7 +50,7 @@ export default function Error({
           <div className="pt-4 text-sm text-gray-500">
             <p>אם הבעיה נמשכת, אנא צור קשר:</p>
             <a
-              href="tel:0508838982"
+              href="tel:+972-50-883-8982"
               className="text-primary hover:underline"
             >
               050-883-8982

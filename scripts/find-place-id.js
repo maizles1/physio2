@@ -97,7 +97,7 @@ async function main() {
   log('='.repeat(50), 'blue')
   
   // כתובת הקליניקה
-  const address = 'יקינטון 3, אשדוד'
+  const address = 'מרכז כלניות, אשדוד'
   
   log(`\n📍 כתובת הקליניקה: ${address}`, 'blue')
   log('\n💡 כדי למצוא את ה-Place ID, יש צורך ב-API Key מ-Google Cloud Console', 'yellow')

@@ -11,7 +11,16 @@ import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import ToastContainer from "@/components/Toast";
 import PerformanceTracker from "@/components/PerformanceTracker";
 import CookieConsent from "@/components/CookieConsent";
-import { getOpeningHoursSpecification, getMastersCredentialSchema } from "@/config/geo.config";
+import { seoConfig } from "@/config/seo.config";
+import {
+  clinicEntity,
+  clinicGeo,
+  clinicSchemaIds,
+  getAshdodAreaServed,
+  getClinicPostalAddress,
+  getMastersCredentialSchema,
+  getOpeningHoursSpecification,
+} from "@/config/geo.config";
 
 const assistant = Assistant({
   subsets: ["latin", "hebrew"],
@@ -100,47 +109,44 @@ const openingHoursSpecification = getOpeningHoursSpecification()
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  '@id': 'https://physio-plus.co.il/#organization',
+  '@id': clinicSchemaIds.organization,
   name: 'פיזיותרפיה.פלוס - פיזיותרפיה פרטית באשדוד',
-  alternateName: 'Physiotherapy.Plus',
+  alternateName: clinicEntity.brandEn,
   description: 'פיזיותרפיה פרטית באשדוד - מכון פיזיותרפיה פרטי באשדוד',
-  url: 'https://physio-plus.co.il',
-  logo: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
+  url: seoConfig.siteUrl,
+  logo: `${seoConfig.siteUrl}/images/logo/clinic-logo.png`,
+  email: seoConfig.contact.email,
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '050-883-8982',
+    telephone: clinicEntity.phoneE164,
+    email: seoConfig.contact.email,
     contactType: 'Customer Service',
-    areaServed: 'IL',
+    areaServed: getAshdodAreaServed(),
     availableLanguage: ['Hebrew'],
   },
-  sameAs: [
-    'https://www.facebook.com/a.mphysiotherapy1',
-    'https://www.instagram.com/physiotherapy.plus/',
-    'https://maps.app.goo.gl/Yoq3HMBmmg8bpMbL7',
-  ],
+  location: {
+    '@id': clinicSchemaIds.medicalBusiness,
+  },
+  sameAs: clinicEntity.sameAs,
 }
 
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'MedicalBusiness',
-  '@id': 'https://physio-plus.co.il/#medicalbusiness',
-  name: 'פיזיותרפיה.פלוס',
-  alternateName: 'Physio Plus',
+  '@type': ['MedicalBusiness', 'LocalBusiness'],
+  '@id': clinicSchemaIds.medicalBusiness,
+  name: clinicEntity.brandHe,
+  alternateName: ['Physio Plus', clinicEntity.brandEn],
   description: 'פיזיותרפיה פרטית באשדוד - קליניקת פיזיותרפיה מקצועית. פיזיותרפיסט פרטי באשדוד, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו.',
-  url: 'https://physio-plus.co.il',
-  logo: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
-  image: 'https://physio-plus.co.il/images/andrey-meizels.JPG',
-  telephone: '+972-50-883-8982',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'מרכז כלניות',
-    addressLocality: 'אשדוד',
-    addressCountry: 'IL',
-  },
+  url: seoConfig.siteUrl,
+  logo: `${seoConfig.siteUrl}/images/logo/clinic-logo.png`,
+  image: `${seoConfig.siteUrl}/images/andrey-meizels.JPG`,
+  telephone: clinicEntity.phoneE164,
+  email: seoConfig.contact.email,
+  address: getClinicPostalAddress(),
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: '31.783106159195388',
-    longitude: '34.65489203389065',
+    latitude: clinicGeo.latitude,
+    longitude: clinicGeo.longitude,
   },
   openingHoursSpecification,
   priceRange: '₪₪',
@@ -228,177 +234,26 @@ const structuredData = {
           '@type': 'Service',
           name: 'ביקורי בית',
           url: 'https://physio-plus.co.il/services#home-visits',
+          areaServed: getAshdodAreaServed(),
         },
       },
     ],
   },
-  areaServed: [
-    { 
-      '@type': 'City', 
-      name: 'אשדוד',
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: '31.8044',
-        longitude: '34.6553',
-      },
-    },
-    { 
-      '@type': 'City', 
-      name: 'אשקלון',
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: '31.6688',
-        longitude: '34.5744',
-      },
-    },
-    { 
-      '@type': 'City', 
-      name: 'קריית גת',
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: '31.6100',
-        longitude: '34.7719',
-      },
-    },
-    { 
-      '@type': 'City', 
-      name: 'ראשון לציון',
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: '31.9730',
-        longitude: '34.7925',
-      },
-    },
-  ],
-  serviceArea: {
-    '@type': 'GeoCircle',
-    geoMidpoint: {
-      '@type': 'GeoCoordinates',
-      latitude: '31.783106159195388',
-      longitude: '34.65489203389065',
-    },
-    geoRadius: {
-      '@type': 'Distance',
-      value: '50',
-      unitCode: 'KMT', // Kilometers
-    },
-  },
+  areaServed: getAshdodAreaServed(),
   acceptedPaymentMethod: [
     { '@type': 'PaymentMethod', name: 'ביטוח משלים כללית' },
     { '@type': 'PaymentMethod', name: 'קופת חולים מאוחדת' },
     { '@type': 'PaymentMethod', name: 'משרד הביטחון' },
     { '@type': 'PaymentMethod', name: 'ביטוחים פרטיים' },
   ],
+  paymentAccepted: ['ביטוח משלים כללית', 'קופת חולים מאוחדת', 'משרד הביטחון', 'ביטוחים פרטיים'],
+  currenciesAccepted: 'ILS',
+  hasMap: 'https://maps.app.goo.gl/Yoq3HMBmmg8bpMbL7',
   // NOTE: aggregateRating intentionally lives only on pages that actually
   // render reviews (the testimonials page). Google requires the rating to
   // reference review content visible on the same page, so a site-wide rating
   // in the shared layout (shown even on /terms, /privacy) is non-compliant.
-  sameAs: [
-    'https://www.facebook.com/a.mphysiotherapy1',
-    'https://www.instagram.com/physiotherapy.plus/',
-    'https://maps.app.goo.gl/Yoq3HMBmmg8bpMbL7',
-  ],
-  // Google Business Profile ID (if available)
-  // Add this when you have the Google Business Profile ID
-  // googleBusinessProfileId: process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_PROFILE_ID || '',
-}
-
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  '@id': 'https://physio-plus.co.il/#localbusiness',
-  name: 'פיזיותרפיה.פלוס',
-  alternateName: 'Physio Plus',
-  description: 'פיזיותרפיה פרטית באשדוד - קליניקת פיזיותרפיה מקצועית. פיזיותרפיסט פרטי באשדוד, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו.',
-  url: 'https://physio-plus.co.il',
-  logo: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
-  image: 'https://physio-plus.co.il/images/andrey-meizels.JPG',
-  telephone: '+972-50-883-8982',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'מרכז כלניות',
-    addressLocality: 'אשדוד',
-    addressRegion: 'אשדוד',
-    addressCountry: 'IL',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: '31.783106159195388',
-    longitude: '34.65489203389065',
-  },
-  openingHoursSpecification,
-  priceRange: '₪₪',
-  paymentAccepted: ['ביטוח משלים כללית', 'קופת חולים מאוחדת', 'משרד הביטחון', 'ביטוחים פרטיים'],
-  currenciesAccepted: 'ILS',
-  hasMap: 'https://maps.app.goo.gl/Yoq3HMBmmg8bpMbL7',
-  sameAs: [
-    'https://maps.app.goo.gl/Yoq3HMBmmg8bpMbL7',
-    'https://www.facebook.com/a.mphysiotherapy1',
-    'https://www.instagram.com/physiotherapy.plus/',
-  ],
-}
-
-const professionalServiceSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  '@id': 'https://physio-plus.co.il/#professionalservice',
-  name: 'פיזיותרפיה.פלוס - שירותי פיזיותרפיה מקצועיים',
-  description: 'שירותי פיזיותרפיה מקצועיים באשדוד: טיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי וטיפול במפרק הלסת.',
-  url: 'https://physio-plus.co.il',
-  provider: {
-    '@type': 'MedicalBusiness',
-    name: 'פיזיותרפיה.פלוס',
-    url: 'https://physio-plus.co.il',
-  },
-  areaServed: {
-    '@type': 'City',
-    name: 'אשדוד',
-  },
-  serviceType: [
-    'Physical Therapy',
-    'Orthopedic Physical Therapy',
-    'Sports Medicine',
-    'Vestibular Rehabilitation',
-    'Post-Surgical Rehabilitation',
-  ],
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'שירותי פיזיותרפיה',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'טיפול בכאבי גב',
-          description: 'טיפול מקצועי ומקיף בכאבי גב אקוטיים וכרוניים',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'טיפול בכאבי כתף',
-          description: 'שיקום וטיפול בכאבי כתף ובעיות מפרק הכתף',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'שיקום לאחר ניתוחים',
-          description: 'תוכניות שיקום מותאמות אישית לאחר ניתוחים אורטופדיים',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'שיקום וסטיבולרי',
-          description: 'טיפול מקצועי בסחרחורות, ורטיגו ובעיות שיווי משקל',
-        },
-      },
-    ],
-  },
+  sameAs: clinicEntity.sameAs,
 }
 
 export default function RootLayout({
@@ -445,24 +300,16 @@ export default function RootLayout({
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
-        />
-        <script
-          type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
-            '@id': 'https://physio-plus.co.il/#website',
-            name: 'פיזיותרפיה.פלוס',
-            alternateName: ['Physiotherapy.Plus', 'Physio Plus'],
-            url: 'https://physio-plus.co.il',
+            '@id': clinicSchemaIds.website,
+            name: clinicEntity.brandHe,
+            alternateName: [clinicEntity.brandEn, 'Physio Plus'],
+            url: seoConfig.siteUrl,
             inLanguage: 'he-IL',
             publisher: {
-              '@id': 'https://physio-plus.co.il/#organization',
+              '@id': clinicSchemaIds.organization,
             },
           }) }}
         />

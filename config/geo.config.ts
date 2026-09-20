@@ -31,8 +31,9 @@ export const clinicEntity = {
     ],
   },
   addressLine: 'מרכז כלניות, אשדוד',
+  street: 'מרכז כלניות',
   city: 'אשדוד',
-  region: 'מחוז הדרום',
+  region: 'דרום',
   country: 'IL',
   phoneDisplay: '050-883-8982',
   phoneE164: '+972-50-883-8982',
@@ -167,6 +168,38 @@ const medicalTopicsBySlug: Record<string, { he: string; en: string }> = {
 
 export function getMedicalTopic(slug: string): { he: string; en: string } | undefined {
   return medicalTopicsBySlug[slug]
+}
+
+export const clinicSchemaIds = {
+  organization: 'https://physio-plus.co.il/#organization',
+  medicalBusiness: 'https://physio-plus.co.il/#medicalbusiness',
+  website: 'https://physio-plus.co.il/#website',
+} as const
+
+export function getClinicPostalAddress() {
+  return {
+    '@type': 'PostalAddress' as const,
+    streetAddress: clinicEntity.street,
+    addressLocality: clinicEntity.city,
+    addressRegion: clinicEntity.region,
+    addressCountry: clinicEntity.country,
+  }
+}
+
+export function getAshdodAreaServed() {
+  return {
+    '@type': 'City' as const,
+    name: clinicEntity.city,
+  }
+}
+
+export function getClinicEntityRef() {
+  return {
+    '@type': 'MedicalBusiness' as const,
+    '@id': clinicSchemaIds.medicalBusiness,
+    name: clinicEntity.brandHe,
+    url: seoConfig.siteUrl,
+  }
 }
 
 export function getOpeningHoursSpecification() {

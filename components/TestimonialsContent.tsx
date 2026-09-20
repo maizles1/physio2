@@ -65,6 +65,7 @@ export default function TestimonialsContent() {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'MedicalBusiness',
+    '@id': 'https://physio-plus.co.il/#medicalbusiness',
     name: 'פיזיותרפיה.פלוס',
     url: 'https://physio-plus.co.il',
     aggregateRating: allReviews.length > 0 ? {
@@ -91,6 +92,7 @@ export default function TestimonialsContent() {
       },
       itemReviewed: {
         '@type': 'MedicalBusiness',
+        '@id': 'https://physio-plus.co.il/#medicalbusiness',
         name: 'פיזיותרפיה.פלוס',
         url: 'https://physio-plus.co.il',
       },
@@ -115,6 +117,7 @@ export default function TestimonialsContent() {
     },
     itemReviewed: {
       '@type': 'MedicalBusiness',
+      '@id': 'https://physio-plus.co.il/#medicalbusiness',
       name: 'פיזיותרפיה.פלוס',
       url: 'https://physio-plus.co.il',
     },
@@ -130,6 +133,7 @@ export default function TestimonialsContent() {
     worstRating: 1,
     itemReviewed: {
       '@type': 'MedicalBusiness',
+      '@id': 'https://physio-plus.co.il/#medicalbusiness',
       name: 'פיזיותרפיה.פלוס',
       url: 'https://physio-plus.co.il',
     },
