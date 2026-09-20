@@ -1,6 +1,7 @@
 'use client'
 
 import Breadcrumbs from '@/components/Breadcrumbs'
+import NeighborhoodHubLinks from '@/components/NeighborhoodHubLinks'
 import { gtag } from '@/components/GoogleAnalytics'
 import { seoConfig, getContactEmailTo, getContactPhoneTel } from '@/config/seo.config'
 
@@ -230,6 +231,11 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <NeighborhoodHubLinks
+        heading="פיזיותרפיה לפי אזור באשדוד"
+        intro="אותה קליניקה במרכז כלניות. דפים קצרים לפי רובע — איך מגיעים, חניה ושירותים רלוונטיים."
+      />
     </div>
   )
 }

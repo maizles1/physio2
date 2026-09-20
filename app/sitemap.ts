@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { getAllPosts } from '@/config/blog.config'
 import { parseHebrewDate } from '@/lib/date-utils'
 import { getServiceLandingPaths } from '@/config/service-pages.config'
+import { getNeighborhoodPaths } from '@/config/neighborhood-pages.config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://physio-plus.co.il'
@@ -44,6 +45,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'monthly' as const,
       priority: 0.85,
+    })),
+    ...getNeighborhoodPaths().map((path) => ({
+      url: `${baseUrl}${path}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: path === '/ashdod' ? 0.8 : 0.75,
     })),
     {
       url: `${baseUrl}/meuhedet`,

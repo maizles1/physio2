@@ -128,6 +128,11 @@ export default function Footer() {
                   שאלות נפוצות
                 </Link>
               </li>
+              <li>
+                <Link href="/ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                  פיזיותרפיה באשדוד לפי אזור
+                </Link>
+              </li>
             </ul>
           </div>
 

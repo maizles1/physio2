@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import ServiceImage from '@/components/ServiceImage'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import NeighborhoodHubLinks from '@/components/NeighborhoodHubLinks'
 import { getClinicEntityRef } from '@/config/geo.config'
 import { clinicServiceNav, serviceLandingPages } from '@/config/service-pages.config'
 
@@ -431,6 +432,11 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      <NeighborhoodHubLinks
+        heading="פיזיותרפיה לפי אזור באשדוד"
+        intro="אותה קליניקה במרכז כלניות. דפי רובע להגעה, חניה ושירותים — בלי סניפים מדומים."
+      />
 
       <section className="py-16 text-white" style={{ background: 'linear-gradient(to left, #2A3080, #2080C0)' }}>
         <div className="container mx-auto px-4 text-center">
