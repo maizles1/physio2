@@ -10,7 +10,7 @@ const services = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
       </svg>
     ),
-    href: '/services',
+    href: '/services/back-pain-ashdod',
     color: 'from-[#2080C0] to-[#2A3080]',
     imagePath: '/images/services/back-pain/service-image.jpg',
   },
@@ -22,7 +22,7 @@ const services = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
       </svg>
     ),
-    href: '/services#post-surgery',
+    href: '/services/post-surgery-ashdod',
     color: 'from-[#2A3080] to-[#004080]',
     imagePath: '/images/services/post-surgery/service-image.jpg',
   },
@@ -34,7 +34,7 @@ const services = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
       </svg>
     ),
-    href: '/services#vestibular',
+    href: '/services/vestibular-ashdod',
     color: 'from-[#2080C0] to-[#40C0F0]',
     imagePath: '/images/services/vestibular/service-image.png',
   },
@@ -46,7 +46,7 @@ const services = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
       </svg>
     ),
-    href: '/services#tmj',
+    href: '/services/tmj-ashdod',
     color: 'from-[#40C0F0] to-[#2A3080]',
     imagePath: '/images/services/tmj/service-image.png',
   },
@@ -58,7 +58,7 @@ const services = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
       </svg>
     ),
-    href: '/services#home-visits',
+    href: '/services/home-visits-ashdod',
     color: 'from-[#004080] to-[#2080C0]',
     imagePath: '/images/services/home-visits/service-image.png',
   },

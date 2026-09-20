@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { getAllPosts } from '@/config/blog.config'
 import { parseHebrewDate } from '@/lib/date-utils'
+import { getServiceLandingPaths } from '@/config/service-pages.config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://physio-plus.co.il'
@@ -38,6 +39,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
+    ...getServiceLandingPaths().map((path) => ({
+      url: `${baseUrl}${path}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.85,
+    })),
     {
       url: `${baseUrl}/meuhedet`,
       lastModified: now,

@@ -2,11 +2,12 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import ServiceImage from '@/components/ServiceImage'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import { getAshdodAreaServed, getClinicEntityRef } from '@/config/geo.config'
+import { getClinicEntityRef } from '@/config/geo.config'
+import { clinicServiceNav, serviceLandingPages } from '@/config/service-pages.config'
 
 export const metadata: Metadata = {
-  title: 'שירותי פיזיותרפיה - טיפול בכאבי גב, כתף, צוואר וברך',
-  description: 'שירותי פיזיותרפיה מקצועיים באשדוד: טיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי וטיפול במפרק הלסת. מכון פיזיותרפיה פרטי.',
+  title: 'שירותי פיזיותרפיה באשדוד - טיפול בכאבי גב, שיקום וסחרחורות',
+  description: 'שירותי פיזיותרפיה מקצועיים באשדוד: טיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי, TMJ וביקורי בית. מכון פיזיותרפיה פרטי במרכז כלניות.',
   keywords: [
     'טיפול בכאבי גב',
     'טיפול בכאבי כתף',
@@ -17,24 +18,21 @@ export const metadata: Metadata = {
     'טיפול בסחרחורות',
     'טיפול במפרק הלסת',
     'TMJ',
-    // Long-tail keywords
     'טיפול בכאבי גב באשדוד',
     'שיקום לאחר ניתוח ברך באשדוד',
     'שיקום וסטיבולרי אשדוד',
     'טיפול בסחרחורות אשדוד',
-    // LSI keywords
     'שיקום אורטופדי',
     'פיזיותרפיה אורטופדית',
     'טיפול בפציעות ספורט',
     'שיקום לאחר ניתוח כתף',
     'שיקום לאחר ניתוח גב',
-    // Local queries
     'פיזיותרפיה אשדוד מרכז כלניות',
     'שירותי פיזיותרפיה אשדוד',
   ],
   openGraph: {
-    title: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
-    description: 'טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי. מכון פיזיותרפיה פרטי באשדוד.',
+    title: 'שירותי פיזיותרפיה באשדוד - פיזיותרפיה.פלוס',
+    description: 'טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי וביקורי בית. מכון פיזיותרפיה פרטי באשדוד.',
     url: 'https://physio-plus.co.il/services',
     type: 'website',
     locale: 'he_IL',
@@ -43,14 +41,14 @@ export const metadata: Metadata = {
         url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
         width: 1200,
         height: 630,
-        alt: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
+        alt: 'שירותי פיזיותרפיה באשדוד - פיזיותרפיה.פלוס',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
-    description: 'טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
+    title: 'שירותי פיזיותרפיה באשדוד - פיזיותרפיה.פלוס',
+    description: 'טיפול מקצועי בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים ושיקום וסטיבולרי באשדוד.',
     images: ['https://physio-plus.co.il/images/logo/clinic-logo.png'],
   },
   alternates: {
@@ -62,24 +60,26 @@ export const metadata: Metadata = {
   },
 }
 
-const services = [
+const landingHubCards = [
+  ...serviceLandingPages.map((page) => ({
+    id: page.hubId,
+    title: page.navTitle,
+    description: page.lead,
+    href: `/services/${page.slug}`,
+    imagePath: page.imagePath,
+    cta: 'לעמוד השירות באשדוד',
+  })),
   {
-    id: 'back-pain',
-    title: 'טיפול בכאבי גב',
-    description: 'טיפול מקצועי ומקיף בכאבי גב אקוטיים וכרוניים, כולל כאבי גב תחתון, עליון ומתיחה בגב',
-    details: [
-      'טיפול בכאבי גב תחתון (Lower Back Pain)',
-      'כאבי גב עליון וצוואר',
-      'מתיחות ופציעות שרירים בגב',
-      'בעיות דיסק ועצבים',
-      'שיפור יציבה ותנועה',
-      'חיזוק שרירי הליבה',
-    ],
-    icon: '🦴',
-    color: 'from-[#2080C0] to-[#2A3080]',
-    imagePath: '/images/services/back-pain/service-image.jpg',
-    fallbackImagePath: '/images/services/back-pain/service-image.svg',
+    id: 'meuhedet',
+    title: 'פציעות ספורט – מאוחדת',
+    description: 'ספק מאוחדת רשמי לפיזיותרפיה לפציעות ספורט באשדוד. תהליך ההפניה, ההתחייבות וקביעת התור — בדף הייעודי.',
+    href: '/meuhedet',
+    imagePath: '/images/services/sports-teams/service-image.jpg',
+    cta: 'לדף מאוחדת',
   },
+]
+
+const inlineServices = [
   {
     id: 'shoulder-pain',
     title: 'טיפול בכאבי כתף',
@@ -92,10 +92,18 @@ const services = [
       'שיפור טווח תנועה',
       'חיזוק שרירי הכתף',
     ],
-    icon: '💪',
+    audience: [
+      'כאבי כתף אקוטיים או כרוניים',
+      'דלקות גידים בכתף',
+      'פגיעות במסובב הכתף',
+      'כאבי כתף לאחר פציעה או ניתוח',
+    ],
+    expectedResults:
+      'שיפור בטווח התנועה והפחתת כאב נבדקים לאורך הטיפול. משך השיקום משתנה לפי סוג הפגיעה והרקע הרפואי, ונבנה אחרי הערכה ראשונית.',
     color: 'from-[#40C0F0] to-[#2080C0]',
     imagePath: '/images/services/shoulder-pain/service-image.jpg',
-    fallbackImagePath: '/images/services/shoulder-pain/service-image.svg',
+    blogHref: '/blog/shoulder-pain-complete-guide',
+    blogLabel: 'קרא את המדריך לכאבי כתף',
   },
   {
     id: 'neck-pain',
@@ -109,10 +117,18 @@ const services = [
       'בעיות יציבה המשפיעות על הצוואר',
       'שיפור גמישות ותנועתיות הצוואר',
     ],
-    icon: '🦴',
+    audience: [
+      'כאבי צוואר ושרירים',
+      'כאבי ראש הקשורים לצוואר',
+      'בעיות יציבה המשפיעות על הצוואר',
+      'כאבי צוואר מעבודה ממושכת מול מחשב',
+    ],
+    expectedResults:
+      'הטיפול מתמקד בהפחתת כאב ושיפור תנועתיות הצוואר לפי הממצאים בבדיקה. אין לוח זמנים אחיד — התוכנית מתעדכנת לפי התגובה לטיפול.',
     color: 'from-[#004080] to-[#2080C0]',
     imagePath: '/images/services/neck-pain/service-image.jpg',
-    fallbackImagePath: '/images/services/neck-pain/service-image.svg',
+    blogHref: '/blog/neck-pain-complete-guide',
+    blogLabel: 'קרא את המדריך המלא',
   },
   {
     id: 'knee-pain',
@@ -126,61 +142,20 @@ const services = [
       'בעיות רצועות הברך',
       'שיפור יציבות וחוזק הברך',
     ],
-    icon: '🦵',
+    audience: [
+      'כאבי ברך אקוטיים או כרוניים',
+      'בעיות מניסקוס',
+      'דלקות בגידים',
+      'כאבי ברך לאחר פעילות ספורטיבית',
+    ],
+    expectedResults:
+      'עובדים על יציבות, כוח ותפקוד בהליכה ובפעילות. קצב השיקום תלוי בסוג הפגיעה, ואם יש צורך בשיקום לאחר ניתוח — ממשיכים בדף השיקום הפוסט-ניתוחי.',
     color: 'from-[#2080C0] to-[#40C0F0]',
     imagePath: '/images/services/knee-pain/service-image.jpg',
-    fallbackImagePath: '/images/services/knee-pain/service-image.svg',
-  },
-  {
-    id: 'post-surgery',
-    title: 'שיקום לאחר ניתוחים',
-    description: 'תוכניות שיקום מותאמות אישית לאחר ניתוחים אורטופדיים, כולל ניתוחי מפרקים, שברים וניתוחי עמוד שדרה',
-    details: [
-      'שיקום לאחר ניתוחי ברך',
-      'שיקום לאחר ניתוחי כתף',
-      'שיקום לאחר ניתוחי עמוד שדרה',
-      'שיקום לאחר שברים',
-      'טיפול בצלקות ובצקות',
-      'החזרה הדרגתית לפעילות יומיומית',
-    ],
-    icon: '🏥',
-    color: 'from-[#2A3080] to-[#004080]',
-    imagePath: '/images/services/post-surgery/service-image.jpg',
-    fallbackImagePath: '/images/services/post-surgery/service-image.svg',
-  },
-  {
-    id: 'vestibular',
-    title: 'שיקום וסטיבולרי - טיפול בסחרחורות',
-    description: 'טיפול מקצועי בסחרחורות, ורטיגו ובעיות שיווי משקל באמצעות שיקום וסטיבולרי מתקדם',
-    details: [
-      'טיפול בורטיגו (Vertigo)',
-      'סחרחורות ובעיות שיווי משקל',
-      'שיקום וסטיבולרי מקצועי',
-      'תרגילי איזון ושיווי משקל',
-      'טיפול בבעיות BPPV',
-      'שיפור יציבות והליכה',
-    ],
-    icon: '🌀',
-    color: 'from-[#2080C0] to-[#40C0F0]',
-    imagePath: '/images/services/vestibular/service-image.png',
-    fallbackImagePath: '/images/services/vestibular/service-image.svg',
-  },
-  {
-    id: 'tmj',
-    title: 'טיפול במפרק הלסת (TMJ)',
-    description: 'טיפול מקצועי בכאבי לסת, נעילת לסת, בעיות במפרק הטמפורומנדיבולרי וקשיי לעיסה',
-    details: [
-      'כאבי לסת ומפרק הלסת',
-      'נעילת לסת והגבלת פתיחה',
-      'בעיות TMJ (Temporomandibular Joint)',
-      'קשיי לעיסה ובליעה',
-      'כאבי פנים וצוואר קשורים',
-      'שיפור תפקוד הלסת',
-    ],
-    icon: '😬',
-    color: 'from-[#40C0F0] to-[#2A3080]',
-    imagePath: '/images/services/tmj/service-image.png',
-    fallbackImagePath: '/images/services/tmj/service-image.svg',
+    blogHref: '/blog',
+    blogLabel: 'קרא מאמרים',
+    extraHref: '/services/post-surgery-ashdod',
+    extraLabel: 'שיקום לאחר ניתוח באשדוד',
   },
   {
     id: 'sports-teams',
@@ -194,96 +169,55 @@ const services = [
       'ייעוץ והדרכה למאמנים',
       'טיפול על המגרש בזמן אימונים ותחרויות',
     ],
-    icon: '⚽',
+    audience: [
+      'ספורטאים מקצועיים',
+      'קבוצות ספורט',
+      'פציעות ספורט',
+      'מניעת פציעות ספורט',
+    ],
+    expectedResults:
+      'הליווי נבנה לפי ענף הספורט, לוח התחרויות וסוג הפציעה. מבוטחי מאוחדת עם פציעת ספורט מופנים לדף המסלול הייעודי, בלי לשכפל כאן את תהליך ההתחייבות.',
     color: 'from-[#2A3080] to-[#2080C0]',
     imagePath: '/images/services/sports-teams/service-image.jpg',
-    fallbackImagePath: '/images/services/sports-teams/service-image.svg',
-  },
-  {
-    id: 'home-visits',
-    title: 'ביקורי בית באשדוד',
-    description: 'שירותי פיזיותרפיה מקצועיים בביקורי בית באשדוד והסביבה. טיפול מקצועי בנוחות הבית שלך',
-    details: [
-      'ביקורי בית באשדוד והסביבה',
-      'טיפול מקצועי בנוחות הבית',
-      'שיקום לאחר ניתוחים בבית',
-      'טיפול בקשישים ובמתקשים להגיע לקליניקה',
-      'טיפול בפציעות בבית',
-      'תוכניות שיקום מותאמות אישית',
-    ],
-    icon: '🏠',
-    color: 'from-[#004080] to-[#2080C0]',
-    imagePath: '/images/services/home-visits/service-image.png',
-    fallbackImagePath: '/images/services/home-visits/service-image.svg',
+    blogHref: '/blog/running-injuries-prevention-treatment-guide',
+    blogLabel: 'מדריך לפציעות ריצה',
+    extraHref: '/meuhedet',
+    extraLabel: 'פציעות ספורט במאוחדת',
   },
 ]
 
 export default function ServicesPage() {
-  // Enhanced MedicalProcedure schemas with more details
-  const serviceSchemas = services.map((service) => {
-    const schema: Record<string, unknown> = {
-      '@context': 'https://schema.org',
-      '@type': 'MedicalProcedure',
-      name: service.title,
-      description: service.description,
-      procedureType: service.title,
-      medicalSpecialty: {
-        '@type': 'MedicalSpecialty',
-        name: 'Physical Therapy',
-      },
-      provider: getClinicEntityRef(),
-      url: `https://physio-plus.co.il/services#${service.id}`,
-    }
-
-    // Add treatment duration (average 45-60 minutes per session)
-    schema.duration = 'PT45M'
-    
-    // Add what the treatment addresses based on service details
-    if (service.details && service.details.length > 0) {
-      schema.followup = service.details.join(', ')
-    }
-
-    // Add specific conditions treated based on service ID
-    const conditionMap: Record<string, string[]> = {
-      'back-pain': ['כאבי גב תחתון', 'כאבי גב עליון', 'דיסק בולט', 'פריצת דיסק', 'מתיחות שרירים בגב'],
-      'shoulder-pain': ['כאבי כתף', 'דלקות גידים', 'פגיעות במסובב הכתף', 'נקעים בכתף'],
-      'neck-pain': ['כאבי צוואר', 'בעיות מפרק הצוואר', 'כאבי ראש הקשורים לצוואר'],
-      'knee-pain': ['כאבי ברך', 'בעיות מניסקוס', 'דלקות בגידים', 'בעיות רצועות הברך'],
-      'post-surgery': ['שיקום לאחר ניתוחי ברך', 'שיקום לאחר ניתוחי כתף', 'שיקום לאחר ניתוחי עמוד שדרה', 'שיקום לאחר שברים'],
-      'vestibular': ['ורטיגו', 'סחרחורות', 'בעיות שיווי משקל', 'BPPV'],
-      'tmj': ['כאבי לסת', 'נעילת לסת', 'בעיות TMJ', 'קשיי לעיסה'],
-      'sports-teams': ['פציעות ספורט', 'מניעת פציעות', 'שיקום ספורטאים'],
-      'home-visits': ['שיקום בבית', 'טיפול בקשישים', 'שיקום לאחר ניתוחים בבית'],
-    }
-    
-    if (conditionMap[service.id]) {
-      schema.condition = conditionMap[service.id]
-    }
-
-    if (service.id === 'home-visits') {
-      schema.areaServed = getAshdodAreaServed()
-    }
-
-    return schema
-  })
-
-  // ItemList schema for all services
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'שירותי פיזיותרפיה - פיזיותרפיה.פלוס',
-    description: 'רשימת כל שירותי הפיזיותרפיה המוצעים בקליניקה',
-    itemListElement: services.map((service, index) => ({
+    name: 'שירותי פיזיותרפיה באשדוד - פיזיותרפיה.פלוס',
+    description: 'רשימת שירותי הפיזיותרפיה בקליניקה במרכז כלניות, אשדוד',
+    itemListElement: clinicServiceNav.map((service, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       item: {
-        '@type': 'MedicalProcedure',
+        '@type': 'Service',
         name: service.title,
-        description: service.description,
-        url: `https://physio-plus.co.il/services#${service.id}`,
+        url: `https://physio-plus.co.il${service.href}`,
       },
     })),
   }
+
+  const inlineSchemas = inlineServices.map((service) => ({
+    '@context': 'https://schema.org',
+    '@type': 'MedicalProcedure',
+    name: service.title,
+    description: service.description,
+    procedureType: service.title,
+    medicalSpecialty: {
+      '@type': 'MedicalSpecialty',
+      name: 'Physical Therapy',
+    },
+    provider: getClinicEntityRef(),
+    url: `https://physio-plus.co.il/services#${service.id}`,
+    duration: 'PT45M',
+    followup: service.details.join(', '),
+  }))
 
   return (
     <div className="bg-white">
@@ -291,18 +225,17 @@ export default function ServicesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
-      {serviceSchemas.map((schema, index) => (
+      {inlineSchemas.map((schema) => (
         <script
-          key={index}
+          key={String(schema.url)}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
-      {/* Hero Section */}
+
       <section className="relative text-white overflow-hidden py-12 sm:py-16" style={{ background: 'linear-gradient(to bottom right, #2A3080, #2080C0, #40C0F0)' }}>
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div 
+        <div className="absolute inset-0 opacity-10" aria-hidden="true">
+          <div
             className="absolute inset-0"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
@@ -311,12 +244,13 @@ export default function ServicesPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <Breadcrumbs items={[{ label: 'דף בית', href: '/' }, { label: 'שירותים', href: '/services' }]} />
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">השירותים שלנו</h1>
-          <p className="text-lg sm:text-xl text-white">מגוון רחב של שירותי פיזיותרפיה מקצועיים המותאמים לצרכי כל מטופל</p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">שירותי פיזיותרפיה באשדוד</h1>
+          <p className="text-lg sm:text-xl text-white max-w-3xl">
+            מכון פיזיותרפיה פרטי במרכז כלניות: טיפול בכאבי גב ושריר-שלד, שיקום לאחר ניתוחים, שיקום וסטיבולרי, TMJ וביקורי בית.
+          </p>
         </div>
       </section>
 
-      {/* Meuhedet sports injuries */}
       <section className="py-8 bg-blue-50/60 border-y border-blue-100">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
@@ -330,11 +264,88 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services List */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3" style={{ color: '#2A3080' }}>
+              עמודי שירות באשדוד
+            </h2>
+            <p className="text-lg text-gray-700">
+              דפי שירות ייעודיים לחיפושים מקומיים, בנוסף לפירוט כאן בעמוד. פציעות ספורט במאוחדת נשארות בדף{' '}
+              <Link href="/meuhedet" className="text-[#2080C0] font-semibold hover:underline">
+                /meuhedet
+              </Link>
+              .
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {landingHubCards.map((card) => (
+              <article
+                key={card.id}
+                id={card.id}
+                className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow"
+              >
+                <Link href={card.href} className="block group" aria-label={`${card.title} — ${card.cta}`}>
+                  <div className="relative h-48 overflow-hidden">
+                    <ServiceImage
+                      src={card.imagePath}
+                      fallbackSrc={card.imagePath}
+                      alt={card.title}
+                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#2080C0] transition-colors">
+                      {card.title}
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed mb-4">{card.description}</p>
+                    <span className="text-[#2080C0] font-semibold">{card.cta} ←</span>
+                  </div>
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-8 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-xl font-bold mb-4" style={{ color: '#2A3080' }}>
+              עוד שירותים בקליניקה
+            </h2>
+            <ul className="flex flex-wrap gap-3">
+              {clinicServiceNav
+                .filter((item) => !serviceLandingPages.some((page) => page.hubId === item.id))
+                .map((item) => (
+                  <li key={item.id}>
+                    <Link
+                      href={item.href}
+                      className="inline-block bg-white border border-gray-200 rounded-lg px-4 py-2 text-[#2080C0] font-medium hover:border-[#2080C0]"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              <li>
+                <Link
+                  href="/contact"
+                  className="inline-block bg-white border border-gray-200 rounded-lg px-4 py-2 text-[#2080C0] font-medium hover:border-[#2080C0]"
+                >
+                  יצירת קשר
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="space-y-16">
-            {services.map((service, index) => (
+            {inlineServices.map((service, index) => (
               <article
                 key={service.id}
                 id={service.id}
@@ -344,121 +355,40 @@ export default function ServicesPage() {
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ color: '#2A3080' }}>
                     {service.title}
                   </h2>
-                  
-                  {/* Summary */}
                   <div className="mb-6 p-4 bg-blue-50 rounded-lg border-r-4" style={{ borderColor: '#2080C0' }}>
                     <p className="text-lg text-gray-700 leading-relaxed">
                       {service.description}
                     </p>
                   </div>
-
-                  {/* מה כולל הטיפול? */}
                   <h3 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#2A3080' }}>
                     מה כולל הטיפול?
                   </h3>
                   <ol className="space-y-3 mb-6 list-decimal list-inside">
-                    {service.details.slice(0, 4).map((detail, idx) => (
-                      <li key={idx} className="text-lg text-gray-700">
+                    {service.details.slice(0, 4).map((detail) => (
+                      <li key={detail} className="text-lg text-gray-700">
                         {detail}
                       </li>
                     ))}
                   </ol>
-
-                  {/* למי מתאים? */}
                   <h3 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#2A3080' }}>
                     למי מתאים?
                   </h3>
                   <ul className="space-y-2 mb-6">
-                    {(() => {
-                      const targetAudience: Record<string, string[]> = {
-                        'back-pain': [
-                          'כאבי גב תחתון/עליון חריפים או כרוניים',
-                          'דיסק בולט או פריצת דיסק',
-                          'כאבים מעבודה סטטית או עבודה פיזית',
-                          'כאבי גב לאחר פציעה או תאונה',
-                        ],
-                        'shoulder-pain': [
-                          'כאבי כתף אקוטיים או כרוניים',
-                          'דלקות גידים בכתף',
-                          'פגיעות במסובב הכתף',
-                          'כאבי כתף לאחר פציעה או ניתוח',
-                        ],
-                        'neck-pain': [
-                          'כאבי צוואר ושרירים',
-                          'כאבי ראש הקשורים לצוואר',
-                          'בעיות יציבה המשפיעות על הצוואר',
-                          'כאבי צוואר מעבודה ממושכת מול מחשב',
-                        ],
-                        'knee-pain': [
-                          'כאבי ברך אקוטיים או כרוניים',
-                          'בעיות מניסקוס',
-                          'דלקות בגידים',
-                          'כאבי ברך לאחר פעילות ספורטיבית',
-                        ],
-                        'post-surgery': [
-                          'שיקום לאחר ניתוחי ברך, כתף או עמוד שדרה',
-                          'שיקום לאחר שברים',
-                          'החזרה לפעילות לאחר ניתוח',
-                          'טיפול בצלקות ובצקות לאחר ניתוח',
-                        ],
-                        'vestibular': [
-                          'ורטיגו וסחרחורות',
-                          'בעיות שיווי משקל',
-                          'BPPV (Benign Paroxysmal Positional Vertigo)',
-                          'סחרחורות לאחר פציעת ראש',
-                        ],
-                        'tmj': [
-                          'כאבי לסת ומפרק הלסת',
-                          'נעילת לסת והגבלת פתיחה',
-                          'קשיי לעיסה ובליעה',
-                          'כאבי פנים וצוואר קשורים ללסת',
-                        ],
-                        'sports-teams': [
-                          'ספורטאים מקצועיים',
-                          'קבוצות ספורט',
-                          'פציעות ספורט',
-                          'מניעת פציעות ספורט',
-                        ],
-                        'home-visits': [
-                          'קשישים ומתקשים להגיע לקליניקה',
-                          'שיקום לאחר ניתוחים בבית',
-                          'פציעות הדורשות טיפול בבית',
-                          'מטופלים עם מוגבלות תנועה',
-                        ],
-                      }
-                      return (targetAudience[service.id] || service.details.slice(0, 3)).map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-3">
-                          <svg className="w-5 h-5 flex-shrink-0 mt-1" style={{ color: '#2080C0' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span className="text-lg text-gray-700">{item}</span>
-                        </li>
-                      ))
-                    })()}
+                    {service.audience.map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        <svg className="w-5 h-5 flex-shrink-0 mt-1" style={{ color: '#2080C0' }} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="text-lg text-gray-700">{item}</span>
+                      </li>
+                    ))}
                   </ul>
-
-                  {/* תוצאות צפויות */}
                   <h3 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#2A3080' }}>
-                    תוצאות צפויות
+                    איך מתקדמים?
                   </h3>
                   <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                    {(() => {
-                      const expectedResults: Record<string, string> = {
-                        'back-pain': 'רוב המטופלים חווים הקלה משמעותית כבר לאחר 3-5 טיפולים. תהליך השיקום המלא נמשך בדרך כלל 6-12 שבועות, תלוי בחומרת הבעיה.',
-                        'shoulder-pain': 'שיפור בטווח התנועה והפחתת כאב כבר לאחר מספר טיפולים. תהליך השיקום המלא נמשך בדרך כלל 8-16 שבועות.',
-                        'neck-pain': 'הקלה בכאבים ושיפור בתנועתיות הצוואר כבר לאחר 4-6 טיפולים. תהליך השיקום המלא נמשך בדרך כלל 6-10 שבועות.',
-                        'knee-pain': 'שיפור ביציבות הברך והפחתת כאב כבר לאחר 4-6 טיפולים. תהליך השיקום המלא נמשך בדרך כלל 8-14 שבועות.',
-                        'post-surgery': 'החזרה הדרגתית לפעילות יומיומית תוך 6-12 שבועות. תהליך השיקום המלא נמשך בדרך כלל 12-24 שבועות, תלוי בסוג הניתוח.',
-                        'vestibular': 'שיפור משמעותי בסחרחורות ושיווי משקל כבר לאחר 4-8 טיפולים. תהליך השיקום המלא נמשך בדרך כלל 6-12 שבועות.',
-                        'tmj': 'הקלה בכאבי לסת ושיפור בתפקוד הלסת כבר לאחר 4-6 טיפולים. תהליך השיקום המלא נמשך בדרך כלל 6-10 שבועות.',
-                        'sports-teams': 'שיפור בביצועים ומניעת פציעות. זמן השיקום משתנה בהתאם לסוג הפציעה ורמת הספורטאי.',
-                        'home-visits': 'שיקום יעיל בנוחות הבית. זמן השיקום משתנה בהתאם לבעיה ולצרכי המטופל.',
-                      }
-                      return expectedResults[service.id] || 'תוצאות משתנות בהתאם לבעיה ולצרכי המטופל. לאחר הערכה ראשונית, נקבעת תוכנית טיפול מותאמת אישית.'
-                    })()}
+                    {service.expectedResults}
                   </p>
-
-                  {/* CTA */}
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Link
                       href="/contact"
@@ -469,23 +399,29 @@ export default function ServicesPage() {
                       קבע תור לטיפול
                     </Link>
                     <Link
-                      href={service.id === 'neck-pain' ? '/blog/neck-pain-complete-guide' : '/blog'}
+                      href={service.blogHref}
                       className="inline-block text-[#2080C0] border-2 border-[#2080C0] font-bold py-3 px-8 rounded-lg transition-all duration-200 hover:bg-[#2080C0] hover:text-white text-center"
-                      aria-label={`קרא מאמרים על ${service.title}`}
                     >
-                      {service.id === 'neck-pain' ? 'קרא את המדריך המלא' : 'קרא מאמרים'}
+                      {service.blogLabel}
                     </Link>
+                    {service.extraHref ? (
+                      <Link
+                        href={service.extraHref}
+                        className="inline-block text-[#2A3080] border-2 border-[#2A3080] font-bold py-3 px-8 rounded-lg transition-all duration-200 hover:bg-[#2A3080] hover:text-white text-center"
+                      >
+                        {service.extraLabel}
+                      </Link>
+                    ) : null}
                   </div>
                 </div>
                 <div className="flex-1 w-full">
-                  <div className={`h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-xl shadow-xl overflow-hidden relative`}>
+                  <div className="h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-xl shadow-xl overflow-hidden relative">
                     <ServiceImage
                       src={service.imagePath}
                       fallbackSrc={service.imagePath}
                       alt={`${service.title} - טיפול פיזיותרפי מקצועי בקליניקת פיזיותרפיה.פלוס באשדוד`}
                       className="object-cover w-full h-full"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      priority={index < 2}
                     />
                     <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-10 pointer-events-none`} aria-hidden="true"></div>
                   </div>
@@ -496,14 +432,13 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-16 text-white" style={{ background: 'linear-gradient(to left, #2A3080, #2080C0)' }}>
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             מוכנים להתחיל את תהליך השיקום?
           </h2>
           <p className="text-lg sm:text-xl mb-8 text-white">
-            צרו איתנו קשר עוד היום וקבלו ייעוץ מקצועי
+            צרו איתנו קשר עוד היום וקבלו ייעוץ מקצועי — הקליניקה במרכז כלניות, אשדוד
           </p>
           <Link
             href="/contact"
