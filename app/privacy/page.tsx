@@ -47,7 +47,7 @@ export default function PrivacyPage() {
               <p className="text-gray-700 mb-2"><strong>שם העסק:</strong> פיזיותרפיה.פלוס</p>
               <p className="text-gray-700 mb-2"><strong>בעל העסק:</strong> אנדריי מייזלס</p>
               <p className="text-gray-700 mb-2"><strong>כתובת:</strong> מרכז כלניות, אשדוד</p>
-              <p className="text-gray-700 mb-2"><strong>טלפון:</strong> <a href="tel:0508838982" className="text-[#2080C0] hover:underline">050-883-8982</a></p>
+              <p className="text-gray-700 mb-2"><strong>טלפון:</strong> <a href="tel:+972-50-883-8982" className="text-[#2080C0] hover:underline">050-883-8982</a></p>
               <p className="text-gray-700"><strong>יצירת קשר:</strong> <Link href="/contact" className="text-[#2080C0] hover:underline">דרך טופס יצירת קשר</Link></p>
             </div>
 
@@ -104,7 +104,7 @@ export default function PrivacyPage() {
               <li><strong>זכות התנגדות:</strong> אתם רשאים להתנגד לעיבוד המידע שלכם למטרות מסוימות</li>
             </ul>
             <p className="text-gray-700 leading-relaxed mb-6">
-              כדי לממש את זכויותיכם, אנא צרו איתנו קשר דרך <Link href="/contact" className="text-[#2080C0] hover:underline">טופס יצירת קשר</Link> או בטלפון: <a href="tel:0508838982" className="text-[#2080C0] hover:underline">050-883-8982</a>.
+              כדי לממש את זכויותיכם, אנא צרו איתנו קשר דרך <Link href="/contact" className="text-[#2080C0] hover:underline">טופס יצירת קשר</Link> או בטלפון: <a href="tel:+972-50-883-8982" className="text-[#2080C0] hover:underline">050-883-8982</a>.
             </p>
 
             <h2 className="text-2xl font-bold mb-4 mt-8" style={{ color: '#2A3080' }}>7. עוגיות (Cookies) וכלי ניתוח</h2>
@@ -144,7 +144,7 @@ export default function PrivacyPage() {
                   <svg className="w-5 h-5" style={{ color: '#2080C0' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  טלפון: <a href="tel:0508838982" className="text-[#2080C0] hover:underline">050-883-8982</a>
+                  טלפון: <a href="tel:+972-50-883-8982" className="text-[#2080C0] hover:underline">050-883-8982</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <svg className="w-5 h-5" style={{ color: '#2080C0' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { gtag } from './GoogleAnalytics'
+import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
 
-const phoneTel = '0508838982'
-const phoneDisplay = '050-883-8982'
+const phoneTel = getContactPhoneTel()
+const phoneDisplay = seoConfig.contact.phone
 const whatsappNumber = '972508838982'
 const whatsappMessage = encodeURIComponent(
   'שלום, פניתי דרך הדף של מאוחדת באתר ואשמח לתיאום טיפול לפציעת ספורט'

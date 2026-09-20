@@ -6,7 +6,8 @@ import MeuhedetReviewsStrip from '@/components/MeuhedetReviewsStrip'
 import MeuhedetStickyCTA from '@/components/MeuhedetStickyCTA'
 import MeuhedetContactLink from '@/components/MeuhedetContactLink'
 import { manualReviews } from '@/config/manual-reviews.config'
-import { getUniversitySchema } from '@/config/geo.config'
+import { getUniversitySchema, getClinicPostalAddress, getOpeningHoursSpecification, getAshdodAreaServed, clinicSchemaIds, clinicEntity, clinicGeo } from '@/config/geo.config'
+import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
 
 export const metadata: Metadata = {
   title: 'פיזיותרפיה לפציעות ספורט – מאוחדת | אשדוד',
@@ -55,8 +56,8 @@ export const metadata: Metadata = {
   },
 }
 
-const phoneNumber = '050-883-8982'
-const phoneTel = '0508838982'
+const phoneNumber = seoConfig.contact.phone
+const phoneTel = getContactPhoneTel()
 const whatsappNumber = '972508838982'
 const whatsappMessageMeuhedet = encodeURIComponent(
   'שלום, פניתי דרך הדף של מאוחדת באתר ואשמח לתיאום טיפול לפציעת ספורט'
@@ -172,39 +173,23 @@ const faqs = [
 export default function MeuhedetPage() {
   const medicalBusinessSchema = {
     '@context': 'https://schema.org',
-    '@type': 'MedicalBusiness',
-    '@id': 'https://physio-plus.co.il/meuhedet#business',
-    name: 'פיזיותרפיה.פלוס – ספק מאוחדת לפציעות ספורט',
+    '@type': ['MedicalBusiness', 'LocalBusiness'],
+    '@id': clinicSchemaIds.medicalBusiness,
+    name: clinicEntity.brandHe,
     description:
       'קליניקת פיזיותרפיה באשדוד, ספק מוכר של מאוחדת לטיפול בפציעות ספורט ושיקום אורתופדי.',
-    url: 'https://physio-plus.co.il/meuhedet',
-    telephone: '+972-50-883-8982',
-    image: 'https://physio-plus.co.il/images/andrey-meizels.JPG',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'מרכז כלניות',
-      addressLocality: 'אשדוד',
-      addressCountry: 'IL',
-    },
+    url: seoConfig.siteUrl,
+    telephone: clinicEntity.phoneE164,
+    email: seoConfig.contact.email,
+    image: `${seoConfig.siteUrl}/images/andrey-meizels.JPG`,
+    address: getClinicPostalAddress(),
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: '31.783106159195388',
-      longitude: '34.65489203389065',
+      latitude: clinicGeo.latitude,
+      longitude: clinicGeo.longitude,
     },
-    openingHoursSpecification: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
-        opens: '08:00',
-        closes: '20:00',
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: 'Friday',
-        opens: '08:00',
-        closes: '14:00',
-      },
-    ],
+    openingHoursSpecification: getOpeningHoursSpecification(),
+    areaServed: getAshdodAreaServed(),
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '5.0',
@@ -231,8 +216,8 @@ export default function MeuhedetPage() {
     alumniOf: getUniversitySchema(),
     worksFor: {
       '@type': 'MedicalBusiness',
-      '@id': 'https://physio-plus.co.il/meuhedet#business',
-      name: 'פיזיותרפיה.פלוס – אנדריי מייזלס',
+      '@id': clinicSchemaIds.medicalBusiness,
+      name: clinicEntity.brandHe,
     },
     url: 'https://physio-plus.co.il/about',
   }

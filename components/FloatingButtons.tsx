@@ -1,9 +1,11 @@
 'use client'
 
 import { gtag } from './GoogleAnalytics'
+import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
 
 export default function FloatingButtons() {
-  const phoneNumber = '050-883-8982'
+  const phoneNumber = seoConfig.contact.phone
+  const phoneTel = getContactPhoneTel()
   const whatsappNumber = '972508838982'
   const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
 
@@ -30,7 +32,7 @@ export default function FloatingButtons() {
 
       {/* Phone Button - Fixed Left */}
       <a
-        href={`tel:${phoneNumber}`}
+        href={`tel:${phoneTel}`}
         onClick={() => gtag.clickToCall(phoneNumber)}
         className="fixed bottom-6 left-6 z-[10000] bg-[#2080C0] hover:bg-[#004080] text-white p-4 sm:p-5 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center group"
         aria-label={`התקשר אלינו: ${phoneNumber}`}

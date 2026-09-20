@@ -153,7 +153,7 @@ export default function MeuhedetLeadForm() {
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-3">
           <a
-            href="tel:050-8838982"
+            href="tel:+972-50-883-8982"
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#2080C0] px-6 py-3 font-semibold text-white shadow hover:bg-[#1a6ea5] transition-colors"
             onClick={() => {
               try {
