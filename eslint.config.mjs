@@ -15,6 +15,8 @@ const eslintConfig = defineConfig([
     // Ignore Node.js scripts that use CommonJS (require)
     "scripts/**",
     "config/*.js",
+    // Node test files import with .ts extensions for type-stripping.
+    "**/*.test.ts",
   ]),
 ]);
 

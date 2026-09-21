@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getAllPosts } from '@/config/blog.config'
-import { parseHebrewDate } from '@/lib/date-utils'
+import { tryParseHebrewDate } from '@/lib/date-utils'
 
 export async function GET() {
   const baseUrl = 'https://physio-plus.co.il'
@@ -9,14 +9,14 @@ export async function GET() {
   const rssItems = blogPosts
     .slice(0, 20) // Latest 20 posts
     .map((post) => {
-      const pubDate = parseHebrewDate(post.date)
+      const pubDate = tryParseHebrewDate(post.date)
+      const pubDateTag = pubDate ? `\n      <pubDate>${pubDate.toUTCString()}</pubDate>` : ''
       return `
     <item>
       <title><![CDATA[${post.title}]]></title>
       <link>${baseUrl}/blog/${post.slug}</link>
       <guid isPermaLink="true">${baseUrl}/blog/${post.slug}</guid>
-      <description><![CDATA[${post.excerpt}]]></description>
-      <pubDate>${pubDate.toUTCString()}</pubDate>
+      <description><![CDATA[${post.excerpt}]]></description>${pubDateTag}
       <author>אנדריי מייזלס</author>
       <category><![CDATA[${post.category}]]></category>
     </item>`
