@@ -2,58 +2,87 @@
  * Utilities להמרת תאריכים עבריים ל-Date objects
  */
 
+const HEBREW_MONTHS: Record<string, number> = {
+  ינואר: 0,
+  פברואר: 1,
+  מרץ: 2,
+  מרס: 2, // חלופה
+  אפריל: 3,
+  מאי: 4,
+  יוני: 5,
+  יולי: 6,
+  אוגוסט: 7,
+  ספטמבר: 8,
+  אוקטובר: 9,
+  נובמבר: 10,
+  דצמבר: 11,
+}
+
+export function isValidDate(value: unknown): value is Date {
+  return value instanceof Date && !Number.isNaN(value.getTime())
+}
+
+/**
+ * Parse a Hebrew date without throwing and without falling back to "now".
+ * Returns undefined for missing, unparseable, or invalid values.
+ *
+ * Examples: '25 בינואר 2025', '15 במרץ 2024'
+ */
+export function tryParseHebrewDate(value: unknown): Date | undefined {
+  if (typeof value !== 'string' || !value.trim()) {
+    return undefined
+  }
+
+  try {
+    // הסרת המילה "ב" אם קיימת בתחילת המחרוזת
+    const cleanedDate = value.replace(/^ב/, '').trim()
+    const parts = cleanedDate.split(/\s+/)
+
+    if (parts.length < 3) {
+      return undefined
+    }
+
+    const day = parseInt(parts[0], 10)
+    const monthName = parts[1].replace(/^ב/, '')
+    const year = parseInt(parts[2], 10)
+    const month = HEBREW_MONTHS[monthName]
+
+    if (month === undefined || Number.isNaN(day) || Number.isNaN(year)) {
+      return undefined
+    }
+
+    const date = new Date(year, month, day)
+    if (!isValidDate(date)) {
+      return undefined
+    }
+
+    // Reject overflow dates such as 31 בפברואר (JS Date would roll into March)
+    if (
+      date.getFullYear() !== year ||
+      date.getMonth() !== month ||
+      date.getDate() !== day
+    ) {
+      return undefined
+    }
+
+    return date
+  } catch {
+    return undefined
+  }
+}
+
 /**
  * ממיר תאריך עברי לפורמט 'DD MMMM YYYY' ל-Date object
  * דוגמאות: '25 בינואר 2025', '15 במרץ 2024'
  */
 export function parseHebrewDate(hebrewDate: string): Date {
-  // מיפוי חודשים עבריים לאנגליים
-  const monthMap: Record<string, number> = {
-    'ינואר': 0,
-    'פברואר': 1,
-    'מרץ': 2,
-    'מרס': 2, // חלופה
-    'אפריל': 3,
-    'מאי': 4,
-    'יוני': 5,
-    'יולי': 6,
-    'אוגוסט': 7,
-    'ספטמבר': 8,
-    'אוקטובר': 9,
-    'נובמבר': 10,
-    'דצמבר': 11,
+  const parsed = tryParseHebrewDate(hebrewDate)
+  if (parsed) {
+    return parsed
   }
 
-  // הסרת המילה "ב" אם קיימת (כמו "בינואר" -> "ינואר")
-  const cleanedDate = hebrewDate.replace(/^ב/, '').trim()
-  
-  // פירוק התאריך: יום, חודש, שנה
-  // פורמט: "25 בינואר 2025" או "25 ינואר 2025"
-  const parts = cleanedDate.split(/\s+/)
-  
-  if (parts.length < 3) {
-    // אם לא הצלחנו לפרק, נחזיר תאריך נוכחי
-    console.warn(`לא הצלחתי לפרק את התאריך: ${hebrewDate}`)
-    return new Date()
-  }
-
-  const day = parseInt(parts[0], 10)
-  const monthName = parts[1].replace(/^ב/, '') // הסרת "ב" אם קיימת
-  const year = parseInt(parts[2], 10)
-
-  const month = monthMap[monthName]
-  
-  if (month === undefined) {
-    console.warn(`חודש לא מזוהה: ${monthName} בתאריך: ${hebrewDate}`)
-    return new Date()
-  }
-
-  if (isNaN(day) || isNaN(year)) {
-    console.warn(`תאריך לא תקין: ${hebrewDate}`)
-    return new Date()
-  }
-
-  return new Date(year, month, day)
+  console.warn(`לא הצלחתי לפרק את התאריך: ${hebrewDate}`)
+  return new Date()
 }
 
 /**
