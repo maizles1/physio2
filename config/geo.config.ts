@@ -165,6 +165,10 @@ const medicalTopicsBySlug: Record<string, { he: string; en: string }> = {
     he: 'פיזיותרפיה פרטית מול קופת חולים',
     en: 'Private vs HMO physiotherapy',
   },
+  'active-rehabilitation-tissue-adaptation-guide': {
+    he: 'שיקום אקטיבי והסתגלות רקמות',
+    en: 'Active rehabilitation and tissue adaptation',
+  },
 }
 
 export function getMedicalTopic(slug: string): { he: string; en: string } | undefined {
