@@ -17,7 +17,7 @@ export default function Header() {
   const phoneTel = getContactPhoneTel()
   const whatsappNumber = '972508838982'
   const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
-  const address = 'מרכז כלניות, אשדוד'
+  const address = 'יקינטון 3, מרכז כלניות, אשדוד'
   const hasSocial = !!(seoConfig.social?.facebook || seoConfig.social?.instagram)
 
   /** קישור יחיד ליצירת קשר — מרונדר פעם אחת בדסקטופ כדי למנוע כפילות */

@@ -158,7 +158,7 @@ export default function AboutPage() {
               </div>
               <div>
                 <dt className="text-sm font-semibold text-gray-500">כתובת</dt>
-                <dd className="text-lg font-bold text-gray-900">מרכז כלניות, אשדוד</dd>
+                <dd className="text-lg font-bold text-gray-900">יקינטון 3, מרכז כלניות, אשדוד</dd>
               </div>
               <div>
                 <dt className="text-sm font-semibold text-gray-500">טלפון</dt>

@@ -27,8 +27,10 @@ export interface GooglePlaceDetails {
  * Place ID של Google My Business
  * ניתן למצוא ב-Google Maps או ב-Google My Business Console
  */
+const CLINIC_PLACE_ID = 'ChIJ00UzEtajAhURetXBt4kVt9w'
+
 export function getPlaceId(): string {
-  return process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID || ''
+  return process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID || CLINIC_PLACE_ID
 }
 
 /**

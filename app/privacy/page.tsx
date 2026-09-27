@@ -46,7 +46,7 @@ export default function PrivacyPage() {
             <div className="bg-gray-50 rounded-lg p-6 mb-6">
               <p className="text-gray-700 mb-2"><strong>שם העסק:</strong> פיזיותרפיה.פלוס</p>
               <p className="text-gray-700 mb-2"><strong>בעל העסק:</strong> אנדריי מייזלס</p>
-              <p className="text-gray-700 mb-2"><strong>כתובת:</strong> מרכז כלניות, אשדוד</p>
+              <p className="text-gray-700 mb-2"><strong>כתובת:</strong> יקינטון 3, מרכז כלניות, אשדוד</p>
               <p className="text-gray-700 mb-2"><strong>טלפון:</strong> <a href="tel:+972-50-883-8982" className="text-[#2080C0] hover:underline">050-883-8982</a></p>
               <p className="text-gray-700"><strong>יצירת קשר:</strong> <Link href="/contact" className="text-[#2080C0] hover:underline">דרך טופס יצירת קשר</Link></p>
             </div>
@@ -157,7 +157,7 @@ export default function PrivacyPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  כתובת: מרכז כלניות, אשדוד
+                  כתובת: יקינטון 3, מרכז כלניות, אשדוד
                 </li>
               </ul>
             </div>

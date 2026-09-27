@@ -65,7 +65,7 @@ aria-label="קבע טיפול עכשיו - עמוד יצירת קשר"
                 <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span>מקצועי תואר שני</span>
+                <span>פיזיותרפיסט בעל תואר שני</span>
               </div>
             </div>
           </div>

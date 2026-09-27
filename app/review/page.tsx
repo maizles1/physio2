@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { getPlaceId, getReviewUrl } from '@/config/google-business.config'
+import { getReviewUrl } from '@/config/google-business.config'
 
 export const metadata: Metadata = {
   title: 'השאר ביקורת',
@@ -9,28 +9,13 @@ export const metadata: Metadata = {
     index: false, // Don't index this page
     follow: false,
   },
+  alternates: {
+    canonical: 'https://physio-plus.co.il/review',
+  },
 }
 
 export default function ReviewPage() {
-  const placeId = getPlaceId()
   const reviewUrl = getReviewUrl()
-
-  if (!placeId || !reviewUrl) {
-    return (
-      <div className="bg-white min-h-screen flex items-center justify-center">
-        <div className="text-center px-4">
-          <h1 className="text-2xl font-bold mb-4">Google Business לא מוגדר</h1>
-          <p className="text-gray-600 mb-6">נא להגדיר NEXT_PUBLIC_GOOGLE_PLACE_ID ב-.env.local</p>
-          <Link
-            href="/testimonials"
-            className="text-blue-600 hover:underline"
-          >
-            חזרה לדף ההמלצות
-          </Link>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="bg-white min-h-screen">
@@ -67,7 +52,7 @@ export default function ReviewPage() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">5</span>
-                <span className="text-right">חזור לדף ההמלצות שלנו - הביקורת תועתק אוטומטית ותופיע שם תוך מספר שעות!</span>
+                <span className="text-right">זהו! הביקורת תופיע בפרופיל של הקליניקה ב-Google</span>
               </li>
             </ol>
           </div>
@@ -78,14 +63,6 @@ export default function ReviewPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-[#2080C0] hover:bg-[#004080] text-white font-bold text-lg py-4 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
-              onClick={() => {
-                // After opening Google, show message to come back
-                setTimeout(() => {
-                  if (typeof window !== 'undefined') {
-                    window.alert('לאחר שתפרסם את הביקורת ב-Google, חזור לדף ההמלצות שלנו כדי לראות אותה!')
-                  }
-                }, 1000)
-              }}
             >
               <svg 
                 className="w-6 h-6" 
@@ -99,33 +76,6 @@ export default function ReviewPage() {
               </svg>
               <span>השאר ביקורת ב-Google</span>
             </a>
-          </div>
-
-          <div className="bg-green-50 border-r-4 border-green-500 rounded-lg p-6 mb-8 text-right">
-            <p className="text-gray-800 mb-3">
-              <strong className="text-lg">✅ מה כבר עובד:</strong>
-            </p>
-            <ul className="text-gray-700 space-y-2">
-              <li className="flex items-start gap-2">
-                <span className="text-green-600 font-bold">✓</span>
-                <span>הביקורות מ-Google מועתקות אוטומטית לאתר דרך Google Places API</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-green-600 font-bold">✓</span>
-                <span>כל ביקורת שתפרסם ב-Google תופיע באתר שלנו תוך מספר שעות</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-blue-50 border-r-4 border-blue-400 rounded-lg p-6 mb-8 text-right">
-            <p className="text-gray-800 mb-2">
-              <strong>💡 איך זה עובד:</strong>
-            </p>
-            <p className="text-gray-700">
-              לאחר שתפרסם את הביקורת ב-Google, חזור לדף ההמלצות שלנו. 
-              <br />
-              <strong>הביקורת תועתק אוטומטית</strong> ותופיע בדף ההמלצות תוך מספר שעות (תלוי בעדכון של Google).
-            </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

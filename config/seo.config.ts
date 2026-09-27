@@ -64,7 +64,7 @@ export const seoConfig: SEOConfig = {
   locale: 'he_IL',
   businessName: 'פיזיותרפיה.פלוס - מרכז הפיזיותרפיה של אשדוד',
   businessAddress: {
-    street: 'מרכז כלניות',
+    street: 'יקינטון 3, מרכז כלניות',
     city: 'אשדוד',
     country: 'IL',
   },

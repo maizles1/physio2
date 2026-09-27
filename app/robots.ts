@@ -5,7 +5,6 @@ export default function robots(): MetadataRoute.Robots {
     '/api/',
     '/admin-login',
     '/admin-exercises-builder',
-    '/_next/',
     '/private/',
   ]
 
@@ -34,19 +33,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow,
       },
-      {
-        userAgent: 'Googlebot',
-        allow: '/',
-      },
-      {
-        userAgent: 'Bingbot',
-        allow: '/',
-      },
-      {
-        userAgent: 'Slurp',
-        allow: '/',
-      },
-      ...aiCrawlers.map((userAgent) => ({
+      ...['Googlebot', 'Bingbot', 'Slurp', ...aiCrawlers].map((userAgent) => ({
         userAgent,
         allow: '/',
         disallow,

@@ -157,7 +157,7 @@ export default function HeroSection() {
             )}
           </div>
           <p className="text-center text-white/90 text-sm mt-4 px-2">
-            זמינות 24–48 שעות · מקצועי תואר שני
+            תור תוך 24–48 שעות · פיזיותרפיסט בעל תואר שני
           </p>
         </div>
       </div>

@@ -11,7 +11,7 @@ export default function Footer() {
   const phoneTel = getContactPhoneTel()
   const whatsappNumber = '972508838982'
   const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
-  const address = 'מרכז כלניות, אשדוד'
+  const address = 'יקינטון 3, מרכז כלניות, אשדוד'
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterLoading, setNewsletterLoading] = useState(false)
 

@@ -8,7 +8,7 @@ const phoneNumber = seoConfig.contact.phone
 const phoneTel = getContactPhoneTel()
 const whatsappNumber = '972508838982'
 const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
-const address = 'מרכז כלניות, אשדוד'
+const address = 'יקינטון 3, מרכז כלניות, אשדוד'
 const mapsDestination = '31.783106159195388,34.65489203389065'
 
 export default function ContactPage() {
