@@ -4,6 +4,8 @@ export const SITEMAP_BASE_URL = 'https://physio-plus.co.il'
 export const SITEMAP_XMLNS = 'http://www.sitemaps.org/schemas/sitemap/0.9'
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000
 const STATIC_PAGE_LASTMOD = '2025-01-01'
+/** Last real content change to the core pages (NAP/address update). Bump when core copy changes. */
+const CORE_PAGES_LASTMOD = '2026-09-27'
 const SAFE_PATH = /^\/[A-Za-z0-9/_-]*$/
 const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/i
 
@@ -207,23 +209,28 @@ export function collectSitemapUrls(input: SitemapInput = {}): SitemapUrl[] {
     const servicePaths = normalizeServicePaths(input.servicePaths)
     const { urls: postUrls, latestPostDate } = blogEntries(input.posts, now)
 
+    const coreLastmod = new Date(CORE_PAGES_LASTMOD)
+    // Home changes whenever a post is published (latest posts strip) or core copy changes.
+    const homeLastmod =
+      latestPostDate && latestPostDate.getTime() > coreLastmod.getTime() ? latestPostDate : coreLastmod
+
     const entries = compactUrls([
-      sitemapUrl('/', { lastmod: now, changefreq: 'weekly', priority: 1 }),
-      sitemapUrl('/services', { lastmod: now, changefreq: 'weekly', priority: 0.9 }),
+      sitemapUrl('/', { lastmod: homeLastmod, changefreq: 'weekly', priority: 1 }),
+      sitemapUrl('/services', { lastmod: coreLastmod, changefreq: 'weekly', priority: 0.9 }),
       ...servicePaths.map((path) =>
-        sitemapUrl(path, { lastmod: now, changefreq: 'monthly', priority: 0.85 })
+        sitemapUrl(path, { lastmod: coreLastmod, changefreq: 'monthly', priority: 0.85 })
       ),
-      sitemapUrl('/meuhedet', { lastmod: now, changefreq: 'monthly', priority: 0.9 }),
-      sitemapUrl('/about', { lastmod: now, changefreq: 'monthly', priority: 0.8 }),
+      sitemapUrl('/meuhedet', { lastmod: coreLastmod, changefreq: 'monthly', priority: 0.9 }),
+      sitemapUrl('/about', { lastmod: coreLastmod, changefreq: 'monthly', priority: 0.8 }),
       sitemapUrl('/blog', {
-        lastmod: latestPostDate ?? now,
+        lastmod: latestPostDate ?? coreLastmod,
         changefreq: 'weekly',
         priority: 0.8,
       }),
       ...postUrls,
-      sitemapUrl('/contact', { lastmod: now, changefreq: 'monthly', priority: 0.8 }),
-      sitemapUrl('/testimonials', { lastmod: now, changefreq: 'monthly', priority: 0.7 }),
-      sitemapUrl('/faq', { lastmod: now, changefreq: 'monthly', priority: 0.7 }),
+      sitemapUrl('/contact', { lastmod: coreLastmod, changefreq: 'monthly', priority: 0.8 }),
+      sitemapUrl('/testimonials', { lastmod: coreLastmod, changefreq: 'monthly', priority: 0.7 }),
+      sitemapUrl('/faq', { lastmod: coreLastmod, changefreq: 'monthly', priority: 0.7 }),
       sitemapUrl('/accessibility', {
         lastmod: STATIC_PAGE_LASTMOD,
         changefreq: 'yearly',

@@ -55,7 +55,7 @@ export default function AboutPage() {
     '@type': 'Person',
     '@id': 'https://physio-plus.co.il/about#andrey-meizels',
     name: 'אנדריי מייזלס',
-    alternateName: 'Andrey Meizels',
+    alternateName: ['Andrey Meizels', 'Andrey Maizles'],
     jobTitle: 'פיזיותרפיסט מוסמך, מנהל הקליניקה',
     description: 'פיזיותרפיסט מקצועי בעל תואר שני (M.Sc) בפיזיותרפיה מאוניברסיטת אריאל, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו ושל סיירת חרוב. מתמחה בטיפול בכאבים, שיקום לאחר ניתוחים ושיקום וסטיבולרי.',
     url: 'https://physio-plus.co.il/about',
