@@ -72,12 +72,12 @@ const injuries = [
   {
     title: 'פציעות ברך',
     description: 'מניסקוס, רצועות צולבות (ACL/PCL), פציעות סחוס וכאבי קדמת הברך אצל רצים.',
-    href: '/services#knee-pain',
+    href: '/services/knee-pain-ashdod',
   },
   {
     title: 'פציעות כתף',
     description: 'מסובב הכתף (Rotator Cuff), פריקות חוזרות, דלקות גידים וכאבי כתף אצל שחיינים וטניסאים.',
-    href: '/services#shoulder-pain',
+    href: '/services/shoulder-pain-ashdod',
   },
   {
     title: 'פציעות קרסול וכף רגל',
@@ -87,7 +87,7 @@ const injuries = [
   {
     title: 'דלקות גידים ושרירים',
     description: 'אכילס, מרפק טניסאי, מרפק גולפאי ומשיכות שרירים בריצה ובאימוני כוח.',
-    href: '/services#shoulder-pain',
+    href: '/services/back-pain-ashdod',
   },
   {
     title: 'שיקום פוסט-ניתוחי',

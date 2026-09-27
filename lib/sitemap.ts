@@ -11,6 +11,10 @@ const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/i
 
 export const FALLBACK_SERVICE_PATHS = [
   '/services/back-pain-ashdod',
+  '/services/lower-back-pain-ashdod',
+  '/services/shoulder-pain-ashdod',
+  '/services/neck-pain-ashdod',
+  '/services/knee-pain-ashdod',
   '/services/post-surgery-ashdod',
   '/services/vestibular-ashdod',
   '/services/tmj-ashdod',

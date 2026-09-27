@@ -585,7 +585,7 @@ export const blogPosts: BlogPost[] = [
       
       <p>אם אתם גרים באשדוד והסביבה ורוצים לוודא שאתם חוזרים לפעילות בצורה הבטוחה, המהירה והמקצועית ביותר – אנחנו כאן בשבילכם. ב<strong>פיזיותרפיה פלוס</strong>, מכון פיזיותרפיה פרטי באשדוד, נבצע אבחון מקיף, נשלול שברים או נזקים נלווים, ונבנה לכם תוכנית שיקום ידנית ואקטיבית שתחזיר אתכם לעמוד על הרגליים בביטחון מלא. כפיזיותרפיסט פרטי באשדוד עם ניסיון רב בטיפול בפציעות ספורט, אני מתחייב לתת לכם את הטיפול המקצועי והמותאם ביותר לצרכים שלכם.</p>
       
-      <p>למידע נוסף על <a href="/services#knee-pain" style="color: #2080C0; text-decoration: underline;">טיפול בכאבי ברך</a>, <a href="/blog/plantar-fasciitis-complete-guide" style="color: #2080C0; text-decoration: underline;">דורבן בכף הרגל</a> או <a href="/blog/running-injuries-prevention-treatment-guide" style="color: #2080C0; text-decoration: underline;">פציעות ריצה</a>.</p>
+      <p>למידע נוסף על <a href="/services/knee-pain-ashdod" style="color: #2080C0; text-decoration: underline;">טיפול בכאבי ברך</a>, <a href="/blog/plantar-fasciitis-complete-guide" style="color: #2080C0; text-decoration: underline;">דורבן בכף הרגל</a> או <a href="/blog/running-injuries-prevention-treatment-guide" style="color: #2080C0; text-decoration: underline;">פציעות ריצה</a>.</p>
       
       <div style="text-align: center; margin: 40px 0;">
         <a href="/contact" style="display: inline-block; background: linear-gradient(to left, #2080C0, #2A3080); color: white; font-weight: bold; padding: 16px 32px; border-radius: 8px; text-decoration: none; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
@@ -742,7 +742,7 @@ export const blogPosts: BlogPost[] = [
       
       <p>בפיזיותרפיה פלוס באשדוד, מכון פיזיותרפיה פרטי באשדוד, אנחנו לא מחפשים פתרונות קסם. אנחנו נבנה לכם תוכנית שתחזק את הרגל, נשחרר את השרירים התפוסים בעזרת ידיים מקצועיות, ונוודא שאתם חוזרים ללכת זקוף ובטוח – מהצעד הראשון בבוקר ועד הצעד האחרון בערב. כפיזיותרפיסט פרטי באשדוד עם ניסיון רב בטיפול בדורבן, אני מתחייב לתת לכם את הטיפול המקצועי והמותאם ביותר לצרכים שלכם.</p>
       
-      <p>למידע נוסף על <a href="/services#knee-pain" style="color: #2080C0; text-decoration: underline;">טיפול בכאבי ברך</a>, <a href="/blog/running-injuries-prevention-treatment-guide" style="color: #2080C0; text-decoration: underline;">פציעות ריצה</a> או <a href="/blog/knee-rehabilitation-after-surgery-complete-guide" style="color: #2080C0; text-decoration: underline;">שיקום ברך לאחר ניתוח</a>.</p>
+      <p>למידע נוסף על <a href="/services/knee-pain-ashdod" style="color: #2080C0; text-decoration: underline;">טיפול בכאבי ברך</a>, <a href="/blog/running-injuries-prevention-treatment-guide" style="color: #2080C0; text-decoration: underline;">פציעות ריצה</a> או <a href="/blog/knee-rehabilitation-after-surgery-complete-guide" style="color: #2080C0; text-decoration: underline;">שיקום ברך לאחר ניתוח</a>.</p>
       
       <div style="text-align: center; margin: 40px 0;">
         <a href="/contact" style="display: inline-block; background: linear-gradient(to left, #2080C0, #2A3080); color: white; font-weight: bold; padding: 16px 32px; border-radius: 8px; text-decoration: none; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
@@ -927,7 +927,7 @@ export const blogPosts: BlogPost[] = [
       
       <p>אם אתם גרים באזור אשדוד והסביבה ומרגישים שהצוואר מגביל אתכם, אל תחכו שהמצב יהפוך לכרוני. בפיזיותרפיה פלוס, מכון פיזיותרפיה פרטי באשדוד, אנחנו מחויבים לאבחון יסודי (לא 5 דקות!), טיפול מבוסס מחקר, ויחס אישי שיחזיר אתכם לשגרה המלאה שלכם. כפיזיותרפיסט פרטי באשדוד המתמחה בטיפול בכאבי צוואר, אני מתחייב לתת לכם את הטיפול המקצועי והמותאם ביותר לצרכים שלכם.</p>
       
-      <p>למידע נוסף על <a href="/services#neck-pain" style="color: #2080C0; text-decoration: underline;">טיפול בכאבי צוואר</a>, <a href="/blog/lower-back-pain-complete-guide" style="color: #2080C0; text-decoration: underline;">טיפול בכאבי גב</a>, <a href="/blog/shoulder-pain-complete-guide" style="color: #2080C0; text-decoration: underline;">כאבי כתף</a> או <a href="/blog/ergonomics-work-from-home-guide" style="color: #2080C0; text-decoration: underline;">ארגונומיה בעבודה מהבית</a>.</p>
+      <p>למידע נוסף על <a href="/services/neck-pain-ashdod" style="color: #2080C0; text-decoration: underline;">טיפול בכאבי צוואר</a>, <a href="/blog/lower-back-pain-complete-guide" style="color: #2080C0; text-decoration: underline;">טיפול בכאבי גב</a>, <a href="/blog/shoulder-pain-complete-guide" style="color: #2080C0; text-decoration: underline;">כאבי כתף</a> או <a href="/blog/ergonomics-work-from-home-guide" style="color: #2080C0; text-decoration: underline;">ארגונומיה בעבודה מהבית</a>.</p>
       
       <div style="text-align: center; margin: 40px 0;">
         <a href="/contact" style="display: inline-block; background: linear-gradient(to left, #2080C0, #2A3080); color: white; font-weight: bold; padding: 16px 32px; border-radius: 8px; text-decoration: none; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
@@ -1049,7 +1049,7 @@ export const blogPosts: BlogPost[] = [
       
       <p>אני מזמין אתכם לקליניקה שלי באשדוד לאבחון מהיר ומדויק. ביחד, נבנה תוכנית שתחזיר לכם את טווח התנועה, את השינה הטובה בלילה, ואת היכולת לחיות ללא מגבלות.</p>
       
-      <p>אנדריי מייזלס – פיזיותרפיסט ספורט (M.Sc). כי מגיע לכם הטיפול הטוב ביותר, קרוב לבית. למידע נוסף על <a href="/services#shoulder-pain" style="color: #2080C0; text-decoration: underline;">שירותי שיקום כתף</a> או <a href="/blog/what-happens-in-physiotherapy-treatment" style="color: #2080C0; text-decoration: underline;">למידע על תהליך הטיפול</a>.</p>
+      <p>אנדריי מייזלס – פיזיותרפיסט ספורט (M.Sc). כי מגיע לכם הטיפול הטוב ביותר, קרוב לבית. למידע נוסף על <a href="/services/shoulder-pain-ashdod" style="color: #2080C0; text-decoration: underline;">שירותי שיקום כתף</a> או <a href="/blog/what-happens-in-physiotherapy-treatment" style="color: #2080C0; text-decoration: underline;">למידע על תהליך הטיפול</a>.</p>
       
       <p>צריכים ייעוץ או רוצים לתאם תור? <a href="/contact" style="color: #2080C0; text-decoration: underline;">צרו קשר עוד היום</a>.</p>
       
@@ -1238,7 +1238,7 @@ export const blogPosts: BlogPost[] = [
       <ul>
         <li>שחזור רצועה צולבת (ACL) וניתוחי מיניסקוס.</li>
         <li><a href="/blog/hip-knee-replacement-rehabilitation-guide" style="color: #2080C0; text-decoration: underline;">החלפת מפרק ירך או ברך</a>.</li>
-        <li>תפירת גידים בכתף (Rotator Cuff) - <a href="/services#shoulder-pain" style="color: #2080C0; text-decoration: underline;">שיקום כתף</a>.</li>
+        <li>תפירת גידים בכתף (Rotator Cuff) - <a href="/services/shoulder-pain-ashdod" style="color: #2080C0; text-decoration: underline;">שיקום כתף</a>.</li>
         <li>קיבוע שברים (קרסול, שורש כף יד ועוד).</li>
         <li>ניתוחי גב ועמוד שדרה - <a href="/services/back-pain-ashdod" style="color: #2080C0; text-decoration: underline;">שיקום גב</a>.</li>
       </ul>
@@ -1264,7 +1264,7 @@ export const blogPosts: BlogPost[] = [
     keywords: ['כאבי כתף', 'פיזיותרפיה לכאבי כתף', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'Rotator Cuff', 'תסמונת הצביטה', 'כתף קפואה', 'שיקום כתף', 'Shoulder Pain', 'Impingement Syndrome', 'Frozen Shoulder'],
     relatedPosts: ['neck-pain-complete-guide', 'frozen-shoulder-complete-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
-      <p>כאב בכתף הוא אחד התלונות הנפוצות ביותר בקליניקה. בין אם זה קרה בגלל אימון בחדר כושר, ישיבה ממושכת מול המחשב, או "סתם ככה" יום אחד בלי סיבה ברורה – ההגבלה בתנועה יכולה להוציא אתכם מדעתכם. המאמר הזה יעשה לכם סדר: למה זה קורה, מתי צריך לדאוג, ואיך <a href="/services#shoulder-pain" style="color: #2080C0; text-decoration: underline;">פיזיותרפיה מודרנית</a> יכולה להחזיר אתכם לתנועה מלאה. אם אתם מחפשים פיזיותרפיה פרטית באשדוד לטיפול בכאבי כתף, המאמר הזה יעזור לכם להבין מה צפוי לכם בתהליך הטיפול.</p>
+      <p>כאב בכתף הוא אחד התלונות הנפוצות ביותר בקליניקה. בין אם זה קרה בגלל אימון בחדר כושר, ישיבה ממושכת מול המחשב, או "סתם ככה" יום אחד בלי סיבה ברורה – ההגבלה בתנועה יכולה להוציא אתכם מדעתכם. המאמר הזה יעשה לכם סדר: למה זה קורה, מתי צריך לדאוג, ואיך <a href="/services/shoulder-pain-ashdod" style="color: #2080C0; text-decoration: underline;">פיזיותרפיה מודרנית</a> יכולה להחזיר אתכם לתנועה מלאה. אם אתם מחפשים פיזיותרפיה פרטית באשדוד לטיפול בכאבי כתף, המאמר הזה יעזור לכם להבין מה צפוי לכם בתהליך הטיפול.</p>
       
       <p>דמיינו את הפעולה הכי פשוטה: להושיט יד למדף העליון במטבח להביא כוס, ללבוש חולצה בבוקר, או לחפוף את הראש. עבור רוב האנשים אלו פעולות אוטומטיות. עבור מי שסובל מכאבי כתף, כל פעולה כזו הופכת לאתגר שמלווה בכיווץ פנים.</p>
       
@@ -1502,7 +1502,7 @@ export const blogPosts: BlogPost[] = [
       
       <h3>1. תסמונת הכאב הפטלו-פמורלי (Runner's Knee)</h3>
       
-      <p>זוהי הפציעה השכיחה ביותר בקרב רצים. היא מתבטאת בכאב עמום בקדמת הברך, סביב או מתחת לפיקה. הכאב מחמיר לרוב בירידה במדרגות, בריצה, או לאחר ישיבה ממושכת ("Theater sign"). למידע נוסף על <a href="/services#knee-pain" style="color: #2080C0; text-decoration: underline;">טיפול בכאבי ברך</a>.</p>
+      <p>זוהי הפציעה השכיחה ביותר בקרב רצים. היא מתבטאת בכאב עמום בקדמת הברך, סביב או מתחת לפיקה. הכאב מחמיר לרוב בירידה במדרגות, בריצה, או לאחר ישיבה ממושכת ("Theater sign"). למידע נוסף על <a href="/services/knee-pain-ashdod" style="color: #2080C0; text-decoration: underline;">טיפול בכאבי ברך</a>.</p>
       
       <p>מה המדע אומר? בעבר האשימו את מבנה כף הרגל ("פלטפוס") או את הנעליים. המחקרים העדכניים מצביעים על כך שהאשם העיקרי נמצא דווקא גבוה יותר – בירך. חולשה של שרירי הישבן והאגן (בדגש על Gluteus Medius) גורמת לירך לקרוס פנימה בזמן הנחיתה. הקריסה הזו משנה את המסלול של הפיקה ויוצרת לחץ מוגבר על הסחוס. הטיפול: לא מנוחה בלבד! אלא חיזוק ממוקד ועצים של שרירי האגן ושיפור השליטה המוטורית בנחיתה.</p>
       

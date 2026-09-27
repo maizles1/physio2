@@ -121,9 +121,10 @@ export const preferredCitationPages = [
 
 export const serviceCitationPages = [
   { path: '/services/back-pain-ashdod', name: 'טיפול בכאבי גב באשדוד' },
-  { path: '/services#shoulder-pain', name: 'טיפול בכאבי כתף' },
-  { path: '/services#neck-pain', name: 'טיפול בכאבי צוואר' },
-  { path: '/services#knee-pain', name: 'טיפול בכאבי ברך' },
+  { path: '/services/lower-back-pain-ashdod', name: 'טיפול בכאבי גב תחתון באשדוד' },
+  { path: '/services/shoulder-pain-ashdod', name: 'טיפול בכאבי כתף באשדוד' },
+  { path: '/services/neck-pain-ashdod', name: 'טיפול בכאבי צוואר באשדוד' },
+  { path: '/services/knee-pain-ashdod', name: 'טיפול בכאבי ברך באשדוד' },
   { path: '/services/post-surgery-ashdod', name: 'שיקום לאחר ניתוחים באשדוד' },
   { path: '/services/vestibular-ashdod', name: 'שיקום וסטיבולרי / ורטיגו באשדוד' },
   { path: '/services/tmj-ashdod', name: 'טיפול במפרק הלסת (TMJ) באשדוד' },

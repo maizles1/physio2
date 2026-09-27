@@ -141,17 +141,22 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/services#shoulder-pain" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                <Link href="/services/lower-back-pain-ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                  טיפול בכאבי גב תחתון
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/shoulder-pain-ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
                   טיפול בכאבי כתף
                 </Link>
               </li>
               <li>
-                <Link href="/services#neck-pain" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                <Link href="/services/neck-pain-ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
                   טיפול בכאבי צוואר
                 </Link>
               </li>
               <li>
-                <Link href="/services#knee-pain" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                <Link href="/services/knee-pain-ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
                   טיפול בכאבי ברך
                 </Link>
               </li>
