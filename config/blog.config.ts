@@ -7,6 +7,8 @@ export interface BlogPost {
   id: string
   slug: string
   title: string
+  /** כותרת קצרה ל-<title> ולשיתוף (עד ~60 תווים). אם חסר, משתמשים ב-title */
+  seoTitle?: string
   excerpt: string
   content: string
   date: string
@@ -15,6 +17,13 @@ export interface BlogPost {
   image: string
   keywords?: string[]
   relatedPosts?: string[]
+  /** שאלות ותשובות לסכמת FAQPage. אם חסר, מחולץ אוטומטית מקטע "שאלות נפוצות" בתוכן */
+  faq?: BlogFaqItem[]
+}
+
+export interface BlogFaqItem {
+  question: string
+  answer: string
 }
 
 /**
@@ -26,6 +35,7 @@ export const blogPosts: BlogPost[] = [
     id: '95',
     slug: 'active-rehabilitation-tissue-adaptation-guide',
     title: 'פיזיותרפיה היא לא "טיפול קסם": המדע שמאחורי שיקום אקטיבי, ניהול עומסים והסתגלות רקמות',
+    seoTitle: 'שיקום אקטיבי: כמה זמן לוקח לרקמות להחלים',
     excerpt:
       'פיזיותרפיה אינה טיפול פסיבי: רקמות מחלימות בתגובה לעומס מבוקר. כוח שריר מבני נבנה תוך 6–12 שבועות, וגידים מסתגלים רק אחרי 12–24 שבועות של העמסה הדרגתית.',
     date: '27 בספטמבר 2026',

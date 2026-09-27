@@ -3,9 +3,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getAllPosts, type BlogPost } from '@/config/blog.config'
-import { getRelatedPosts } from '@/lib/blog-utils'
+import { getRelatedPosts, getPostFaq, getPostSeoTitle } from '@/lib/blog-utils'
 import { toIsoDate } from '@/lib/date-utils'
 import { authorEntity, getMedicalTopic } from '@/config/geo.config'
+import { optimizeMetaDescription } from '@/config/seo.config'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import SocialSharing from '@/components/SocialSharing'
 import ArticleAuthor from '@/components/ArticleAuthor'
@@ -43,14 +44,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     ? `https://physio-plus.co.il${post.image}`
     : 'https://physio-plus.co.il/images/logo/clinic-logo.png'
   const publishedIso = toIsoDate(post.date)
+  const seoTitle = getPostSeoTitle(post)
+  const description = optimizeMetaDescription(post.excerpt)
 
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: seoTitle,
+    description,
     authors: [{ name: 'אנדריי מייזלס', url: 'https://physio-plus.co.il/about' }],
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title: seoTitle,
+      description,
       url: `https://physio-plus.co.il/blog/${post.slug}`,
       type: 'article',
       publishedTime: publishedIso,
@@ -68,8 +71,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title,
-      description: post.excerpt,
+      title: seoTitle,
+      description,
       images: [postImage],
     },
     alternates: {
@@ -96,6 +99,22 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const publishedIso = toIsoDate(post.date)
   const medicalTopic = getMedicalTopic(post.slug)
   const articleUrl = `https://physio-plus.co.il/blog/${post.slug}`
+  const faqItems = getPostFaq(post)
+  const faqSchema =
+    faqItems.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          '@id': `${articleUrl}#faq`,
+          inLanguage: 'he-IL',
+          isPartOf: { '@id': articleUrl },
+          mainEntity: faqItems.map((item) => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: { '@type': 'Answer', text: item.answer },
+          })),
+        }
+      : null
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -157,6 +176,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <article className="bg-white">
       {/* Hero Section */}
       <section className="relative text-white overflow-hidden py-12 sm:py-16" style={{ background: 'linear-gradient(to bottom right, #2A3080, #2080C0, #40C0F0)' }}>
