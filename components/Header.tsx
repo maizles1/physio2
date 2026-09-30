@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ClinicLogo from './ClinicLogo'
 import { gtag } from './GoogleAnalytics'
 import { seoConfig, getContactEmailTo, getContactPhoneTel } from '@/config/seo.config'
@@ -12,6 +12,26 @@ type NavItem = { name: string; href: string; dropdown?: NavSubItem[] }
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const closeDropdownTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const openDropdown = (name: string) => {
+    if (closeDropdownTimer.current) {
+      clearTimeout(closeDropdownTimer.current)
+      closeDropdownTimer.current = null
+    }
+    setActiveDropdown(name)
+  }
+
+  const scheduleCloseDropdown = () => {
+    if (closeDropdownTimer.current) clearTimeout(closeDropdownTimer.current)
+    closeDropdownTimer.current = setTimeout(() => setActiveDropdown(null), 220)
+  }
+
+  useEffect(() => {
+    return () => {
+      if (closeDropdownTimer.current) clearTimeout(closeDropdownTimer.current)
+    }
+  }, [])
 
   const phoneNumber = seoConfig.contact.phone
   const phoneTel = getContactPhoneTel()
@@ -153,8 +173,8 @@ export default function Header() {
                 <div
                   key={item.name}
                   className="group relative shrink-0"
-                  onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
-                  onMouseLeave={() => setActiveDropdown(null)}
+                  onMouseEnter={() => item.dropdown && openDropdown(item.name)}
+                  onMouseLeave={() => item.dropdown && scheduleCloseDropdown()}
                 >
                   <Link
                     href={item.href}
@@ -166,22 +186,24 @@ export default function Header() {
                     {item.name}
                   </Link>
                   {item.dropdown && activeDropdown === item.name && (
-                    <div
-                      className="absolute top-full right-0 z-50 mt-2 w-64 rounded-xl border border-gray-100 bg-white py-2 shadow-2xl"
-                      role="menu"
-                      aria-label={`תפריט משנה של ${item.name}`}
-                    >
-                      {item.dropdown.map((subItem) => (
-                        <Link
-                          key={subItem.name}
-                          href={subItem.href}
-                          className="block px-4 py-2.5 text-sm text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0]"
-                          role="menuitem"
-                          aria-label={`${subItem.name} - ${item.name}`}
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
+                    <div className="absolute top-full right-0 z-50 pt-2">
+                      <div
+                        className="w-64 rounded-xl border border-gray-100 bg-white py-2 shadow-2xl"
+                        role="menu"
+                        aria-label={`תפריט משנה של ${item.name}`}
+                      >
+                        {item.dropdown.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            href={subItem.href}
+                            className="block px-4 py-2.5 text-sm text-gray-700 transition-colors hover:bg-blue-50 hover:text-[#2080C0]"
+                            role="menuitem"
+                            aria-label={`${subItem.name} - ${item.name}`}
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>

@@ -11,6 +11,7 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import SocialSharing from '@/components/SocialSharing'
 import ArticleAuthor from '@/components/ArticleAuthor'
 import { sanitizeHtml } from '@/lib/security'
+import { extractCitations } from '@/lib/citations'
 
 // פונקציה ליצירת map מהמערך
 function getBlogPostsMap(): Record<string, BlogPost> {
@@ -100,6 +101,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const medicalTopic = getMedicalTopic(post.slug)
   const articleUrl = `https://physio-plus.co.il/blog/${post.slug}`
   const faqItems = getPostFaq(post)
+  const citations = extractCitations(post.content)
   const faqSchema =
     faqItems.length > 0
       ? {
@@ -166,6 +168,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             name: medicalTopic.he,
             alternateName: medicalTopic.en,
           },
+        }
+      : {}),
+    ...(citations.length > 0
+      ? {
+          citation: citations.map((item) => ({
+            '@type': 'ScholarlyArticle',
+            headline: item.title,
+            name: item.title,
+            url: item.url,
+            ...(item.authors ? { author: { '@type': 'Person', name: item.authors } } : {}),
+            ...(item.year ? { datePublished: item.year } : {}),
+            ...(item.journal
+              ? { isPartOf: { '@type': 'Periodical', name: item.journal } }
+              : {}),
+            identifier: {
+              '@type': 'PropertyValue',
+              propertyID: 'doi',
+              value: item.doi,
+            },
+          })),
         }
       : {}),
   }

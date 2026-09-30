@@ -4,7 +4,7 @@
 import { blogPosts, BlogPost, BlogFaqItem } from '@/config/blog.config'
 import { compareHebrewDates } from './date-utils'
 
-const FAQ_HEADING = /שאלות נפוצות/
+const FAQ_HEADING = /שאלות(?:\s+ותשובות)?\s+נפוצות/
 const QUESTION_PREFIX = /^(?:שאלה|ש)\s*[:：]\s*/
 const ANSWER_PREFIX = /^(?:תשובה|ת)\s*[:：]\s*/
 
