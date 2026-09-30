@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getAllPosts } from '@/config/blog.config'
+import { blogContentReviewedOn, getAllPosts } from '@/config/blog.config'
 import { getServiceLandingPaths } from '@/config/service-pages.config'
 import {
   MINIMAL_SITEMAP_XML,
@@ -26,7 +26,8 @@ function xmlResponse(xml: string): NextResponse {
 function loadPosts(): SitemapPost[] {
   try {
     const posts = getAllPosts()
-    return Array.isArray(posts) ? posts : []
+    if (!Array.isArray(posts)) return []
+    return posts.map((post) => ({ ...post, reviewed: blogContentReviewedOn }))
   } catch (error) {
     console.error('[sitemap] Failed to load blog posts', error)
     return []

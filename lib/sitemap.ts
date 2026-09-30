@@ -40,6 +40,7 @@ export type SitemapUrl = {
 export type SitemapPost = {
   slug?: unknown
   date?: unknown
+  reviewed?: unknown
 }
 
 export type SitemapInput = {
@@ -159,11 +160,16 @@ function blogEntries(posts: unknown, now: Date): {
       }
 
       const postDate = tryParseHebrewDate(post?.date)
+      const reviewedDate = tryParseHebrewDate(post?.reviewed)
+      const lastmodDate =
+        postDate && reviewedDate && reviewedDate.getTime() > postDate.getTime()
+          ? reviewedDate
+          : postDate
       const isRecent =
-        postDate !== undefined && now.getTime() - postDate.getTime() < THIRTY_DAYS_MS
+        lastmodDate !== undefined && now.getTime() - lastmodDate.getTime() < THIRTY_DAYS_MS
 
       const item = sitemapUrl(`/blog/${slug}`, {
-        lastmod: postDate,
+        lastmod: lastmodDate,
         changefreq: isRecent ? 'weekly' : 'monthly',
         priority: isRecent ? 0.8 : 0.7,
       })
@@ -171,8 +177,8 @@ function blogEntries(posts: unknown, now: Date): {
         urls.push(item)
       }
 
-      if (postDate && (!latestPostDate || postDate.getTime() > latestPostDate.getTime())) {
-        latestPostDate = postDate
+      if (lastmodDate && (!latestPostDate || lastmodDate.getTime() > latestPostDate.getTime())) {
+        latestPostDate = lastmodDate
       }
     } catch (error) {
       console.warn('[sitemap] Skipping bad blog post', error)

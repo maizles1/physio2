@@ -7,7 +7,7 @@ export interface BlogPost {
   id: string
   slug: string
   title: string
-  /** כותרת קצרה ל-<title> ולשיתוף (עד ~60 תווים). אם חסר, משתמשים ב-title */
+  /** כותרת קצרה ל-<title> ולשיתוף. עד 42 תווים: התבנית מוסיפה " | פיזיותרפיה.פלוס". אם חסר, משתמשים ב-title */
   seoTitle?: string
   excerpt: string
   content: string
@@ -25,6 +25,9 @@ export interface BlogFaqItem {
   question: string
   answer: string
 }
+
+/** עדכון תוכן קליני (ציטוטים, בקצרה, שאלות). נפרד מתאריך הפרסום. */
+export const blogContentReviewedOn = '30 בספטמבר 2026'
 
 /**
  * רשימת כל המאמרים - כולל המאמרים הקיימים והחדשים
@@ -64,6 +67,9 @@ export const blogPosts: BlogPost[] = [
       'lower-back-pain-complete-guide',
     ],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> שיקום רקמות נשען על תרגום עומס מכני לאותות ביולוגיים (Khan &amp; Scott, 2009). טיפול פסיבי לבדו אינו משנה את התחזית ארוכת הטווח של כאבי גב (Foster et al., 2018).</p>
+      </div>
       <p>אחת התפיסות המוטעות הנפוצות ביותר בקרב אנשים המתמודדים עם פציעות שריר-שלד היא ההנחה שפיזיותרפיה פועלת כמו תיקון במוסך: מגיעים למפגש, נשכבים על המיטה, המטפל "מחזיר משהו למקום" או מבצע מניפולציה ידנית, והכאב נעלם לצמיתות.</p>
 
       <p>כאשר מחפשים פיזיותרפיסט מומלץ באשדוד או פונים לקבלת ייעוץ אצל פיזיותרפיסט פרטי באשדוד, המטרה אינה למצוא "פתרון בזק" פסיבי, אלא להניע תהליך שיקומי מבוסס ראיות (Evidence-Based Practice). המדע הקליני מוכיח חד-משמעית: שיקום אמיתי דורש זמן, עקביות, ניהול עומסים מדויק ומאמץ אקטיבי מצד המטופל.</p>
@@ -156,6 +162,7 @@ export const blogPosts: BlogPost[] = [
     id: '94',
     slug: 'barefoot-minimalist-shoes-running-walking-guide',
     title: 'הטרנד היחף: כל מה שצריך לדעת על הליכה וריצה עם נעליים מינימליסטיות (Barefoot)',
+    seoTitle: 'הליכה וריצה בנעלי ברפוט: מתי זה מסוכן',
     excerpt:
       'בעשור האחרון יותר רצים עוברים לנעלי ברפוט ומינימליזם. מה אומר המחקר על ביומכניקה, ברך מול קרסול, וסיכוני מעבר מהיר? מדריך מבוסס-ראיות למעבר בטוח ולמתי כדאי להתייעץ עם פיזיותרפיסט.',
     date: '3 במאי 2026',
@@ -181,6 +188,9 @@ export const blogPosts: BlogPost[] = [
       'ankle-sprain-complete-guide',
     ],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> נחיתה על מרכז כף הרגל או על החלק הקדמי מעלימה כמעט את זעזוע העקב (Lieberman et al., 2010). ריצה בנעל מינימליסטית אינה זהה ביומכנית לריצה יחפה (Bonacci et al., 2013).</p>
+      </div>
       <p>בעשור האחרון, עולם הריצה וההליכה חווה מהפכה שקטה אך משמעותית. יותר ויותר מתאמנים, רצים חובבים ומקצוענים זונחים את נעלי הריצה המסורתיות, בעלות הסוליות העבות ותמיכות הקשת הנוקשות, לטובת נעליים מינימליסטיות – הידועות גם כנעלי "ברפוט" (Barefoot). הרעיון בבסיס הגישה הוא פשוט: כף הרגל האנושית התפתחה במשך מיליוני שנים כדי לנוע יחפה. ההתערבות המודרנית של נעליים מרופדות, כך טוענים התומכים, פוגעת במכניקה הטבעית של הגוף.</p>
 
       <p>אך האם מדובר בטרנד חולף, או בגישה מדעית מבוססת שיכולה למנוע פציעות? כמי שמקפידים על רפואה מבוססת-ראיות (Evidence-Based Practice), במאמר זה נצלול לעומק המחקר העדכני, נבחן את היתרונות והסכנות, ונסביר כיצד לעשות את המעבר בצורה בטוחה.</p>
@@ -250,7 +260,18 @@ export const blogPosts: BlogPost[] = [
       <p>למידע נוסף על <a href="/blog/running-injuries-prevention-treatment-guide" style="color: #2080C0; text-decoration: underline;">פציעות ריצה, מניעה וטיפול</a>, <a href="/blog/plantar-fasciitis-complete-guide" style="color: #2080C0; text-decoration: underline;">דורבן וחיתולית כפית</a> או <a href="/blog/ankle-sprain-complete-guide" style="color: #2080C0; text-decoration: underline;">נקע בקרסול ושיקום</a>.</p>
 
 
-      <h2 id="references">מקורות מדעיים (References)</h2>
+            <h2>שאלות נפוצות</h2>
+
+      <h3>האם נעל מינימליסטית זהה לריצה יחפה?</h3>
+      <p>לא. ריצה בנעל מינימליסטית או קלת משקל אינה זהה ביומכנית לריצה יחפה (Bonacci et al., 2013).</p>
+
+      <h3>למה המעבר צריך להיות הדרגתי?</h3>
+      <p>מעבר מהיר מעלה את העומס על רקמות שלא הורגלו אליו. הספרות על מעבר לנעליים מינימליסטיות מדגישה הדרגתיות (Warne &amp; Gruber, 2017).</p>
+
+      <h3>מה קורה לעומס על הברך?</h3>
+      <p>שינוי דפוס הנחיתה מזיז עומסים בין הברך לקרסול, ולכן המעבר אינו ניטרלי לברך (Davis et al., 2017).</p>
+
+<h2 id="references">מקורות מדעיים (References)</h2>
 
       <ul dir="ltr" style="text-align: left; list-style: none; padding-inline-start: 0;">
         <li>Bonacci, J., et al. (2013). <a href="https://doi.org/10.1136/bjsports-2012-091837" target="_blank" rel="noopener noreferrer" style="color: #2080C0; text-decoration: underline;">Running in a minimalist and lightweight shoe is not the same as running barefoot: a biomechanical study</a>. <em>British Journal of Sports Medicine, 47</em>(6), 387-392. https://doi.org/10.1136/bjsports-2012-091837</li>
@@ -271,6 +292,7 @@ export const blogPosts: BlogPost[] = [
     id: '93',
     slug: 'shockwave-therapy-eswt-scientific-truth',
     title: 'גלי הלם בפיזיותרפיה: פתרון קסם טכנולוגי או טיפול מיותר? האמת המדעית מאחורי המכשיר',
+    seoTitle: 'גלי הלם בפיזיותרפיה: מתי זה באמת עוזר',
     excerpt:
       'גלי הלם (ESWT) מוצגים לעתים כטיפול קסום לכאבים בעקב, באכילס ובכתף – אבל מה אומרים מטא-אנליזות ו-BJSM? במאמר נפרק את ההבדל בין גלים רדיאליים לממוקדים, מתי יש להתוויה, ולמה השיקום האקטיבי נשאר סטנדרט הזהב.',
     date: '12 באפריל 2026',
@@ -294,6 +316,9 @@ export const blogPosts: BlogPost[] = [
       'frozen-shoulder-complete-guide',
     ],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> גלי הלם נבדקו באבחנות ספציפיות, בעיקר טנדינופתיות (Schmitz et al., 2015). התמיכה בהם ברקמות רכות חלקית ולא אחידה (Speed, 2014).</p>
+      </div>
       <p>אם סבלתם לאחרונה מכאבים בעקב, בגיד האכילס או בכתף, וחיפשתם פתרונות ברשת או שירותי פיזיותרפיה פרטית באשדוד, סביר להניח שנתקלתם במונח "גלי הלם" (Extracorporeal Shockwave Therapy - ESWT). בשנים האחרונות, מכשירי גלי ההלם הפכו לציוד סטנדרטי כמעט בכל קליניקה. ההבטחה השיווקית בדרך כלל מפתה מאוד: טיפול טכנולוגי, מתקדם, קצר מועד, שמפרק הסתיידויות, מאיץ החלמה ומעלים כאבים כרוניים שניסיונות טיפול אחרים כשלו בהם.</p>
       
       <p>אך האם ההבטחה הזו עומדת במבחן המציאות המדעית? כמטופלים, אתם מוציאים זמן, אנרגיה ולא מעט כסף על טיפולים אלו. לכן, הגיע הזמן להניח את הסיסמאות השיווקיות בצד ולבחון את הנושא בעיניים ביקורתיות, מקצועיות ומבוססות ראיות (Evidence-Based Practice). במאמר זה נפרק את המנגנון של גלי ההלם, נבין מתי (אם בכלל) יש להם הצדקה קלינית, והכי חשוב – נחשוף את מה שהמחקרים העדכניים מכתבי העת המובילים בעולם האורתופדיה והפיזיותרפיה באמת אומרים על היעילות שלהם בהשוואה לשיקום אקטיבי ואיכותי.</p>
@@ -374,7 +399,18 @@ export const blogPosts: BlogPost[] = [
       
       <p>אם אתם סובלים מכאב ורוצים לחזור לשגרת האימונים והחיים שלכם חזקים מתמיד, בלי לבזבז זמן על טיפולים שלא מקדמים אתכם – אני מזמין אתכם לקחת אחריות על ההחלמה שלכם. <a href="/contact" style="color: #2080C0; text-decoration: underline;">צרו קשר עוד היום</a> וקבעו תור לאבחון בקליניקת פיזיותרפיה.פלוס, ויחד נבנה לכם תוכנית עבודה אקטיבית, מבוססת-מדע, שתחזיר אתכם לתנועה. למידע על <a href="/services" style="color: #2080C0; text-decoration: underline;">השירותים שלנו</a> ועל <a href="/blog/what-happens-in-physiotherapy-treatment" style="color: #2080C0; text-decoration: underline;">מה קורה בטיפול פיזיותרפיה</a>.</p>
 
-      <h2 id="references">מקורות מדעיים (References)</h2>
+            <h2>שאלות נפוצות</h2>
+
+      <h3>באילו מצבים נבדקו גלי הלם?</h3>
+      <p>הספרות בדקה אבחנות ספציפיות, בעיקר טנדינופתיות כמו דורבן וגיד אכילס (Schmitz et al., 2015; Gerdesmeyer et al., 2008; Rompe et al., 2007).</p>
+
+      <h3>האם גלי הלם מחליפים תרגול?</h3>
+      <p>לא. התמיכה בגלי הלם ברקמות רכות חלקית ולא אחידה, והתרגול נשאר הטיפול המרכזי (Speed, 2014).</p>
+
+      <h3>האם יש השפעה על כאב בטווח הקצר?</h3>
+      <p>יש מחקרים שמצאו הקלה בכאב בטווח הקצר (Korakakis et al., 2018). זה אינו זהה לשינוי מבני ארוך טווח בגיד.</p>
+
+<h2 id="references">מקורות מדעיים (References)</h2>
 
       <ul dir="ltr" style="text-align: left; list-style: none; padding-inline-start: 0;">
         <li>Gerdesmeyer, L., et al. (2008). <a href="https://doi.org/10.1177/0363546508324176" target="_blank" rel="noopener noreferrer" style="color: #2080C0; text-decoration: underline;">Radial extracorporeal shock wave therapy is safe and effective in the treatment of chronic recalcitrant plantar fasciitis</a>. <em>The American Journal of Sports Medicine, 36</em>(11), 2100-2109. https://doi.org/10.1177/0363546508324176</li>
@@ -390,6 +426,7 @@ export const blogPosts: BlogPost[] = [
     id: '92',
     slug: 'private-vs-kupa-physiotherapy-guide',
     title: 'פיזיותרפיה פרטית או דרך הקופה? המדריך המלא לקבלת ההחלטה הנכונה לשיקום שלך באשדוד',
+    seoTitle: 'פיזיותרפיה פרטית או דרך הקופה באשדוד?',
     excerpt: 'הדילמה של הכאב: לאן ללכת כשיש פציעה או כאב? מערכת הבריאות הציבורית עמוסה, וההמתנה לתור יכולה לקחת שבועות. במאמר זה נעשה סדר בשיקולים – זמן, איכות הטיפול, גישה אקטיבית, עלויות והחזרים – ולמה תושבי אשדוד בוחרים יותר ויותר בפיזיותרפיה פרטית ב-Physiotherapy Plus.',
     date: '8 בפברואר 2026',
     category: 'תהליך הטיפול',
@@ -398,6 +435,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['פיזיותרפיה פרטית באשדוד', 'פיזיותרפיה קופה', 'השוואה פיזיותרפיה', 'שיקום אשדוד', 'מכון פיזיותרפיה פרטי', 'פיזיותרפיסט פרטי אשדוד', 'טיפול פיזיותרפיה', 'החזר קופת חולים', 'מאוחדת פיזיותרפיה'],
     relatedPosts: ['what-happens-in-physiotherapy-treatment', 'ankle-sprain-complete-guide'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> בכאבי גב תחתון, התחלת פיזיותרפיה מוקדמת ותואמת הנחיות נקשרה לפחות שימוש בשירותי בריאות (Childs et al., 2015; Fritz et al., 2012; Fritz et al., 2015). גישה ישירה לפיזיותרפיה נמצאה בטוחה בסקירות בינלאומיות (Bury &amp; Stokes, 2013; Ojha et al., 2014).</p>
+      </div>
       <p>כשאנחנו נפצעים או סובלים מכאב פתאומי בגב, בברך או בכתף, השאלה הראשונה שעולה היא: "לאן הולכים?". מערכת הבריאות הציבורית בישראל היא מהטובות בעולם, והצוותים בקופות החולים עושים עבודת קודש. אבל, וזה אבל גדול – המערכת עמוסה.</p>
       
       <p>האם לחכות לתור בקופה? האם לפנות לקליניקה פרטית? וכמה זה באמת עולה לנו בסופו של דבר? במאמר הזה נעשה סדר בשיקולים, נבין את ההבדלים המהותיים בגישה הטיפולית, ונסביר למה תושבי אשדוד והסביבה בוחרים יותר ויותר בפיזיותרפיה פרטית מותאמת אישית ב-"Physiotherapy Plus".</p>
@@ -452,7 +492,18 @@ export const blogPosts: BlogPost[] = [
       
       <p>כואב לכם? רוצים לחזור להתאמן? <a href="/contact" style="color: #2080C0; text-decoration: underline;">צרו קשר עוד היום</a> עם "Physiotherapy Plus" באשדוד, ובואו נתחיל במסע ההחלמה שלכם. למידע על <a href="/services" style="color: #2080C0; text-decoration: underline;">השירותים שלנו</a>.</p>
 
-      <h2 id="references">מקורות מדעיים (References)</h2>
+            <h2>שאלות נפוצות</h2>
+
+      <h3>האם חייבים הפניה לפני פיזיותרפיה פרטית?</h3>
+      <p>בסקירות בינלאומיות, גישה ישירה לפיזיותרפיה בלי הפניה מוקדמת נמצאה בטוחה (Bury &amp; Stokes, 2013; Ojha et al., 2014). החזר מקופת חולים תלוי בפוליסה.</p>
+
+      <h3>למה חשוב להתחיל מוקדם בכאבי גב?</h3>
+      <p>התחלת פיזיותרפיה מוקדמת ותואמת הנחיות נקשרה לפחות שימוש בשירותי בריאות (Childs et al., 2015; Fritz et al., 2012; Fritz et al., 2015).</p>
+
+      <h3>כמה זמן נמשך טיפול פרטי?</h3>
+      <p>בקליניקה מפגש נמשך בדרך כלל 45–60 דקות, כולל אבחון ותרגול, ולא רק חיבור למכשיר.</p>
+
+<h2 id="references">מקורות מדעיים (References)</h2>
 
       <ul dir="ltr" style="text-align: left; list-style: none; padding-inline-start: 0;">
         <li>Bury, T. J., &amp; Stokes, E. K. (2013). <a href="https://doi.org/10.2522/ptj.20120060" target="_blank" rel="noopener noreferrer" style="color: #2080C0; text-decoration: underline;">A global view of direct access and patient self-referral to physical therapy: implications for the profession</a>. <em>Physical Therapy, 93</em>(4), 449-459. https://doi.org/10.2522/ptj.20120060</li>
@@ -468,6 +519,7 @@ export const blogPosts: BlogPost[] = [
     id: '91',
     slug: 'ankle-sprain-complete-guide',
     title: 'נקעתם את הקרסול? המדריך המלא לטיפול, שיקום וחזרה מהירה לספורט (ולמה קרח ומנוחה זה לא מספיק)',
+    seoTitle: 'נקע בקרסול: למה קרח ומנוחה לא מספיקים',
     excerpt: 'נקע בקרסול הוא פציעת הספורט הנפוצה ביותר בעולם. אבל העובדה שזה נפוץ, לא אומרת שזה "שטויות". כ-40% מהאנשים שלא משקמים נקע כמו שצריך, יפתחו "אי-יציבות כרונית". במאמר זה נבין בדיוק מה קרה לרגל שלכם, מתי צריך לרוץ לצילום ומתי לא, ומהו הפרוטוקול המדעי העדכני שיחזיר אתכם למגרש חזקים יותר משהייתם קודם.',
     date: '20 בפברואר 2025',
     category: 'פציעות ספורט',
@@ -476,6 +528,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['נקע בקרסול', 'Ankle Sprain', 'פציעת קרסול', 'שיקום קרסול', 'פיזיותרפיה לנקע', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'אי יציבות קרסול', 'פציעות ספורט', 'פיזיותרפיסט ספורט באשדוד'],
     relatedPosts: ['plantar-fasciitis-complete-guide', 'running-injuries-prevention-treatment-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> נקע בקרסול הוא פציעת הספורט הנפוצה ביותר (Doherty et al., 2014). העמסה מוקדמת, לא רק קרח ומנוחה, היא חלק מהגישה העדכנית (Bleakley et al., 2010; Dubois &amp; Esculier, 2020).</p>
+      </div>
       <p>זה קורה בשבריר שניה. אתם יורדים מדרכה לא ישר, נוחתים לא טוב מכדור בורעף בחוף הקשתות באשדוד, או סתם מפספסים מדרגה בחדר המדרגות. פתאום נשמע "קליק" או "פופ" מפחיד, ואחריו מגיע גל של כאב חד בצידי הקרסול. הרגל מתחילה להתנפח, הדריכה הופכת לבלתי אפשרית, והמחשבה הראשונה שעולה לראש היא: "זהו, שברתי את הרגל".</p>
       
       <p>נקע בקרסול (Ankle Sprain) הוא פציעת הספורט הנפוצה ביותר בעולם (Doherty et al., 2014). למעשה, הסטטיסטיקה מדברת על כ-25,000 אנשים שנוקעים את הקרסול מדי יום. אבל העובדה שזה נפוץ, לא אומרת שזה "שטויות".</p>
@@ -643,6 +698,7 @@ export const blogPosts: BlogPost[] = [
     id: '90',
     slug: 'plantar-fasciitis-complete-guide',
     title: 'דורבן בכף הרגל: למה הצעד הראשון בבוקר מרגיש כמו דריכה על מסמר? (והמדריך המלא לטיפול)',
+    seoTitle: 'דורבן בכף הרגל: כאב בצעד הראשון בבוקר',
     excerpt: 'השעון מצלצל, אתם פוקחים עיניים, מתיישבים על קצה המיטה ומורידים רגליים לרצפה. ואז זה מגיע: כאב חד, דוקר ומשתק בעקב. אם התיאור הזה נשמע לכם מוכר, אתם כנראה סובלים מדורבן בכף הרגל. במאמר המקיף הזה נבין מהו באמת הדורבן, ננפץ מיתוסים שמבזבזים לכם זמן וכסף, ונציג את פרוטוקול הטיפול המדעי והיעיל ביותר.',
     date: '18 בפברואר 2025',
     category: 'כאבי כף רגל',
@@ -651,6 +707,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['דורבן', 'Plantar Fasciitis', 'כאב בעקב', 'כאב בכף הרגל', 'פיזיותרפיה לדורבן', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'טיפול בדורבן', 'כאב צעד ראשון', 'פיזיותרפיסט מומלץ באשדוד'],
     relatedPosts: ['ankle-sprain-complete-guide', 'running-injuries-prevention-treatment-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> תרגילי חיזוק עם משקל לגיד ולפאשיה נמצאו יעילים יותר ממתיחות בלבד לטווח הארוך (Rathleff et al., 2014). פרוטוקולים בינלאומיים משלבים טיפול ידני ותרגול (Martin et al., 2014).</p>
+      </div>
       <p>השעון מצלצל, אתם פוקחים עיניים, מתיישבים על קצה המיטה ומורידים רגליים לרצפה. ואז זה מגיע: כאב חד, דוקר ומשתק בעקב, שמרגיש כאילו דרכתם על זכוכית או מסמר לוהט. אתם מדדים לשירותים, נאחזים בקירות, ואחרי כמה דקות – הפלא ופלא – הכאב נרגע מעט ואפשר "להתניע" את היום. אבל בערב? הוא חוזר בגדול.</p>
       
       <p>אם התיאור הזה נשמע לכם מוכר, אתם כנראה סובלים מהתופעה האורתופדית הנפוצה ביותר בכף הרגל: Plantar Fasciitis, או בשמה העממי והמוכר יותר בישראל – "דורבן".</p>
@@ -812,6 +871,7 @@ export const blogPosts: BlogPost[] = [
     id: '89',
     slug: 'neck-pain-complete-guide',
     title: 'כאבי צוואר: המדריך המדעי המלא לאבחון, טיפול ומניעה (ולמה ה-MRI שלכם כנראה משקר)',
+    seoTitle: 'כאבי צוואר: למה ממצא ב-MRI אינו הכאב',
     excerpt: 'הצוואר שלנו הוא פלא הנדסי, אבל עבור רבים מאיתנו הוא הופך למקור סבל יומיומי. במאמר המקיף הזה נשים את המיתוסים בצד, נצלול למחקרים העדכניים ביותר, ונבין איך באמת מטפלים בכאבי צוואר – בלי "חירטוטים" ובלי הבטחות שווא.',
     date: '15 בפברואר 2025',
     category: 'טיפול בכאבי צוואר',
@@ -820,6 +880,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['כאבי צוואר', 'צוואר תפוס', 'Cervical Pain', 'טיפול בכאבי צוואר', 'פיזיותרפיה לכאבי צוואר', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'רדיקולופתיה צווארית', 'צוואר תפוס אקוטי', 'פיזיותרפיסט מומלץ באשדוד', 'MRI צוואר', 'בלט דיסק צווארי'],
     relatedPosts: ['lower-back-pain-complete-guide', 'shoulder-pain-complete-guide', 'what-happens-in-physiotherapy-treatment', 'ergonomics-work-from-home-guide'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> ממצאי MRI בצוואר שכיחים גם אצל אנשים בלי כאב (Nakashima et al., 2015). חיזוק השרירים המייצבים העמוקים הוא חלק מהטיפול (Blanpied et al., 2017; Gross et al., 2015).</p>
+      </div>
       <p>הצוואר שלנו הוא פלא הנדסי. הוא נושא את הראש (ששוקל כ-5 ק"ג בממוצע – בערך כמו כדור באולינג), מאפשר לנו להביט לכל כיוון כדי לשרוד, ומגן על "כבל התקשורת" החשוב ביותר בגוף – חוט השדרה. אבל עבור רבים מאיתנו, הפלא הזה הופך למקור סבל יומיומי.</p>
       
       <p>אם הגעתם לכאן, אתם כנראה מכירים את התחושה: הקימה בבוקר עם צוואר "נעול", הכאב החד כשמנסים לעשות רוורס עם הרכב, או תחושת השריפה שמתפשטת לכתפיים אחרי יום עבודה מול המחשב. אתם לא לבד. כאבי צוואר הם הסיבה הרביעית בעולם לנכות ותחלואה, וכמעט 70% מהאוכלוסייה יחוו אותם בשלב כלשהו בחייהם.</p>
@@ -1007,6 +1070,7 @@ export const blogPosts: BlogPost[] = [
     id: '88',
     slug: 'frozen-shoulder-complete-guide',
     title: 'כתף קפואה: המדריך המלא לאבחון, טיפול ושחרור מהכאב',
+    seoTitle: 'כתף קפואה: כמה זמן זה נמשך ואיך מטפלים',
     excerpt: 'כתף קפואה היא תופעה מתסכלת וכואבת שגורמת להגבלה משמעותית בתנועה. במאמר זה נבין את שלבי המחלה, נכיר את הטיפול הנכון בכל שלב, ונראה כיצד פיזיותרפיה מקצועית יכולה לקצר את משך הסבל ולשפר את איכות החיים.',
     date: '12 בפברואר 2025',
     category: 'כתף קפואה',
@@ -1015,6 +1079,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['כתף קפואה', 'Frozen Shoulder', 'Adhesive Capsulitis', 'טיפול בכתף קפואה', 'פיזיותרפיה לכתף קפואה', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'שיקום כתף', 'כאבי כתף', 'פיזיותרפיסט ספורט באשדוד'],
     relatedPosts: ['shoulder-pain-complete-guide', 'what-happens-in-physiotherapy-treatment', 'post-surgery-physiotherapy-necessity'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> הטיפול בכתף קפואה משתנה לפי השלב (Kelley et al., 2013). תרגול ביתי נועד להחזיר טווחי תנועה (Mertens et al., 2022).</p>
+      </div>
       <p>דמיינו את הסיטואציה הבאה: אתם מנסים להושיט יד לאחור כדי לקחת את הארנק מהכיס האחורי, או כדי לסגור את החזייה, ופתאום – כאב חד, פלח ומשתק עוצר אתכם. אתם מנסים להרים יד למדף גבוה במטבח, והכתף פשוט "נתקעת". הלילות הופכים לסיוט, השינה נפגעת, והתסכול גובר.</p>
       
       <p>אם זה נשמע לכם מוכר, ייתכן שאתם סובלים מתופעה המכונה "כתף קפואה" (Frozen Shoulder), או בשמה הרפואי: דלקת מסויידת של קופסית הכתף (Adhesive Capsulitis).</p>
@@ -1148,6 +1215,7 @@ export const blogPosts: BlogPost[] = [
     id: '87',
     slug: 'knee-rehabilitation-after-surgery-complete-guide',
     title: 'שיקום ברך לאחר ניתוח: המדריך המלא לחזרה לחיים ולספורט',
+    seoTitle: 'שיקום ברך אחרי ניתוח: חזרה לספורט',
     excerpt: 'שיקום ברך לאחר ניתוח הוא תהליך מורכב שדורש מומחיות מיוחדת. במאמר זה נבין את שלבי השיקום, ננפץ מיתוסים ונראה כיצד גישה מדעית וספורטיבית מביאה לחזרה מלאה לתפקוד ולפעילות.',
     date: '10 בפברואר 2025',
     category: 'שיקום לאחר ניתוח',
@@ -1156,6 +1224,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['שיקום ברך', 'שיקום לאחר ניתוח ברך', 'ניתוח ACL', 'ניתוח מניסקוס', 'פיזיותרפיסט ספורט באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'שיקום ברך לאחר ניתוח', 'פיזיותרפיסט M.Sc', 'Return to Sport', 'שיקום ACL', 'שיקום מניסקוס'],
     relatedPosts: ['post-surgery-physiotherapy-necessity', 'hip-knee-replacement-rehabilitation-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> שיקום ברך אחרי ניתוח בנוי שלבים, ועוברים שלב רק אחרי שהמטרה הושגה (van Melick et al., 2016). תחושה טובה אינה סיבה לחזור לפעילות לפני שהרקמה הבשילה (Grindem et al., 2016).</p>
+      </div>
       <p>הרגע שבו אתה מתעורר מהניתוח הוא רגע מורכב. מצד אחד, ישנה תחושת הקלה – הבעיה המכאנית טופלה, הקרע אוחה, המניסקוס נתפר. מצד שני, המציאות נוחתת עליך במהירות: הרגל חבושה, הכאב נוכח, והשאלה הגדולה מרחפת באוויר – "האם אני אחזור לעצמי?".</p>
       
       <p>שמי אנדריי מייזלס, וכמי שמשמש כפיזיותרפיסט פרטי באשדוד, פיזיותרפיסט ספורט ובעל תואר שני (M.Sc) בפיזיותרפיה, ליוויתי מאות מטופלים – החל מספורטאים מקצועיים ועד לאנשים שפשוט רוצים ללכת ללא כאב – במסע המאתגר הזה שנקרא "שיקום ברך". כתבתי את המאמר הזה כדי לעשות לכם סדר בבלאגן, לנפץ כמה מיתוסים, ולהסביר מדוע שיקום ברך הוא הרבה יותר מסתם "לעשות תרגילים", ומדוע הגישה המדעית והספורטיבית היא קריטית להצלחה שלכם. אם אתם מחפשים פיזיותרפיה פרטית באשדוד לשיקום ברך לאחר ניתוח, המאמר הזה יעזור לכם להבין מה צפוי לכם בתהליך השיקום.</p>
@@ -1260,6 +1331,7 @@ export const blogPosts: BlogPost[] = [
     id: '86',
     slug: 'post-surgery-physiotherapy-necessity',
     title: 'הניתוח הוא רק יריית הפתיחה: למה שיקום פיזיותרפי הוא לא "המלצה" אלא חובה',
+    seoTitle: 'שיקום אחרי ניתוח הוא חובה, לא המלצה',
     excerpt: 'עברתם ניתוח אורטופדי? המנתח עשה את עבודתו, אבל ההבדל בין ניתוח ש"הצליח על הנייר" לבין חזרה לחיים אמיתיים ללא מגבלות, טמון בדבר אחד: איכות השיקום הפיזיותרפי.',
     date: '7 בפברואר 2025',
     category: 'שיקום לאחר ניתוח',
@@ -1268,6 +1340,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['שיקום לאחר ניתוח', 'פיזיותרפיה לאחר ניתוח', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'שיקום אורטופדי', 'ניתוח ACL', 'החלפת מפרק', 'שיקום כתף', 'Post-surgery rehabilitation', 'Physical therapy after surgery', 'שיקום ניתוחי'],
     relatedPosts: ['knee-rehabilitation-after-surgery-complete-guide', 'hip-knee-replacement-rehabilitation-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> מרגע החתך מתחילים תהליכים שצריך לנהל, לא לחכות שהכאב יעבור (Kehlet, 1997; Husted, 2012). שיקום אחרי ניתוח הוא פרוטוקול מותאם, לא המלצה כללית (Bandholm et al., 2018).</p>
+      </div>
       <p>עברתם ניתוח אורטופדי? בשעה טובה. המנתח עשה את עבודתו ותיקן את מה שהיה שבור או קרוע. אבל אם אתם חושבים שבזה הסתיים הסיפור – טעות בידכם. ההבדל בין ניתוח ש"הצליח על הנייר" לבין חזרה לחיים אמיתיים ללא מגבלות, טמון בדבר אחד בלבד: איכות השיקום שתעשו ביום שאחרי.</p>
       
       <p>רגע אחרי שההרדמה פגה והמנתח מבשר שהכל עבר בהצלחה, מתחילה תקופה של חוסר ודאות. הגוף כואב, האיבר המנותח נפוח ומוגבל, והביטחון העצמי ביכולת לזוז יורד לאפס. הרבה מטופלים נופלים למלכודת המחשבתית של "אני אנוח בבית וזה יסתדר".</p>
@@ -1343,7 +1418,18 @@ export const blogPosts: BlogPost[] = [
       
       <p>עברתם ניתוח או שאתם מועמדים לאחד כזה? אל תחכו לרגע האחרון. <a href="/contact" style="color: #2080C0; text-decoration: underline;">צרו קשר</a> עוד היום כדי לתאם פגישת ייעוץ ובניית תוכנית שיקום. בואו נחזיר אתכם לעמוד על הרגליים, חזקים יותר ממה שהייתם קודם.</p>
 
-      <h2 id="references">מקורות מדעיים (References)</h2>
+            <h2>שאלות נפוצות</h2>
+
+      <h3>למה לא לחכות שהכאב יעבור?</h3>
+      <p>ההמתנה לכאב שעובר מעכבת את ניהול התהליכים שמתחילים כבר מהחתך (Husted, 2012; Kehlet, 1997).</p>
+
+      <h3>האם תרגול אחרי החלפת ברך נחקר?</h3>
+      <p>כן. פיזיותרפיה ותרגול אחרי החלפת ברך נבחנו במחקרים קליניים (Artz et al., 2015).</p>
+
+      <h3>האם תוכנית בית יכולה להספיק?</h3>
+      <p>תוכנית בית במעקב מקצועי יכולה להשתוות בניידות לאשפוז שיקומי, כשיש מעקב (Buhagiar et al., 2017).</p>
+
+<h2 id="references">מקורות מדעיים (References)</h2>
 
       <ul dir="ltr" style="text-align: left; list-style: none; padding-inline-start: 0;">
         <li>Artz, N., et al. (2015). <a href="https://doi.org/10.1186/s12891-015-0469-6" target="_blank" rel="noopener noreferrer" style="color: #2080C0; text-decoration: underline;">Effectiveness of physiotherapy exercise following total knee replacement: systematic review and meta-analysis</a>. <em>BMC Musculoskeletal Disorders, 16</em>(1). https://doi.org/10.1186/s12891-015-0469-6</li>
@@ -1360,6 +1446,7 @@ export const blogPosts: BlogPost[] = [
     id: '85',
     slug: 'shoulder-pain-complete-guide',
     title: 'כאבי כתף לא חייבים להיות גזירת גורל: המדריך המלא לטיפול ושיקום',
+    seoTitle: 'כאבי כתף: מתי פיזיותרפיה מספיקה בלי ניתוח',
     excerpt: 'כאב בכתף הוא אחד התלונות הנפוצות ביותר בקליניקה. במאמר זה נבין למה זה קורה, מתי צריך לדאוג, ואיך פיזיותרפיה מודרנית יכולה להחזיר אתכם לתנועה מלאה.',
     date: '5 בפברואר 2025',
     category: 'טיפול בכאבי כתף',
@@ -1368,6 +1455,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['כאבי כתף', 'פיזיותרפיה לכאבי כתף', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'Rotator Cuff', 'תסמונת הצביטה', 'כתף קפואה', 'שיקום כתף', 'Shoulder Pain', 'Impingement Syndrome', 'Frozen Shoulder'],
     relatedPosts: ['neck-pain-complete-guide', 'frozen-shoulder-complete-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> תרגול ספציפי הפחית את הצורך בניתוח אצל חלק מהמטופלים עם תסמונת צביטה (Holmgren et al., 2012). בכאב תת-אקרומיאלי, ניתוח ארתרוסקופי לשחרור לא נמצא עדיף על ניתוח דמה (Beard et al., 2018).</p>
+      </div>
       <p>כאב בכתף הוא אחד התלונות הנפוצות ביותר בקליניקה. בין אם זה קרה בגלל אימון בחדר כושר, ישיבה ממושכת מול המחשב, או "סתם ככה" יום אחד בלי סיבה ברורה – ההגבלה בתנועה יכולה להוציא אתכם מדעתכם. המאמר הזה יעשה לכם סדר: למה זה קורה, מתי צריך לדאוג, ואיך <a href="/services/shoulder-pain-ashdod" style="color: #2080C0; text-decoration: underline;">פיזיותרפיה מודרנית</a> יכולה להחזיר אתכם לתנועה מלאה. אם אתם מחפשים פיזיותרפיה פרטית באשדוד לטיפול בכאבי כתף, המאמר הזה יעזור לכם להבין מה צפוי לכם בתהליך הטיפול.</p>
       
       <p>דמיינו את הפעולה הכי פשוטה: להושיט יד למדף העליון במטבח להביא כוס, ללבוש חולצה בבוקר, או לחפוף את הראש. עבור רוב האנשים אלו פעולות אוטומטיות. עבור מי שסובל מכאבי כתף, כל פעולה כזו הופכת לאתגר שמלווה בכיווץ פנים.</p>
@@ -1446,7 +1536,18 @@ export const blogPosts: BlogPost[] = [
       
       <p>סובלים מכאבי כתף? מרגישים שהתנועה מוגבלת? אל תישארו עם הכאב לבד. אני מזמין אתכם <a href="/contact" style="color: #2080C0; text-decoration: underline;">ליצור איתי קשר</a>, ויחד נבנה את הדרך שלכם חזרה לתנועה מלאה ולחיים ללא כאבים.</p>
 
-      <h2 id="references">מקורות מדעיים (References)</h2>
+            <h2>שאלות נפוצות</h2>
+
+      <h3>האם קרע ב-MRI אומר שצריך ניתוח?</h3>
+      <p>לא בהכרח. ממצאי MRI בכתף, כולל קרעים, שכיחים גם אצל אנשים בלי כאב (Sher et al., 1995).</p>
+
+      <h3>האם תרגול מפחית ניתוחי כתף?</h3>
+      <p>בתסמונת צביטה, אסטרטגיית תרגול ספציפית הפחיתה את הצורך בניתוח אצל חלק מהמטופלים (Holmgren et al., 2012).</p>
+
+      <h3>האם שחרור ארתרוסקופי עדיף על ניתוח דמה?</h3>
+      <p>בכאב תת-אקרומיאלי, ניתוח ארתרוסקופי לשחרור לא נמצא עדיף על ניתוח דמה (Beard et al., 2018).</p>
+
+<h2 id="references">מקורות מדעיים (References)</h2>
 
       <ul dir="ltr" style="text-align: left; list-style: none; padding-inline-start: 0;">
         <li>Beard, D. J., et al. (2018). <a href="https://doi.org/10.1016/S0140-6736(17)32457-1" target="_blank" rel="noopener noreferrer" style="color: #2080C0; text-decoration: underline;">Arthroscopic subacromial decompression for subacromial shoulder pain (CSAW): a multicentre, pragmatic, parallel group, placebo-controlled, three-group, randomised surgical trial</a>. <em>The Lancet, 391</em>(10118), 329-338. https://doi.org/10.1016/S0140-6736(17)32457-1</li>
@@ -1463,6 +1564,7 @@ export const blogPosts: BlogPost[] = [
     id: '84',
     slug: 'lower-back-pain-complete-guide',
     title: 'המדריך המלא לכאבי גב תחתון: המדע, המיתוסים והדרך הבטוחה לחזרה לשגרה',
+    seoTitle: 'כאבי גב תחתון: מה המדע באמת ממליץ',
     excerpt: 'כאב גב תחתון הוא ה"מגיפה השקטה" של העולם המערבי – כ-80% מהאוכלוסייה יחוו לפחות אפיזודה אחת במהלך חייהם. במאמר זה נבין מה באמת קורה בגוף, ננפץ מיתוסים מסוכנים ונראה את דרכי הטיפול היעילות ביותר.',
     date: '1 בפברואר 2025',
     category: 'טיפול בכאבי גב',
@@ -1471,6 +1573,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['כאבי גב תחתון', 'כאב גב', 'פיזיותרפיה לכאבי גב', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'אישיאס', 'סיאטיקה', 'בלט דיסק', 'פריצת דיסק', 'Lower Back Pain', 'LBP', 'Non-specific back pain'],
     relatedPosts: ['neck-pain-complete-guide', 'ergonomics-work-from-home-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> בלטי דיסק ופריצות דיסק נמצאים גם אצל אנשים בלי כאבי גב (Brinjikji et al., 2015). ההנחיה היא להישאר פעילים, לא לנוח במיטה (Foster et al., 2018; Qaseem et al., 2017).</p>
+      </div>
       <p>כאב גב תחתון הוא, ללא ספק, ה"מגיפה השקטה" של העולם המערבי. אם הגעתם למאמר הזה, סביר להניח שגם אתם מכירים מקרוב את התחושה: אותה דקירה פתאומית כשמתכופפים להרים משהו, הנוקשות המייסרת בבוקר שלא נותנת לכם לצאת מהמיטה, או ההגבלה המרגיזה בתנועה שמונעת מכם לשחק עם הילדים או לצאת לריצה בטיילת. אם אתם סובלים מכאבי גב, אנו מציעים <a href="/services/back-pain-ashdod" style="color: #2080C0; text-decoration: underline;">טיפול מקצועי בכאבי גב</a>.</p>
       
       <p>כמי שעובד שנים רבות כפיזיותרפיסט פרטי באשדוד, ופוגש מדי שבוע עשרות מטופלים – מעובדי נמל ועד אנשי הייטק – אני רואה את התסכול, הפחד והבלבול העצום שיש סביב הנושא. האינטרנט מוצף במידע סותר, "תרופות פלא" והפחדות מיותרות.</p>
@@ -1600,6 +1705,7 @@ export const blogPosts: BlogPost[] = [
     id: '83',
     slug: 'running-injuries-prevention-treatment-guide',
     title: 'רצים בטיילת באשדוד? המדריך המקיף לפציעות ריצה, מניעה וטיפול מנצח',
+    seoTitle: 'פציעות ריצה בטיילת אשדוד: מניעה וטיפול',
     excerpt: 'בין 50% ל-70% מהרצים החובבים יחוו פציעה כלשהי במהלך שנה נתונה. במאמר זה נבין מדוע פציעות קורות ונראה כיצד פיזיותרפיה ספורטיבית יכולה לעזור לחזרה מהירה למסלול.',
     date: '30 בינואר 2025',
     category: 'פציעות ספורט',
@@ -1608,6 +1714,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['פציעות ריצה', 'ריצה באשדוד', 'ברך רצים', 'דורבן', 'שין ספלינט', 'שברי מאמץ', 'פיזיותרפיסט ספורט באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'תסמונת הכאב הפטלו-פמורלי', 'Plantar Fasciitis', 'Gait Analysis', 'Return to Run', 'ריצה בטיילת אשדוד'],
     relatedPosts: ['plantar-fasciitis-complete-guide', 'lower-back-pain-complete-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> בין 50% ל-70% מהרצים החובבים נפצעים במהלך שנה (van Gent et al., 2007). העלאת קצב הצעדים יכולה להפחית עומס על מפרקי הרגל (Heiderscheit et al., 2011).</p>
+      </div>
       <p>כל מי שגר באשדוד מכיר את התמונה הזו: שעת ערב מוקדמת, השמש מתחילה לשקוע בים, והטיילת היפהפייה שלנו מתמלאת באנרגיה. מהמסלולים המטופחים של פארק אשדוד ים, דרך השבילים שלאורך נחל לכיש ועד לקו החוף הזהוב – העיר שלנו הפכה למעצמת ריצה אמיתית.</p>
       
       <p>הריצה היא ספורט נפלא: היא נגישה, לא דורשת ציוד יקר (פרט לנעליים טובות), משפרת דרמטית את בריאות הלב וכלי הדם ותורמת לבריאות הנפשית.</p>
@@ -1694,7 +1803,18 @@ export const blogPosts: BlogPost[] = [
       
       <p>הים של אשדוד מחכה לכם. בואו נדאג שתרוצו לידו בביטחון וללא כאב. נתראה על המסלול!</p>
 
-      <h2 id="references">מקורות מדעיים (References)</h2>
+            <h2>שאלות נפוצות</h2>
+
+      <h3>כמה רצים חובבים נפצעים בשנה?</h3>
+      <p>בין 50% ל-70% מהרצים החובבים נפצעים במהלך שנה נתונה (van Gent et al., 2007).</p>
+
+      <h3>האם מתיחות לפני ריצה מונעות פציעות?</h3>
+      <p>מתיחה סטטית לפני ריצה לא נמצאה כמונעת פציעות (Lauersen et al., 2014).</p>
+
+      <h3>האם כדאי להגביר את קצב הצעדים?</h3>
+      <p>העלאת קצב הצעדים יכולה להפחית עומס על מפרקי הרגל בזמן ריצה (Heiderscheit et al., 2011).</p>
+
+<h2 id="references">מקורות מדעיים (References)</h2>
 
       <ul dir="ltr" style="text-align: left; list-style: none; padding-inline-start: 0;">
         <li>Barton, C. J., et al. (2010). <a href="https://doi.org/10.2165/11530780-000000000-00000" target="_blank" rel="noopener noreferrer" style="color: #2080C0; text-decoration: underline;">The efficacy of foot orthoses in the treatment of individuals with patellofemoral pain syndrome</a>. <em>Sports Medicine, 40</em>(5), 377-395. https://doi.org/10.2165/11530780-000000000-00000</li>
@@ -1711,6 +1831,7 @@ export const blogPosts: BlogPost[] = [
     id: '82',
     slug: 'ergonomics-work-from-home-guide',
     title: 'יושבים כל היום? המדריך המלא לארגונומיה נכונה',
+    seoTitle: 'יושבים כל היום? ארגונומיה לעבודה מהבית',
     excerpt: 'יושבים מול המחשב כל היום? המדריך המלא לארגונומיה נכונה ואיך לסיים את יום העבודה ללא כאב. נלמד איך לכוון את עמדת העבודה שלכם בצורה מושלמת ונבין מהו הכלל האחד שחשוב יותר מכל כרית אורתופדית.',
     date: '29 בינואר 2025',
     category: 'ארגונומיה',
@@ -1719,6 +1840,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['ארגונומיה', 'עמדת עבודה', 'כאבי גב', 'כאבי צוואר', 'עבודה מהבית', 'ישיבה נכונה', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'כאבי כתפיים', 'תסמונת התעלה הקרפלית', 'מרפק טניס', 'עמדת עמידה', 'standing desk'],
     relatedPosts: ['neck-pain-complete-guide', 'lower-back-pain-complete-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> הבעיה המרכזית היא חוסר תנועה, לא עצם הישיבה (Parry &amp; Straker, 2013; van Uffelen et al., 2010). עמדות ישיבה-עמידה יכולות להפחית את זמן הישיבה (Danquah et al., 2016; Shrestha et al., 2018).</p>
+      </div>
       <p>בעולם המודרני, ובמיוחד בערי חוף מתפתחות כמו אשדוד שבהן יש עליה גדולה בכמות העובדים מהבית ואנשי ההייטק, הישיבה הפכה לפעילות העיקרית שלנו. אנחנו יושבים ברכב בדרך לעבודה, יושבים מול המחשב 8-9 שעות, ואז חוזרים הביתה לשבת מול הטלוויזיה. כפיזיותרפיסט פרטי באשדוד, אני פוגש מדי יום מטופלים שסובלים מכאבי גב, צוואר, שורשי כפות הידיים וכאבי ראש, וכולם שואלים אותה שאלה: "איזה כיסא אני צריך לקנות ב-5,000 שקל כדי שזה יעבור?". אם אתם סובלים מכאבים הקשורים לישיבה, קראו גם על <a href="/blog/lower-back-pain-complete-guide" style="color: #2080C0; text-decoration: underline;">כאבי גב תחתון</a>, <a href="/blog/neck-pain-complete-guide" style="color: #2080C0; text-decoration: underline;">כאבי צוואר</a> ועל <a href="/blog/shoulder-pain-complete-guide" style="color: #2080C0; text-decoration: underline;">כאבי כתף</a>.</p>
       
       <p>התשובה שלי בדרך כלל מפתיעה אותם: הכיסא הוא רק חלק קטן מהמשוואה. במאמר מקיף זה, ננפץ את המיתוסים על "ישיבה נכונה", נלמד איך לכוון את עמדת העבודה שלכם בצורה מושלמת (בחינם), ונבין מהו הכלל האחד שחשוב יותר מכל כרית אורתופדית.</p>
@@ -1783,7 +1907,18 @@ export const blogPosts: BlogPost[] = [
       
       <p>אם למרות השינויים אתם עדיין סובלים מכאב בסוף היום, ייתכן שכבר התפתחה בעיה הדורשת התערבות. כאבי שורש כף יד (כמו תסמונת התעלה הקרפלית), מרפק טניס או כאבי גב כרוניים לא יעברו רק מכיוון הכיסא. במקרים אלו, חשוב לפנות אל פיזיותרפיסט פרטי באשדוד או מומחה לארגונומיה, שיאבחן את מקור הכאב, יטפל ברקמות הפגועות ויתאים לכם תוכנית חיזוק אישית. במכון פיזיותרפיה פרטי באשדוד שלנו, אנחנו מתמחים בטיפול בבעיות הקשורות לעבודה מהבית ולעמדות עבודה. אם אתם מחפשים פיזיותרפיה פרטית באשדוד לטיפול בכאבים הקשורים לישיבה, המאמר הזה יעזור לכם להבין מה צפוי לכם בתהליך הטיפול. למידע נוסף על <a href="/services" style="color: #2080C0; text-decoration: underline;">השירותים שלנו</a> או <a href="/contact" style="color: #2080C0; text-decoration: underline;">צרו קשר</a> לקביעת תור. זכרו: הגוף שלכם הוא הכלי הכי חשוב בעבודה שלכם – תשמרו עליו.</p>
 
-      <h2 id="references">מקורות מדעיים (References)</h2>
+            <h2>שאלות נפוצות</h2>
+
+      <h3>האם ישיבה מסוכנת כמו עישון?</h3>
+      <p>לא. הבעיה המרכזית היא חוסר התנועה, לא עצם הישיבה (Parry &amp; Straker, 2013; van Uffelen et al., 2010).</p>
+
+      <h3>האם עמדת ישיבה-עמידה מפחיתה ישיבה?</h3>
+      <p>התערבויות במקום העבודה, כולל עמדות ישיבה-עמידה, יכולות להפחית את זמן הישיבה (Danquah et al., 2016; Shrestha et al., 2018).</p>
+
+      <h3>האם הפסקות קצרות עוזרות לגב?</h3>
+      <p>הפסקות קצרות במהלך יום עבודה נבחנו כדרך להפחית אי-נוחות וכאב גב תחתון (Waongenngarm et al., 2018).</p>
+
+<h2 id="references">מקורות מדעיים (References)</h2>
 
       <ul dir="ltr" style="text-align: left; list-style: none; padding-inline-start: 0;">
         <li>Coenen, P., et al. (2018). <a href="https://doi.org/10.1136/bjsports-2016-096795" target="_blank" rel="noopener noreferrer" style="color: #2080C0; text-decoration: underline;">Associations of occupational standing with musculoskeletal symptoms: a systematic review with meta-analysis</a>. <em>British Journal of Sports Medicine, 52</em>(3), 176-183. https://doi.org/10.1136/bjsports-2016-096795</li>
@@ -1800,6 +1935,7 @@ export const blogPosts: BlogPost[] = [
     id: '81',
     slug: 'hip-knee-replacement-rehabilitation-guide',
     title: 'ניתוח החלפת ירך או ברך כל מה שצריך לדעת',
+    seoTitle: 'החלפת ברך או ירך: למה השיקום קובע',
     excerpt: 'החלפת מפרק ירך או ברך? המדריך המלא לשיקום מוצלח וחזרה לעצמאות באשדוד. ניתוח החלפת מפרק נחשב לאחד הניתוחים האורתופדיים השכיחים והמוצלחים ביותר. המדריך המקיף הזה יסביר מה צפוי לכם, מהו "חלון ההזדמנויות" הקריטי, ולמה ליווי פיזיותרפי צמוד הוא לא מותרות – אלא חובה.',
     date: '28 בינואר 2025',
     category: 'החלפת מפרק',
@@ -1808,6 +1944,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['החלפת מפרק ברך', 'החלפת מפרק ירך', 'שיקום לאחר החלפת מפרק', 'פיזיותרפיה לאחר ניתוח', 'שיקום ברך', 'שיקום ירך', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'שיקום אורטופדי', 'Pre-Hab', 'חלון הזדמנויות', 'שיקום לאחר ניתוח באשדוד'],
     relatedPosts: ['knee-rehabilitation-after-surgery-complete-guide', 'post-surgery-physiotherapy-necessity', 'what-happens-in-physiotherapy-treatment'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> החלפת ברך יחד עם טיפול לא-ניתוחי נמצאה יעילה יותר מטיפול לא-ניתוחי בלבד, וגם הזרוע הלא-ניתוחית השתפרה (Skou et al., 2015). השיקום שאחרי הניתוח הוא זה שבונה מחדש את היכולת לזוז.</p>
+      </div>
       <p>ניתוח החלפת מפרק (ברך או ירך) נחשב כיום לאחד הניתוחים האורתופדיים השכיחים והמוצלחים ביותר ברפואה המודרנית. הוא מעניק תקווה ואיכות חיים חדשה לאנשים שסבלו במשך שנים מכאבים כרוניים, מגבלות תנועה ושחיקת סחוס (Osteoarthritis - OA). תושבים רבים באשדוד והסביבה בוחרים לעבור את הניתוח בבית החולים "אסותא אשדוד" החדשני, ב"קפלן" או במרכזים רפואיים במרכז הארץ. למידע כללי על <a href="/blog/post-surgery-physiotherapy-necessity" style="color: #2080C0; text-decoration: underline;">שיקום לאחר ניתוח</a>.</p>
       
       <p>אך ישנה אמת אחת שחשוב להניח על השולחן כבר בהתחלה: הניתוח הוא רק יריית הפתיחה. במחקר מבוקר, החלפת ברך בשילוב טיפול לא-ניתוחי הייתה יעילה יותר מטיפול לא-ניתוחי בלבד, וגם הזרוע הלא-ניתוחית השתפרה (Skou et al., 2015). המנתח הוא אומן שמחליף את החלקים השחוקים, אך אתם – בעזרת הפיזיותרפיסט – הם אלו שבונים מחדש את היכולת לזוז. ההצלחה האמיתית של הניתוח לא נקבעת בחדר הניתוח, אלא בחודשים שאחריו, בתהליך השיקום הסיזיפי והמתגמל.</p>
@@ -1925,6 +2064,9 @@ export const blogPosts: BlogPost[] = [
     keywords: ['אורתופד', 'פיזיותרפיסט', 'מתי לאורטופד', 'מתי לפיזיותרפיסט', 'כאבי גב', 'כאבי ברך', 'פיזיותרפיסט פרטי באשדוד', 'מכון פיזיותרפיה פרטי באשדוד', 'הבדל בין אורתופד לפיזיותרפיסט', 'מתי צריך ניתוח'],
     relatedPosts: ['neck-pain-complete-guide', 'lower-back-pain-complete-guide', 'what-happens-in-physiotherapy-treatment'],
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> ממצאי דימות, כולל בלטי דיסק, אינם זהים לכאב (Brinjikji et al., 2015; Chou et al., 2009). בכתף תת-אקרומיאלית, במניסקוס ניווני ובברך ניוונית, ארתרוסקופיה לא נמצאה טובה יותר מטיפול לא-ניתוחי או מניתוח דמה (Beard et al., 2018; Sihvonen et al., 2013; Thorlund et al., 2015).</p>
+      </div>
       <p>למה אתם מבזבזים זמן אצל האורתופד? האמת על ההבדל בין "מנתח" ל"מטפל"</p>
       
       <p>ישנה טעות נפוצה, כמעט היסטורית, בקרב הציבור בישראל. כשכואב הגב, כשהברך מציקה בריצה או כשהצוואר נתפס, האינסטינקט הראשוני הוא: "אני צריך לקבוע תור לאורתופד". ואז מתחיל התהליך המתיש: מחכים חודש (במקרה הטוב) לתור, יושבים בחדר ההמתנה, נכנסים לרופא ל-5 דקות, ומקבלים... מרשם לאתופן והפניה לפיזיותרפיה.</p>
@@ -1982,7 +2124,18 @@ export const blogPosts: BlogPost[] = [
       
       <p>במכון פיזיותרפיה פרטי באשדוד, אתם מקבלים אבחון מקצועי וטיפול מעמיק כבר מהרגע הראשון. חבל על הזמן שלכם בחדרי המתנה. הגוף שלכם צריך תנועה, לא תורים. <a href="/contact" style="color: #2080C0; text-decoration: underline;">צרו קשר</a> לקביעת תור או למדו עוד על <a href="/services" style="color: #2080C0; text-decoration: underline;">השירותים שלנו</a>.</p>
 
-      <h2 id="references">מקורות מדעיים (References)</h2>
+            <h2>שאלות נפוצות</h2>
+
+      <h3>האם ממצא בדימות הוא הסיבה לכאב?</h3>
+      <p>לא בהכרח. בלטי דיסק ושינויים ניווניים נמצאים גם אצל אנשים בלי כאב (Brinjikji et al., 2015; Chou et al., 2009).</p>
+
+      <h3>מתי ארתרוסקופיה לא נמצאה עדיפה?</h3>
+      <p>בכאב כתף תת-אקרומיאלי, במניסקוס ניווני ובברך ניוונית, הניתוח לא נמצא טוב יותר מטיפול לא-ניתוחי או מניתוח דמה (Beard et al., 2018; Sihvonen et al., 2013; Thorlund et al., 2015).</p>
+
+      <h3>מתי כן פונים לאורתופד?</h3>
+      <p>כשכבר יש אבחון ופיזיותרפיה, והשאלה היא אם נזק מבני ברור מצריך ניתוח. וגם כשכאב דלקתי חד לא מאפשר תנועה, ויש צורך בזריקה. בשאר כאבי השלד-שריר הכתובת הראשונה היא פיזיותרפיסט.</p>
+
+<h2 id="references">מקורות מדעיים (References)</h2>
 
       <ul dir="ltr" style="text-align: left; list-style: none; padding-inline-start: 0;">
         <li>Beard, D. J., et al. (2018). <a href="https://doi.org/10.1016/S0140-6736(17)32457-1" target="_blank" rel="noopener noreferrer" style="color: #2080C0; text-decoration: underline;">Arthroscopic subacromial decompression for subacromial shoulder pain (CSAW): a multicentre, pragmatic, parallel group, placebo-controlled, three-group, randomised surgical trial</a>. <em>The Lancet, 391</em>(10118), 329-338. https://doi.org/10.1016/S0140-6736(17)32457-1</li>
@@ -2005,6 +2158,9 @@ export const blogPosts: BlogPost[] = [
     categoryId: 'treatment-process',
     image: '/images/blog/physiotherapy-treatment-process.png',
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> חלק מהמפגש הוא להסביר מה בסדר, לא רק מה פגום (Louw et al., 2016). בכאבי גב, התרגול הוא מה ששומר על השיפור לאורך זמן (Foster et al., 2018; Hayden et al., 2005; Qaseem et al., 2017).</p>
+      </div>
       <p>כשאנשים מתקשרים לקבוע תור ראשון אצלי כפיזיותרפיסט פרטי באשדוד, אני שומע בקול שלהם תערובת של תקווה וחשש. הם כואבים, הם מתוסכלים, ולעיתים קרובות הם כבר ראו רופא אחד או שניים שנתנו להם כדורים שלא עזרו. השאלה שמרחפת באוויר היא תמיד: "מה אתה תעשה ששונה ממה שכבר עשיתי?".</p>
       
       <p>התשובה טמונה במילה אחת: אבחון. ההבדל בין טיפול ש"נעים בגב ליום אחד" לבין טיפול שפותר את הבעיה מהשורש, הוא היכולת לזהות לא רק מה כואב, אלא למה זה כואב. במאמר זה אקח אתכם יד ביד אל מאחורי הקלעים של הקליניקה, ואסביר שלב אחר שלב איך עובד תהליך ה"בילוש" הפיזיותרפי, ואיך אנחנו בונים את הדרך להחלמה. אם אתם מחפשים פיזיותרפיה פרטית באשדוד, המאמר הזה יעזור לכם להבין מה צפוי לכם בתהליך הטיפול. למקרים ספציפיים, קראו על <a href="/blog/lower-back-pain-complete-guide" style="color: #2080C0; text-decoration: underline;">טיפול בכאבי גב</a>, <a href="/blog/neck-pain-complete-guide" style="color: #2080C0; text-decoration: underline;">כאבי צוואר</a>, <a href="/blog/shoulder-pain-complete-guide" style="color: #2080C0; text-decoration: underline;">כאבי כתף</a> או <a href="/blog/post-surgery-physiotherapy-necessity" style="color: #2080C0; text-decoration: underline;">שיקום לאחר ניתוח</a>.</p>
@@ -2075,7 +2231,18 @@ export const blogPosts: BlogPost[] = [
       
       <p>הגוף שלכם הוא המכונה המתוחכמת ביותר בעולם – בואו ניתן לו את הטיפול הראוי לו. <a href="/contact" style="color: #2080C0; text-decoration: underline;">צרו קשר</a> לקביעת תור או למדו על <a href="/services" style="color: #2080C0; text-decoration: underline;">השירותים שלנו</a>.</p>
 
-      <h2 id="references">מקורות מדעיים (References)</h2>
+            <h2>שאלות נפוצות</h2>
+
+      <h3>מה בודקים במפגש הראשון?</h3>
+      <p>המפגש כולל בירור של מה מעורר את הכאב וגם של מה עדיין עובד. ההסבר הזה הוא חלק מהטיפול (Louw et al., 2016).</p>
+
+      <h3>האם תרגול עוזר לכאבי גב?</h3>
+      <p>בכאבי גב, תרגול הוא טיפול מומלץ ששומר על השיפור, לא תוספת אופציונלית (Foster et al., 2018; Hayden et al., 2005; Qaseem et al., 2017).</p>
+
+      <h3>כמה זמן נמשך טיפול?</h3>
+      <p>מפגש בקליניקה נמשך בדרך כלל 45–60 דקות. המפגש הראשון ארוך יותר כי הוא כולל אבחון.</p>
+
+<h2 id="references">מקורות מדעיים (References)</h2>
 
       <ul dir="ltr" style="text-align: left; list-style: none; padding-inline-start: 0;">
         <li>Babatunde, O. O., et al. (2017). <a href="https://doi.org/10.1371/journal.pone.0178621" target="_blank" rel="noopener noreferrer" style="color: #2080C0; text-decoration: underline;">Effective treatment options for musculoskeletal pain in primary care: a systematic overview of current evidence</a>. <em>PLOS ONE, 12</em>(6), e0178621. https://doi.org/10.1371/journal.pone.0178621</li>
@@ -2094,12 +2261,16 @@ export const blogPosts: BlogPost[] = [
     id: '78',
     slug: 'vertigo-bppv-complete-guide',
     title: 'טיפול בסחרחורות',
+    seoTitle: 'ורטיגו ו-BPPV: אבחון וטיפול בסחרחורת',
     excerpt: 'החדר מתחיל להסתובב סביבכם בטירוף? זהו ורטיגו – אחת התחושות המפחידות ביותר. במאמר זה נבין מה גורם לסחרחורות ואיך פיזיותרפיה יכולה לפתור את הבעיה תוך 30 דקות.',
     date: '25 בינואר 2025',
     category: 'ורטיגו וסחרחורות',
     categoryId: 'vertigo',
     image: '/images/blog/vertigo-bppv.png',
     content: `
+      <div class="geo-answer" style="border-right: 4px solid #2080C0; background: #E3F2FD; padding: 16px 20px; border-radius: 8px; margin: 0 0 1.5rem;">
+        <p style="margin: 0;"><strong>בקצרה:</strong> BPPV הוא אחד הגורמים השכיחים לסחרחורת שמקורה באוזן הפנימית (von Brevern et al., 2007). האבחון כולל מבחן Dix-Hallpike, והטיפול המוכר לסחרחורת הזו הוא תמרון אפלי (Bhattacharyya et al., 2017; Hilton &amp; Pinder, 2014).</p>
+      </div>
       <p>דמיינו את הסיטואציה הבאה: אתם נכנסים למיטה אחרי יום ארוך, מניחים את הראש על הכרית, עוצמים עיניים ולפתע – בום. החדר מתחיל להסתובב סביבכם בטירוף כמו קרוסלה שיצאה משליטה. הבטן מתהפכת, אתם חווים בחילה איומה, הזיעה הקרה מכסה את המצח, ואתם נאחזים במזרן בחוזקה מפחד שמא תיפלו לרצפה, למרות שאתם שוכבים בבטחה.</p>
       
       <p>אם חוויתם את זה, אתם יודעים שזו אחת התחושות המפחידות והמערערות ביותר שיש. תחושת חוסר האונים היא מוחלטת. קוראים לזה ורטיגו, או בשפה המקצועית BPPV. מבחינה אפידמיולוגית זהו אחד הגורמים השכיחים לסחרחורת שמקורה באוזן הפנימית (von Brevern et al., 2007).</p>
@@ -2192,7 +2363,18 @@ export const blogPosts: BlogPost[] = [
       
       <p>אם אתם, ההורים שלכם או מכרים שלכם מתלוננים שהחדר מסתובב, אל תתנו לזה לעבור לבד. הגיעו לאבחון וסטיבולרי בקליניקה. אנחנו נחזיר לכם את הקרקע היציבה מתחת לרגליים. במכון פיזיותרפיה פרטי באשדוד שלנו, אנחנו מתמחים בטיפול בורטיגו ובסחרחורות. כפיזיותרפיסט פרטי באשדוד עם ניסיון רב בטיפול בורטיגו, אני מתחייב לתת לכם את הטיפול המקצועי והמותאם ביותר. אם אתם מחפשים פיזיותרפיה פרטית באשדוד לטיפול בורטיגו, אנחנו כאן בשבילכם. למידע נוסף על <a href="/services/vestibular-ashdod" style="color: #2080C0; text-decoration: underline;">שיקום וסטיבולרי</a> או <a href="/contact" style="color: #2080C0; text-decoration: underline;">צרו קשר</a> לקביעת תור. למידע כללי על <a href="/blog/what-happens-in-physiotherapy-treatment" style="color: #2080C0; text-decoration: underline;">תהליך הטיפול</a>.</p>
 
-      <h2 id="references">מקורות מדעיים (References)</h2>
+            <h2>שאלות נפוצות</h2>
+
+      <h3>מהו BPPV?</h3>
+      <p>BPPV הוא אחד הגורמים השכיחים לסחרחורת שמקורה באוזן הפנימית, כשקריסטלים זזים בתוך התעלות (von Brevern et al., 2007).</p>
+
+      <h3>איך מאבחנים את הסחרחורת הזו?</h3>
+      <p>האבחון הקליני כולל מבחן Dix-Hallpike, שמכוון את הטיפול לפי התעלה המעורבת (Bhattacharyya et al., 2017).</p>
+
+      <h3>מה עושים אם הסחרחורת אינה מקריסטלים?</h3>
+      <p>כשהמקור הוא חולשה של המערכת הוסטיבולרית, שיקום וסטיבולרי מובנה הוא הטיפול המומלץ (Hall et al., 2022; McDonnell &amp; Hillier, 2015). תמרון אפלי מיועד ל-BPPV.</p>
+
+<h2 id="references">מקורות מדעיים (References)</h2>
 
       <ul dir="ltr" style="text-align: left; list-style: none; padding-inline-start: 0;">
         <li>Bhattacharyya, N., et al. (2017). <a href="https://doi.org/10.1177/0194599816689667" target="_blank" rel="noopener noreferrer" style="color: #2080C0; text-decoration: underline;">Clinical practice guideline: benign paroxysmal positional vertigo (update)</a>. <em>Otolaryngology–Head and Neck Surgery, 156</em>(S3). https://doi.org/10.1177/0194599816689667</li>

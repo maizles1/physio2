@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { getAllPosts, type BlogPost } from '@/config/blog.config'
+import { blogContentReviewedOn, getAllPosts, type BlogPost } from '@/config/blog.config'
 import { getRelatedPosts, getPostFaq, getPostSeoTitle } from '@/lib/blog-utils'
 import { toIsoDate } from '@/lib/date-utils'
 import { authorEntity, getMedicalTopic } from '@/config/geo.config'
@@ -45,6 +45,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     ? `https://physio-plus.co.il${post.image}`
     : 'https://physio-plus.co.il/images/logo/clinic-logo.png'
   const publishedIso = toIsoDate(post.date)
+  const reviewedIso = toIsoDate(blogContentReviewedOn)
+  const modifiedIso = [publishedIso, reviewedIso].filter(Boolean).sort().at(-1) || publishedIso
   const seoTitle = getPostSeoTitle(post)
   const description = optimizeMetaDescription(post.excerpt)
 
@@ -58,7 +60,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       url: `https://physio-plus.co.il/blog/${post.slug}`,
       type: 'article',
       publishedTime: publishedIso,
-      modifiedTime: publishedIso,
+      modifiedTime: modifiedIso,
       authors: ['אנדריי מייזלס'],
       tags: post.keywords || [],
       images: [
@@ -82,7 +84,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     other: {
       'article:author': 'אנדריי מייזלס',
       'article:published_time': publishedIso,
-      'article:modified_time': publishedIso,
+      'article:modified_time': modifiedIso,
       'article:section': post.category,
     },
   }
@@ -98,6 +100,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   const publishedIso = toIsoDate(post.date)
+  const reviewedIso = toIsoDate(blogContentReviewedOn)
+  const modifiedIso = [publishedIso, reviewedIso].filter(Boolean).sort().at(-1) || publishedIso
   const medicalTopic = getMedicalTopic(post.slug)
   const articleUrl = `https://physio-plus.co.il/blog/${post.slug}`
   const faqItems = getPostFaq(post)
@@ -126,7 +130,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     inLanguage: 'he-IL',
     image: post.image ? `https://physio-plus.co.il${post.image}` : 'https://physio-plus.co.il/images/logo/clinic-logo.png',
     datePublished: publishedIso,
-    dateModified: publishedIso,
+    dateModified: modifiedIso,
     author: {
       '@type': 'Person',
       '@id': 'https://physio-plus.co.il/about#andrey-meizels',
@@ -140,7 +144,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       '@id': 'https://physio-plus.co.il/about#andrey-meizels',
       name: authorEntity.name,
     },
-    lastReviewed: publishedIso,
+    lastReviewed: modifiedIso,
     publisher: {
       '@type': 'Organization',
       '@id': 'https://physio-plus.co.il/#organization',
@@ -159,7 +163,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     },
     speakable: {
       '@type': 'SpeakableSpecification',
-      cssSelector: ['.geo-headline', '.geo-excerpt'],
+      cssSelector: ['.geo-headline', '.geo-excerpt', '.geo-answer'],
     },
     ...(medicalTopic
       ? {
