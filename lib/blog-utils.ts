@@ -125,6 +125,7 @@ export function searchPosts(query: string): BlogPost[] {
   const lowerQuery = query.toLowerCase()
   return blogPosts.filter(post => 
     post.title.toLowerCase().includes(lowerQuery) ||
+    (post.seoTitle?.toLowerCase().includes(lowerQuery) ?? false) ||
     post.excerpt.toLowerCase().includes(lowerQuery) ||
     post.content.toLowerCase().includes(lowerQuery) ||
     (post.keywords && post.keywords.some(kw => kw.toLowerCase().includes(lowerQuery)))

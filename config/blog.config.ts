@@ -7,8 +7,12 @@ export interface BlogPost {
   id: string
   slug: string
   title: string
-  /** כותרת קצרה ל-<title> ולשיתוף. עד 42 תווים: התבנית מוסיפה " | פיזיותרפיה.פלוס". אם חסר, משתמשים ב-title */
+  /** כותרת קצרה ל-<title>, ל-H1 ולרשימת הבלוג. עד 42 תווים: התבנית מוסיפה " | פיזיותרפיה.פלוס". אם חסר, משתמשים ב-title */
   seoTitle?: string
+  /** תיאור לתגית description: משפט שלם, עד 160 תווים. אם חסר, נגזר מה-excerpt */
+  seoDescription?: string
+  /** משפט אחד באנגלית עבור llms.txt */
+  summaryEn?: string
   excerpt: string
   content: string
   date: string
@@ -27,7 +31,7 @@ export interface BlogFaqItem {
 }
 
 /** עדכון תוכן קליני (ציטוטים, בקצרה, שאלות). נפרד מתאריך הפרסום. */
-export const blogContentReviewedOn = '30 בספטמבר 2026'
+export const blogContentReviewedOn = '4 באוקטובר 2026'
 
 /**
  * רשימת כל המאמרים - כולל המאמרים הקיימים והחדשים
@@ -39,12 +43,13 @@ export const blogPosts: BlogPost[] = [
     slug: 'active-rehabilitation-tissue-adaptation-guide',
     title: 'פיזיותרפיה היא לא "טיפול קסם": המדע שמאחורי שיקום אקטיבי, ניהול עומסים והסתגלות רקמות',
     seoTitle: 'שיקום אקטיבי: כמה זמן לוקח לרקמות להחלים',
+    summaryEn: 'Active rehabilitation depends on graded mechanical load; passive treatment alone does not change the long-term course of low back pain.',
     excerpt:
       'פיזיותרפיה אינה טיפול פסיבי: רקמות מחלימות בתגובה לעומס מבוקר. כוח שריר מבני נבנה תוך 6–12 שבועות, וגידים מסתגלים רק אחרי 12–24 שבועות של העמסה הדרגתית.',
     date: '27 בספטמבר 2026',
     category: 'תהליך הטיפול',
     categoryId: 'treatment-process',
-    image: '',
+    image: '/images/blog/active-rehabilitation-load-capacity.png',
     keywords: [
       'שיקום אקטיבי',
       'ניהול עומסים',
@@ -163,6 +168,8 @@ export const blogPosts: BlogPost[] = [
     slug: 'barefoot-minimalist-shoes-running-walking-guide',
     title: 'הטרנד היחף: כל מה שצריך לדעת על הליכה וריצה עם נעליים מינימליסטיות (Barefoot)',
     seoTitle: 'הליכה וריצה בנעלי ברפוט: מתי זה מסוכן',
+    seoDescription: 'נעלי ברפוט לריצה והליכה: נחיתה על קדמת כף הרגל משנה את העומס, ונעל מינימליסטית אינה זהה לריצה יחפה.',
+    summaryEn: 'A minimalist shoe is not biomechanically the same as barefoot running, and a rapid switch can overload the foot and ankle.',
     excerpt:
       'בעשור האחרון יותר רצים עוברים לנעלי ברפוט ומינימליזם. מה אומר המחקר על ביומכניקה, ברך מול קרסול, וסיכוני מעבר מהיר? מדריך מבוסס-ראיות למעבר בטוח ולמתי כדאי להתייעץ עם פיזיותרפיסט.',
     date: '3 במאי 2026',
@@ -293,6 +300,8 @@ export const blogPosts: BlogPost[] = [
     slug: 'shockwave-therapy-eswt-scientific-truth',
     title: 'גלי הלם בפיזיותרפיה: פתרון קסם טכנולוגי או טיפול מיותר? האמת המדעית מאחורי המכשיר',
     seoTitle: 'גלי הלם בפיזיותרפיה: מתי זה באמת עוזר',
+    seoDescription: 'גלי הלם בפיזיותרפיה: באילו טנדינופתיות נבדקו, ומתי התרגול נשאר הטיפול המרכזי ולא המכשיר.',
+    summaryEn: 'Shockwave therapy has been studied in selected tendinopathies, and the evidence for soft-tissue use is partial and uneven.',
     excerpt:
       'גלי הלם (ESWT) מוצגים לעתים כטיפול קסום לכאבים בעקב, באכילס ובכתף – אבל מה אומרים מטא-אנליזות ו-BJSM? במאמר נפרק את ההבדל בין גלים רדיאליים לממוקדים, מתי יש להתוויה, ולמה השיקום האקטיבי נשאר סטנדרט הזהב.',
     date: '12 באפריל 2026',
@@ -427,6 +436,8 @@ export const blogPosts: BlogPost[] = [
     slug: 'private-vs-kupa-physiotherapy-guide',
     title: 'פיזיותרפיה פרטית או דרך הקופה? המדריך המלא לקבלת ההחלטה הנכונה לשיקום שלך באשדוד',
     seoTitle: 'פיזיותרפיה פרטית או דרך הקופה באשדוד?',
+    seoDescription: 'פיזיותרפיה פרטית או קופת חולים באשדוד: זמינות, משך המפגש, ומה המחקר אומר על התחלה מוקדמת בכאבי גב.',
+    summaryEn: 'For low back pain, starting guideline-adherent physiotherapy early is linked to less later healthcare use.',
     excerpt: 'הדילמה של הכאב: לאן ללכת כשיש פציעה או כאב? מערכת הבריאות הציבורית עמוסה, וההמתנה לתור יכולה לקחת שבועות. במאמר זה נעשה סדר בשיקולים – זמן, איכות הטיפול, גישה אקטיבית, עלויות והחזרים – ולמה תושבי אשדוד בוחרים יותר ויותר בפיזיותרפיה פרטית ב-Physiotherapy Plus.',
     date: '8 בפברואר 2026',
     category: 'תהליך הטיפול',
@@ -520,6 +531,8 @@ export const blogPosts: BlogPost[] = [
     slug: 'ankle-sprain-complete-guide',
     title: 'נקעתם את הקרסול? המדריך המלא לטיפול, שיקום וחזרה מהירה לספורט (ולמה קרח ומנוחה זה לא מספיק)',
     seoTitle: 'נקע בקרסול: למה קרח ומנוחה לא מספיקים',
+    seoDescription: 'נקע בקרסול: למה קרח ומנוחה לא מספיקים, ואיך העמסה מוקדמת מחזירה ליציבות ולספורט.',
+    summaryEn: 'Ankle sprain is the most common sports injury, and early loading matters more than ice and rest alone.',
     excerpt: 'נקע בקרסול הוא פציעת הספורט הנפוצה ביותר בעולם. אבל העובדה שזה נפוץ, לא אומרת שזה "שטויות". כ-40% מהאנשים שלא משקמים נקע כמו שצריך, יפתחו "אי-יציבות כרונית". במאמר זה נבין בדיוק מה קרה לרגל שלכם, מתי צריך לרוץ לצילום ומתי לא, ומהו הפרוטוקול המדעי העדכני שיחזיר אתכם למגרש חזקים יותר משהייתם קודם.',
     date: '20 בפברואר 2025',
     category: 'פציעות ספורט',
@@ -699,6 +712,8 @@ export const blogPosts: BlogPost[] = [
     slug: 'plantar-fasciitis-complete-guide',
     title: 'דורבן בכף הרגל: למה הצעד הראשון בבוקר מרגיש כמו דריכה על מסמר? (והמדריך המלא לטיפול)',
     seoTitle: 'דורבן בכף הרגל: כאב בצעד הראשון בבוקר',
+    seoDescription: 'דורבן בכף הרגל: למה הצעד הראשון בבוקר כואב, ומה תרגול חיזוק משנה לעומת מתיחה בלבד.',
+    summaryEn: 'Heavy slow resistance for the plantar fascia was more effective long-term than stretching alone in a key trial.',
     excerpt: 'השעון מצלצל, אתם פוקחים עיניים, מתיישבים על קצה המיטה ומורידים רגליים לרצפה. ואז זה מגיע: כאב חד, דוקר ומשתק בעקב. אם התיאור הזה נשמע לכם מוכר, אתם כנראה סובלים מדורבן בכף הרגל. במאמר המקיף הזה נבין מהו באמת הדורבן, ננפץ מיתוסים שמבזבזים לכם זמן וכסף, ונציג את פרוטוקול הטיפול המדעי והיעיל ביותר.',
     date: '18 בפברואר 2025',
     category: 'כאבי כף רגל',
@@ -872,6 +887,8 @@ export const blogPosts: BlogPost[] = [
     slug: 'neck-pain-complete-guide',
     title: 'כאבי צוואר: המדריך המדעי המלא לאבחון, טיפול ומניעה (ולמה ה-MRI שלכם כנראה משקר)',
     seoTitle: 'כאבי צוואר: למה ממצא ב-MRI אינו הכאב',
+    seoDescription: 'כאבי צוואר: מתי ממצא ב-MRI אינו הסיבה לכאב, ומה כולל טיפול שמחזק את שרירי הצוואר העמוקים.',
+    summaryEn: 'Neck MRI findings, including disc bulges, are common in people without pain.',
     excerpt: 'הצוואר שלנו הוא פלא הנדסי, אבל עבור רבים מאיתנו הוא הופך למקור סבל יומיומי. במאמר המקיף הזה נשים את המיתוסים בצד, נצלול למחקרים העדכניים ביותר, ונבין איך באמת מטפלים בכאבי צוואר – בלי "חירטוטים" ובלי הבטחות שווא.',
     date: '15 בפברואר 2025',
     category: 'טיפול בכאבי צוואר',
@@ -1071,6 +1088,8 @@ export const blogPosts: BlogPost[] = [
     slug: 'frozen-shoulder-complete-guide',
     title: 'כתף קפואה: המדריך המלא לאבחון, טיפול ושחרור מהכאב',
     seoTitle: 'כתף קפואה: כמה זמן זה נמשך ואיך מטפלים',
+    seoDescription: 'כתף קפואה: איך השלב משנה את הטיפול, וכמה זמן לוקח להחזיר טווח תנועה בתרגול ביתי.',
+    summaryEn: 'Frozen shoulder treatment depends on the stage, and home exercise is used to restore range of motion.',
     excerpt: 'כתף קפואה היא תופעה מתסכלת וכואבת שגורמת להגבלה משמעותית בתנועה. במאמר זה נבין את שלבי המחלה, נכיר את הטיפול הנכון בכל שלב, ונראה כיצד פיזיותרפיה מקצועית יכולה לקצר את משך הסבל ולשפר את איכות החיים.',
     date: '12 בפברואר 2025',
     category: 'כתף קפואה',
@@ -1216,6 +1235,8 @@ export const blogPosts: BlogPost[] = [
     slug: 'knee-rehabilitation-after-surgery-complete-guide',
     title: 'שיקום ברך לאחר ניתוח: המדריך המלא לחזרה לחיים ולספורט',
     seoTitle: 'שיקום ברך אחרי ניתוח: חזרה לספורט',
+    seoDescription: 'שיקום ברך אחרי ניתוח: שלבי החזרה לספורט, ולמה תחושה טובה אינה סיבה לחזור מוקדם מדי.',
+    summaryEn: 'Knee rehabilitation after surgery is staged, and feeling good is not a reason to return to sport early.',
     excerpt: 'שיקום ברך לאחר ניתוח הוא תהליך מורכב שדורש מומחיות מיוחדת. במאמר זה נבין את שלבי השיקום, ננפץ מיתוסים ונראה כיצד גישה מדעית וספורטיבית מביאה לחזרה מלאה לתפקוד ולפעילות.',
     date: '10 בפברואר 2025',
     category: 'שיקום לאחר ניתוח',
@@ -1332,6 +1353,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'post-surgery-physiotherapy-necessity',
     title: 'הניתוח הוא רק יריית הפתיחה: למה שיקום פיזיותרפי הוא לא "המלצה" אלא חובה',
     seoTitle: 'שיקום אחרי ניתוח הוא חובה, לא המלצה',
+    summaryEn: 'Physiological recovery starts at the incision, so rehabilitation should not wait until pain disappears.',
     excerpt: 'עברתם ניתוח אורטופדי? המנתח עשה את עבודתו, אבל ההבדל בין ניתוח ש"הצליח על הנייר" לבין חזרה לחיים אמיתיים ללא מגבלות, טמון בדבר אחד: איכות השיקום הפיזיותרפי.',
     date: '7 בפברואר 2025',
     category: 'שיקום לאחר ניתוח',
@@ -1447,6 +1469,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'shoulder-pain-complete-guide',
     title: 'כאבי כתף לא חייבים להיות גזירת גורל: המדריך המלא לטיפול ושיקום',
     seoTitle: 'כאבי כתף: מתי פיזיותרפיה מספיקה בלי ניתוח',
+    summaryEn: 'Specific exercise reduced the need for surgery in some people with shoulder impingement.',
     excerpt: 'כאב בכתף הוא אחד התלונות הנפוצות ביותר בקליניקה. במאמר זה נבין למה זה קורה, מתי צריך לדאוג, ואיך פיזיותרפיה מודרנית יכולה להחזיר אתכם לתנועה מלאה.',
     date: '5 בפברואר 2025',
     category: 'טיפול בכאבי כתף',
@@ -1565,6 +1588,8 @@ export const blogPosts: BlogPost[] = [
     slug: 'lower-back-pain-complete-guide',
     title: 'המדריך המלא לכאבי גב תחתון: המדע, המיתוסים והדרך הבטוחה לחזרה לשגרה',
     seoTitle: 'כאבי גב תחתון: מה המדע באמת ממליץ',
+    seoDescription: 'כאבי גב תחתון: למה ממצא בדימות אינו האבחנה, ולמה ההנחיה היא להישאר פעילים.',
+    summaryEn: 'Disc findings are common without pain, and guidelines advise staying active rather than bed rest.',
     excerpt: 'כאב גב תחתון הוא ה"מגיפה השקטה" של העולם המערבי – כ-80% מהאוכלוסייה יחוו לפחות אפיזודה אחת במהלך חייהם. במאמר זה נבין מה באמת קורה בגוף, ננפץ מיתוסים מסוכנים ונראה את דרכי הטיפול היעילות ביותר.',
     date: '1 בפברואר 2025',
     category: 'טיפול בכאבי גב',
@@ -1706,6 +1731,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'running-injuries-prevention-treatment-guide',
     title: 'רצים בטיילת באשדוד? המדריך המקיף לפציעות ריצה, מניעה וטיפול מנצח',
     seoTitle: 'פציעות ריצה בטיילת אשדוד: מניעה וטיפול',
+    summaryEn: 'About half to 70 percent of recreational runners are injured in a given year.',
     excerpt: 'בין 50% ל-70% מהרצים החובבים יחוו פציעה כלשהי במהלך שנה נתונה. במאמר זה נבין מדוע פציעות קורות ונראה כיצד פיזיותרפיה ספורטיבית יכולה לעזור לחזרה מהירה למסלול.',
     date: '30 בינואר 2025',
     category: 'פציעות ספורט',
@@ -1832,6 +1858,8 @@ export const blogPosts: BlogPost[] = [
     slug: 'ergonomics-work-from-home-guide',
     title: 'יושבים כל היום? המדריך המלא לארגונומיה נכונה',
     seoTitle: 'יושבים כל היום? ארגונומיה לעבודה מהבית',
+    seoDescription: 'ישיבה ממושכת ועבודה מהבית: הבעיה היא חוסר תנועה, ואיך עמדת ישיבה-עמידה והפסקות קצרות עוזרות.',
+    summaryEn: 'The main problem is prolonged stillness, not sitting itself; sit-stand options can reduce sitting time.',
     excerpt: 'יושבים מול המחשב כל היום? המדריך המלא לארגונומיה נכונה ואיך לסיים את יום העבודה ללא כאב. נלמד איך לכוון את עמדת העבודה שלכם בצורה מושלמת ונבין מהו הכלל האחד שחשוב יותר מכל כרית אורתופדית.',
     date: '29 בינואר 2025',
     category: 'ארגונומיה',
@@ -1936,6 +1964,8 @@ export const blogPosts: BlogPost[] = [
     slug: 'hip-knee-replacement-rehabilitation-guide',
     title: 'ניתוח החלפת ירך או ברך כל מה שצריך לדעת',
     seoTitle: 'החלפת ברך או ירך: למה השיקום קובע',
+    seoDescription: 'החלפת ברך או ירך: למה השיקום אחרי הניתוח קובע את התוצאה, לא רק הניתוח עצמו.',
+    summaryEn: 'Knee replacement plus non-surgical care beat non-surgical care alone in one trial, and the non-surgical group also improved.',
     excerpt: 'החלפת מפרק ירך או ברך? המדריך המלא לשיקום מוצלח וחזרה לעצמאות באשדוד. ניתוח החלפת מפרק נחשב לאחד הניתוחים האורתופדיים השכיחים והמוצלחים ביותר. המדריך המקיף הזה יסביר מה צפוי לכם, מהו "חלון ההזדמנויות" הקריטי, ולמה ליווי פיזיותרפי צמוד הוא לא מותרות – אלא חובה.',
     date: '28 בינואר 2025',
     category: 'החלפת מפרק',
@@ -2056,6 +2086,8 @@ export const blogPosts: BlogPost[] = [
     id: '80',
     slug: 'why-waste-time-at-orthopedist',
     title: 'למה אתם מבזבזים זמן אצל אורטופד?',
+    seoDescription: 'מתי פונים לאורתופד ומתי לפיזיותרפיסט: ממצא בדימות אינו תמיד הסיבה לכאב.',
+    summaryEn: 'Imaging findings do not equal pain, and arthroscopy was not better than non-operative care or sham surgery for several common conditions.',
     excerpt: 'למה אתם מבזבזים זמן אצל האורתופד? האמת על ההבדל בין "מנתח" ל"מטפל". כשכואב הגב, הברך או הצוואר, האינסטינקט הראשוני הוא לקבוע תור לאורתופד – אבל זה לא תמיד הפתרון הנכון.',
     date: '27 בינואר 2025',
     category: 'מתי לאורטופד ומתי לפיזיותרפיסט',
@@ -2152,6 +2184,7 @@ export const blogPosts: BlogPost[] = [
     id: '79',
     slug: 'what-happens-in-physiotherapy-treatment',
     title: 'מה קורה בטיפול פיזיותרפיה?',
+    summaryEn: 'A physiotherapy visit explains what is still working, and for back pain exercise is what keeps the improvement.',
     excerpt: 'מה קורה בטיפול פיזיותרפיה? השאלה שמרחפת באוויר היא תמיד: "מה אתה תעשה ששונה ממה שכבר עשיתי?". במאמר זה נבין את תהליך האבחון והטיפול המקצועי.',
     date: '26 בינואר 2025',
     category: 'תהליך הטיפול',
@@ -2262,6 +2295,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'vertigo-bppv-complete-guide',
     title: 'טיפול בסחרחורות',
     seoTitle: 'ורטיגו ו-BPPV: אבחון וטיפול בסחרחורת',
+    summaryEn: 'BPPV is a common cause of inner-ear vertigo and is assessed with the Dix-Hallpike test.',
     excerpt: 'החדר מתחיל להסתובב סביבכם בטירוף? זהו ורטיגו – אחת התחושות המפחידות ביותר. במאמר זה נבין מה גורם לסחרחורות ואיך פיזיותרפיה יכולה לפתור את הבעיה תוך 30 דקות.',
     date: '25 בינואר 2025',
     category: 'ורטיגו וסחרחורות',
@@ -2422,6 +2456,7 @@ export function searchPosts(query: string): BlogPost[] {
   const lowerQuery = query.toLowerCase()
   return blogPosts.filter(post => 
     post.title.toLowerCase().includes(lowerQuery) ||
+    (post.seoTitle?.toLowerCase().includes(lowerQuery) ?? false) ||
     post.excerpt.toLowerCase().includes(lowerQuery) ||
     post.content.toLowerCase().includes(lowerQuery)
   )

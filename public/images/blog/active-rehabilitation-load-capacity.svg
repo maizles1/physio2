@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#F4F8FC"/>
+  <rect x="0" y="0" width="16" height="630" fill="#2080C0"/>
+  <text x="80" y="78" fill="#2A3080" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700">Active rehab: load within tissue capacity</text>
+  <text x="80" y="118" fill="#3A4A66" font-family="Arial, Helvetica, sans-serif" font-size="22">Tissue adapts when load rises in steps, not in a single jump</text>
+  <line x1="120" y1="180" x2="120" y2="500" stroke="#2A3080" stroke-width="3"/>
+  <line x1="120" y1="500" x2="1080" y2="500" stroke="#2A3080" stroke-width="3"/>
+  <text x="96" y="196" fill="#5A6A80" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="end">high</text>
+  <text x="96" y="504" fill="#5A6A80" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="end">low</text>
+  <text x="120" y="536" fill="#5A6A80" font-family="Arial, Helvetica, sans-serif" font-size="16">start</text>
+  <text x="1040" y="536" fill="#5A6A80" font-family="Arial, Helvetica, sans-serif" font-size="16">later</text>
+  <path d="M140 420 C 280 400, 420 340, 560 300 S 860 210, 1040 180" fill="none" stroke="#2A3080" stroke-width="6" stroke-linecap="round"/>
+  <path d="M140 450 L 260 450 L 260 390 L 400 390 L 400 330 L 560 330 L 560 270 L 740 270 L 740 220 L 920 220 L 920 190 L 1040 190" fill="none" stroke="#2080C0" stroke-width="6" stroke-linecap="square" stroke-linejoin="round"/>
+  <path d="M140 450 L 220 450 L 300 210" fill="none" stroke="#C04545" stroke-width="4" stroke-dasharray="8 8"/>
+  <circle cx="300" cy="210" r="7" fill="#C04545"/>
+  <text x="316" y="206" fill="#C04545" font-family="Arial, Helvetica, sans-serif" font-size="18">too much, too soon</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <line x1="80" y1="580" x2="130" y2="580" stroke="#2080C0" stroke-width="6"/>
+    <text x="142" y="586" fill="#2A3080">Load</text>
+    <line x1="250" y1="580" x2="300" y2="580" stroke="#2A3080" stroke-width="6"/>
+    <text x="312" y="586" fill="#2A3080">Tissue capacity</text>
+  </g>
+</svg>

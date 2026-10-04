@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const reviewedIso = toIsoDate(blogContentReviewedOn)
   const modifiedIso = [publishedIso, reviewedIso].filter(Boolean).sort().at(-1) || publishedIso
   const seoTitle = getPostSeoTitle(post)
-  const description = optimizeMetaDescription(post.excerpt)
+  const description = optimizeMetaDescription(post.seoDescription?.trim() || post.excerpt)
 
   return {
     title: seoTitle,
@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
           url: postImage,
           width: 1200,
           height: 630,
-          alt: post.title,
+          alt: seoTitle,
         },
       ],
     },
@@ -106,6 +106,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const articleUrl = `https://physio-plus.co.il/blog/${post.slug}`
   const faqItems = getPostFaq(post)
   const citations = extractCitations(post.content)
+  const displayTitle = getPostSeoTitle(post)
   const faqSchema =
     faqItems.length > 0
       ? {
@@ -125,7 +126,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': ['Article', 'MedicalWebPage'],
-    headline: post.title,
+    headline: displayTitle,
     description: post.excerpt,
     inLanguage: 'he-IL',
     image: post.image ? `https://physio-plus.co.il${post.image}` : 'https://physio-plus.co.il/images/logo/clinic-logo.png',
@@ -168,7 +169,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     ...(medicalTopic
       ? {
           about: {
-            '@type': 'MedicalCondition',
+            '@type': medicalTopic.schemaType || 'MedicalCondition',
             name: medicalTopic.he,
             alternateName: medicalTopic.en,
           },
@@ -182,7 +183,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             name: item.title,
             url: item.url,
             ...(item.authors ? { author: { '@type': 'Person', name: item.authors } } : {}),
-            ...(item.year ? { datePublished: item.year } : {}),
+            ...(item.year && /^\d{4}$/.test(item.year) ? { copyrightYear: Number(item.year) } : {}),
             ...(item.journal
               ? { isPartOf: { '@type': 'Periodical', name: item.journal } }
               : {}),
@@ -225,12 +226,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <Breadcrumbs items={[
               { label: 'דף בית', href: '/' },
               { label: 'בלוג', href: '/blog' },
-              { label: post.title, href: `/blog/${post.slug}` }
+              { label: displayTitle, href: `/blog/${post.slug}` }
             ]} />
             <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium mb-4 inline-block">
               {post.category}
             </span>
-            <h1 className="geo-headline text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">{post.title}</h1>
+            <h1 className="geo-headline text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">{displayTitle}</h1>
             <p className="text-white text-base sm:text-lg">{post.date} · אנדריי מייזלס, פיזיותרפיסט (M.Sc)</p>
           </div>
         </div>
@@ -246,7 +247,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <div className="relative w-full h-64 sm:h-80 md:h-96">
                   <Image
                     src={post.image}
-                    alt={`תמונה המלווה את המאמר "${post.title}" - מאמר על פיזיותרפיה מאת אנדריי מייזלס`}
+                    alt={`תמונה המלווה את המאמר "${displayTitle}" - מאמר על פיזיותרפיה מאת אנדריי מייזלס`}
                     fill
                     className="object-cover w-full h-full"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 896px"
@@ -261,8 +262,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 {post.excerpt}
               </p>
               <SocialSharing 
-                title={post.title}
-                description={post.excerpt}
+                title={displayTitle}
+                description={post.seoDescription?.trim() || post.excerpt}
                 image={post.image}
                 variant="horizontal"
               />
@@ -315,8 +316,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </div>
             <div className="mt-8 pt-6 border-t border-gray-200">
               <SocialSharing 
-                title={post.title}
-                description={post.excerpt}
+                title={displayTitle}
+                description={post.seoDescription?.trim() || post.excerpt}
                 image={post.image}
                 variant="horizontal"
               />
@@ -348,7 +349,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       <div className="p-4">
                         <span className="text-xs text-gray-500 mb-2 block">{relatedPost.date}</span>
                         <h3 className="text-lg font-bold mb-2" style={{ color: '#2A3080' }}>
-                          {relatedPost.title}
+                          {getPostSeoTitle(relatedPost)}
                         </h3>
                         <p className="text-sm text-gray-600 line-clamp-2">{relatedPost.excerpt}</p>
                       </div>

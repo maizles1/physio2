@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getAllPosts } from '@/config/blog.config'
+import { getPostSeoTitle } from '@/lib/blog-utils'
 import { tryParseHebrewDate } from '@/lib/date-utils'
 
 export async function GET() {
@@ -13,10 +14,10 @@ export async function GET() {
       const pubDateTag = pubDate ? `\n      <pubDate>${pubDate.toUTCString()}</pubDate>` : ''
       return `
     <item>
-      <title><![CDATA[${post.title}]]></title>
+      <title><![CDATA[${getPostSeoTitle(post)}]]></title>
       <link>${baseUrl}/blog/${post.slug}</link>
       <guid isPermaLink="true">${baseUrl}/blog/${post.slug}</guid>
-      <description><![CDATA[${post.excerpt}]]></description>${pubDateTag}
+      <description><![CDATA[${post.seoDescription?.trim() || post.excerpt}]]></description>${pubDateTag}
       <author>אנדריי מייזלס</author>
       <category><![CDATA[${post.category}]]></category>
     </item>`

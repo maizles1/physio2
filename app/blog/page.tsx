@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getAllPosts } from '@/config/blog.config'
+import { getPostSeoTitle } from '@/lib/blog-utils'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
@@ -77,7 +78,7 @@ export default function BlogPage() {
                   <Link href={`/blog/${post.slug}`} className="block relative h-48 w-full overflow-hidden">
                     <Image
                       src={post.image}
-                      alt={post.title}
+                      alt={getPostSeoTitle(post)}
                       fill
                       className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -100,7 +101,7 @@ export default function BlogPage() {
                       href={`/blog/${post.slug}`}
                       className="block text-[#2A3080] no-underline hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2080C0] focus-visible:ring-offset-2 rounded-sm"
                     >
-                      {post.title}
+                      {getPostSeoTitle(post)}
                     </Link>
                   </h2>
                   <p className="text-gray-600 mb-4 leading-relaxed">

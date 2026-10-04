@@ -134,7 +134,7 @@ export const serviceCitationPages = [
 ] as const
 
 /** Maps blog slugs to a medical topic for MedicalWebPage schema. */
-const medicalTopicsBySlug: Record<string, { he: string; en: string }> = {
+const medicalTopicsBySlug: Record<string, { he: string; en: string; schemaType?: string }> = {
   'lower-back-pain-complete-guide': { he: 'כאבי גב תחתון', en: 'Low back pain' },
   'shoulder-pain-complete-guide': { he: 'כאבי כתף', en: 'Shoulder pain' },
   'neck-pain-complete-guide': { he: 'כאבי צוואר', en: 'Neck pain' },
@@ -172,9 +172,20 @@ const medicalTopicsBySlug: Record<string, { he: string; en: string }> = {
     he: 'שיקום אקטיבי והסתגלות רקמות',
     en: 'Active rehabilitation and tissue adaptation',
   },
+  'why-waste-time-at-orthopedist': {
+    he: 'כאב שלד-שריר',
+    en: 'Musculoskeletal pain',
+  },
+  'what-happens-in-physiotherapy-treatment': {
+    he: 'טיפול פיזיותרפיה',
+    en: 'Physiotherapy care',
+    schemaType: 'TherapeuticProcedure',
+  },
 }
 
-export function getMedicalTopic(slug: string): { he: string; en: string } | undefined {
+export function getMedicalTopic(
+  slug: string
+): { he: string; en: string; schemaType?: string } | undefined {
   return medicalTopicsBySlug[slug]
 }
 
@@ -246,11 +257,22 @@ function abs(path: string): string {
  * llms.txt — machine-readable clinic facts for ChatGPT, Perplexity, Claude, Gemini.
  * Format follows https://llmstxt.org
  */
-export type LlmsArticle = { slug: string; title: string; excerpt: string; date: string }
+export type LlmsArticle = {
+  slug: string
+  title: string
+  excerpt: string
+  date: string
+  dateIso?: string
+  summaryEn?: string
+}
 
 export function getLlmsTxt(articles: LlmsArticle[] = []): string {
   const articleLines = articles
-    .map((post) => `- [${post.title}](${abs(`/blog/${post.slug}`)}) — ${post.date}: ${post.excerpt}`)
+    .map((post) => {
+      const when = post.dateIso ? `${post.dateIso} (${post.date})` : post.date
+      const english = post.summaryEn?.trim() ? `\n  English: ${post.summaryEn.trim()}` : ''
+      return `- [${post.title}](${abs(`/blog/${post.slug}`)}) — ${when}: ${post.excerpt}${english}`
+    })
     .join('\n')
   const articlesSection = articleLines
     ? `\n## Articles / מאמרים קליניים (Hebrew, evidence-based, by ${clinicEntity.clinician.nameEn})\n\n${articleLines}\n`

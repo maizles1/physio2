@@ -15,6 +15,14 @@ export type RelatedLink = {
   href: string
 }
 
+export type ServiceEvidence = {
+  text: string
+  sourceLabel: string
+  doiUrl: string
+  articleHref: string
+  articleLabel: string
+}
+
 export type ServiceLandingPageData = {
   slug: string
   hubId: string
@@ -34,6 +42,7 @@ export type ServiceLandingPageData = {
   faqs: ServiceFaq[]
   relatedServices: RelatedLink[]
   relatedReads: RelatedLink[]
+  evidence?: ServiceEvidence
   whatsappMessage: string
   schemaName: string
   schemaDescription: string
@@ -113,9 +122,16 @@ export const serviceLandingPages: ServiceLandingPageData[] = [
       { title: 'פציעות ספורט במאוחדת', href: '/meuhedet' },
     ],
     relatedReads: [
-      { title: 'מדריך לכאבי גב תחתון', href: '/blog/lower-back-pain-complete-guide' },
-      { title: 'ארגונומיה בעבודה מהבית', href: '/blog/ergonomics-work-from-home-guide' },
+      { title: 'כאבי גב תחתון: מה המדע באמת ממליץ', href: '/blog/lower-back-pain-complete-guide' },
+      { title: 'יושבים כל היום? ארגונומיה לעבודה מהבית', href: '/blog/ergonomics-work-from-home-guide' },
     ],
+    evidence: {
+      text: 'בהנחיות לכאבי גב, ההמלצה היא להישאר פעילים ולא לשכב במיטה',
+      sourceLabel: 'Foster et al., 2018',
+      doiUrl: 'https://doi.org/10.1016/S0140-6736(18)30489-6',
+      articleHref: '/blog/lower-back-pain-complete-guide',
+      articleLabel: 'כאבי גב תחתון: מה המדע באמת ממליץ',
+    },
     whatsappMessage: 'שלום, אשמח לקבוע תור לטיפול בכאבי גב באשדוד',
     schemaName: 'טיפול בכאבי גב ושריר-שלד באשדוד',
     schemaDescription:
@@ -194,11 +210,18 @@ export const serviceLandingPages: ServiceLandingPageData[] = [
       { title: 'ביקורי בית באשדוד', href: '/services/home-visits-ashdod' },
     ],
     relatedReads: [
-      { title: 'המדריך המלא לכאבי גב תחתון', href: '/blog/lower-back-pain-complete-guide' },
-      { title: 'למה שיקום אקטיבי דורש זמן', href: '/blog/active-rehabilitation-tissue-adaptation-guide' },
-      { title: 'למה אתם מבזבזים זמן אצל אורטופד', href: '/blog/why-waste-time-at-orthopedist' },
-      { title: 'ארגונומיה בעבודה מהבית', href: '/blog/ergonomics-work-from-home-guide' },
+      { title: 'כאבי גב תחתון: מה המדע באמת ממליץ', href: '/blog/lower-back-pain-complete-guide' },
+      { title: 'שיקום אקטיבי: כמה זמן לוקח לרקמות להחלים', href: '/blog/active-rehabilitation-tissue-adaptation-guide' },
+      { title: 'למה אתם מבזבזים זמן אצל אורטופד?', href: '/blog/why-waste-time-at-orthopedist' },
+      { title: 'יושבים כל היום? ארגונומיה לעבודה מהבית', href: '/blog/ergonomics-work-from-home-guide' },
     ],
+    evidence: {
+      text: 'ממצאי דיסק ניווניים מופיעים גם אצל אנשים בלי כאבי גב, ולכן ממצא בדימות אינו האבחנה',
+      sourceLabel: 'Brinjikji et al., 2015',
+      doiUrl: 'https://doi.org/10.3174/ajnr.A4173',
+      articleHref: '/blog/lower-back-pain-complete-guide',
+      articleLabel: 'כאבי גב תחתון: מה המדע באמת ממליץ',
+    },
     whatsappMessage: 'שלום, אשמח לקבוע תור לטיפול בכאבי גב תחתון באשדוד',
     schemaName: 'טיפול בכאבי גב תחתון באשדוד',
     schemaDescription:
@@ -277,10 +300,17 @@ export const serviceLandingPages: ServiceLandingPageData[] = [
       { title: 'פציעות ספורט במאוחדת', href: '/meuhedet' },
     ],
     relatedReads: [
-      { title: 'המדריך המלא לכאבי כתף', href: '/blog/shoulder-pain-complete-guide' },
-      { title: 'כתף קפואה: אבחון, טיפול ושחרור', href: '/blog/frozen-shoulder-complete-guide' },
-      { title: 'למה שיקום אקטיבי דורש זמן', href: '/blog/active-rehabilitation-tissue-adaptation-guide' },
+      { title: 'כאבי כתף: מתי פיזיותרפיה מספיקה בלי ניתוח', href: '/blog/shoulder-pain-complete-guide' },
+      { title: 'כתף קפואה: כמה זמן זה נמשך ואיך מטפלים', href: '/blog/frozen-shoulder-complete-guide' },
+      { title: 'שיקום אקטיבי: כמה זמן לוקח לרקמות להחלים', href: '/blog/active-rehabilitation-tissue-adaptation-guide' },
     ],
+    evidence: {
+      text: 'תרגול ממוקד הפחית את הצורך בניתוח אצל חלק מהאנשים עם צביטה בכתף',
+      sourceLabel: 'Holmgren et al., 2012',
+      doiUrl: 'https://doi.org/10.1136/bmj.e787',
+      articleHref: '/blog/shoulder-pain-complete-guide',
+      articleLabel: 'כאבי כתף: מתי פיזיותרפיה מספיקה בלי ניתוח',
+    },
     whatsappMessage: 'שלום, אשמח לקבוע תור לטיפול בכאבי כתף באשדוד',
     schemaName: 'טיפול בכאבי כתף באשדוד',
     schemaDescription:
@@ -359,10 +389,17 @@ export const serviceLandingPages: ServiceLandingPageData[] = [
       { title: 'טיפול בכאבי גב תחתון באשדוד', href: '/services/lower-back-pain-ashdod' },
     ],
     relatedReads: [
-      { title: 'המדריך המדעי לכאבי צוואר', href: '/blog/neck-pain-complete-guide' },
-      { title: 'ארגונומיה בעבודה מהבית', href: '/blog/ergonomics-work-from-home-guide' },
-      { title: 'למה שיקום אקטיבי דורש זמן', href: '/blog/active-rehabilitation-tissue-adaptation-guide' },
+      { title: 'כאבי צוואר: למה ממצא ב-MRI אינו הכאב', href: '/blog/neck-pain-complete-guide' },
+      { title: 'יושבים כל היום? ארגונומיה לעבודה מהבית', href: '/blog/ergonomics-work-from-home-guide' },
+      { title: 'שיקום אקטיבי: כמה זמן לוקח לרקמות להחלים', href: '/blog/active-rehabilitation-tissue-adaptation-guide' },
     ],
+    evidence: {
+      text: 'ממצאים ב-MRI של הצוואר, כולל בלט דיסק, שכיחים גם אצל אנשים בלי כאב',
+      sourceLabel: 'Nakashima et al., 2015',
+      doiUrl: 'https://doi.org/10.1097/BRS.0000000000000775',
+      articleHref: '/blog/neck-pain-complete-guide',
+      articleLabel: 'כאבי צוואר: למה ממצא ב-MRI אינו הכאב',
+    },
     whatsappMessage: 'שלום, אשמח לקבוע תור לטיפול בכאבי צוואר באשדוד',
     schemaName: 'טיפול בכאבי צוואר באשדוד',
     schemaDescription:
@@ -441,11 +478,18 @@ export const serviceLandingPages: ServiceLandingPageData[] = [
       { title: 'פציעות ספורט במאוחדת', href: '/meuhedet' },
     ],
     relatedReads: [
-      { title: 'פציעות ריצה: מניעה וטיפול', href: '/blog/running-injuries-prevention-treatment-guide' },
-      { title: 'שיקום ברך לאחר ניתוח', href: '/blog/knee-rehabilitation-after-surgery-complete-guide' },
-      { title: 'החלפת ברך או ירך: מה צריך לדעת', href: '/blog/hip-knee-replacement-rehabilitation-guide' },
-      { title: 'למה שיקום אקטיבי דורש זמן', href: '/blog/active-rehabilitation-tissue-adaptation-guide' },
+      { title: 'פציעות ריצה בטיילת אשדוד: מניעה וטיפול', href: '/blog/running-injuries-prevention-treatment-guide' },
+      { title: 'שיקום ברך אחרי ניתוח: חזרה לספורט', href: '/blog/knee-rehabilitation-after-surgery-complete-guide' },
+      { title: 'החלפת ברך או ירך: למה השיקום קובע', href: '/blog/hip-knee-replacement-rehabilitation-guide' },
+      { title: 'שיקום אקטיבי: כמה זמן לוקח לרקמות להחלים', href: '/blog/active-rehabilitation-tissue-adaptation-guide' },
     ],
+    evidence: {
+      text: 'במניסקוס ניווני, ארתרוסקופיה לא נמצאה טובה יותר מניתוח דמה',
+      sourceLabel: 'Sihvonen et al., 2013',
+      doiUrl: 'https://doi.org/10.1056/nejmoa1305189',
+      articleHref: '/blog/why-waste-time-at-orthopedist',
+      articleLabel: 'למה אתם מבזבזים זמן אצל אורטופד?',
+    },
     whatsappMessage: 'שלום, אשמח לקבוע תור לטיפול בכאבי ברך באשדוד',
     schemaName: 'טיפול בכאבי ברך באשדוד',
     schemaDescription:
@@ -517,10 +561,17 @@ export const serviceLandingPages: ServiceLandingPageData[] = [
       { title: 'פציעות ספורט במאוחדת', href: '/meuhedet' },
     ],
     relatedReads: [
-      { title: 'למה פיזיותרפיה אחרי ניתוח חשובה', href: '/blog/post-surgery-physiotherapy-necessity' },
-      { title: 'שיקום אחרי החלפת ברך או ירך', href: '/blog/hip-knee-replacement-rehabilitation-guide' },
-      { title: 'שיקום ברך לאחר ניתוח', href: '/blog/knee-rehabilitation-after-surgery-complete-guide' },
+      { title: 'שיקום אחרי ניתוח הוא חובה, לא המלצה', href: '/blog/post-surgery-physiotherapy-necessity' },
+      { title: 'החלפת ברך או ירך: למה השיקום קובע', href: '/blog/hip-knee-replacement-rehabilitation-guide' },
+      { title: 'שיקום ברך אחרי ניתוח: חזרה לספורט', href: '/blog/knee-rehabilitation-after-surgery-complete-guide' },
     ],
+    evidence: {
+      text: 'מרגע החתך מתחילים תהליכים שצריך לנהל, ולא לחכות שהכאב יעבור',
+      sourceLabel: 'Kehlet, 1997',
+      doiUrl: 'https://doi.org/10.1093/bja/78.5.606',
+      articleHref: '/blog/post-surgery-physiotherapy-necessity',
+      articleLabel: 'שיקום אחרי ניתוח הוא חובה, לא המלצה',
+    },
     whatsappMessage: 'שלום, אשמח לקבוע תור לשיקום לאחר ניתוח באשדוד',
     schemaName: 'שיקום פיזיותרפי לאחר ניתוח באשדוד',
     schemaDescription:
@@ -590,8 +641,15 @@ export const serviceLandingPages: ServiceLandingPageData[] = [
       { title: 'טיפול בכאבי גב באשדוד', href: '/services/back-pain-ashdod' },
     ],
     relatedReads: [
-      { title: 'מדריך לורטיגו מסוג BPPV', href: '/blog/vertigo-bppv-complete-guide' },
+      { title: 'ורטיגו ו-BPPV: אבחון וטיפול בסחרחורת', href: '/blog/vertigo-bppv-complete-guide' },
     ],
+    evidence: {
+      text: 'BPPV הוא גורם שכיח לסחרחורת שמקורה באוזן הפנימית',
+      sourceLabel: 'von Brevern et al., 2007',
+      doiUrl: 'https://doi.org/10.1136/jnnp.2006.100420',
+      articleHref: '/blog/vertigo-bppv-complete-guide',
+      articleLabel: 'ורטיגו ו-BPPV: אבחון וטיפול בסחרחורת',
+    },
     whatsappMessage: 'שלום, אשמח לקבוע תור לשיקום וסטיבולרי / סחרחורות באשדוד',
     schemaName: 'שיקום וסטיבולרי וטיפול בסחרחורות באשדוד',
     schemaDescription:
@@ -660,7 +718,7 @@ export const serviceLandingPages: ServiceLandingPageData[] = [
       { title: 'טיפול בכאבי גב באשדוד', href: '/services/back-pain-ashdod' },
     ],
     relatedReads: [
-      { title: 'מדריך לכאבי צוואר', href: '/blog/neck-pain-complete-guide' },
+      { title: 'כאבי צוואר: למה ממצא ב-MRI אינו הכאב', href: '/blog/neck-pain-complete-guide' },
     ],
     whatsappMessage: 'שלום, אשמח לקבוע תור לטיפול במפרק הלסת (TMJ) באשדוד',
     schemaName: 'טיפול במפרק הלסת (TMJ) באשדוד',
@@ -737,8 +795,15 @@ export const serviceLandingPages: ServiceLandingPageData[] = [
       { title: 'צור קשר לתיאום', href: '/contact' },
     ],
     relatedReads: [
-      { title: 'מה קורה בטיפול פיזיותרפיה', href: '/blog/what-happens-in-physiotherapy-treatment' },
+      { title: 'מה קורה בטיפול פיזיותרפיה?', href: '/blog/what-happens-in-physiotherapy-treatment' },
     ],
+    evidence: {
+      text: 'אחרי החלפת מפרק גדול, שיקום שמכוון לחזרה לתפקוד הוא חלק מההתאוששות',
+      sourceLabel: 'Bandholm et al., 2018',
+      doiUrl: 'https://doi.org/10.1186/s40634-018-0156-2',
+      articleHref: '/blog/post-surgery-physiotherapy-necessity',
+      articleLabel: 'שיקום אחרי ניתוח הוא חובה, לא המלצה',
+    },
     whatsappMessage: 'שלום, אשמח לתאם ביקור בית לפיזיותרפיה באשדוד',
     schemaName: 'ביקורי בית לפיזיותרפיה באשדוד',
     schemaDescription:

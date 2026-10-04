@@ -125,8 +125,13 @@ export function calculateReadingTime(content: string): number {
  * יצירת meta description אופטימלי (150-160 תווים)
  */
 export function optimizeMetaDescription(description: string): string {
-  if (description.length <= 160) return description
-  return description.substring(0, 157).trim() + '...'
+  const clean = description.replace(/\s+/g, ' ').trim()
+  if (clean.length <= 160) return clean
+  const window = clean.slice(0, 160)
+  const sentenceEnd = Math.max(window.lastIndexOf('. '), window.lastIndexOf('! '), window.lastIndexOf('? '))
+  if (sentenceEnd >= 80) return window.slice(0, sentenceEnd + 1).trim()
+  const space = window.lastIndexOf(' ')
+  return (space > 80 ? window.slice(0, space) : window).replace(/[,:;–\-]\s*$/, '').trim()
 }
 
 /**

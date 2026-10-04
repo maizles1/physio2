@@ -142,6 +142,24 @@ export default function ServiceLandingPage({ page }: ServiceLandingPageProps) {
                   {paragraph}
                 </p>
               ))}
+              {page.evidence ? (
+                <p className="text-lg text-gray-700 leading-relaxed mb-5">
+                  {`${page.evidence.text} (`}
+                  <a
+                    href={page.evidence.doiUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline"
+                    style={{ color: '#2080C0' }}
+                  >
+                    {page.evidence.sourceLabel}
+                  </a>
+                  {`). עוד במאמר `}
+                  <Link href={page.evidence.articleHref} className="underline" style={{ color: '#2080C0' }}>
+                    {page.evidence.articleLabel}
+                  </Link>{'.'}
+                </p>
+              ) : null}
 
               <h2 className="text-xl sm:text-2xl font-bold mb-4 mt-8" style={{ color: '#2A3080' }}>
                 מה כולל הטיפול?
