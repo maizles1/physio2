@@ -401,6 +401,36 @@ export default function MeuhedetPage() {
         </div>
       </section>
 
+      {/* How it works */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3" style={{ color: '#2A3080' }}>
+              איך זה עובד?
+            </h2>
+            <p className="text-lg text-gray-700">
+              ארבעה צעדים פשוטים מהפנייה ועד תחילת הטיפול במסגרת מאוחדת.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+            {steps.map((step) => (
+              <div
+                key={step.n}
+                className="relative rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
+              >
+                <div className="absolute -top-4 right-6 flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#2A3080] via-[#2080C0] to-[#40C0F0] text-white font-bold shadow-md">
+                  {step.n}
+                </div>
+                <h3 className="mt-2 text-lg font-bold mb-2" style={{ color: '#2A3080' }}>
+                  {step.title}
+                </h3>
+                <p className="text-gray-700 text-sm leading-relaxed">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <MeuhedetReviewsStrip />
 
       {/* 3. Therapist photo + clinic gallery */}
@@ -574,7 +604,7 @@ export default function MeuhedetPage() {
                   'פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו',
                   'קליניקה מקצועית במרכז כלניות, אשדוד',
                   'ליווי בתהליך מול מאוחדת – מההפניה ועד תחילת הטיפול',
-                  'טיפול אישי, לא בקבוצה – תשומת לב מלאה בכל מפגש',
+                  'תוכנית טיפול ושיקום מותאמת אישית',
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-3 rounded-xl bg-white border border-gray-200 p-4">
                     <svg className="h-5 w-5 text-[#2080C0] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -601,36 +631,6 @@ export default function MeuhedetPage() {
                 <li>בגדי ספורט נוחים ונעליים סגורות</li>
               </ul>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3" style={{ color: '#2A3080' }}>
-              איך זה עובד?
-            </h2>
-            <p className="text-lg text-gray-700">
-              ארבעה צעדים פשוטים מהפנייה ועד תחילת הטיפול במסגרת מאוחדת.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
-            {steps.map((step) => (
-              <div
-                key={step.n}
-                className="relative rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
-              >
-                <div className="absolute -top-4 right-6 flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#2A3080] via-[#2080C0] to-[#40C0F0] text-white font-bold shadow-md">
-                  {step.n}
-                </div>
-                <h3 className="mt-2 text-lg font-bold mb-2" style={{ color: '#2A3080' }}>
-                  {step.title}
-                </h3>
-                <p className="text-gray-700 text-sm leading-relaxed">{step.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
