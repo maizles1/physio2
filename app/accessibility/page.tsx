@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'הצהרת נגישות',
-  description: 'הצהרת נגישות של אתר פיזיותרפיה.פלוס - מחויבותנו לנגישות השירותים והאתר.',
+  description: 'הצהרת הנגישות של פיזיותרפיה.פלוס: מחויבות לנגישות האתר והקליניקה לפי WCAG 2.1 ברמה AA, ודרכי פנייה לתיאום התאמות נגישות באשדוד.',
   alternates: {
     canonical: 'https://physio-plus.co.il/accessibility',
   },

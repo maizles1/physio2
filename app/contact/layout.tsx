@@ -1,4 +1,13 @@
 import { Metadata } from 'next'
+import { seoConfig } from '@/config/seo.config'
+import {
+  clinicEntity,
+  clinicGeo,
+  clinicSchemaIds,
+  getAshdodAreaServed,
+  getClinicPostalAddress,
+  getOpeningHoursSpecification,
+} from '@/config/geo.config'
 
 export const metadata: Metadata = {
   title: 'צור קשר',
@@ -33,12 +42,38 @@ export const metadata: Metadata = {
   },
 }
 
+const medicalBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['MedicalBusiness', 'LocalBusiness'],
+  '@id': clinicSchemaIds.medicalBusiness,
+  name: clinicEntity.brandHe,
+  url: seoConfig.siteUrl,
+  telephone: clinicEntity.phoneE164,
+  email: seoConfig.contact.email,
+  address: getClinicPostalAddress(),
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: clinicGeo.latitude,
+    longitude: clinicGeo.longitude,
+  },
+  openingHoursSpecification: getOpeningHoursSpecification(),
+  areaServed: getAshdodAreaServed(),
+}
+
 export default function ContactLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalBusinessSchema) }}
+      />
+      {children}
+    </>
+  )
 }
 
 

@@ -6,7 +6,7 @@ import { getClinicEntityRef } from '@/config/geo.config'
 import { clinicServiceNav, serviceLandingPages } from '@/config/service-pages.config'
 
 export const metadata: Metadata = {
-  title: 'שירותי פיזיותרפיה באשדוד - טיפול בכאבי גב, שיקום וסחרחורות',
+  title: 'שירותי פיזיותרפיה באשדוד | גב ושיקום',
   description: 'שירותי פיזיותרפיה מקצועיים באשדוד: טיפול בכאבי גב, כתף, צוואר וברך, שיקום לאחר ניתוחים, שיקום וסטיבולרי, TMJ וביקורי בית. מכון פיזיותרפיה פרטי במרכז כלניות.',
   keywords: [
     'טיפול בכאבי גב',

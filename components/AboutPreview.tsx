@@ -1,6 +1,15 @@
+'use client'
+
 import Link from 'next/link'
-import Image from 'next/image'
+import Image, { type ImageLoaderProps } from 'next/image'
 import { TEAM_PHYSIO, isTeamPhysioConfigured, teamPhysioInitials } from '@/config/team.config'
+
+/** Keep 48px avatars off the default srcset that includes 3840w. */
+function therapistThumbLoader({ src, width, quality }: ImageLoaderProps) {
+  const allowed = [16, 32, 48, 64, 96]
+  const w = allowed.find((size) => size >= width) ?? 96
+  return `/_next/image?url=${encodeURIComponent(src)}&w=${w}&q=${quality || 75}`
+}
 
 export default function AboutPreview() {
   const physioName = isTeamPhysioConfigured() ? TEAM_PHYSIO.name : 'פיזיותרפיסטית מוסמכת'
@@ -25,12 +34,14 @@ export default function AboutPreview() {
                 href="/about#andrey-meizels"
                 className="flex items-center gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3 hover:border-blue-300 transition-colors"
               >
-                <span className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
+                <span className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
                   <Image
                     src="/images/andrey-meizels.JPG"
-                    alt=""
-                    fill
-                    className="object-cover"
+                    alt="אנדריי מייזלס"
+                    width={48}
+                    height={48}
+                    loader={therapistThumbLoader}
+                    className="object-cover w-12 h-12"
                     sizes="48px"
                   />
                 </span>
@@ -44,16 +55,17 @@ export default function AboutPreview() {
                 className="flex items-center gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3 hover:border-blue-300 transition-colors"
               >
                 <span
-                  className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center text-white text-xs font-bold"
+                  className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center text-white text-xs font-bold"
                   style={{ background: 'linear-gradient(to bottom right, #2A3080, #2080C0)' }}
-                  aria-hidden="true"
                 >
                   {TEAM_PHYSIO.imageSrc ? (
                     <Image
                       src={TEAM_PHYSIO.imageSrc}
-                      alt=""
-                      fill
-                      className="object-cover"
+                      alt={TEAM_PHYSIO.name}
+                      width={48}
+                      height={48}
+                      loader={therapistThumbLoader}
+                      className="object-cover w-12 h-12"
                       sizes="48px"
                     />
                   ) : (

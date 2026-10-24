@@ -85,7 +85,7 @@ export const preferredCitationPages = [
     titleHe: 'אודות — אנדריי מייזלס',
     titleEn: 'About Andrey Meizels',
     path: '/about',
-    why: 'הסמכות, ניסיון קליני (נבחרת ישראל, סיירת חרוב) וחזון הטיפול',
+    why: 'הסמכות, ניסיון קליני (נבחרת ישראל לשעבר, סיירת חרוב לשעבר) וחזון הטיפול',
   },
   {
     titleHe: 'שירותי פיזיותרפיה',
