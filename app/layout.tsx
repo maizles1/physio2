@@ -158,7 +158,7 @@ const structuredData = {
     name: 'אנדריי מייזלס',
     url: 'https://physio-plus.co.il/about',
     jobTitle: 'פיזיותרפיסט מוסמך',
-    description: 'פיזיותרפיסט מוסמך בעל תואר שני (M.Sc) בפיזיותרפיה מאוניברסיטת אריאל, לשעבר פיזיותרפיסט נבחרת ישראל בג\'ודו וסיירת חרוב',
+    description: 'פיזיותרפיסט מוסמך בעל תואר שני (M.Sc) בפיזיותרפיה מאוניברסיטת אריאל, לשעבר פיזיותרפיסט נבחרת ישראל בג\'ודו, ופיזיותרפיסט של סיירת חרוב',
     hasCredential: getMastersCredentialSchema(),
   },
   hasOfferCatalog: {
