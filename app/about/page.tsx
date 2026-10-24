@@ -14,11 +14,11 @@ const aboutLead =
   'הצוות הקליני של פיזיותרפיה.פלוס – בניהולו של אנדריי מייזלס (M.Sc), מייסד, מנהל קליני ופיזיותרפיסט ספורט'
 
 export const metadata: Metadata = {
-  title: 'הצוות הקליני – אנדריי מייזלס (M.Sc), מייסד, מנהל קליני ופיזיותרפיסט ספורט',
+  title: 'הצוות הקליני | אנדריי מייזלס באשדוד',
   description: `${aboutLead}. מכון פיזיותרפיה פרטי באשדוד, לשעבר נבחרת ישראל בג'ודו.`,
   authors: [{ name: 'אנדריי מייזלס' }],
   openGraph: {
-    title: aboutLead,
+    title: 'הצוות הקליני | אנדריי מייזלס באשדוד',
     description: `${aboutLead}. מכון פיזיותרפיה פרטי באשדוד, לשעבר נבחרת ישראל בג'ודו.`,
     url: 'https://physio-plus.co.il/about',
     type: 'website',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: aboutLead,
+    title: 'הצוות הקליני | אנדריי מייזלס באשדוד',
     description: `${aboutLead}. מכון פיזיותרפיה פרטי באשדוד.`,
     images: ['https://physio-plus.co.il/images/logo/clinic-logo.png'],
   },
@@ -170,7 +170,7 @@ export default function AboutPage() {
     alternateName: ['Andrey Meizels', 'Andrey Maizles'],
     jobTitle: 'מייסד, מנהל קליני ופיזיותרפיסט ספורט',
     description:
-      'אנדריי מייזלס (M.Sc) – מייסד, מנהל קליני ופיזיותרפיסט ספורט. בעל תואר שני (M.Sc) ותואר ראשון (B.P.T) בפיזיותרפיה מאוניברסיטת אריאל, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו ושל סיירת חרוב.',
+      'אנדריי מייזלס (M.Sc) – מייסד, מנהל קליני ופיזיותרפיסט ספורט. בעל תואר שני (M.Sc) ותואר ראשון (B.P.T) בפיזיותרפיה מאוניברסיטת אריאל, פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו ופיזיותרפיסט של סיירת חרוב.',
     url: 'https://physio-plus.co.il/about',
     image: 'https://physio-plus.co.il/images/andrey-meizels.JPG',
     telephone: '+972-50-883-8982',
@@ -188,11 +188,18 @@ export default function AboutPage() {
     ],
     hasCredential: getMastersCredentialSchema(),
     alumniOf: getUniversitySchema(),
-    memberOf: {
-      '@type': 'SportsTeam',
-      name: 'נבחרת ישראל בג\'ודו',
-      roleName: 'פיזיותרפיסט',
-    },
+    memberOf: [
+      {
+        '@type': 'SportsTeam',
+        name: 'נבחרת ישראל בג\'ודו',
+        roleName: 'פיזיותרפיסט לשעבר',
+      },
+      {
+        '@type': 'Organization',
+        name: 'סיירת חרוב',
+        roleName: 'פיזיותרפיסט',
+      },
+    ],
     hasOccupation: {
       '@type': 'Occupation',
       name: 'Physiotherapist',
@@ -423,8 +430,8 @@ export default function AboutPage() {
                     </p>
                     <p className="text-gray-700 leading-relaxed">
                       את הניסיון הקליני והמעשי צבר במקומות התובעניים ביותר: שימש כפיזיותרפיסט של נבחרת ישראל בג&apos;ודו,
-                      שם טיפל בספורטאי עלית תחת עומס קיצוני, וכפיזיותרפיסט של יחידת העילית סיירת חרוב,
-                      שם התמודד עם פציעות מורכבות בשטח.
+                      שם טיפל בספורטאי עלית תחת עומס קיצוני, ומשמש כפיזיותרפיסט של יחידת העילית סיירת חרוב,
+                      שם הוא מטפל בפציעות מורכבות בשטח.
                     </p>
                     <p className="text-gray-700 leading-relaxed">
                       את הניסיון הזה תרגם אנדריי לפרוטוקולי הטיפול האחידים של הקליניקה, לכלי מדידה אובייקטיביים – דינמומטר Lafayette, מערכת BFR ו-NMES – ולפלטפורמת תרגול דיגיטלית שמלווה כל מטופל בין הטיפולים.

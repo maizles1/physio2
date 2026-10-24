@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'תנאי שימוש',
-  description: 'תנאי השימוש באתר פיזיותרפיה.פלוס - כללים והנחיות לשימוש באתר.',
+  description: 'תנאי השימוש באתר פיזיותרפיה.פלוס: כללי השימוש במידע הקליני, הגבלת אחריות, וכי המידע באתר אינו תחליף לייעוץ או טיפול רפואי אישי.',
   alternates: {
     canonical: 'https://physio-plus.co.il/terms',
   },

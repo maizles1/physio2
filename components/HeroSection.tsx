@@ -103,7 +103,7 @@ export default function HeroSection() {
               </h1>
               <div className="max-w-3xl mx-auto lg:mx-0 lg:mr-0 mt-6 sm:mt-8 space-y-4 sm:space-y-6">
                 <h2 className="mb-4 sm:mb-6 text-white leading-relaxed">
-                  הסטנדרט הקליני של נבחרת ישראל ב<span className="font-bold highlight-judo">ג&apos;ודו</span> – עכשיו בקליניקה באשדוד
+                  הסטנדרט הקליני של פיזיותרפיסט לשעבר בנבחרת ישראל ב<span className="font-bold highlight-judo">ג&apos;ודו</span> – עכשיו בקליניקה באשדוד
                 </h2>
                 <div className="space-y-4 text-white leading-relaxed sm:leading-loose">
                   <p className="text-base sm:text-large">
