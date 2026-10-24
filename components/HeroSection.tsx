@@ -7,7 +7,7 @@ import { gtag } from '@/components/GoogleAnalytics'
 import { seoConfig, getContactEmailTo } from '@/config/seo.config'
 
 const whatsappNumber = '972508838982'
-const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
+const whatsappMessage = encodeURIComponent('שלום, אשמח לתאם אבחון')
 
 export default function HeroSection() {
   const [imgError, setImgError] = useState(false)
@@ -73,7 +73,7 @@ export default function HeroSection() {
                 {!imgError && (
                   <Image
                     src="/images/andrey-meizels.JPG"
-                    alt="אנדריי מייזלס, פיזיותרפיסט מקצועי"
+                    alt="אנדריי מייזלס (M.Sc), מייסד, מנהל קליני ופיזיותרפיסט ספורט"
                     fill
                     className="object-cover w-full h-full"
                     sizes="(max-width: 640px) 160px, (max-width: 768px) 192px, (max-width: 1024px) 256px, 320px"
@@ -82,7 +82,7 @@ export default function HeroSection() {
                     onError={() => setImgError(true)}
                   />
                 )}
-                <div className={`w-full h-full ${imgError ? 'flex' : 'hidden'} items-center justify-center`} role="img" aria-label="אנדריי מייזלס, פיזיותרפיסט מקצועי">
+                <div className={`w-full h-full ${imgError ? 'flex' : 'hidden'} items-center justify-center`} role="img" aria-label="אנדריי מייזלס (M.Sc), מייסד, מנהל קליני ופיזיותרפיסט ספורט">
                   <div className="text-center text-white">
                     <svg className="w-24 h-24 mx-auto mb-2 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -95,19 +95,19 @@ export default function HeroSection() {
             
             {/* Title and Description */}
             <div className="flex-1 text-center lg:text-right order-2 lg:order-2 px-2 sm:pr-20 md:pr-24 sm:pl-0 md:pl-28">
+              <p className="inline-block max-w-full rounded-full bg-white/10 backdrop-blur-sm border border-white/30 px-4 py-1.5 text-sm sm:text-base font-semibold text-white mb-4 leading-snug">
+                פיזיותרפיה.פלוס | בניהולו הקליני של אנדריי מייזלס (M.Sc)
+              </p>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 sm:mb-8 leading-tight sm:leading-relaxed tracking-wide text-white">
-                פיזיותרפיסט פרטי באשדוד
+                פיזיותרפיה ספורט ושיקום אקטיבי באשדוד
               </h1>
               <div className="max-w-3xl mx-auto lg:mx-0 lg:mr-0 mt-6 sm:mt-8 space-y-4 sm:space-y-6">
                 <h2 className="mb-4 sm:mb-6 text-white leading-relaxed">
-                  הידיים שטיפלו בנבחרת ישראל ב<span className="font-bold highlight-judo">ג&apos;ודו</span> – עכשיו זמינות לכאב שלך
+                  הסטנדרט הקליני של נבחרת ישראל ב<span className="font-bold highlight-judo">ג&apos;ודו</span> – עכשיו בקליניקה באשדוד
                 </h2>
                 <div className="space-y-4 text-white leading-relaxed sm:leading-loose">
                   <p className="text-base sm:text-large">
-                    כאב לא חייב לנהל לך את החיים. בקליניקה תקבל את הסטנדרט המקצועי של נבחרת ישראל: אבחון קליני, חשיבה רפואית מתקדמת והתאמה אישית של הטיפול.
-                  </p>
-                  <p className="text-base sm:text-large">
-                    אני לא מוכר אשליות ולא מבטיח קסמים, אבל אני מתחייב לדבר אחד: 100% מהידע, הניסיון והמאמץ שלי מושקעים בשיקום שלך, בדיוק כפי שהייתי משקיע בספורטאי אולימפי.
+                    אבחון מבוסס מדידות כוח אובייקטיביות, מכשור קליני מתקדם ופרוטוקולי שיקום מעולם ספורט העילית – עם 100% השקעה ומחויבות שלנו לתהליך השיקום שלך.
                   </p>
                 </div>
               </div>
@@ -119,9 +119,9 @@ export default function HeroSection() {
             <Link
               href="/contact"
               className="btn btn-secondary btn-large w-full sm:w-auto"
-              aria-label="קבע טיפול עכשיו"
+              aria-label="לתיאום אבחון והתאמת תוכנית שיקום"
             >
-              קבע טיפול עכשיו
+              לתיאום אבחון והתאמת תוכנית שיקום
             </Link>
             <a
               href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
@@ -157,7 +157,7 @@ export default function HeroSection() {
             )}
           </div>
           <p className="text-center text-white/90 text-sm mt-4 px-2">
-            תור תוך 24–48 שעות · פיזיותרפיסט בעל תואר שני
+            תור תוך 24–48 שעות · בניהול קליני של פיזיותרפיסט ספורט בעל תואר שני (M.Sc)
           </p>
         </div>
       </div>
