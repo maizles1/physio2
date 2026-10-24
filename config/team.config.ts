@@ -7,15 +7,15 @@
 export interface TeamPhysio {
   name: string
   university: string
-  /** נתיב מקומי, למשל '/images/team/physio.jpg'. ריק = אווטאר ראשי תיבות */
+  /** קובץ בתיקייה public/images. ריק = אווטאר ראשי תיבות */
   imageSrc: string
   specialties: string[]
 }
 
 export const TEAM_PHYSIO: TeamPhysio = {
-  name: '[שם הפיזיותרפיסטית]',
+  name: 'לינוי הימלפרב',
   university: '[שם האוניברסיטה]',
-  imageSrc: '',
+  imageSrc: '/images/linoy-himmelfarb.jpeg',
   specialties: ['שיקום אורתופדי', 'פציעות ספורט', 'שיקום אקטיבי'],
 }
 

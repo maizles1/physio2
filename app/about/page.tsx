@@ -125,7 +125,7 @@ function TeamPhysioPortrait() {
         src={TEAM_PHYSIO.imageSrc}
         alt={`${TEAM_PHYSIO.name}, פיזיותרפיסטית מוסמכת`}
         fill
-        className="object-cover w-full h-full"
+        className="object-cover object-top w-full h-full"
         sizes="(max-width: 768px) 100vw, 33vw"
         quality={90}
       />
