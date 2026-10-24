@@ -309,10 +309,10 @@ export default function AboutPage() {
               </div>
               <div>
                 <dt className="text-sm font-semibold text-gray-500">צוות קליני</dt>
-                <dd dir="rtl" className="text-lg font-bold text-gray-900 flex flex-wrap items-baseline justify-start gap-x-1.5">
-                  <span>{isTeamPhysioConfigured() ? `${TEAM_PHYSIO.name},` : 'פיזיותרפיסטית מוסמכת,'}</span>
-                  <span dir="ltr">B.P.T</span>
-                  {isTeamPhysioConfigured() && <span>– פיזיותרפיסטית מוסמכת</span>}
+                <dd className="text-lg font-bold text-gray-900">
+                  {isTeamPhysioConfigured()
+                    ? `${TEAM_PHYSIO.name} (B.P.T) – פיזיותרפיסטית מוסמכת`
+                    : 'פיזיותרפיסטית מוסמכת (B.P.T)'}
                 </dd>
               </div>
               <div>
@@ -493,14 +493,8 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <div className="md:w-2/3 p-8">
-                  <h3
-                    dir="rtl"
-                    className="text-2xl font-bold mb-2 flex flex-wrap items-baseline justify-start gap-x-1.5"
-                    style={{ color: '#2A3080' }}
-                  >
-                    <span>{TEAM_PHYSIO.name},</span>
-                    <span dir="ltr">B.P.T</span>
-                    <span>– פיזיותרפיסטית מוסמכת</span>
+                  <h3 className="text-2xl font-bold mb-2" style={{ color: '#2A3080' }}>
+                    {TEAM_PHYSIO.name} (B.P.T) – פיזיותרפיסטית מוסמכת
                   </h3>
                   {!isPlaceholderValue(TEAM_PHYSIO.university) && (
                     <p className="text-base text-gray-600 mb-3">{TEAM_PHYSIO.university}</p>
