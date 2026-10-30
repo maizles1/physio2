@@ -1,12 +1,26 @@
 import Link from 'next/link'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import ClinicNapCta from '@/components/ClinicNapCta'
+import LeadForm from '@/components/LeadForm'
 import ServiceFaqAccordion from '@/components/ServiceFaqAccordion'
 import ServiceImage from '@/components/ServiceImage'
 import type { ServiceLandingPageData } from '@/config/service-pages.config'
 import { absUrl } from '@/config/service-pages.config'
 import { getAshdodAreaServed, getClinicEntityRef } from '@/config/geo.config'
 import { seoConfig } from '@/config/seo.config'
+
+/** Pre-selects the matching option in the lead form. */
+const LEAD_AREA_BY_SLUG: Record<string, string> = {
+  'back-pain-ashdod': 'כאבי גב',
+  'lower-back-pain-ashdod': 'כאבי גב',
+  'shoulder-pain-ashdod': 'כאבי כתף',
+  'neck-pain-ashdod': 'כאבי צוואר',
+  'knee-pain-ashdod': 'כאבי ברך',
+  'post-surgery-ashdod': 'שיקום אחרי ניתוח',
+  'vestibular-ashdod': 'סחרחורות / ורטיגו',
+  'tmj-ashdod': 'כאבי לסת',
+  'home-visits-ashdod': 'ביקור בית',
+}
 
 type ServiceLandingPageProps = {
   page: ServiceLandingPageData
@@ -267,6 +281,14 @@ export default function ServiceLandingPage({ page }: ServiceLandingPageProps) {
                 </ul>
               </div>
             ) : null}
+          </div>
+        </div>
+      </section>
+
+      <section id="lead-form" className="py-12 bg-gray-50 scroll-mt-24">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto">
+            <LeadForm source="service" defaultArea={LEAD_AREA_BY_SLUG[page.slug] ?? ''} />
           </div>
         </div>
       </section>

@@ -5,6 +5,7 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import MeuhedetReviewsStrip from '@/components/MeuhedetReviewsStrip'
 import MeuhedetStickyCTA from '@/components/MeuhedetStickyCTA'
 import MeuhedetContactLink from '@/components/MeuhedetContactLink'
+import LeadForm from '@/components/LeadForm'
 import { manualReviews } from '@/config/manual-reviews.config'
 import { getUniversitySchema, getClinicPostalAddress, getOpeningHoursSpecification, getAshdodAreaServed, clinicSchemaIds, clinicEntity, clinicGeo } from '@/config/geo.config'
 import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
@@ -680,6 +681,13 @@ export default function MeuhedetPage() {
               <p className="mt-5 text-center text-sm text-gray-600 leading-relaxed">
                 שעות פעילות: א׳–ה׳ בשעות 08:00–20:00 • שיחת ייעוץ ראשונית ללא התחייבות
               </p>
+            </div>
+            <div id="lead-form" className="mt-8 scroll-mt-24">
+              <LeadForm
+                source="meuhedet"
+                defaultArea="פציעת ספורט"
+                subtitle="השאירו שם וטלפון ונחזור אליכם לתיאום טיפול במסגרת מאוחדת."
+              />
             </div>
           </div>
         </div>

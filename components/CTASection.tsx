@@ -3,15 +3,17 @@
 import Link from 'next/link'
 import { gtag } from '@/components/GoogleAnalytics'
 import { seoConfig, getContactEmailTo } from '@/config/seo.config'
+import LeadForm from '@/components/LeadForm'
 
 const whatsappNumber = '972508838982'
 const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
 
 export default function CTASection() {
   return (
-    <section className="cta-section section-spacing bg-primary-gradient text-white">
+    <section id="lead-form" className="cta-section section-spacing bg-primary-gradient text-white scroll-mt-24">
       <div className="container">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto grid gap-8 lg:grid-cols-2 lg:items-center">
+          <LeadForm source="home" />
           <div className="text-center rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm px-6 py-10 sm:px-10 sm:py-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
               מוכנים להתחיל את תהליך השיקום?

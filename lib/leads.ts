@@ -16,6 +16,10 @@ export interface Lead {
   phone: string;
   email?: string;
   message?: string;
+  /** Pain area picked in the form, if any. */
+  area?: string;
+  /** Page path the form was sent from. */
+  page?: string;
   source: LeadSource;
   createdAt: string;
   ip?: string;
@@ -117,6 +121,8 @@ export async function addLead(
     phone: input.phone.trim(),
     email: input.email?.trim() || undefined,
     message: input.message?.trim() || undefined,
+    area: input.area?.trim() || undefined,
+    page: input.page?.trim() || undefined,
     source: input.source,
     createdAt: input.createdAt ?? new Date().toISOString(),
     ip: input.ip,
