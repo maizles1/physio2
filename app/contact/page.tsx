@@ -1,6 +1,7 @@
 'use client'
 
 import Breadcrumbs from '@/components/Breadcrumbs'
+import LeadForm from '@/components/LeadForm'
 import { gtag } from '@/components/GoogleAnalytics'
 import { seoConfig, getContactEmailTo, getContactPhoneTel } from '@/config/seo.config'
 
@@ -27,11 +28,20 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 relative z-10">
           <Breadcrumbs items={[{ label: 'דף בית', href: '/' }, { label: 'צור קשר', href: '/contact' }]} />
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">צור קשר</h1>
-          <p className="text-lg sm:text-xl text-white">אנחנו כאן כדי לעזור – צרו איתנו קשר בטלפון או ב-WhatsApp</p>
+          <p className="text-lg sm:text-xl text-white">אנחנו כאן כדי לעזור – התקשרו, כתבו ב-WhatsApp או השאירו פרטים ונחזור אליכם</p>
         </div>
       </section>
 
-      {/* Contact Section - clinic details only */}
+      {/* Lead form */}
+      <section id="lead-form" className="pt-8 sm:pt-12 scroll-mt-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto">
+            <LeadForm source="contact" />
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section - clinic details */}
       <section className="py-8 sm:py-12 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">
