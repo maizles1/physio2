@@ -146,15 +146,15 @@ export default function LeadForm({
       <div
         role="status"
         aria-live="polite"
-        className="rounded-2xl border border-green-200 bg-green-50 p-6 sm:p-8 text-center shadow-sm text-gray-800"
+        className="lead-form-card rounded-2xl border border-green-200 bg-green-50 p-6 sm:p-8 text-center shadow-sm text-gray-800"
       >
         <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
           <svg className="h-7 w-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl sm:text-2xl font-bold text-[#2A3080] mb-2">תודה, הפרטים התקבלו!</h3>
-        <p className="leading-relaxed mb-5">נחזור אליכם בהקדם לתיאום תור. רוצים מהר יותר?</p>
+        <h3 className="lf-title text-xl sm:text-2xl font-bold text-[#2A3080] mb-2">תודה, הפרטים התקבלו!</h3>
+        <p className="lf-body leading-relaxed mb-5">נחזור אליכם בהקדם לתיאום תור. רוצים מהר יותר?</p>
         <a
           href={`https://wa.me/972508838982?text=${encodeURIComponent('שלום, השארתי פרטים באתר ואשמח לתאם תור')}`}
           target="_blank"
@@ -179,15 +179,15 @@ export default function LeadForm({
       onSubmit={handleSubmit}
       noValidate
       aria-label={title}
-      className="rounded-2xl border border-gray-200 bg-white p-5 sm:p-7 shadow-lg text-right text-gray-900"
+      className="lead-form-card rounded-2xl border border-gray-200 bg-white p-5 sm:p-7 shadow-lg text-right text-gray-900"
     >
-      <h3 className="text-xl sm:text-2xl font-bold text-[#2A3080] mb-1">{title}</h3>
-      <p className="text-gray-600 mb-5 leading-relaxed">{subtitle}</p>
+      <h3 className="lf-title text-xl sm:text-2xl font-bold text-[#2A3080] mb-1">{title}</h3>
+      <p className="lf-muted text-gray-600 mb-5 leading-relaxed">{subtitle}</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor={nameId} className="mb-1.5 block text-sm font-semibold text-gray-800">
-            שם <span className="text-red-600" aria-hidden="true">*</span>
+            שם <span className="lf-required text-red-600" aria-hidden="true">*</span>
           </label>
           <input
             id={nameId}
@@ -205,7 +205,7 @@ export default function LeadForm({
         </div>
         <div>
           <label htmlFor={phoneId} className="mb-1.5 block text-sm font-semibold text-gray-800">
-            טלפון <span className="text-red-600" aria-hidden="true">*</span>
+            טלפון <span className="lf-required text-red-600" aria-hidden="true">*</span>
           </label>
           <input
             id={phoneId}
@@ -225,7 +225,7 @@ export default function LeadForm({
         </div>
         <div className="sm:col-span-2">
           <label htmlFor={areaId} className="mb-1.5 block text-sm font-semibold text-gray-800">
-            מה כואב? <span className="text-gray-400 font-normal">(לא חובה)</span>
+            מה כואב? <span className="lf-optional text-gray-400 font-normal">(לא חובה)</span>
           </label>
           <select
             id={areaId}
@@ -267,7 +267,7 @@ export default function LeadForm({
       >
         {submitting ? 'שולח…' : 'חזרו אליי'}
       </button>
-      <p className="mt-3 text-center text-xs text-gray-500 leading-relaxed">
+      <p className="lf-note mt-3 text-center text-xs text-gray-500 leading-relaxed">
         הפרטים משמשים רק ליצירת קשר לתיאום טיפול ואינם מועברים לצד שלישי.
       </p>
     </form>

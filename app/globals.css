@@ -1023,3 +1023,12 @@ section.bg-primary-gradient h2 span.highlight-judo {
   background-color: #2080C0 !important;
 }
 
+
+/* Lead form is a white card. When it sits inside a blue section, the
+   "white text on blue sections" rules above would hide its text. */
+section .lead-form-card .lf-title { color: #2A3080 !important; }
+section .lead-form-card .lf-body { color: #1f2937 !important; }
+section .lead-form-card .lf-muted { color: #4b5563 !important; }
+section .lead-form-card .lf-required { color: #dc2626 !important; }
+section .lead-form-card .lf-optional { color: #9ca3af !important; }
+section .lead-form-card .lf-note { color: #6b7280 !important; }
