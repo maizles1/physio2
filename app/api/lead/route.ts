@@ -162,33 +162,6 @@ export async function POST(request: Request) {
     console.warn("RESEND_API_KEY is not set: lead saved but no email was sent.");
   }
 
-  // Optional: forward to Web3Forms as a backup channel. Failure here must not fail the request.
-  if (process.env.WEB3FORMS_ACCESS_KEY) {
-    try {
-      await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: process.env.WEB3FORMS_ACCESS_KEY,
-          subject,
-          from_name: "physio-plus.co.il",
-          name: lead.name,
-          phone: lead.phone,
-          email: lead.email ?? "לא סופק",
-          message: lead.message ?? "",
-          area: area ?? "",
-          page: page ?? "",
-          source: sourceLabel,
-        }),
-      });
-    } catch {
-      // Don't fail the request if Web3Forms forward fails
-    }
-  }
-
   return NextResponse.json({ ok: true });
 }
 

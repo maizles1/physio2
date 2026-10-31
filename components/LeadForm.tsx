@@ -4,7 +4,7 @@ import { useId, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { gtag } from './GoogleAnalytics'
 import { toast } from '@/lib/toast'
-import { LEAD_AREAS } from '@/lib/leadOptions'
+import { LEAD_AREAS, LEAD_SOURCE_LABELS, WEB3FORMS_PUBLIC_KEY } from '@/lib/leadOptions'
 
 const NAME_MIN = 2
 const NAME_MAX = 80
@@ -26,6 +26,35 @@ function isValidIsraeliPhone(phone: string): boolean {
     (digits.length === 10 && digits.startsWith('0')) ||
     (digits.length === 12 && digits.startsWith('972'))
   )
+}
+
+/** Emails the lead via Web3Forms. Runs in the browser, as the free plan requires. */
+async function emailLead(lead: {
+  name: string
+  phone: string
+  area: string
+  source: LeadFormSource
+  page: string
+}): Promise<boolean> {
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_PUBLIC_KEY,
+        subject: `ליד חדש מהאתר: ${lead.name}${lead.area ? ` – ${lead.area}` : ''}`,
+        from_name: 'אתר פיזיותרפיה.פלוס',
+        'שם': lead.name,
+        'טלפון': lead.phone,
+        'מה כואב': lead.area || 'לא צוין',
+        'מקור': `${LEAD_SOURCE_LABELS[lead.source]} (${lead.page})`,
+      }),
+    })
+    const data = await res.json().catch(() => ({}))
+    return res.ok && data?.success === true
+  } catch {
+    return false
+  }
 }
 
 const inputClass =
@@ -67,7 +96,9 @@ export default function LeadForm({
 
     setSubmitting(true)
     try {
-      const res = await fetch('/api/lead', {
+      // Save on the server and email from the browser at the same time.
+      // Either one succeeding means the clinic has the lead.
+      const savePromise = fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -79,8 +110,12 @@ export default function LeadForm({
           website,
         }),
       })
+      const emailPromise = website
+        ? Promise.resolve(false)
+        : emailLead({ name: trimmedName, phone: trimmedPhone, area, source, page: pathname })
+      const [res, emailed] = await Promise.all([savePromise, emailPromise])
       const data = await res.json().catch(() => ({}))
-      if (!res.ok) {
+      if (!res.ok && !emailed) {
         toast.error(data?.error || 'השליחה נכשלה. נסו שוב או התקשרו אלינו.')
         return
       }
