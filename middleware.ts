@@ -112,6 +112,7 @@ export function middleware(request: NextRequest) {
       '/api/admin-youtube-ids',
       '/api/admin-custom-exercises',
       '/api/admin-saved-plans',
+      '/api/admin-leads',
       '/api/newsletter',
       '/api/plan-feedback',
       '/api/admin-plan-feedback',

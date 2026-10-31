@@ -215,6 +215,12 @@ export default function AdminBuilderClient() {
                 <h1 className="text-2xl font-bold">בונה תוכנית תרגילים</h1>
                 <div className="flex items-center gap-2">
                   <Link
+                    href="/admin-exercises-builder/leads"
+                    className="text-sm rounded-xl border-2 border-white/80 px-3 py-2 text-white hover:bg-white/20 transition min-h-[44px] flex items-center"
+                  >
+                    לידים
+                  </Link>
+                  <Link
                     href="/admin-exercises-builder/plans"
                     className="text-sm rounded-xl border-2 border-white/80 px-3 py-2 text-white hover:bg-white/20 transition min-h-[44px] flex items-center"
                   >
