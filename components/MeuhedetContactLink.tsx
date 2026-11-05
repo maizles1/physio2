@@ -11,6 +11,8 @@ type MeuhedetContactLinkProps = {
   children: ReactNode
   target?: string
   rel?: string
+  /** Page name sent with the click events. */
+  page?: string
 }
 
 export default function MeuhedetContactLink({
@@ -21,16 +23,17 @@ export default function MeuhedetContactLink({
   children,
   target,
   rel,
+  page = 'meuhedet',
 }: MeuhedetContactLinkProps) {
   const handleClick = () => {
     if (type === 'phone') {
       gtag.event('click_to_call', 'engagement', href.replace('tel:', ''), undefined, {
-        page: 'meuhedet',
+        page,
         section,
       })
     } else {
       gtag.event('whatsapp_click', 'engagement', section, undefined, {
-        page: 'meuhedet',
+        page,
         section,
       })
     }

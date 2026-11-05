@@ -7,11 +7,19 @@ import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
 const phoneTel = getContactPhoneTel()
 const phoneDisplay = seoConfig.contact.phone
 const whatsappNumber = '972508838982'
-const whatsappMessage = encodeURIComponent(
-  'שלום, פניתי דרך הדף של מאוחדת באתר ואשמח לתיאום טיפול לפציעת ספורט'
-)
+const DEFAULT_WHATSAPP_TEXT = 'שלום, פניתי דרך הדף של מאוחדת באתר ואשמח לתיאום טיפול לפציעת ספורט'
 
-export default function MeuhedetStickyCTA() {
+interface StickyCtaProps {
+  /** Page name sent with the click events. */
+  page?: string
+  whatsappText?: string
+}
+
+export default function MeuhedetStickyCTA({
+  page = 'meuhedet',
+  whatsappText = DEFAULT_WHATSAPP_TEXT,
+}: StickyCtaProps = {}) {
+  const whatsappMessage = encodeURIComponent(whatsappText)
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -32,7 +40,7 @@ export default function MeuhedetStickyCTA() {
       <div className="flex gap-2 max-w-lg mx-auto">
         <a
           href={`tel:${phoneTel}`}
-          onClick={() => gtag.event('click_to_call', 'engagement', phoneDisplay, undefined, { page: 'meuhedet', section: 'sticky' })}
+          onClick={() => gtag.event('click_to_call', 'engagement', phoneDisplay, undefined, { page, section: 'sticky' })}
           className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-[#2A3080] px-4 py-3 text-sm font-bold text-white"
         >
           <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -44,7 +52,7 @@ export default function MeuhedetStickyCTA() {
           href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => gtag.event('whatsapp_click', 'engagement', 'meuhedet_sticky', undefined, { page: 'meuhedet', section: 'sticky' })}
+          onClick={() => gtag.event('whatsapp_click', 'engagement', `${page}_sticky`, undefined, { page, section: 'sticky' })}
           className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-3 text-sm font-bold text-white"
         >
           WhatsApp

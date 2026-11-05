@@ -67,7 +67,7 @@ const insuranceOptions: InsuranceOption[] = [
     logoPath: '/images/insurance/Ministry-of-defense-logo.png',
     color: 'text-orange-600',
     bgColor: 'bg-orange-50',
-    href: '/contact',
+    href: '/misrad-habitachon',
     linkLabel: 'לפרטים נוספים',
   },
 ]
