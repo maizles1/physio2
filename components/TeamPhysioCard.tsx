@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { TEAM_PHYSIO, isTeamPhysioConfigured } from '@/config/team.config'
+import { TEAM_PHYSIO, isTeamPhysioConfigured, isPlaceholderValue } from '@/config/team.config'
 
 /** Card for the team physiotherapist, used in "who treats you" sections. Hidden if not configured. */
 export default function TeamPhysioCard() {
@@ -25,7 +25,8 @@ export default function TeamPhysioCard() {
           {TEAM_PHYSIO.name}
         </h3>
         <p className="text-sm font-medium mb-3" style={{ color: '#2080C0' }}>
-          פיזיותרפיסטית מוסמכת (B.P.T) · פיזיותרפיה.פלוס
+          פיזיותרפיסטית מוסמכת (B.P.T)
+          {!isPlaceholderValue(TEAM_PHYSIO.university) && ` · ${TEAM_PHYSIO.university}`}
         </p>
         <p className="text-gray-700 text-sm leading-relaxed mb-4">
           פיזיותרפיסטית בצוות הקליני של הקליניקה, מתמחה ב{TEAM_PHYSIO.specialties.join(', ')}, תחת

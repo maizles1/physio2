@@ -14,7 +14,7 @@ export interface TeamPhysio {
 
 export const TEAM_PHYSIO: TeamPhysio = {
   name: 'לינוי הימלפרב',
-  university: '[שם האוניברסיטה]',
+  university: 'אוניברסיטת תל אביב',
   imageSrc: '/images/linoy-himmelfarb.jpeg',
   specialties: ['שיקום אורתופדי', 'פציעות ספורט', 'שיקום אקטיבי'],
 }
