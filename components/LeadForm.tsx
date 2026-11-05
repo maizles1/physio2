@@ -9,7 +9,7 @@ import { LEAD_AREAS, LEAD_SOURCE_LABELS, WEB3FORMS_PUBLIC_KEY } from '@/lib/lead
 const NAME_MIN = 2
 const NAME_MAX = 80
 
-export type LeadFormSource = 'home' | 'contact' | 'service' | 'meuhedet'
+export type LeadFormSource = 'home' | 'contact' | 'service' | 'meuhedet' | 'misrad-habitachon'
 
 interface LeadFormProps {
   /** Where the form sits; shown in the notification email. */
