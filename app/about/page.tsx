@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import ImageCarousel from '@/components/ImageCarousel'
 import { getMastersCredentialSchema, getUniversitySchema, getClinicEntityRef } from '@/config/geo.config'
 import {
   TEAM_PHYSIO,
@@ -388,6 +389,8 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
+      <ImageCarousel />
+
       <section id="team" className="py-16 bg-gray-50 scroll-mt-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">

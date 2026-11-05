@@ -2,6 +2,9 @@ import Link from 'next/link'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import ClinicNapCta from '@/components/ClinicNapCta'
 import LeadForm from '@/components/LeadForm'
+import ServiceInlineCta from '@/components/ServiceInlineCta'
+import { getReviewForService } from '@/config/manual-reviews.config'
+import { GOOGLE_RATING_DISPLAY } from '@/config/google-business.config'
 import ServiceFaqAccordion from '@/components/ServiceFaqAccordion'
 import ServiceImage from '@/components/ServiceImage'
 import type { ServiceLandingPageData } from '@/config/service-pages.config'
@@ -28,6 +31,7 @@ type ServiceLandingPageProps = {
 
 export default function ServiceLandingPage({ page }: ServiceLandingPageProps) {
   const pageUrl = absUrl(`/services/${page.slug}`)
+  const review = getReviewForService(page.slug)
   const clinicRef = getClinicEntityRef()
 
   const serviceSchema = {
@@ -151,10 +155,13 @@ export default function ServiceLandingPage({ page }: ServiceLandingPageProps) {
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-10 items-start max-w-6xl mx-auto">
             <div className="flex-1">
-              {page.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="text-lg text-gray-700 leading-relaxed mb-5">
-                  {paragraph}
-                </p>
+              {page.paragraphs.map((paragraph, i) => (
+                <div key={paragraph}>
+                  <p className="text-lg text-gray-700 leading-relaxed mb-5">{paragraph}</p>
+                  {i === 0 && (
+                    <ServiceInlineCta slug={page.slug} whatsappMessage={page.whatsappMessage} />
+                  )}
+                </div>
               ))}
               {page.evidence ? (
                 <p className="text-lg text-gray-700 leading-relaxed mb-5">
@@ -173,6 +180,26 @@ export default function ServiceLandingPage({ page }: ServiceLandingPageProps) {
                     {page.evidence.articleLabel}
                   </Link>{'.'}
                 </p>
+              ) : null}
+
+              {review ? (
+                <figure className="my-6 rounded-2xl border border-gray-200 bg-white p-4 sm:p-5 shadow-sm">
+                  <div className="flex items-center gap-2 mb-2" aria-label={`דירוג ${review.rating} מתוך 5`}>
+                    {Array.from({ length: review.rating }).map((_, i) => (
+                      <svg key={i} className="w-4 h-4" viewBox="0 0 20 20" fill="#FBBF24" aria-hidden="true">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                    <span className="text-sm text-gray-500">ביקורת בגוגל · {GOOGLE_RATING_DISPLAY}</span>
+                  </div>
+                  <blockquote className="text-gray-700 leading-relaxed line-clamp-5">&ldquo;{review.text}&rdquo;</blockquote>
+                  <figcaption className="mt-2 text-sm font-semibold text-gray-900">
+                    {review.authorName}
+                  </figcaption>
+                  <Link href="/testimonials" className="mt-2 inline-block text-sm underline" style={{ color: '#1a6ea5' }}>
+                    עוד המלצות מטופלים
+                  </Link>
+                </figure>
               ) : null}
 
               <h2 className="text-xl sm:text-2xl font-bold mb-4 mt-8" style={{ color: '#2A3080' }}>
