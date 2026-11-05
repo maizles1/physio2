@@ -6,6 +6,7 @@ import MeuhedetReviewsStrip from '@/components/MeuhedetReviewsStrip'
 import MeuhedetStickyCTA from '@/components/MeuhedetStickyCTA'
 import MeuhedetContactLink from '@/components/MeuhedetContactLink'
 import LeadForm from '@/components/LeadForm'
+import TeamPhysioCard, { therapistNames } from '@/components/TeamPhysioCard'
 import { manualReviews } from '@/config/manual-reviews.config'
 import { getUniversitySchema, getClinicPostalAddress, getOpeningHoursSpecification, getAshdodAreaServed, clinicSchemaIds, clinicEntity, clinicGeo } from '@/config/geo.config'
 import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
@@ -443,7 +444,7 @@ export default function MeuhedetPage() {
                 מי מטפל בכם?
               </h2>
               <p className="text-lg text-gray-700">
-                אנדריי מייזלס · מרכז כלניות, אשדוד · ספק מאוחדת רשמי
+                {therapistNames()} · מרכז כלניות, אשדוד · ספק מאוחדת רשמי
               </p>
             </div>
 
@@ -482,6 +483,7 @@ export default function MeuhedetPage() {
                     </svg>
                   </Link>
                 </div>
+                <TeamPhysioCard />
               </div>
 
               {/* Clinic bento gallery – balanced mosaic */}
