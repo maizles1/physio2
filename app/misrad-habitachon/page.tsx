@@ -9,6 +9,7 @@ import LeadForm from '@/components/LeadForm'
 import { manualReviews } from '@/config/manual-reviews.config'
 import { getUniversitySchema, getClinicPostalAddress, getOpeningHoursSpecification, getAshdodAreaServed, clinicSchemaIds, clinicEntity, clinicGeo } from '@/config/geo.config'
 import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
+import { TEAM_PHYSIO, isTeamPhysioConfigured } from '@/config/team.config'
 
 export const metadata: Metadata = {
   title: 'פיזיותרפיה לזכאי משרד הביטחון | אשדוד',
@@ -471,7 +472,7 @@ export default function MisradHabitachonPage() {
                 מי מטפל בכם?
               </h2>
               <p className="text-lg text-gray-700">
-                אנדריי מייזלס · מרכז כלניות, אשדוד · ספק משרד הביטחון
+                {isTeamPhysioConfigured() ? `אנדריי מייזלס ו${TEAM_PHYSIO.name}` : 'אנדריי מייזלס'} · מרכז כלניות, אשדוד · ספק משרד הביטחון
               </p>
             </div>
 
@@ -510,6 +511,43 @@ export default function MisradHabitachonPage() {
                     </svg>
                   </Link>
                 </div>
+                {isTeamPhysioConfigured() && (
+                  <div className="flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                    {TEAM_PHYSIO.imageSrc && (
+                      <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-full ring-2 ring-[#2080C0]/20">
+                        <Image
+                          src={TEAM_PHYSIO.imageSrc}
+                          alt={`${TEAM_PHYSIO.name}, פיזיותרפיסטית מוסמכת`}
+                          fill
+                          className="object-cover object-top"
+                          sizes="80px"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <h3 className="text-xl font-bold mb-1" style={{ color: '#2A3080' }}>
+                        {TEAM_PHYSIO.name}
+                      </h3>
+                      <p className="text-sm font-medium mb-3" style={{ color: '#2080C0' }}>
+                        פיזיותרפיסטית מוסמכת (B.P.T) · פיזיותרפיה.פלוס
+                      </p>
+                      <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                        פיזיותרפיסטית בצוות הקליני של הקליניקה, מתמחה ב{TEAM_PHYSIO.specialties.join(', ')}, תחת
+                        המתודולוגיה הקלינית של אנדריי מייזלס.
+                      </p>
+                      <Link
+                        href="/about#team"
+                        className="inline-flex items-center gap-1 text-sm text-[#2080C0] font-semibold hover:underline"
+                      >
+                        עוד על הצוות
+                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </Link>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Clinic bento gallery – balanced mosaic */}
