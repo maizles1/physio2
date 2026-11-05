@@ -110,29 +110,33 @@ const clinicPhotos = [
   },
 ]
 
+/** Personal area of the Ministry of Defense Rehabilitation Department, where the approval is issued. */
+const SHIKUM_PERSONAL_AREA_URL = 'https://myshikum.mod.gov.il/'
+
 const steps = [
   {
     n: 1,
-    title: 'בדיקת זכאות',
+    title: 'מפיקים התחייבות באזור האישי',
     description:
-      'בדקו מול הגורם המטפל שלכם במשרד הביטחון שיש לכם זכאות לטיפולי פיזיותרפיה.',
+      'נכנסים לאזור האישי באתר אגף השיקום של משרד הביטחון ומפיקים באופן עצמאי התחייבות לטיפולי פיזיותרפיה בקליניקה "פיזיותרפיה.פלוס – אנדריי מייזלס".',
   },
   {
     n: 2,
-    title: 'אישור לטיפול בקליניקה שלנו',
+    title: 'מתקשרים אלינו לקביעת תור',
     description:
-      'בקשו אישור לטיפולי פיזיותרפיה בקליניקה "פיזיותרפיה.פלוס – אנדריי מייזלס", ספק מוכר של משרד הביטחון.',
+      'עם ההתחייבות ביד – מתקשרים או שולחים הודעה ב-WhatsApp, ומתאמים תור קרוב בקליניקה באשדוד.',
   },
   {
     n: 3,
-    title: 'תיאום תור מהיר',
-    description: 'יוצרים איתנו קשר ומתאמים תור קרוב בקליניקה באשדוד בשעות שנוחות לכם.',
+    title: 'מגיעים לטיפול',
+    description:
+      'לטיפול הראשון מביאים תעודת זהות, ואם יש – מסמכים רפואיים ובדיקות הדמיה.',
   },
   {
     n: 4,
-    title: 'כאן בשבילכם לכל שאלה',
+    title: 'צריכים עזרה?',
     description:
-      'לא בטוחים איך מתחילים, או נתקעתם בתהליך? צרו איתנו קשר ונשמח לעזור.',
+      'לא מצליחים להפיק את ההתחייבות או לא בטוחים איך? התקשרו אלינו ונעזור.',
   },
 ]
 
@@ -142,12 +146,20 @@ const faqs = [
     a: 'כן. הקליניקה "פיזיותרפיה.פלוס – אנדריי מייזלס" מוכרת כספק של משרד הביטחון לטיפולי פיזיותרפיה.',
   },
   {
+    q: 'איך מגיעים לטיפול אצלכם?',
+    a: 'מפיקים באופן עצמאי התחייבות לטיפולי פיזיותרפיה באזור האישי באתר אגף השיקום של משרד הביטחון, ואז פשוט מתקשרים אלינו לקביעת תור. אין צורך להגיע קודם לסניף.',
+  },
+  {
+    q: 'לא הצלחתי להפיק התחייבות באזור האישי – מה עושים?',
+    a: 'התקשרו אלינו או שלחו הודעה ב-WhatsApp. נסביר איך עושים את זה, ואם צריך – נכוון אתכם לגורם המתאים באגף השיקום.',
+  },
+  {
     q: 'מי יכול לקבל טיפול במסגרת משרד הביטחון?',
     a: 'הזכאות נקבעת על ידי הגורמים המוסמכים, לפי ההכרה והזכאות האישית שלכם. אם אינכם בטוחים מה מגיע לכם – בדקו מול הגורם המטפל, ואנחנו נשמח לעזור להבין את התהליך.',
   },
   {
     q: 'מה צריך להביא לטיפול הראשון?',
-    a: 'את האישור לטיפול, תעודת זהות ומסמכים רפואיים רלוונטיים. אם יש בידיכם בדיקות הדמיה (MRI/אולטרסאונד/רנטגן) – מומלץ להביא גם אותן.',
+    a: 'תעודת זהות ומסמכים רפואיים רלוונטיים. את ההתחייבות מפיקים מראש באזור האישי. אם יש בידיכם בדיקות הדמיה (MRI/אולטרסאונד/רנטגן) – מומלץ להביא גם אותן.',
   },
   {
     q: 'האם יש השתתפות עצמית?',
@@ -328,7 +340,7 @@ export default function MisradHabitachonPage() {
                 </MeuhedetContactLink>
               </div>
               <p className="mt-4 text-sm text-white/80">
-                נשמח לעזור גם בתהליך מול משרד הביטחון · שיחת ייעוץ ראשונית ללא התחייבות
+                מפיקים התחייבות באזור האישי באתר אגף השיקום ומתקשרים אלינו לקביעת תור
               </p>
             </div>
             <div className="flex justify-center lg:justify-end">
@@ -404,7 +416,7 @@ export default function MisradHabitachonPage() {
               איך זה עובד?
             </h2>
             <p className="text-lg text-gray-700">
-              ארבעה צעדים מהפנייה ועד תחילת הטיפול במסגרת משרד הביטחון.
+              מפיקים התחייבות באופן עצמאי, מתקשרים אלינו – ומתחילים טיפול.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
@@ -422,6 +434,28 @@ export default function MisradHabitachonPage() {
                 <p className="text-gray-700 text-sm leading-relaxed">{step.description}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href={SHIKUM_PERSONAL_AREA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#2A3080] px-6 py-3.5 font-bold text-white shadow-md hover:bg-[#1f2566] transition-colors"
+            >
+              לאזור האישי באתר אגף השיקום
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            <MeuhedetContactLink
+              page={PAGE}
+              type="phone"
+              href={`tel:${phoneTel}`}
+              section="steps"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[#2080C0] px-6 py-3 font-bold text-[#2A3080] hover:bg-white transition-colors"
+            >
+              יש לי התחייבות – לקביעת תור
+            </MeuhedetContactLink>
           </div>
         </div>
       </section>
@@ -578,7 +612,7 @@ export default function MisradHabitachonPage() {
               <p className="text-gray-700 leading-relaxed mb-4">
                 בפגישה הראשונה נערוך הערכה מקיפה: שיחה על הרקע והתלונות, בדיקה תנועתית ותכנון תוכנית
                 טיפול אישית. המטרה – להבין את מקור הכאב, לשפר תפקוד ולהחזיר ביטחון בתנועה ביום-יום.
-                נעזור גם בהסבר על התהליך מול משרד הביטחון במעמד קביעת התור.
+                את ההתחייבות מפיקים מראש באופן עצמאי באזור האישי, ואם צריך – נעזור בהסבר במעמד קביעת התור.
               </p>
               <ul className="list-disc list-inside text-gray-700 space-y-2 text-sm sm:text-base">
                 <li>אבחון תנועה וכוח – זיהוי מגבלות וחולשות</li>
@@ -597,7 +631,7 @@ export default function MisradHabitachonPage() {
                   'פיזיותרפיסט (M.Sc) עם ניסיון בשיקום אורתופדי ושיקום אחרי ניתוחים',
                   'פיזיותרפיסט לשעבר של נבחרת ישראל בג\'ודו',
                   'קליניקה מקצועית במרכז כלניות, אשדוד',
-                  'ליווי בתהליך מול משרד הביטחון – מהבירור ועד תחילת הטיפול',
+                  'תהליך פשוט: מפיקים התחייבות באזור האישי ומתקשרים לקביעת תור',
                   'תוכנית טיפול ושיקום מותאמת אישית',
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-3 rounded-xl bg-white border border-gray-200 p-4">
@@ -618,7 +652,7 @@ export default function MisradHabitachonPage() {
                 כדי שהטיפול יתחיל בצורה חלקה, מומלץ להגיע מוכנים עם המסמכים הבאים:
               </p>
               <ul className="list-disc list-inside text-gray-700 space-y-2 text-sm sm:text-base">
-                <li>אישור לטיפולי פיזיותרפיה בקליניקה: פיזיותרפיה.פלוס – אנדריי מייזלס</li>
+                <li>התחייבות לטיפולי פיזיותרפיה בקליניקה &quot;פיזיותרפיה.פלוס – אנדריי מייזלס&quot; – מפיקים מראש באזור האישי באתר אגף השיקום</li>
                 <li>תעודת זהות</li>
                 <li>מסמכים רפואיים רלוונטיים ובדיקות הדמיה (MRI, רנטגן, אולטרסאונד) – אם קיימים</li>
                 <li>בגדים נוחים</li>

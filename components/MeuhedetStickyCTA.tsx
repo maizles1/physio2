@@ -29,6 +29,13 @@ export default function MeuhedetStickyCTA({
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // While this bar is showing (phones only), hide the round floating buttons
+  // so they don't cover it. Same buttons, no need for both.
+  useEffect(() => {
+    document.body.classList.toggle('sticky-cta-on', visible)
+    return () => document.body.classList.remove('sticky-cta-on')
+  }, [visible])
+
   if (!visible) return null
 
   return (

@@ -1032,3 +1032,8 @@ section .lead-form-card .lf-muted { color: #4b5563 !important; }
 section .lead-form-card .lf-required { color: #dc2626 !important; }
 section .lead-form-card .lf-optional { color: #9ca3af !important; }
 section .lead-form-card .lf-note { color: #6b7280 !important; }
+
+/* Landing pages with a sticky call bar: hide the round floating buttons on phones. */
+@media (max-width: 767px) {
+  body.sticky-cta-on .floating-cta { display: none !important; }
+}
