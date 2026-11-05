@@ -9,6 +9,7 @@ import LeadForm from '@/components/LeadForm'
 import { manualReviews } from '@/config/manual-reviews.config'
 import { getUniversitySchema, getClinicPostalAddress, getOpeningHoursSpecification, getAshdodAreaServed, clinicSchemaIds, clinicEntity, clinicGeo } from '@/config/geo.config'
 import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
+import TeamPhysioCard, { therapistNames } from '@/components/TeamPhysioCard'
 
 export const metadata: Metadata = {
   title: 'פיזיותרפיה לזכאי משרד הביטחון | אשדוד',
@@ -471,7 +472,7 @@ export default function MisradHabitachonPage() {
                 מי מטפל בכם?
               </h2>
               <p className="text-lg text-gray-700">
-                אנדריי מייזלס · מרכז כלניות, אשדוד · ספק משרד הביטחון
+                {therapistNames()} · מרכז כלניות, אשדוד · ספק משרד הביטחון
               </p>
             </div>
 
@@ -510,6 +511,7 @@ export default function MisradHabitachonPage() {
                     </svg>
                   </Link>
                 </div>
+                <TeamPhysioCard />
               </div>
 
               {/* Clinic bento gallery – balanced mosaic */}
