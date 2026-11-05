@@ -69,3 +69,6 @@ export function getReviewUrl(): string {
  */
 export const GOOGLE_PLACES_API_BASE = 'https://maps.googleapis.com/maps/api/place/details/json'
 
+
+/** Public Google rating shown on the site (update when it changes on Google). */
+export const GOOGLE_RATING_DISPLAY = '5.0'

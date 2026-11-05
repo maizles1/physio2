@@ -79,3 +79,21 @@ export function getTopManualReviews(limit: number = 3): ManualReview[] {
 
 
 
+
+/**
+ * Which review to show on each service page (by review id). Pages not listed
+ * fall back to the general review. Pick a review that talks about that problem.
+ */
+export const SERVICE_REVIEW_IDS: Record<string, string> = {
+  'back-pain-ashdod': 'review-1',
+  'lower-back-pain-ashdod': 'review-1',
+  'vestibular-ashdod': 'review-3',
+  'post-surgery-ashdod': 'review-4',
+  'knee-pain-ashdod': 'review-4',
+}
+const DEFAULT_SERVICE_REVIEW_ID = 'review-2'
+
+export function getReviewForService(slug: string): ManualReview | undefined {
+  const id = SERVICE_REVIEW_IDS[slug] ?? DEFAULT_SERVICE_REVIEW_ID
+  return manualReviews.find((r) => r.id === id) ?? manualReviews[0]
+}

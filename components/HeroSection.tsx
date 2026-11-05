@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { gtag } from '@/components/GoogleAnalytics'
 import { seoConfig, getContactEmailTo, getContactPhoneTel } from '@/config/seo.config'
+import { GOOGLE_RATING_DISPLAY } from '@/config/google-business.config'
 
 const whatsappNumber = '972508838982'
 const whatsappMessage = encodeURIComponent('שלום, אשמח לתאם אבחון')
@@ -101,6 +102,20 @@ export default function HeroSection() {
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-8 leading-tight sm:leading-relaxed tracking-wide text-white">
                 פיזיותרפיה ספורט ושיקום אקטיבי באשדוד
               </h1>
+              <Link
+                href="/testimonials"
+                className="inline-flex items-center gap-2 rounded-full bg-white/15 border border-white/30 px-3 py-1 text-sm font-semibold text-white hover:bg-white/25 transition-colors mb-2 sm:mb-4"
+                aria-label={`דירוג ${GOOGLE_RATING_DISPLAY} מתוך 5 בגוגל – להמלצות המטופלים`}
+              >
+                <span className="flex" aria-hidden="true">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <svg key={i} className="w-4 h-4" viewBox="0 0 20 20" fill="#FBBF24">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </span>
+                {GOOGLE_RATING_DISPLAY} בגוגל
+              </Link>
               <div className="max-w-3xl mx-auto lg:mx-0 lg:mr-0 mt-2 sm:mt-8 space-y-4 sm:space-y-6">
                 <h2 className="mb-0 sm:mb-6 text-white leading-relaxed max-sm:text-lg!">
                   הסטנדרט הקליני של פיזיותרפיסט לשעבר בנבחרת ישראל ב<span className="font-bold highlight-judo">ג&apos;ודו</span> – עכשיו בקליניקה באשדוד

@@ -92,7 +92,7 @@ export default function ServicesPreview() {
   return (
     <section className="py-12 sm:py-16 bg-gray-50">
       <div className="container">
-        <div className="text-center mb-12">
+        <div className="text-center mb-6 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             השירותים שלנו
           </h2>
@@ -101,7 +101,7 @@ export default function ServicesPreview() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8 max-w-6xl mx-auto">
           {services.map((service, index) => (
             <Link
               key={index}
@@ -110,7 +110,7 @@ export default function ServicesPreview() {
               aria-label={`${service.title} - ${service.description}. למידע נוסף`}
             >
               {/* תמונה קטנה */}
-              <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 w-full overflow-hidden">
+              <div className="relative h-24 sm:h-56 md:h-64 lg:h-72 w-full overflow-hidden">
                 {service.imagePath && service.imagePath.includes('lectures') ? (
                   // eslint-disable-next-line @next/next/no-img-element -- dynamic path from data
                   <img
@@ -125,8 +125,7 @@ export default function ServicesPreview() {
                     fallbackSrc={service.imagePath}
                     alt={service.title}
                     className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    priority={index < 3}
+                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 ) : (
                   <div className={`w-full h-full bg-gradient-to-br ${service.color} flex items-center justify-center`}>
@@ -139,19 +138,19 @@ export default function ServicesPreview() {
               </div>
               
               {/* תוכן */}
-              <div className="p-6">
-                <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-lg flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
+              <div className="p-3 sm:p-6">
+                <div className={`hidden sm:flex w-16 h-16 bg-gradient-to-br ${service.color} rounded-lg items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
                   <div aria-hidden="true">
                     {service.icon}
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-base sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2 leading-snug group-hover:text-blue-600 transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="hidden sm:block text-gray-600 leading-relaxed">
                   {service.description}
                 </p>
-                <div className="mt-4 text-blue-600 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                <div className="mt-1 sm:mt-4 text-sm sm:text-base text-blue-600 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
                   <span>למידע נוסף</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -162,7 +161,7 @@ export default function ServicesPreview() {
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-8 sm:mt-12">
           <Link
             href="/services"
             className="btn btn-primary"

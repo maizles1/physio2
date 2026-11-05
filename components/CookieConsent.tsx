@@ -59,7 +59,34 @@ function injectAnalyticsScripts(defaultState: ConsentState) {
   `;
   document.head.appendChild(initScript);
 
-  // 2. GTM container (all marketing tags live here).
+  // 2. GTM container (all marketing tags live here). Loading it is deferred
+  // until the visitor interacts or the page has been idle for a few
+  // seconds, so ~400KB of marketing scripts don't compete with the first
+  // render on phones. Events pushed before then wait in dataLayer.
+  scheduleGtmLoad();
+}
+
+const GTM_FALLBACK_DELAY_MS = 3500;
+const INTERACTION_EVENTS = ["pointerdown", "keydown", "scroll", "touchstart"] as const;
+
+function scheduleGtmLoad() {
+  let done = false;
+  const load = () => {
+    if (done) return;
+    done = true;
+    INTERACTION_EVENTS.forEach((e) => window.removeEventListener(e, load));
+    loadGtm();
+  };
+  INTERACTION_EVENTS.forEach((e) =>
+    window.addEventListener(e, load, { once: true, passive: true })
+  );
+  const startTimer = () => window.setTimeout(load, GTM_FALLBACK_DELAY_MS);
+  if (document.readyState === "complete") startTimer();
+  else window.addEventListener("load", startTimer, { once: true });
+}
+
+function loadGtm() {
+  if (document.getElementById("google-tag-manager")) return;
   const gtmScript = document.createElement("script");
   gtmScript.id = "google-tag-manager";
   gtmScript.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -139,10 +166,14 @@ export default function CookieConsent() {
       className="fixed bottom-0 left-0 right-0 z-[10001] bg-white border-t-2 border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.15)] pb-[env(safe-area-inset-bottom)]"
       dir="rtl"
     >
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <p className="text-gray-700 text-sm leading-relaxed max-w-2xl">
-            אנחנו משתמשים בעוגיות כדי לשפר את החוויה ולנתח תעבורה באתר. לחיצה על &quot;מאשר/ים&quot; מסכימה לשימוש.{" "}
+      <div className="container mx-auto px-3 py-2 sm:px-4 sm:py-4">
+        {/* Phones: one compact row so the banner doesn't hide the call buttons. */}
+        <div className="flex flex-row items-center justify-between gap-3 sm:gap-4">
+          <p className="text-gray-700 text-xs sm:text-sm leading-snug sm:leading-relaxed max-w-2xl">
+            <span className="sm:hidden">האתר משתמש בעוגיות.</span>
+            <span className="hidden sm:inline">
+              אנחנו משתמשים בעוגיות כדי לשפר את החוויה ולנתח תעבורה באתר. לחיצה על &quot;מאשר/ים&quot; מסכימה לשימוש.
+            </span>{" "}
             <Link
               href="/privacy"
               className="text-[#2080C0] hover:underline font-medium"
@@ -150,18 +181,18 @@ export default function CookieConsent() {
               מדיניות פרטיות
             </Link>
           </p>
-          <div className="flex gap-3 shrink-0">
+          <div className="flex gap-2 sm:gap-3 shrink-0">
             <button
               type="button"
               onClick={decline}
-              className="rounded-xl border-2 border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 min-h-[44px] transition-colors"
+              className="rounded-xl border-2 border-gray-300 px-3 sm:px-4 py-2 sm:py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 min-h-[44px] transition-colors"
             >
               דחה
             </button>
             <button
               type="button"
               onClick={accept}
-              className="rounded-xl bg-[#2A3080] hover:bg-[#004080] text-white px-5 py-2.5 text-sm font-medium min-h-[44px] transition-colors"
+              className="rounded-xl bg-[#2A3080] hover:bg-[#004080] text-white px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-medium min-h-[44px] transition-colors"
             >
               מאשר/ים
             </button>

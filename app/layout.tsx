@@ -25,7 +25,7 @@ import { getServiceCatalogOffers } from "@/config/service-pages.config";
 
 const assistant = Assistant({
   subsets: ["latin", "hebrew"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
   preload: true,
   variable: "--font-assistant",
