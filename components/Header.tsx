@@ -33,6 +33,16 @@ export default function Header() {
     }
   }, [])
 
+  // While the phone menu is open, stop the page behind it from scrolling.
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    const previous = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previous
+    }
+  }, [mobileMenuOpen])
+
   const phoneNumber = seoConfig.contact.phone
   const phoneTel = getContactPhoneTel()
   const whatsappNumber = '972508838982'
@@ -316,7 +326,9 @@ export default function Header() {
         {mobileMenuOpen && (
           <div 
             id="mobile-menu"
-            className="xl:hidden pb-4 border-t border-gray-200 animate-in slide-in-from-top"
+            // The menu is taller than a phone screen and the header is sticky, so
+            // it scrolls on its own; overscroll-contain keeps the page still.
+            className="xl:hidden pb-4 border-t border-gray-200 animate-in slide-in-from-top max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain"
             role="menu"
             aria-label="תפריט ניווט ראשי"
             aria-live="polite"
