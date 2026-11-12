@@ -17,7 +17,8 @@
     "seo-audit": "node scripts/seo-audit.js",
     "seo-report": "node scripts/seo-email-report.js",
     "seo-monitor": "node scripts/seo-audit.js && node scripts/seo-email-report.js",
-    "backup": "bash scripts/backup.sh"
+    "backup": "bash scripts/backup.sh",
+    "tag-check": "node scripts/tag-check.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.3.0",
