@@ -40,6 +40,14 @@ export interface SEOConfig {
   }
   googleAnalyticsId?: string
   googleSearchConsoleId?: string
+  /**
+   * Google Ads conversions for contact clicks, mirrored from the GTM link-click
+   * tags. Used only when a click happens before GTM has loaded (see gtag.event).
+   */
+  googleAdsClickConversions?: {
+    whatsapp: string
+    phone: string
+  }
 }
 
 export const seoConfig: SEOConfig = {
@@ -94,6 +102,12 @@ export const seoConfig: SEOConfig = {
   // The tag itself must be configured inside GTM (GTM-MK3F6SVQ), not loaded
   // directly from the site. Consent Mode defaults live in CookieConsent.tsx.
   googleAnalyticsId: 'G-ETG7YT4SBR',
+  // Same "send_to" values as the GTM link-click conversion tags. If those
+  // tags change in GTM, update these too.
+  googleAdsClickConversions: {
+    whatsapp: 'AW-705216601/D8IhCLniwcYaENmAo9AC',
+    phone: 'AW-705216601/WpWnCLbiwcYaENmAo9AC',
+  },
   // googleSearchConsoleId: 'your-verification-code',
 }
 
