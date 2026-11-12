@@ -100,7 +100,8 @@ export default function HeroSection() {
                 פיזיותרפיה.פלוס | בניהולו הקליני של אנדריי מייזלס (M.Sc)
               </p>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-8 leading-tight sm:leading-relaxed tracking-wide text-white">
-                פיזיותרפיה ספורט ושיקום אקטיבי באשדוד
+                <span className="block">שיקום ברמה אולימפית.</span>{' '}
+                <span className="block">מכון הפיזיותרפיה של אשדוד</span>
               </h1>
               <Link
                 href="/testimonials"
