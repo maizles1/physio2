@@ -49,6 +49,30 @@ function fireFbqEvent(action: string, params: Record<string, unknown>) {
 }
 
 /**
+ * GTM loads after the first scroll/tap (see CookieConsent.tsx). Its WhatsApp
+ * and phone conversions use link-click triggers, which miss a click that
+ * happens before GTM has loaded, e.g. a visitor whose first action is tapping
+ * the call button. In that case queue the same Google Ads conversion; the
+ * Google tag sends it once GTM is up. When GTM is already running we do
+ * nothing here, so its own link-click tag is the only one that counts.
+ */
+function queueClickConversionIfGtmNotReady(action: string) {
+  if (typeof window === 'undefined' || !window.gtag) return
+  const w = window as unknown as { google_tag_manager?: unknown }
+  if (w.google_tag_manager) return
+  const conversions = seoConfig.googleAdsClickConversions
+  if (!conversions) return
+  const sendTo =
+    action === 'whatsapp_click' ? conversions.whatsapp : action === 'click_to_call' ? conversions.phone : null
+  if (!sendTo) return
+  try {
+    window.gtag('event', 'conversion', { send_to: sendTo })
+  } catch {
+    // ignore analytics errors
+  }
+}
+
+/**
  * Event tracking functions
  */
 export const gtag = {
@@ -75,6 +99,7 @@ export const gtag = {
 
   // Track custom events
   event: (action: string, category: string, label?: string, value?: number, additionalParams?: Record<string, unknown>) => {
+    queueClickConversionIfGtmNotReady(action)
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', action, {
         event_category: category,
