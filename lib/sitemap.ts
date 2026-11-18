@@ -196,6 +196,7 @@ export function fallbackSitemapUrls(now: Date = new Date()): SitemapUrl[] {
     ...FALLBACK_SERVICE_PATHS,
     '/meuhedet',
     '/misrad-habitachon',
+    '/vertigo-ashdod',
     '/about',
     '/blog',
     '/contact',
@@ -233,6 +234,7 @@ export function collectSitemapUrls(input: SitemapInput = {}): SitemapUrl[] {
       ),
       sitemapUrl('/meuhedet', { lastmod: coreLastmod, changefreq: 'monthly', priority: 0.9 }),
       sitemapUrl('/misrad-habitachon', { lastmod: coreLastmod, changefreq: 'monthly', priority: 0.9 }),
+      sitemapUrl('/vertigo-ashdod', { lastmod: coreLastmod, changefreq: 'monthly', priority: 0.9 }),
       sitemapUrl('/about', { lastmod: coreLastmod, changefreq: 'monthly', priority: 0.8 }),
       sitemapUrl('/blog', {
         lastmod: latestPostDate ?? coreLastmod,

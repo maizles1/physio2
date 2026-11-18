@@ -114,6 +114,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/vertigo-ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
+                  טיפול בורטיגו וסחרחורות
+                </Link>
+              </li>
+              <li>
                 <Link href="/misrad-habitachon" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
                   פיזיותרפיה לזכאי משרד הביטחון
                 </Link>

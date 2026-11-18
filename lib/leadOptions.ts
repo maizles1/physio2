@@ -12,7 +12,7 @@ export const LEAD_AREAS = [
   'אחר',
 ] as const
 
-export const LEAD_SOURCES = ['home', 'contact', 'service', 'meuhedet', 'misrad-habitachon'] as const
+export const LEAD_SOURCES = ['home', 'contact', 'service', 'meuhedet', 'misrad-habitachon', 'vertigo'] as const
 
 export const LEAD_SOURCE_LABELS: Record<(typeof LEAD_SOURCES)[number], string> = {
   home: 'דף הבית',
@@ -20,6 +20,7 @@ export const LEAD_SOURCE_LABELS: Record<(typeof LEAD_SOURCES)[number], string> =
   service: 'עמוד שירות',
   meuhedet: 'מאוחדת',
   'misrad-habitachon': 'משרד הביטחון',
+  vertigo: 'ורטיגו וסחרחורות',
 }
 
 /**
