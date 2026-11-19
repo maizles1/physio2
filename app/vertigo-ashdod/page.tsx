@@ -1,6 +1,10 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import {
+  ArrowUpFromLine, BedDouble, CalendarCheck, Car, CircleCheck, Clock, Glasses, MapPin, MessageCircle, Phone,
+  PhoneCall, Plus, Quote, RotateCcw, ShieldCheck, Star, Stethoscope, Sunrise, Timer, TriangleAlert, Waves,
+} from 'lucide-react'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import MeuhedetReviewsStrip from '@/components/MeuhedetReviewsStrip'
 import MeuhedetStickyCTA from '@/components/MeuhedetStickyCTA'
@@ -141,17 +145,35 @@ const faqs = [
   },
 ]
 
-const CheckIcon = () => (
-  <svg className="h-5 w-5 flex-shrink-0 mt-1 text-[#2080C0]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-  </svg>
-)
+const symptomIcons = [BedDouble, Sunrise, ArrowUpFromLine, Timer, Waves]
+const stepIcons = [PhoneCall, Glasses, RotateCcw, ShieldCheck]
 
-const PhoneIcon = ({ className = 'h-5 w-5' }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-  </svg>
-)
+const NAVY = '#2A3080'
+const LINK = '#1a6ea5'
+
+const STAR_PATH =
+  'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z'
+
+function Stars({ className = 'w-5 h-5' }: { className?: string }) {
+  return (
+    <span className="inline-flex gap-0.5" aria-hidden="true">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <svg key={i} className={className} viewBox="0 0 20 20" fill="#FBBF24">
+          <path d={STAR_PATH} />
+        </svg>
+      ))}
+    </span>
+  )
+}
+
+/** Small label above a section heading. */
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[#2080C0]/10 px-3.5 py-1 text-sm font-bold" style={{ color: LINK }}>
+      {children}
+    </div>
+  )
+}
 
 function ContactButtons({ section, light = false }: { section: string; light?: boolean }) {
   return (
@@ -163,11 +185,11 @@ function ContactButtons({ section, light = false }: { section: string; light?: b
         section={section}
         className={
           light
-            ? 'inline-flex items-center justify-center gap-2 rounded-lg bg-white px-7 py-3.5 text-base font-bold text-[#2A3080] shadow-lg hover:bg-gray-100 transition-colors'
-            : 'inline-flex items-center justify-center gap-2 rounded-lg bg-[#2A3080] px-7 py-3.5 text-base font-bold text-white shadow-md hover:bg-[#1f2566] transition-colors'
+            ? 'inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-base font-bold text-[#2A3080] shadow-lg hover:bg-gray-100 transition-colors'
+            : 'inline-flex items-center justify-center gap-2 rounded-xl bg-[#2A3080] px-7 py-3.5 text-base font-bold text-white shadow-md hover:bg-[#1f2566] transition-colors'
         }
       >
-        <PhoneIcon />
+        <Phone className="h-5 w-5" aria-hidden="true" />
         התקשרו: {phoneNumber}
       </MeuhedetContactLink>
       <MeuhedetContactLink
@@ -177,11 +199,62 @@ function ContactButtons({ section, light = false }: { section: string; light?: b
         section={section}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-7 py-3.5 text-base font-bold text-white shadow-md hover:bg-[#1ebe57] transition-colors"
+        className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-7 py-3.5 text-base font-bold text-white shadow-md hover:bg-[#1ebe57] transition-colors"
       >
+        <MessageCircle className="h-5 w-5" aria-hidden="true" />
         כתבו ב-WhatsApp
       </MeuhedetContactLink>
     </div>
+  )
+}
+
+/** Schematic inner ear: three balance canals, with crystals that drifted into one of them. */
+function InnerEarIllustration() {
+  const canal = { fill: 'none', strokeLinecap: 'round' as const }
+  return (
+    <svg viewBox="0 0 420 340" className="w-full h-auto" role="img" aria-label="איור של האוזן הפנימית: גבישי סידן שנדדו לאחת מתעלות שיווי המשקל">
+      <circle cx="210" cy="170" r="160" fill="#ffffff" />
+      <circle cx="210" cy="170" r="160" fill="none" stroke="#2080C0" strokeOpacity="0.15" strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* Canals: outer wall, then the fluid inside */}
+      {[
+        'M168 196 C 60 190, 70 50, 196 176',
+        'M214 172 C 190 30, 340 40, 250 182',
+        'M262 206 C 380 170, 384 292, 256 238',
+      ].map((d) => (
+        <g key={d}>
+          <path d={d} {...canal} stroke="#2A3080" strokeWidth="26" />
+          <path d={d} {...canal} stroke="#CFE6F7" strokeWidth="19" />
+        </g>
+      ))}
+
+      {/* Vestibule (where the crystals belong) and cochlea */}
+      <ellipse cx="214" cy="212" rx="62" ry="44" fill="#CFE6F7" stroke="#2A3080" strokeWidth="3.5" />
+      <path
+        d="M168 236 C 110 236, 92 300, 140 308 C 182 314, 190 264, 156 262 C 132 262, 130 290, 150 290"
+        fill="none"
+        stroke="#2A3080"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+
+      {/* Crystals at home */}
+      {[
+        [200, 214], [212, 206], [224, 216], [210, 224], [234, 208], [222, 228], [196, 226],
+      ].map(([x, y]) => (
+        <circle key={`${x}-${y}`} cx={x} cy={y} r="4.2" fill="#2080C0" />
+      ))}
+
+      {/* Crystals that drifted into the canal */}
+      <g className="vertigo-crystals">
+        {[
+          [103, 128], [112, 117], [98, 141], [120, 108], [108, 104],
+        ].map(([x, y]) => (
+          <circle key={`${x}-${y}`} cx={x} cy={y} r="4.6" fill="#F59E0B" stroke="#ffffff" strokeWidth="1.2" />
+        ))}
+      </g>
+      <circle cx="108" cy="122" r="34" fill="none" stroke="#F59E0B" strokeWidth="2.5" strokeDasharray="5 6" />
+    </svg>
   )
 }
 
@@ -262,6 +335,13 @@ export default function VertigoPage() {
     })),
   }
 
+  const highlights = [
+    { Icon: CalendarCheck, title: 'אותו יום או למחרת', text: 'תור בזמן התקף ורטיגו' },
+    { Icon: Stethoscope, title: 'אבחון וטיפול יחד', text: 'באותו מפגש, בלי לחכות' },
+    { Icon: RotateCcw, title: '1 עד 3 מפגשים', text: 'מספיקים לרוב ב-BPPV' },
+    { Icon: Star, title: '5.0 בגוגל', text: 'דירוג המטופלים בקליניקה' },
+  ]
+
   return (
     <div className="bg-white">
       {[medicalBusinessSchema, webPageSchema, personSchema, breadcrumbSchema, faqSchema].map((schema, i) => (
@@ -273,8 +353,15 @@ export default function VertigoPage() {
         className="relative text-white overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #1b2063 0%, #2A3080 45%, #2080C0 100%)' }}
       >
-        <div className="container mx-auto px-4 relative z-10 py-8 sm:py-14 lg:py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        {/* Soft rings behind the content, echoing the spinning feeling */}
+        <svg className="pointer-events-none absolute -left-40 -top-40 h-[640px] w-[640px] opacity-[0.09]" viewBox="0 0 640 640" fill="none" aria-hidden="true">
+          {[300, 240, 180, 120, 60].map((r) => (
+            <circle key={r} cx="320" cy="320" r={r} stroke="#ffffff" strokeWidth="2" />
+          ))}
+        </svg>
+
+        <div className="container mx-auto px-4 relative z-10 pt-6 pb-20 sm:pt-12 sm:pb-24 lg:pt-14 lg:pb-28">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-12 items-center">
             <div className="order-2 lg:order-1">
               <div className="hidden lg:block">
                 <Breadcrumbs
@@ -291,44 +378,39 @@ export default function VertigoPage() {
                 </span>
                 בהתקף ורטיגו: תור לאותו יום או למחרת
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-white leading-tight">
+              <h1 className="text-[2rem] sm:text-4xl lg:text-5xl font-bold mb-4 text-white leading-tight">
                 <span className="block">החדר מסתובב?</span>{' '}
                 <span className="block">טיפול בורטיגו וסחרחורות באשדוד</span>
               </h1>
-              <p className="text-lg sm:text-xl text-white/95 leading-relaxed mb-6">
+              <p className="text-lg sm:text-xl text-white/95 leading-relaxed mb-6 max-w-xl">
                 פעמים רבות מדובר בבעיה מכנית באוזן הפנימית, שאפשר לאבחן בבדיקה פשוטה ולטפל בה בקליניקה, בלי
                 תרופות.
               </p>
               <ContactButtons section="hero" light />
-              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/90">
-                <li className="flex items-center gap-1.5">
-                  <svg className="w-4 h-4" viewBox="0 0 20 20" fill="#FBBF24" aria-hidden="true">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  5.0 בגוגל
-                </li>
-                <li>אנדריי מייזלס, פיזיותרפיסט (M.Sc)</li>
-                <li>אבחון וטיפול באותו מפגש</li>
-              </ul>
+              <p className="mt-4 text-sm text-white/85">
+                עונה לכם אנדריי מייזלס, פיזיותרפיסט (M.Sc). לא צריך הפניה.
+              </p>
             </div>
 
             <div className="order-1 lg:order-2">
-              <div className="relative aspect-[16/10] lg:aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/20">
-                <Image
-                  src="/images/services/vestibular/service-image.png"
-                  alt="אישה עם התקף ורטיגו, תחושה שהחדר מסתובב סביבה"
-                  fill
-                  priority
-                  className="object-cover object-[80%_center]"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1b2063]/70 via-transparent to-transparent" aria-hidden="true" />
-                <div className="hidden sm:block absolute bottom-4 right-4 rounded-xl bg-white/95 px-4 py-2.5 shadow-lg">
-                  <div className="text-sm font-bold" style={{ color: '#2A3080' }}>
-                    ורטיגו מפחיד, אבל בדרך כלל ניתן לטיפול
-                  </div>
-                  <div className="text-xs" style={{ color: '#4b5563' }}>
-                    מתחילים בבדיקה שמגלה מה גורם לו
+              <div className="relative">
+                <div className="relative aspect-[16/10] lg:aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/20">
+                  <Image
+                    src="/images/services/vestibular/service-image.png"
+                    alt="אישה עם התקף ורטיגו, תחושה שהחדר מסתובב סביבה"
+                    fill
+                    priority
+                    className="object-cover object-[80%_center]"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1b2063]/60 via-transparent to-transparent" aria-hidden="true" />
+                </div>
+                {/* Rating card on the image corner */}
+                <div className="absolute -bottom-4 right-4 sm:right-6 flex items-center gap-3 rounded-2xl bg-white px-4 py-2.5 shadow-xl">
+                  <div className="text-2xl font-extrabold leading-none" style={{ color: NAVY }}>5.0</div>
+                  <div>
+                    <Stars className="w-4 h-4" />
+                    <div className="text-xs font-medium" style={{ color: '#4b5563' }}>ביקורות מטופלים בגוגל</div>
                   </div>
                 </div>
               </div>
@@ -337,103 +419,184 @@ export default function VertigoPage() {
         </div>
       </section>
 
-      {/* Short answer (for readers in a hurry and for AI/search summaries) */}
-      <section className="py-10 bg-blue-50/60 border-b border-blue-100">
+      {/* Highlights bar, overlapping the hero */}
+      <section className="relative z-10 -mt-12 sm:-mt-14">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto border-r-4 border-[#2080C0] pr-5">
-            <h2 className="text-lg font-bold mb-2" style={{ color: '#2A3080' }}>
-              בקצרה
-            </h2>
-            <p className="text-gray-800 leading-relaxed">
-              הסיבה השכיחה לסחרחורת סיבובית שמקורה באוזן הפנימית היא BPPV: גבישי סידן זעירים שיצאו ממקומם
-              ונכנסו לאחת מתעלות שיווי המשקל (
-              <a href="https://doi.org/10.1136/jnnp.2006.100420" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: '#1a6ea5' }}>
-                von Brevern et al., 2007
-              </a>
-              ). מאבחנים אותה בבדיקת תנוחה שנקראת Dix-Hallpike, ומטפלים בתמרון שמחזיר את הגבישים למקומם, כמו
-              תמרון אפלי (
-              <a href="https://doi.org/10.1177/0194599816689667" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: '#1a6ea5' }}>
-                Bhattacharyya et al., 2017
-              </a>
-              ;{' '}
-              <a href="https://doi.org/10.1002/14651858.CD003162.pub3" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: '#1a6ea5' }}>
-                Hilton &amp; Pinder, 2014
-              </a>
-              ). בפיזיותרפיה.פלוס באשדוד האבחון והטיפול נעשים באותו מפגש.
-            </p>
+          <ul className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-0! pr-0! mb-0! overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-gray-100">
+            {highlights.map(({ Icon, title, text }, i) => (
+              <li
+                key={title}
+                className={`mb-0! flex flex-col items-center gap-1.5 px-3 py-5 text-center sm:flex-row sm:items-center sm:gap-3 sm:px-5 sm:text-right border-gray-100 ${i % 2 === 0 ? 'border-l' : ''} ${i < 2 ? 'border-b lg:border-b-0' : ''} ${i < 3 ? 'lg:border-l' : 'lg:border-l-0'}`}
+              >
+                <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[#2080C0]/10">
+                  <Icon className="h-5 w-5" style={{ color: LINK }} aria-hidden="true" />
+                </span>
+                <span>
+                  <span className="block text-base font-bold leading-snug" style={{ color: NAVY }}>{title}</span>
+                  <span className="block text-xs sm:text-sm text-gray-600 leading-snug">{text}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Symptoms */}
+      <section className="py-14 sm:py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-8">
+              <Eyebrow>בדיקה עצמית קצרה</Eyebrow>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold" style={{ color: NAVY }}>
+                זה נשמע מוכר?
+              </h2>
+            </div>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 pr-0! mb-0!">
+              {symptoms.map((s, i) => {
+                const Icon = symptomIcons[i]
+                return (
+                  <li
+                    key={s}
+                    className="mb-0! flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm lg:flex-col lg:items-start lg:gap-3 lg:p-6"
+                  >
+                    <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#2A3080] to-[#2080C0] shadow-md">
+                      <Icon className="h-6 w-6 text-white" aria-hidden="true" />
+                    </span>
+                    <span className="text-gray-800 leading-relaxed">{s}</span>
+                  </li>
+                )
+              })}
+              <li className="mb-0! flex flex-col justify-center rounded-2xl bg-[#EAF4FC] p-5 lg:p-6">
+                <span className="block text-lg font-bold mb-1" style={{ color: NAVY }}>
+                  סימנתם שניים או שלושה?
+                </span>
+                <span className="block text-gray-800 leading-relaxed">
+                  יש סיכוי טוב שזה BPPV. זה מפחיד, אבל זה לא מסוכן, ובדרך כלל אפשר לטפל בזה מהר.
+                </span>
+              </li>
+            </ul>
+            <div className="mt-8 flex justify-center">
+              <ContactButtons section="symptoms" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Symptoms + red flags */}
-      <section className="py-14">
+      {/* What happens in the ear: short cited answer (also for AI/search summaries) + illustration */}
+      <section className="py-14 sm:py-16 bg-[#F2F8FD]">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="max-w-sm mx-auto w-full lg:max-w-none">
+              <InnerEarIllustration />
+              <ul className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 pr-0! mb-0! text-sm text-gray-700">
+                <li className="flex items-center gap-2">
+                  <span className="h-3 w-3 rounded-full bg-[#2080C0]" aria-hidden="true" />
+                  גבישים במקומם
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-3 w-3 rounded-full bg-[#F59E0B]" aria-hidden="true" />
+                  גבישים שנדדו לתעלה
+                </li>
+              </ul>
+            </div>
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-5" style={{ color: '#2A3080' }}>
-                זה נשמע מוכר?
+              <Eyebrow>בקצרה</Eyebrow>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight" style={{ color: NAVY }}>
+                למה החדר מסתובב
               </h2>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {symptoms.map((s, i) => (
-                  <li
-                    key={s}
-                    className={`flex items-start gap-3 rounded-xl border border-blue-100 bg-blue-50/50 p-4 text-gray-800 leading-relaxed ${i === symptoms.length - 1 ? 'sm:col-span-2' : ''}`}
-                  >
-                    <CheckIcon />
-                    {s}
+              <p className="text-gray-800 leading-relaxed text-[1.05rem]">
+                הסיבה השכיחה לסחרחורת סיבובית שמקורה באוזן הפנימית היא BPPV: גבישי סידן זעירים שיצאו ממקומם
+                ונכנסו לאחת מתעלות שיווי המשקל (
+                <a href="https://doi.org/10.1136/jnnp.2006.100420" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: LINK }}>
+                  von Brevern et al., 2007
+                </a>
+                ). מאבחנים אותה בבדיקת תנוחה שנקראת Dix-Hallpike, ומטפלים בתמרון שמחזיר את הגבישים למקומם, כמו
+                תמרון אפלי (
+                <a href="https://doi.org/10.1177/0194599816689667" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: LINK }}>
+                  Bhattacharyya et al., 2017
+                </a>
+                ;{' '}
+                <a href="https://doi.org/10.1002/14651858.CD003162.pub3" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: LINK }}>
+                  Hilton &amp; Pinder, 2014
+                </a>
+                ). בפיזיותרפיה.פלוס באשדוד האבחון והטיפול נעשים באותו מפגש.
+              </p>
+              <ul className="mt-5 space-y-2.5 pr-0! text-gray-800">
+                {[
+                  'כל תזוזה של הראש מזיזה את הגבישים, והמוח מקבל אות שגוי של סיבוב.',
+                  'לכן ההתקף קצר, ומופיע דווקא כשמשנים תנוחה.',
+                  'התמרון מוביל את הגבישים בחזרה למקומם, בלי תרופות ובלי מכשירים.',
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-3">
+                    <CircleCheck className="h-5 w-5 flex-shrink-0 mt-1" style={{ color: LINK }} aria-hidden="true" />
+                    {t}
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 text-gray-700 leading-relaxed">
-                אם סימנתם שניים או שלושה מאלה, יש סיכוי טוב שזה BPPV. זה מפחיד, אבל זה לא מסוכן, ובדרך כלל
-                אפשר לטפל בזה מהר.
-              </p>
-              <div className="mt-6">
-                <ContactButtons section="symptoms" />
-              </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="rounded-2xl border border-red-200 bg-red-50 p-6 self-start">
-              <h2 className="text-xl font-bold mb-3 text-red-800">מתי לא לחכות לתור ולפנות למיון</h2>
-              <p className="text-gray-800 mb-3 leading-relaxed">
-                אם יחד עם הסחרחורת מופיע אחד מהסימנים האלה, פנו מיד לחדר מיון או חייגו 101:
-              </p>
-              <ul className="list-disc list-inside space-y-1.5 text-gray-800">
-                {redFlags.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
+      {/* Red flags */}
+      <section className="py-10 sm:py-12">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto rounded-2xl border border-red-200 bg-red-50 p-5 sm:p-7">
+            <div className="flex items-start gap-4">
+              <span className="hidden sm:flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100">
+                <TriangleAlert className="h-6 w-6 text-red-700" aria-hidden="true" />
+              </span>
+              <div className="flex-1">
+                <h2 className="text-xl sm:text-2xl font-bold mb-2 text-red-800">מתי לא לחכות לתור ולפנות למיון</h2>
+                <p className="text-gray-800 mb-4 leading-relaxed">
+                  אם יחד עם הסחרחורת מופיע אחד מהסימנים האלה, פנו מיד לחדר מיון או חייגו 101:
+                </p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-1! pr-0! mb-0! text-gray-800">
+                  {redFlags.map((f) => (
+                    <li key={f} className="mb-0! flex items-start gap-2">
+                      <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-red-600" aria-hidden="true" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* How it works */}
-      <section className="py-14 bg-gray-50">
+      <section className="py-14 sm:py-16 text-white" style={{ background: 'linear-gradient(160deg, #1b2063 0%, #2A3080 100%)' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3" style={{ color: '#2A3080' }}>
-              מה קורה בטיפול
-            </h2>
-            <p className="text-lg text-gray-700">מהטלפון הראשון ועד שהסחרחורת מאחוריכם.</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-white">מה קורה בטיפול</h2>
+            <p className="text-lg text-white/90">מהטלפון הראשון ועד שהסחרחורת מאחוריכם.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
-            {steps.map((step) => (
-              <div key={step.n} className="relative rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                <div className="absolute -top-4 right-6 flex h-9 w-9 items-center justify-center rounded-full bg-[#2A3080] text-white font-bold shadow-md">
-                  {step.n}
-                </div>
-                <h3 className="mt-2 text-lg font-bold mb-2" style={{ color: '#2A3080' }}>
-                  {step.title}
-                </h3>
-                <p className="text-gray-700 text-sm leading-relaxed">{step.description}</p>
-              </div>
-            ))}
-          </div>
-          <p className="max-w-3xl mx-auto mt-8 text-center text-gray-700 leading-relaxed">
+          <ol className="relative grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-5 max-w-6xl mx-auto pr-0! mb-0!">
+            {steps.map((step, i) => {
+              const Icon = stepIcons[i]
+              return (
+                <li key={step.n} className="mb-0! relative flex gap-4 rounded-2xl bg-white/10 p-5 ring-1 ring-white/15 lg:flex-col lg:gap-3 lg:p-6">
+                  <div className="flex flex-shrink-0 flex-col items-center gap-2 lg:flex-row lg:justify-between lg:w-full">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md">
+                      <Icon className="h-6 w-6" style={{ color: NAVY }} aria-hidden="true" />
+                    </span>
+                    <span className="text-3xl font-extrabold leading-none text-white/30" aria-hidden="true">
+                      0{step.n}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold mb-1.5 text-white">{step.title}</h3>
+                    <p className="text-white/90 text-[0.95rem] leading-relaxed">{step.description}</p>
+                  </div>
+                </li>
+              )
+            })}
+          </ol>
+          <p className="max-w-3xl mx-auto mt-8 text-center text-white/90 leading-relaxed">
             לא כל סחרחורת היא BPPV. אם הבדיקה מראה שהמקור אחר, אסביר מה מצאתי ואפנה אתכם לרופא המתאים. אם
             נשאר חוסר יציבות אחרי שהורטיגו עבר, ממשיכים ב
-            <Link href="/services/vestibular-ashdod" className="underline font-semibold" style={{ color: '#1a6ea5' }}>
+            <Link href="/services/vestibular-ashdod" className="underline font-semibold text-white">
               שיקום וסטיבולרי
             </Link>
             .
@@ -442,40 +605,56 @@ export default function VertigoPage() {
       </section>
 
       {/* Who treats */}
-      <section className="py-14">
+      <section className="py-14 sm:py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[auto_1fr] gap-8 items-center">
-            <div className="relative h-56 w-56 mx-auto overflow-hidden rounded-2xl shadow-md">
-              <Image
-                src="/images/andrey-meizels.JPG"
-                alt="אנדריי מייזלס, פיזיותרפיסט המטפל בורטיגו וסחרחורות באשדוד"
-                fill
-                className="object-cover object-top"
-                sizes="224px"
-                loading="lazy"
-              />
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-8 md:gap-12 items-center">
+            <div className="relative mx-auto w-full max-w-xs md:max-w-none">
+              <div className="absolute -bottom-3 -left-3 h-full w-full rounded-3xl bg-[#2080C0]/15" aria-hidden="true" />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-lg">
+                <Image
+                  src="/images/andrey-meizels.JPG"
+                  alt="אנדריי מייזלס, פיזיותרפיסט המטפל בורטיגו וסחרחורות באשדוד"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 320px, 400px"
+                  loading="lazy"
+                />
+              </div>
             </div>
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-3" style={{ color: '#2A3080' }}>
-                מי מטפל בכם
+              <Eyebrow>מי מטפל בכם</Eyebrow>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2" style={{ color: NAVY }}>
+                אנדריי מייזלס
               </h2>
-              <p className="text-gray-800 leading-relaxed mb-4">
-                אני אנדריי מייזלס, פיזיותרפיסט בעל תואר שני (M.Sc) מאוניברסיטת אריאל, עם הכשרה ייעודית בשיקום
-                וסטיבולרי. במטופלי ורטיגו וסחרחורת בקליניקה אני מטפל בעצמי, מהבדיקה הראשונה ועד המעקב.
+              <p className="font-semibold mb-4" style={{ color: LINK }}>
+                פיזיותרפיסט (M.Sc) · הכשרה ייעודית בשיקום וסטיבולרי
               </p>
-              <ul className="space-y-2 text-gray-800">
-                <li className="flex items-start gap-3"><CheckIcon />אבחון עם משקפי פרנזל, שמאפשרים לראות את ריצוד העיניים בבירור</li>
-                <li className="flex items-start gap-3"><CheckIcon />אבחון וטיפול באותו מפגש</li>
-                <li className="flex items-start gap-3"><CheckIcon />הסבר ברור על מה שנמצא ומה עושים הלאה</li>
+              <p className="text-gray-800 leading-relaxed mb-5">
+                אני פיזיותרפיסט בעל תואר שני מאוניברסיטת אריאל. במטופלי ורטיגו וסחרחורת בקליניקה אני מטפל
+                בעצמי, מהבדיקה הראשונה ועד המעקב.
+              </p>
+              <ul className="space-y-3 pr-0! text-gray-800">
+                {[
+                  { Icon: Glasses, t: 'אבחון עם משקפי פרנזל, שמאפשרים לראות את ריצוד העיניים בבירור' },
+                  { Icon: Stethoscope, t: 'אבחון וטיפול באותו מפגש' },
+                  { Icon: MessageCircle, t: 'הסבר ברור על מה שנמצא ומה עושים הלאה' },
+                ].map(({ Icon, t }) => (
+                  <li key={t} className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#2080C0]/10">
+                      <Icon className="h-5 w-5" style={{ color: LINK }} aria-hidden="true" />
+                    </span>
+                    {t}
+                  </li>
+                ))}
               </ul>
-              <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
-                <Link href="/about" className="underline" style={{ color: '#1a6ea5' }}>עוד עליי</Link>
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
+                <Link href="/about" className="underline" style={{ color: LINK }}>עוד עליי</Link>
                 {video && (
-                  <a href={video.youtubeUrl} target="_blank" rel="noopener noreferrer" className="underline" style={{ color: '#1a6ea5' }}>
+                  <a href={video.youtubeUrl} target="_blank" rel="noopener noreferrer" className="underline" style={{ color: LINK }}>
                     סרטון קצר: איך נראה טיפול בסחרחורת
                   </a>
                 )}
-                <Link href="/blog/vertigo-bppv-complete-guide" className="underline" style={{ color: '#1a6ea5' }}>
+                <Link href="/blog/vertigo-bppv-complete-guide" className="underline" style={{ color: LINK }}>
                   המדריך המלא על ורטיגו ו-BPPV
                 </Link>
               </div>
@@ -486,44 +665,53 @@ export default function VertigoPage() {
 
       {/* Patient review */}
       {review && (
-        <section className="py-12 bg-gray-50">
+        <section className="pb-14 sm:pb-16">
           <div className="container mx-auto px-4">
-            <figure className="max-w-3xl mx-auto rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
-              <div className="flex items-center gap-2 mb-3" aria-label="דירוג 5 מתוך 5">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <svg key={i} className="w-5 h-5" viewBox="0 0 20 20" fill="#FBBF24" aria-hidden="true">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-                <span className="text-sm text-gray-500">ביקורת בגוגל</span>
+            <figure className="relative max-w-4xl mx-auto overflow-hidden rounded-3xl bg-[#F2F8FD] p-7 sm:p-10">
+              <Quote className="absolute left-5 top-5 h-16 w-16 sm:h-24 sm:w-24" style={{ color: '#2080C0', opacity: 0.12 }} aria-hidden="true" />
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-4" aria-label="דירוג 5 מתוך 5">
+                  <Stars />
+                  <span className="text-sm text-gray-600">ביקורת בגוגל, אחרי התקף ורטיגו</span>
+                </div>
+                <blockquote className="text-lg sm:text-xl text-gray-900 leading-relaxed">&ldquo;{review.text}&rdquo;</blockquote>
+                <figcaption className="mt-4 font-bold" style={{ color: NAVY }}>{review.authorName}</figcaption>
               </div>
-              <blockquote className="text-lg text-gray-800 leading-relaxed">&ldquo;{review.text}&rdquo;</blockquote>
-              <figcaption className="mt-3 font-semibold text-gray-900">{review.authorName}</figcaption>
             </figure>
           </div>
         </section>
       )}
 
       {/* Contact + lead form */}
-      <section id="contact-cta" className="py-14">
+      <section id="contact-cta" className="py-14 sm:py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3" style={{ color: '#2A3080' }}>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            <div>
+              <Eyebrow>קביעת תור</Eyebrow>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 leading-tight" style={{ color: NAVY }}>
                 לא צריך לחכות שזה יעבור לבד
               </h2>
-              <p className="text-lg text-gray-700">
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                 התקשרו או כתבו, ספרו מה אתם מרגישים, ונקבע תור. בהתקף ורטיגו אני משתדל לקבל אתכם באותו יום או
                 למחרת.
               </p>
-            </div>
-            <div className="flex justify-center">
               <ContactButtons section="contact-cta" />
+              <ul className="mt-7 space-y-3 pr-0! text-gray-800">
+                <li className="flex items-start gap-3">
+                  <Clock className="h-5 w-5 flex-shrink-0 mt-1" style={{ color: LINK }} aria-hidden="true" />
+                  ראשון–חמישי 08:00–20:00 · שישי 08:00–14:00
+                </li>
+                <li className="flex items-start gap-3">
+                  <MapPin className="h-5 w-5 flex-shrink-0 mt-1" style={{ color: LINK }} aria-hidden="true" />
+                  יקינטון 3, מרכז כלניות, אשדוד
+                </li>
+                <li className="flex items-start gap-3">
+                  <Car className="h-5 w-5 flex-shrink-0 mt-1" style={{ color: LINK }} aria-hidden="true" />
+                  בזמן התקף עדיף שמישהו יסיע אתכם
+                </li>
+              </ul>
             </div>
-            <p className="mt-4 text-center text-sm text-gray-600">
-              ראשון–חמישי 08:00–20:00 · שישי 08:00–14:00 · יקינטון 3, מרכז כלניות, אשדוד
-            </p>
-            <div id="lead-form" className="mt-8 scroll-mt-24">
+            <div id="lead-form" className="scroll-mt-24">
               <LeadForm
                 source="vertigo"
                 defaultArea="סחרחורות / ורטיגו"
@@ -537,10 +725,10 @@ export default function VertigoPage() {
       <MeuhedetReviewsStrip />
 
       {/* FAQ */}
-      <section className="py-14 bg-gray-50">
+      <section className="py-14 sm:py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center" style={{ color: '#2A3080' }}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center" style={{ color: NAVY }}>
               שאלות ששואלים אותי על ורטיגו
             </h2>
             <div className="space-y-3">
@@ -549,9 +737,7 @@ export default function VertigoPage() {
                   <summary className="flex cursor-pointer items-center justify-between gap-3 list-none">
                     <h3 className="text-base sm:text-lg font-bold text-[#2A3080] leading-snug">{faq.q}</h3>
                     <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[#2080C0]/10 text-[#2080C0] transition-transform group-open:rotate-45">
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                      </svg>
+                      <Plus className="h-4 w-4" aria-hidden="true" />
                     </span>
                   </summary>
                   <p className="mt-3 text-gray-700 leading-relaxed">{faq.a}</p>
