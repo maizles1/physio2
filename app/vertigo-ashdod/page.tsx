@@ -292,7 +292,7 @@ export default function VertigoPage() {
                 בהתקף ורטיגו: תור לאותו יום או למחרת
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-white leading-tight">
-                <span className="block">החדר מסתובב?</span>
+                <span className="block">החדר מסתובב?</span>{' '}
                 <span className="block">טיפול בורטיגו וסחרחורות באשדוד</span>
               </h1>
               <p className="text-lg sm:text-xl text-white/95 leading-relaxed mb-6">
