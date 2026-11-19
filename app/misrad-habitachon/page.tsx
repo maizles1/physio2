@@ -92,7 +92,7 @@ const treatments = [
   {
     title: 'סחרחורות ושיווי משקל',
     description: 'שיקום וסטיבולרי לסחרחורות, ורטיגו ובעיות שיווי משקל.',
-    href: '/services/vestibular-ashdod',
+    href: '/vertigo-ashdod',
   },
   {
     title: 'ביקורי בית באשדוד',

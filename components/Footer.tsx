@@ -176,11 +176,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/services/vestibular-ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
-                  שיקום וסטיבולרי
-                </Link>
-              </li>
-              <li>
                 <Link href="/services/tmj-ashdod" className="text-gray-700 hover:text-[#2080C0] transition-colors font-medium">
                   טיפול במפרק הלסת
                 </Link>

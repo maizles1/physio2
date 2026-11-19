@@ -20,7 +20,6 @@ const LEAD_AREA_BY_SLUG: Record<string, string> = {
   'neck-pain-ashdod': 'כאבי צוואר',
   'knee-pain-ashdod': 'כאבי ברך',
   'post-surgery-ashdod': 'שיקום אחרי ניתוח',
-  'vestibular-ashdod': 'סחרחורות / ורטיגו',
   'tmj-ashdod': 'כאבי לסת',
   'home-visits-ashdod': 'ביקור בית',
 }

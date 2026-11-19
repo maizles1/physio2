@@ -69,7 +69,6 @@ export default function Header() {
         { name: 'טיפול בכאבי צוואר', href: '/services/neck-pain-ashdod' },
         { name: 'טיפול בכאבי ברך', href: '/services/knee-pain-ashdod' },
         { name: 'שיקום לאחר ניתוחים', href: '/services/post-surgery-ashdod' },
-        { name: 'שיקום וסטיבולרי - טיפול בסחרחורות', href: '/services/vestibular-ashdod' },
         { name: 'טיפול במפרק הלסת (TMJ)', href: '/services/tmj-ashdod' },
         { name: 'ביקורי בית באשדוד', href: '/services/home-visits-ashdod' },
         { name: 'ליווי קבוצות ספורט וספורטאים', href: '/services#sports-teams' },

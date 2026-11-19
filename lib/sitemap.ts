@@ -16,7 +16,6 @@ export const FALLBACK_SERVICE_PATHS = [
   '/services/neck-pain-ashdod',
   '/services/knee-pain-ashdod',
   '/services/post-surgery-ashdod',
-  '/services/vestibular-ashdod',
   '/services/tmj-ashdod',
   '/services/home-visits-ashdod',
 ] as const

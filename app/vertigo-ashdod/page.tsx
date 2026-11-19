@@ -39,6 +39,7 @@ export const metadata: Metadata = {
     'תמרון אפלי אשדוד',
     'סחרחורת סיבובית טיפול',
     'פיזיותרפיה וסטיבולרית אשדוד',
+    'שיקום וסטיבולרי אשדוד',
   ],
   openGraph: {
     title: 'טיפול בורטיגו וסחרחורות באשדוד | פיזיותרפיה.פלוס',
@@ -595,11 +596,8 @@ export default function VertigoPage() {
           </ol>
           <p className="max-w-3xl mx-auto mt-8 text-center text-white/90 leading-relaxed">
             לא כל סחרחורת היא BPPV. אם הבדיקה מראה שהמקור אחר, אסביר מה מצאתי ואפנה אתכם לרופא המתאים. אם
-            נשאר חוסר יציבות אחרי שהורטיגו עבר, ממשיכים ב
-            <Link href="/services/vestibular-ashdod" className="underline font-semibold text-white">
-              שיקום וסטיבולרי
-            </Link>
-            .
+            נשאר חוסר יציבות אחרי שהורטיגו עבר, ממשיכים בשיקום
+            וסטיבולרי: תרגילי שיווי משקל וייצוב מבט.
           </p>
         </div>
       </section>
