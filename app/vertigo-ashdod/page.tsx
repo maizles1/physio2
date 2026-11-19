@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
-  ArrowUpFromLine, BedDouble, CalendarCheck, Car, CircleCheck, Clock, Glasses, MapPin, MessageCircle, Phone,
+  ArrowUpFromLine, BedDouble, Eye, Footprints, House, CalendarCheck, Car, CircleCheck, Clock, Glasses, MapPin, MessageCircle, Phone,
   PhoneCall, Plus, Quote, RotateCcw, ShieldCheck, Star, Stethoscope, Sunrise, Timer, TriangleAlert, Waves,
 } from 'lucide-react'
 import Breadcrumbs from '@/components/Breadcrumbs'
@@ -40,6 +40,7 @@ export const metadata: Metadata = {
     'סחרחורת סיבובית טיפול',
     'פיזיותרפיה וסטיבולרית אשדוד',
     'שיקום וסטיבולרי אשדוד',
+    'פיזיותרפיה שיווי משקל אשדוד',
   ],
   openGraph: {
     title: 'טיפול בורטיגו וסחרחורות באשדוד | פיזיותרפיה.פלוס',
@@ -131,6 +132,10 @@ const faqs = [
   {
     q: 'מה ההבדל בין ורטיגו לסחרחורת?',
     a: 'ורטיגו הוא תחושה שאתם או החדר מסתובבים. סחרחורת היא מילה רחבה יותר, שכוללת גם ערפול, חוסר יציבות או תחושה שעומדים להתעלף. ההבחנה חשובה כי לכל אחד מהם יש סיבות אחרות וטיפול אחר.',
+  },
+  {
+    q: 'שיקום וסטיבולרי מתאים לכל סחרחורת?',
+    a: 'לא. יש סחרחורות שדורשות קודם בירור רפואי, למשל כשמופיעים חולשה פתאומית, דיבור משובש או כאב ראש חריג. בבדיקה הראשונה אני בודק אם התמונה מתאימה לטיפול פיזיותרפי, ואם לא, אסביר למה ואפנה אתכם להמשך בירור.',
   },
   {
     q: 'אפשר לעשות את תמרון אפלי לבד בבית?',
@@ -595,15 +600,53 @@ export default function VertigoPage() {
             })}
           </ol>
           <p className="max-w-3xl mx-auto mt-8 text-center text-white/90 leading-relaxed">
-            לא כל סחרחורת היא BPPV. אם הבדיקה מראה שהמקור אחר, אסביר מה מצאתי ואפנה אתכם לרופא המתאים. אם
-            נשאר חוסר יציבות אחרי שהורטיגו עבר, ממשיכים בשיקום
-            וסטיבולרי: תרגילי שיווי משקל וייצוב מבט.
+            לא כל סחרחורת היא BPPV. אם הבדיקה מראה שהמקור אחר, אסביר מה מצאתי ואפנה אתכם לרופא המתאים.
           </p>
         </div>
       </section>
 
-      {/* Who treats */}
+      {/* Balance rehab for dizziness that is not a short BPPV attack */}
       <section className="py-14 sm:py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div>
+              <Eyebrow>שיקום וסטיבולרי</Eyebrow>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight" style={{ color: NAVY }}>
+                ואם הסחרחורת לא עוברת, או שנשאר חוסר יציבות?
+              </h2>
+              <p className="text-gray-800 leading-relaxed mb-4">
+                לא כל סחרחורת נגמרת בתמרון אחד. אחרי דלקת בעצב שיווי המשקל, אחרי התקפים חוזרים או אחרי
+                תקופה ארוכה של הימנעות מתנועה, נשארים לפעמים חוסר יציבות בהליכה, טשטוש כשמזיזים את הראש
+                וחשש ליפול.
+              </p>
+              <p className="text-gray-800 leading-relaxed">
+                במצבים האלה הטיפול הוא שיקום וסטיבולרי: תרגול הדרגתי שמלמד את מערכת שיווי המשקל לעבוד שוב
+                כמו שצריך. זה לוקח יותר זמן מטיפול ב-BPPV, ורוב העבודה נעשית בתרגול קצר וקבוע בבית.
+              </p>
+            </div>
+            <ul className="flex flex-col gap-3 pr-0! mb-0!">
+              {[
+                { Icon: Eye, title: 'ייצוב מבט', text: 'תרגילים שמחזירים ראייה חדה ויציבה כשהראש בתנועה.' },
+                { Icon: Footprints, title: 'שיווי משקל והליכה', text: 'עמידה והליכה בתנאים שהולכים ונעשים מאתגרים, בקצב שלכם.' },
+                { Icon: House, title: 'תוכנית לבית', text: 'כמה דקות ביום, עם הסבר ברור מה עושים ולמה, ועדכון בכל מפגש.' },
+              ].map(({ Icon, title, text }) => (
+                <li key={title} className="mb-0! flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-4 sm:p-5 shadow-sm">
+                  <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#2A3080] to-[#2080C0] shadow-md">
+                    <Icon className="h-6 w-6 text-white" aria-hidden="true" />
+                  </span>
+                  <span>
+                    <span className="block text-lg font-bold" style={{ color: NAVY }}>{title}</span>
+                    <span className="block text-gray-700 leading-relaxed">{text}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Who treats */}
+      <section className="py-14 sm:py-16 bg-[#F2F8FD]">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-8 md:gap-12 items-center">
             <div className="relative mx-auto w-full max-w-xs md:max-w-none">
@@ -663,7 +706,7 @@ export default function VertigoPage() {
 
       {/* Patient review */}
       {review && (
-        <section className="pb-14 sm:pb-16">
+        <section className="py-14 sm:py-16">
           <div className="container mx-auto px-4">
             <figure className="relative max-w-4xl mx-auto overflow-hidden rounded-3xl bg-[#F2F8FD] p-7 sm:p-10">
               <Quote className="absolute left-5 top-5 h-16 w-16 sm:h-24 sm:w-24" style={{ color: '#2080C0', opacity: 0.12 }} aria-hidden="true" />
