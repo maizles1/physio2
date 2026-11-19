@@ -270,31 +270,69 @@ export default function VertigoPage() {
 
       {/* Hero */}
       <section
-        className="relative text-white overflow-hidden py-12 sm:py-20"
-        style={{ background: 'linear-gradient(to bottom right, #2A3080, #2080C0, #40C0F0)' }}
+        className="relative text-white overflow-hidden"
+        style={{ background: 'linear-gradient(135deg, #1b2063 0%, #2A3080 45%, #2080C0 100%)' }}
       >
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl">
-            <Breadcrumbs
-              items={[
-                { label: 'דף בית', href: '/' },
-                { label: 'טיפול בורטיגו וסחרחורות', href: '/vertigo-ashdod' },
-              ]}
-            />
-            <span className="inline-block rounded-full bg-white/15 px-4 py-1.5 text-sm font-semibold text-white mb-4">
-              בהתקף ורטיגו: תור לאותו יום או למחרת
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 text-white leading-tight">
-              טיפול בורטיגו וסחרחורות באשדוד
-            </h1>
-            <p className="text-lg sm:text-xl text-white/95 leading-relaxed mb-8">
-              החדר מסתובב כשאתם מסתובבים במיטה או קמים בבוקר? פעמים רבות מדובר בבעיה מכנית באוזן הפנימית,
-              שאפשר לאבחן בבדיקה פשוטה ולטפל בה בקליניקה, בלי תרופות.
-            </p>
-            <ContactButtons section="hero" light />
-            <p className="mt-4 text-sm text-white/85">
-              אנדריי מייזלס, פיזיותרפיסט (M.Sc) · יקינטון 3, מרכז כלניות, אשדוד
-            </p>
+        <div className="container mx-auto px-4 relative z-10 py-8 sm:py-14 lg:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="order-2 lg:order-1">
+              <div className="hidden lg:block">
+                <Breadcrumbs
+                  items={[
+                    { label: 'דף בית', href: '/' },
+                    { label: 'טיפול בורטיגו וסחרחורות', href: '/vertigo-ashdod' },
+                  ]}
+                />
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-1.5 text-sm font-bold text-white mb-4 shadow-md">
+                <span className="relative flex h-2.5 w-2.5" aria-hidden="true">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-white" />
+                </span>
+                בהתקף ורטיגו: תור לאותו יום או למחרת
+              </div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-white leading-tight">
+                <span className="block">החדר מסתובב?</span>
+                <span className="block">טיפול בורטיגו וסחרחורות באשדוד</span>
+              </h1>
+              <p className="text-lg sm:text-xl text-white/95 leading-relaxed mb-6">
+                פעמים רבות מדובר בבעיה מכנית באוזן הפנימית, שאפשר לאבחן בבדיקה פשוטה ולטפל בה בקליניקה, בלי
+                תרופות.
+              </p>
+              <ContactButtons section="hero" light />
+              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/90">
+                <li className="flex items-center gap-1.5">
+                  <svg className="w-4 h-4" viewBox="0 0 20 20" fill="#FBBF24" aria-hidden="true">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  5.0 בגוגל
+                </li>
+                <li>אנדריי מייזלס, פיזיותרפיסט (M.Sc)</li>
+                <li>אבחון וטיפול באותו מפגש</li>
+              </ul>
+            </div>
+
+            <div className="order-1 lg:order-2">
+              <div className="relative aspect-[16/10] lg:aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/20">
+                <Image
+                  src="/images/services/vestibular/service-image.png"
+                  alt="אישה עם התקף ורטיגו, תחושה שהחדר מסתובב סביבה"
+                  fill
+                  priority
+                  className="object-cover object-[80%_center]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1b2063]/70 via-transparent to-transparent" aria-hidden="true" />
+                <div className="hidden sm:block absolute bottom-4 right-4 rounded-xl bg-white/95 px-4 py-2.5 shadow-lg">
+                  <div className="text-sm font-bold" style={{ color: '#2A3080' }}>
+                    ורטיגו מפחיד, אבל בדרך כלל ניתן לטיפול
+                  </div>
+                  <div className="text-xs" style={{ color: '#4b5563' }}>
+                    מתחילים בבדיקה שמגלה מה גורם לו
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -335,9 +373,12 @@ export default function VertigoPage() {
               <h2 className="text-2xl sm:text-3xl font-bold mb-5" style={{ color: '#2A3080' }}>
                 זה נשמע מוכר?
               </h2>
-              <ul className="space-y-3">
-                {symptoms.map((s) => (
-                  <li key={s} className="flex items-start gap-3 text-gray-800 leading-relaxed">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {symptoms.map((s, i) => (
+                  <li
+                    key={s}
+                    className={`flex items-start gap-3 rounded-xl border border-blue-100 bg-blue-50/50 p-4 text-gray-800 leading-relaxed ${i === symptoms.length - 1 ? 'sm:col-span-2' : ''}`}
+                  >
                     <CheckIcon />
                     {s}
                   </li>
