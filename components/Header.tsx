@@ -74,6 +74,7 @@ export default function Header() {
         { name: 'ביקורי בית באשדוד', href: '/services/home-visits-ashdod' },
         { name: 'ליווי קבוצות ספורט וספורטאים', href: '/services#sports-teams' },
         { name: 'פציעות ספורט – מאוחדת', href: '/meuhedet' },
+        { name: 'טיפול בורטיגו וסחרחורות', href: '/vertigo-ashdod' },
         { name: 'פיזיותרפיה לזכאי משרד הביטחון', href: '/misrad-habitachon' },
       ],
     },
