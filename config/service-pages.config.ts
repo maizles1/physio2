@@ -385,7 +385,7 @@ export const serviceLandingPages: ServiceLandingPageData[] = [
     relatedServices: [
       { title: 'טיפול בכאבי כתף באשדוד', href: '/services/shoulder-pain-ashdod' },
       { title: 'טיפול במפרק הלסת (TMJ) באשדוד', href: '/services/tmj-ashdod' },
-      { title: 'שיקום וסטיבולרי באשדוד', href: '/services/vestibular-ashdod' },
+      { title: 'טיפול בורטיגו וסחרחורות באשדוד', href: '/vertigo-ashdod' },
       { title: 'טיפול בכאבי גב תחתון באשדוד', href: '/services/lower-back-pain-ashdod' },
     ],
     relatedReads: [
@@ -580,83 +580,6 @@ export const serviceLandingPages: ServiceLandingPageData[] = [
     serviceType: 'Post-surgical rehabilitation',
   },
   {
-    slug: 'vestibular-ashdod',
-    hubId: 'vestibular',
-    navTitle: 'שיקום וסטיבולרי',
-    title: 'שיקום וסטיבולרי באשדוד',
-    metaDescription:
-      'שיקום וסטיבולרי באשדוד לחוסר יציבות, בעיות שיווי משקל וסחרחורת ממושכת. הערכה מקצועית במרכז כלניות. קביעת תור בטלפון או ב-WhatsApp.',
-    keywords: [
-      'שיקום וסטיבולרי אשדוד',
-      'פיזיותרפיה וסטיבולרית אשדוד',
-      'פיזיותרפיה שיווי משקל אשדוד',
-      'חוסר יציבות בהליכה טיפול',
-    ],
-    h1: 'שיקום וסטיבולרי ושיווי משקל באשדוד',
-    lead:
-      'סחרחורת וורטיגו יכולים לשבש הליכה, שינה וביטחון בתנועה. בפיזיותרפיה.פלוס באשדוד מציעים שיקום וסטיבולרי אחרי הערכה שמנסה להבין את מקור התסמין — ולא תרגול אחיד לכל סוגי הסחרחורת.',
-    imagePath: '/images/services/vestibular/service-image.png',
-    fallbackImagePath: '/images/services/vestibular/service-image.svg',
-    imageAlt: 'שיקום וסטיבולרי וטיפול בסחרחורות באשדוד — פיזיותרפיה.פלוס',
-    paragraphs: [
-      'ורטיגו תנוחתי שפיר (BPPV), חוסר יציבות בהליכה ותסמינים אחרי שינוי תנוחת ראש דורשים בדיקות שונות. ב-BPPV, למשל, מטפלים לרוב בתמרונים ייעודיים. בבעיות שיווי משקל אחרות הדגש הוא על תרגול הדרגתי של מבט, יציבה והליכה.',
-      'ההערכה כוללת תשאול על משך התסמינים, טריגרים, נפילות ומסמכים רפואיים אם יש. אם התמונה אינה מתאימה לטיפול פיזיותרפי, תקבלו הסבר ברור והפניה להמשך בירור.',
-      'הטיפול נעשה בקליניקה במרכז כלניות, אשדוד. אם יש לכם התקף ורטיגו חריף, כל הפרטים על אבחון וטיפול מהיר נמצאים בעמוד הטיפול בורטיגו וסחרחורות.',
-    ],
-    includes: [
-      'הערכה וסטיבולרית ותפקודית',
-      'טיפול ב-BPPV באמצעות תמרונים מתאימים',
-      'תרגול שיווי משקל, מבט והליכה',
-      'הדרכה להפחתת חשש מתנועה ולתרגול ביתי',
-    ],
-    suitableFor: [
-      'ורטיגו וסחרחורות הקשורות לתנועת ראש',
-      'חשד ל-BPPV',
-      'חוסר יציבות בהליכה או חשש מנפילות',
-      'שיקום שיווי משקל אחרי אירוע וסטיבולרי',
-    ],
-    approach:
-      'חלק מסוגי הורטיגו מגיבים תוך מספר מפגשים, בעיקר BPPV קלאסי. בעיות שיווי משקל ממושכות דורשות תרגול עקבי. קובעים תוכנית רק אחרי שמבינים איזה מנגנון סביר שגורם לתסמינים.',
-    faqs: [
-      {
-        question: 'מה ההבדל בין סחרחורת לורטיגו?',
-        answer:
-          'ורטיגו הוא תחושת תנועה או סיבוב של הגוף או הסביבה. סחרחורת יכולה להיות גם ערפול, חוסר יציבות או כבדות בראש. האבחנה חשובה כי הטיפול שונה. בהערכה מנסים לאפיין את התסמין ולא לתת תרגיל אחיד לכולם.',
-      },
-      {
-        question: 'האם שיקום וסטיבולרי מתאים לכל סחרחורת?',
-        answer:
-          'לא. יש מצבים שדורשים בירור רפואי דחוף או טיפול אחר. אם יש חולשה פתאומית, דיבור משובש, כאב ראש חריג או תסמינים נוירולוגיים — פונים קודם לגורם רפואי מתאים. בטיפול מטפלים במצבים שמתאימים לפיזיותרפיה וסטיבולרית.',
-      },
-      {
-        question: 'האם התמרון יכול להחמיר את הסחרחורת לזמן קצר?',
-        answer:
-          'לפעמים מופיעה סחרחורת במהלך תמרון או אחריו, ואז היא שוככת. מסבירים מראש מה צפוי, ומתאימים את הקצב לרגישות שלכם. לא ממשיכים בתרגול שמחמיר באופן לא סביר.',
-      },
-    ],
-    relatedServices: [
-      { title: 'טיפול בורטיגו וסחרחורות באשדוד', href: '/vertigo-ashdod' },
-      { title: 'טיפול בכאבי צוואר באשדוד', href: '/services/neck-pain-ashdod' },
-      { title: 'טיפול בכאבי גב באשדוד', href: '/services/back-pain-ashdod' },
-    ],
-    relatedReads: [
-      { title: 'ורטיגו ו-BPPV: אבחון וטיפול בסחרחורת', href: '/blog/vertigo-bppv-complete-guide' },
-    ],
-    evidence: {
-      text: 'BPPV הוא גורם שכיח לסחרחורת שמקורה באוזן הפנימית',
-      sourceLabel: 'von Brevern et al., 2007',
-      doiUrl: 'https://doi.org/10.1136/jnnp.2006.100420',
-      articleHref: '/blog/vertigo-bppv-complete-guide',
-      articleLabel: 'ורטיגו ו-BPPV: אבחון וטיפול בסחרחורת',
-    },
-    whatsappMessage: 'שלום, אשמח לקבוע תור לשיקום וסטיבולרי / סחרחורות באשדוד',
-    schemaName: 'שיקום וסטיבולרי וטיפול בסחרחורות באשדוד',
-    schemaDescription:
-      'שיקום וסטיבולרי באשדוד לורטיגו, BPPV ובעיות שיווי משקל. הערכה וטיפול במרכז כלניות.',
-    conditions: ['ורטיגו', 'BPPV', 'סחרחורות', 'בעיות שיווי משקל'],
-    serviceType: 'Vestibular rehabilitation',
-  },
-  {
     slug: 'tmj-ashdod',
     hubId: 'tmj',
     navTitle: 'טיפול במפרק הלסת (TMJ)',
@@ -790,7 +713,7 @@ export const serviceLandingPages: ServiceLandingPageData[] = [
     relatedServices: [
       { title: 'שיקום לאחר ניתוח באשדוד', href: '/services/post-surgery-ashdod' },
       { title: 'טיפול בכאבי גב באשדוד', href: '/services/back-pain-ashdod' },
-      { title: 'שיקום וסטיבולרי באשדוד', href: '/services/vestibular-ashdod' },
+      { title: 'טיפול בורטיגו וסחרחורות באשדוד', href: '/vertigo-ashdod' },
       { title: 'צור קשר לתיאום', href: '/contact' },
     ],
     relatedReads: [
@@ -823,7 +746,7 @@ export const clinicServiceNav = [
   { id: 'neck-pain', title: 'טיפול בכאבי צוואר', href: '/services/neck-pain-ashdod' },
   { id: 'knee-pain', title: 'טיפול בכאבי ברך', href: '/services/knee-pain-ashdod' },
   { id: 'post-surgery', title: 'שיקום לאחר ניתוחים', href: '/services/post-surgery-ashdod' },
-  { id: 'vestibular', title: 'שיקום וסטיבולרי - טיפול בסחרחורות', href: '/services/vestibular-ashdod' },
+  { id: 'vestibular', title: 'טיפול בורטיגו וסחרחורות', href: '/vertigo-ashdod' },
   { id: 'tmj', title: 'טיפול במפרק הלסת (TMJ)', href: '/services/tmj-ashdod' },
   { id: 'sports-teams', title: 'ליווי קבוצות ספורט וספורטאים', href: '/services#sports-teams' },
   { id: 'home-visits', title: 'ביקורי בית באשדוד', href: '/services/home-visits-ashdod' },

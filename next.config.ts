@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/services/vestibular-ashdod',
+        destination: '/vertigo-ashdod',
+        permanent: true,
+      },
+      {
         source: '/ai.txt',
         destination: '/llms.txt',
         permanent: false,

@@ -87,7 +87,6 @@ export function getTopManualReviews(limit: number = 3): ManualReview[] {
 export const SERVICE_REVIEW_IDS: Record<string, string> = {
   'back-pain-ashdod': 'review-1',
   'lower-back-pain-ashdod': 'review-1',
-  'vestibular-ashdod': 'review-3',
   'post-surgery-ashdod': 'review-4',
   'knee-pain-ashdod': 'review-4',
 }
