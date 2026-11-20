@@ -1,219 +1,110 @@
-'use client'
-
-import { useState } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
-import { gtag } from '@/components/GoogleAnalytics'
-import { seoConfig, getContactEmailTo, getContactPhoneTel } from '@/config/seo.config'
+import { Phone, MessageCircle } from 'lucide-react'
+import MeuhedetContactLink from '@/components/MeuhedetContactLink'
+import HeroLeadLink from '@/components/home/HeroLeadLink'
+import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
 import { GOOGLE_RATING_DISPLAY } from '@/config/google-business.config'
 
-const whatsappNumber = '972508838982'
-const whatsappMessage = encodeURIComponent('שלום, אשמח לתאם אבחון')
+const PAGE = 'home'
+const whatsappHref = `https://wa.me/972508838982?text=${encodeURIComponent('שלום, אשמח לתאם אבחון')}`
+
+const STAR_PATH =
+  'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z'
 
 export default function HeroSection() {
-  const [imgError, setImgError] = useState(false)
-  const handleWhatsAppClick = () => {
-    gtag.event('whatsapp_click', 'engagement', 'hero_section')
-  }
   return (
-    <section className="hero-section relative text-white overflow-hidden bg-primary-gradient section-spacing">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
+    <section
+      className="relative text-white overflow-hidden"
+      style={{ background: 'linear-gradient(135deg, #1b2063 0%, #2A3080 45%, #2080C0 100%)' }}
+    >
+      <svg className="pointer-events-none absolute -left-40 -top-40 h-[640px] w-[640px] opacity-[0.08]" viewBox="0 0 640 640" fill="none" aria-hidden="true">
+        {[300, 240, 180, 120, 60].map((r) => (
+          <circle key={r} cx="320" cy="320" r={r} stroke="#ffffff" strokeWidth="2" />
+        ))}
+      </svg>
 
-      {/* Insurance Logos - Top Left */}
-      <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-20 flex flex-col gap-1 sm:gap-1.5">
-        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded px-1.5 py-1 sm:px-2 sm:py-1.5 shadow-md">
-          <Image
-            src="/images/insurance/Clalit-Logo.png"
-            alt="כללית"
-            width={50}
-            height={25}
-            className="max-h-[30px] sm:max-h-[40px] md:max-h-[45px] w-auto object-contain opacity-90"
-            loading="lazy"
-            quality={90}
-          />
-        </div>
-        <div className="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded px-1.5 py-1 sm:px-2 sm:py-1.5 shadow-md">
-            <Image
-            src="/images/insurance/Meuhedet-Logo.png"
-            alt="מאוחדת"
-            width={50}
-            height={25}
-            className="max-h-[30px] sm:max-h-[40px] md:max-h-[45px] w-auto object-contain opacity-90"
-            loading="lazy"
-            quality={90}
-          />
-        </div>
-        <div className="flex items-center justify-center bg-white border border-white rounded px-1.5 py-1 sm:px-2 sm:py-1.5 shadow-lg">
-            <Image
-            src="/images/insurance/Ministry-of-defense-logo.png"
-            alt="משרד הביטחון"
-            width={50}
-            height={25}
-            className="max-h-[30px] sm:max-h-[40px] md:max-h-[45px] w-auto object-contain"
-            loading="lazy"
-            quality={90}
-          />
-        </div>
-      </div>
+      <div className="container mx-auto px-4 relative z-10 pt-5 pb-20 sm:pt-12 sm:pb-24 lg:pt-14 lg:pb-28">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+          {/* Text */}
+          <div className="order-2 lg:order-1">
+            <p className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/25 px-3.5 py-1 text-sm font-semibold text-white mb-3">
+              פיזיותרפיה.פלוס · מרכז כלניות, אשדוד
+            </p>
+            <h1 className="text-[2rem] sm:text-4xl lg:text-5xl font-bold mb-3 text-white leading-tight">
+              פיזיותרפיסט פרטי באשדוד
+            </h1>
+            <p className="text-lg sm:text-xl font-semibold text-[#9fd6f7] mb-3">שיקום ברמה אולימפית</p>
+            <p className="text-base sm:text-lg text-white/95 leading-relaxed mb-6 max-w-xl">
+              אנדריי מייזלס (M.Sc), לשעבר הפיזיותרפיסט של נבחרת ישראל בג&apos;ודו. כאבי גב, צוואר, כתף וברך, שיקום
+              אחרי ניתוח, ורטיגו ומפרק הלסת. כבר במפגש הראשון יודעים מה הבעיה ומה התוכנית.
+            </p>
 
-      <div className="container relative z-10 pt-4 sm:pt-16">
-        <div className="max-w-6xl mx-auto">
-          {/* Header with Image and Title */}
-          <div className="flex flex-col lg:flex-row items-center gap-3 sm:gap-8 lg:gap-10 mb-5 sm:mb-12">
-            {/* Image */}
-            <div className="flex-shrink-0 order-1 lg:order-1">
-              <div className="relative w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl bg-white/10 max-sm:w-24 max-sm:h-24">
-                {!imgError && (
+            <div className="grid grid-cols-1 sm:flex sm:flex-row gap-3">
+              <MeuhedetContactLink
+                page={PAGE}
+                type="phone"
+                href={`tel:${getContactPhoneTel()}`}
+                section="hero"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-base font-bold text-[#2A3080] shadow-lg hover:bg-gray-100 transition-colors"
+              >
+                <Phone className="h-5 w-5" aria-hidden="true" />
+                התקשרו: {seoConfig.contact.phone}
+              </MeuhedetContactLink>
+              <MeuhedetContactLink
+                page={PAGE}
+                type="whatsapp"
+                href={whatsappHref}
+                section="hero"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-7 py-3.5 text-base font-bold text-white shadow-md hover:bg-[#1ebe57] transition-colors"
+              >
+                <MessageCircle className="h-5 w-5" aria-hidden="true" />
+                כתבו ב-WhatsApp
+              </MeuhedetContactLink>
+            </div>
+            <HeroLeadLink />
+          </div>
+
+          {/* Photo */}
+          <div className="order-1 lg:order-2">
+            <div className="relative mx-auto max-w-md lg:max-w-none">
+              <div className="relative aspect-[16/9] sm:aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/20 bg-[#1b2063]">
+                <Image
+                  src="/images/andrey-meizels.JPG"
+                  alt="אנדריי מייזלס (M.Sc), פיזיותרפיסט פרטי באשדוד ומנהל קליני של פיזיותרפיה.פלוס"
+                  fill
+                  priority
+                  className="object-cover object-[50%_25%]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+              <div className="absolute -bottom-4 right-4 flex items-center gap-3 rounded-2xl bg-white px-4 py-2.5 shadow-xl">
+                <div className="text-2xl font-extrabold leading-none text-[#2A3080]">{GOOGLE_RATING_DISPLAY}</div>
+                <div>
+                  <span className="inline-flex gap-0.5" aria-hidden="true">
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <svg key={i} className="w-4 h-4" viewBox="0 0 20 20" fill="#FBBF24">
+                        <path d={STAR_PATH} />
+                      </svg>
+                    ))}
+                  </span>
+                  <div className="text-xs font-medium text-gray-600">ביקורות מטופלים בגוגל</div>
+                </div>
+              </div>
+              <div className="absolute -bottom-4 left-4 hidden sm:block w-28 overflow-hidden rounded-2xl border-4 border-white shadow-xl">
+                <div className="relative aspect-square">
                   <Image
-                    src="/images/andrey-meizels.JPG"
-                    alt="אנדריי מייזלס (M.Sc), מייסד, מנהל קליני ופיזיותרפיסט ספורט"
+                    src="/images/carousel/clinic-5.jpg"
+                    alt="אנדריי מייזלס עם נבחרת ישראל בג'ודו באליפות העולם"
                     fill
-                    className="object-cover w-full h-full"
-                    sizes="(max-width: 640px) 160px, (max-width: 768px) 192px, (max-width: 1024px) 256px, 320px"
-                    priority
-                    quality={90}
-                    onError={() => setImgError(true)}
+                    className="object-cover"
+                    sizes="112px"
                   />
-                )}
-                <div className={`w-full h-full ${imgError ? 'flex' : 'hidden'} items-center justify-center`} role="img" aria-label="אנדריי מייזלס (M.Sc), מייסד, מנהל קליני ופיזיותרפיסט ספורט">
-                  <div className="text-center text-white">
-                    <svg className="w-24 h-24 mx-auto mb-2 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <p className="text-sm opacity-75">אנדריי מייזלס</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Title and Description */}
-            <div className="flex-1 text-center lg:text-right order-2 lg:order-2 px-2 sm:pr-20 md:pr-24 sm:pl-0 md:pl-28">
-              <p className="inline-block max-w-full rounded-full bg-white/10 backdrop-blur-sm border border-white/30 px-4 py-1.5 text-sm sm:text-base font-semibold text-white mb-3 sm:mb-4 leading-snug max-sm:text-xs max-sm:px-3 max-sm:py-1">
-                פיזיותרפיה.פלוס | בניהולו הקליני של אנדריי מייזלס (M.Sc)
-              </p>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-8 leading-tight sm:leading-relaxed tracking-wide text-white">
-                <span className="block">שיקום ברמה אולימפית.</span>{' '}
-                <span className="block">מכון הפיזיותרפיה של אשדוד</span>
-              </h1>
-              <Link
-                href="/testimonials"
-                className="inline-flex items-center gap-2 rounded-full bg-white/15 border border-white/30 px-3 py-1 text-sm font-semibold text-white hover:bg-white/25 transition-colors mb-2 sm:mb-4"
-                aria-label={`דירוג ${GOOGLE_RATING_DISPLAY} מתוך 5 בגוגל – להמלצות המטופלים`}
-              >
-                <span className="flex" aria-hidden="true">
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <svg key={i} className="w-4 h-4" viewBox="0 0 20 20" fill="#FBBF24">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </span>
-                {GOOGLE_RATING_DISPLAY} בגוגל
-              </Link>
-              <div className="max-w-3xl mx-auto lg:mx-0 lg:mr-0 mt-2 sm:mt-8 space-y-4 sm:space-y-6">
-                <h2 className="mb-0 sm:mb-6 text-white leading-relaxed max-sm:text-lg!">
-                  הסטנדרט האולימפי של פיזיותרפיסט לשעבר בנבחרת ישראל ב<span className="font-bold highlight-judo">ג&apos;ודו</span> – עכשיו בקליניקה באשדוד
-                </h2>
-                <div className="hidden sm:block space-y-4 text-white leading-relaxed sm:leading-loose">
-                  <p className="text-base sm:text-large">
-                    אבחון מבוסס מדידות כוח אובייקטיביות, מכשור קליני מתקדם ופרוטוקולי שיקום מעולם ספורט העילית – עם 100% השקעה ומחויבות שלנו לתהליך השיקום שלך.
-                  </p>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* CTA Buttons */}
-          {/* Phones: call + WhatsApp side by side, right under the headline */}
-          <div className="grid grid-cols-2 gap-3 px-2 sm:hidden">
-            <a
-              href={`tel:${getContactPhoneTel()}`}
-              onClick={() => gtag.clickToCall(seoConfig.contact.phone)}
-              className="inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl font-bold text-[#2A3080] bg-white shadow-lg"
-              aria-label="התקשרו לקליניקה"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              התקשרו
-            </a>
-            <a
-              href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleWhatsAppClick}
-              className="inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl font-bold text-white bg-[#25D366] shadow-lg"
-              aria-label="שלח הודעת WhatsApp"
-            >
-              WhatsApp
-            </a>
-            <a
-              href="#lead-form"
-              onClick={() => {
-                try {
-                  gtag.event('button_click', 'engagement', 'hero_lead_form_link')
-                } catch {
-                  // ignore
-                }
-              }}
-              className="col-span-2 text-center text-white underline underline-offset-4 py-1 font-semibold"
-            >
-              לא נוח לדבר? השאירו פרטים ונחזור אליכם
-            </a>
-          </div>
-
-          {/* Tablet and desktop */}
-          <div className="hidden sm:flex flex-row justify-center items-center gap-4 px-2">
-            <Link
-              href="#lead-form"
-              className="btn btn-secondary btn-large w-full sm:w-auto"
-              aria-label="לתיאום אבחון והתאמת תוכנית שיקום"
-            >
-              לתיאום אבחון והתאמת תוכנית שיקום
-            </Link>
-            <a
-              href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleWhatsAppClick}
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-white bg-[#25D366] hover:bg-[#20BD5A] transition-all duration-200 shadow-lg hover:shadow-xl border-0"
-              aria-label="שלח הודעת WhatsApp"
-            >
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-              WhatsApp
-            </a>
-            {seoConfig.contact.email && (
-              <a
-                href={`mailto:${getContactEmailTo()}?subject=${encodeURIComponent('פנייה מאתר פיזיותרפיה.פלוס')}`}
-                onClick={() => {
-                  try {
-                    gtag.event('email_click', 'engagement', 'hero_section')
-                  } catch {
-                    // ignore
-                  }
-                }}
-                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-white bg-white/20 hover:bg-white/30 border border-white/40 transition-all duration-200 shadow-lg hover:shadow-xl"
-                aria-label={`שלח אימייל ל-${seoConfig.contact.email}`}
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                שלח אימייל
-              </a>
-            )}
-          </div>
-          <p className="text-center text-white/90 text-sm mt-3 sm:mt-4 px-2">
-            תור תוך 24–48 שעות · בניהול קליני של פיזיותרפיסט ספורט בעל תואר שני (M.Sc)
-          </p>
         </div>
       </div>
     </section>

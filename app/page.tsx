@@ -1,4 +1,5 @@
 import HeroSection from '@/components/HeroSection'
+import { HomeHighlights, HomePainPicker, HomeSteps } from '@/components/home/HomeSections'
 import dynamic from 'next/dynamic'
 import { Metadata } from 'next'
 import { ImageSkeleton } from '@/components/LoadingSkeleton'
@@ -15,7 +16,6 @@ const VideosSection = dynamic(() => import('@/components/VideosSection'), {
 })
 
 const InsuranceSection = dynamic(() => import('@/components/InsuranceSection'))
-const ServicesPreview = dynamic(() => import('@/components/ServicesPreview'))
 const AboutPreview = dynamic(() => import('@/components/AboutPreview'))
 const TestimonialsPreview = dynamic(() => import('@/components/TestimonialsPreview'))
 const FAQSection = dynamic(() => import('@/components/FAQSection'))
@@ -73,11 +73,13 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <VideosSection />
+      <HomeHighlights />
+      <HomePainPicker />
       <TestimonialsPreview />
+      <HomeSteps />
       <InsuranceSection />
-      <ServicesPreview />
       <AboutPreview />
+      <VideosSection />
       <FAQSection />
       <CTASection />
     </>
