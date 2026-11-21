@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Award, CalendarCheck, ChevronLeft, GraduationCap, MessageCircle, Star, Stethoscope, ClipboardList } from 'lucide-react'
+import { Award, CalendarCheck, ChevronLeft, MessageCircle, Users, Star, Stethoscope, ClipboardList } from 'lucide-react'
 import { GOOGLE_RATING_DISPLAY } from '@/config/google-business.config'
 
 const NAVY = '#2A3080'
@@ -15,8 +15,8 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 
 const highlights = [
-  { Icon: Award, title: 'נבחרת ישראל בג׳ודו', text: 'פיזיותרפיסט הנבחרת לשעבר' },
-  { Icon: GraduationCap, title: 'תואר שני (M.Sc)', text: 'בפיזיותרפיה' },
+  { Icon: Users, title: 'צוות פיזיותרפיסטים', text: 'בניהול קליני של בעל תואר שני (M.Sc)' },
+  { Icon: Award, title: 'ניסיון מנבחרת ישראל', text: 'המנהל הקליני, פיזיותרפיסט הג׳ודו לשעבר' },
   { Icon: Star, title: `${GOOGLE_RATING_DISPLAY} בגוגל`, text: 'דירוג המטופלים בקליניקה' },
   { Icon: CalendarCheck, title: 'תור תוך 24–48 שעות', text: 'בלי המתנה של שבועות' },
 ]
@@ -65,7 +65,7 @@ export function HomePainPicker() {
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8">
-            <Eyebrow>במה אני מטפל</Eyebrow>
+            <Eyebrow>במה אנחנו מטפלים</Eyebrow>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold" style={{ color: NAVY }}>
               מה כואב לך?
             </h2>
