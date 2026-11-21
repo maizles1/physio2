@@ -1037,3 +1037,17 @@ section .lead-form-card .lf-note { color: #6b7280 !important; }
 @media (max-width: 767px) {
   body.sticky-cta-on .floating-cta { display: none !important; }
 }
+
+/* Homepage hero body map: soft pulse on the pain points */
+@keyframes hero-pulse {
+  0%, 100% { transform: scale(0.6); opacity: 0.5; }
+  50% { transform: scale(1.4); opacity: 0; }
+}
+.hero-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hero-pulse 2.4s ease-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-pulse { animation: none; }
+}
