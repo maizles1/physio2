@@ -7,7 +7,7 @@ import HeroVisual, { type HeroVisualKind } from '@/components/home/HeroVisual'
 const PAGE = 'home'
 const whatsappHref = `https://wa.me/972508838982?text=${encodeURIComponent('שלום, אשמח לתאם אבחון')}`
 
-export default function HeroSection({ visual = 'photo' }: { visual?: HeroVisualKind }) {
+export default function HeroSection({ visual = 'body' }: { visual?: HeroVisualKind }) {
   return (
     <section
       className="relative text-white overflow-hidden"

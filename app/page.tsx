@@ -1,25 +1,5 @@
-import HeroSection from '@/components/HeroSection'
-import { HomeHighlights, HomePainPicker, HomeSteps } from '@/components/home/HomeSections'
-import dynamic from 'next/dynamic'
 import { Metadata } from 'next'
-import { ImageSkeleton } from '@/components/LoadingSkeleton'
-
-// Lazy load heavy components below the fold
-const VideosSection = dynamic(() => import('@/components/VideosSection'), {
-  loading: () => (
-    <section className="section-spacing bg-white">
-      <div className="container">
-        <ImageSkeleton className="w-full" aspectRatio="16/9" />
-      </div>
-    </section>
-  ),
-})
-
-const InsuranceSection = dynamic(() => import('@/components/InsuranceSection'))
-const AboutPreview = dynamic(() => import('@/components/AboutPreview'))
-const TestimonialsPreview = dynamic(() => import('@/components/TestimonialsPreview'))
-const FAQSection = dynamic(() => import('@/components/FAQSection'))
-const CTASection = dynamic(() => import('@/components/CTASection'))
+import HomePage from '@/components/home/HomePage'
 
 export const metadata: Metadata = {
   title: 'פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס - אנדריי מייזלס',
@@ -70,18 +50,5 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  return (
-    <>
-      <HeroSection />
-      <HomeHighlights />
-      <HomePainPicker />
-      <TestimonialsPreview />
-      <HomeSteps />
-      <InsuranceSection />
-      <AboutPreview />
-      <VideosSection />
-      <FAQSection />
-      <CTASection />
-    </>
-  )
+  return <HomePage />
 }
