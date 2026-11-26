@@ -44,14 +44,31 @@ function WhatsAppLink({ className, children }: { className: string; children: Re
 }
 
 /** Tilted band of treatment areas sliding sideways. */
-function Ribbon({ bg, fg, star }: { bg: string; fg: string; star: string }) {
+function Ribbon({
+  bg,
+  fg,
+  star,
+  tilt,
+  reverse = false,
+  className = '',
+}: {
+  bg: string
+  fg: string
+  star: string
+  tilt: number
+  reverse?: boolean
+  className?: string
+}) {
   const items = [...AREAS, ...AREAS]
   return (
-    <div className="relative -mx-6 -rotate-2 py-3 shadow-lg" style={{ background: bg }} aria-hidden="true">
+    <div className={`relative -mx-8 py-3 shadow-lg ${className}`} style={{ background: bg, transform: `rotate(${tilt}deg)` }} aria-hidden="true">
       <div dir="ltr" className="overflow-hidden">
-        <div className="hero-marquee flex w-max items-center gap-6" style={{ animationDuration: '28s' }}>
+        <div
+          className="hero-marquee flex w-max items-center gap-6"
+          style={{ animationDuration: '30s', animationDirection: reverse ? 'reverse' : 'normal' }}
+        >
           {items.map((a, i) => (
-            <div key={i} dir="rtl" className={`${display.className} flex items-center gap-6 text-3xl leading-none`} style={{ color: fg }}>
+            <div key={i} dir="rtl" className={`${display.className} flex items-center gap-6 text-[2rem] leading-none`} style={{ color: fg }}>
               {a}
               <div style={{ color: star }}>✦</div>
             </div>
@@ -62,35 +79,77 @@ function Ribbon({ bg, fg, star }: { bg: string; fg: string; star: string }) {
   )
 }
 
-/** Concept A: athletic and bold. Paper background, giant condensed type, offset photo, sticker, ribbon. */
+/** Round badge with text running around it, turning slowly. */
+function SpinBadge() {
+  const ring = 'ביקורות מטופלים בגוגל · ביקורות מטופלים בגוגל · '
+  return (
+    <div className="relative h-32 w-32 sm:h-36 sm:w-36" style={{ color: INK }}>
+      <div className="absolute inset-0 rounded-full shadow-xl" style={{ background: '#FFD23F' }} />
+      {/* Letters placed one by one around the circle, reading right to left (counter-clockwise) */}
+      <div className="hero-spin absolute inset-0" aria-hidden="true">
+        {Array.from(ring).map((ch, i, arr) => (
+          <div
+            key={i}
+            className="absolute left-1/2 top-0 h-1/2 origin-bottom text-[11px] font-bold leading-none"
+            style={{ transform: `translateX(-50%) rotate(${(-360 / arr.length) * i}deg)`, paddingTop: '7px', color: INK }}
+          >
+            {ch}
+          </div>
+        ))}
+      </div>
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <div className={`${display.className} text-[3.2rem] leading-[0.8]`}>{GOOGLE_RATING_DISPLAY}</div>
+        <div className="text-[11px] tracking-[0.2em]">★★★★★</div>
+      </div>
+    </div>
+  )
+}
+
+/** Yellow hand-drawn stroke under a word. */
+function Scribble() {
+  return (
+    <svg className="absolute -bottom-1 right-0 h-[0.22em] w-full" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 16 C 70 4, 140 22, 210 10 S 290 8, 296 14" fill="none" stroke="#FFD23F" strokeWidth="9" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+const PAPER_GRAIN =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E\")"
+
+/** Concept A: athletic and bold. Paper background, giant condensed type, taped photo, spinning badge, crossing ribbons. */
 export function HeroBold() {
   return (
     <section className="relative overflow-hidden" style={{ background: PAPER }}>
+      <div className="pointer-events-none absolute inset-0 opacity-[0.18] mix-blend-multiply" style={{ backgroundImage: PAPER_GRAIN }} aria-hidden="true" />
       <div className="container mx-auto px-5 relative pt-6 sm:pt-12 lg:pt-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-center">
           <div>
-            <div className="flex items-center gap-3 mb-2">
+            <div className="flex items-center gap-3 mb-3">
               <div className="h-[3px] w-10" style={{ background: BLUE }} />
               <h1 className="font-bold tracking-wide m-0!" style={{ color: INK, fontSize: '0.95rem', lineHeight: 1.3 }}>
                 מכון פיזיותרפיה פרטי באשדוד
               </h1>
             </div>
 
-            <div className={`${display.className} leading-[0.82] text-[6.2rem] sm:text-[8rem] lg:text-[9.5rem]`} style={{ color: INK }}>
+            <div className={`${display.className} leading-[0.82] text-[6.4rem] sm:text-[8rem] lg:text-[9.5rem]`} style={{ color: INK }}>
               <div>לחזור</div>
-              <div className="min-h-[0.9em]">
-                <RotatingWord color={BLUE} className="font-bold!" />
+              <div className="min-h-[0.92em]">
+                <div className="relative inline-block">
+                  <RotatingWord color={BLUE} className="font-bold!" />
+                  <Scribble />
+                </div>
               </div>
               <div>בלי כאב.</div>
             </div>
 
-            <div className="mt-5 max-w-md text-[1.05rem] leading-relaxed" style={{ color: '#3b3f4c' }}>
-              צוות פיזיותרפיסטים בניהולו הקליני של אנדריי מייזלס (M.Sc), לשעבר פיזיותרפיסט נבחרת ישראל בג׳ודו.
-              אבחון יסודי, תוכנית ברורה, ועבודה עד שחוזרים לתפקד.
+            <div className="mt-6 max-w-md text-[1.05rem] leading-relaxed" style={{ color: '#3b3f4c' }}>
+              <strong style={{ color: INK }}>הניסיון של נבחרת ישראל בג׳ודו, בקליניקה באשדוד.</strong> צוות פיזיותרפיסטים בניהולו
+              הקליני של אנדריי מייזלס (M.Sc). אבחון יסודי, תוכנית ברורה, ועבודה עד שחוזרים לתפקד.
             </div>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
-              <WhatsAppLink className="group inline-flex items-center justify-between gap-4 whitespace-nowrap rounded-md bg-[#25D366] px-6 py-4 text-lg font-bold text-white shadow-[4px_4px_0_#14161F] hover:translate-y-[1px] transition-transform">
+              <WhatsAppLink className="group inline-flex items-center justify-between gap-4 whitespace-nowrap rounded-md bg-[#25D366] px-6 py-4 text-lg font-bold text-white shadow-[5px_5px_0_#14161F] hover:shadow-[2px_2px_0_#14161F] hover:translate-x-[-3px] hover:translate-y-[3px] transition-all">
                 <div className="flex items-center gap-2">
                   <MessageCircle className="h-5 w-5" aria-hidden="true" />
                   כתבו לנו ב-WhatsApp
@@ -102,11 +161,20 @@ export function HeroBold() {
                 <div style={{ color: INK }}>{seoConfig.contact.phone}</div>
               </CallLink>
             </div>
+
+            <ol className="mt-7 grid grid-cols-3 border-t-2 pr-0! mb-0! list-none" style={{ borderColor: INK }}>
+              {['אבחון', 'טיפול', 'חוזרים לפעילות'].map((step, i) => (
+                <li key={step} className={`mb-0! pt-2 ${i > 0 ? 'border-r pr-3' : ''}`} style={{ borderColor: 'rgba(20,22,31,0.25)' }}>
+                  <div className={`${display.className} text-3xl leading-none`} style={{ color: BLUE }}>0{i + 1}</div>
+                  <div className="text-sm font-bold" style={{ color: INK }}>{step}</div>
+                </li>
+              ))}
+            </ol>
           </div>
 
-          <div className="relative mx-auto w-full max-w-md lg:max-w-none pb-10 lg:pb-16">
-            <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-md" style={{ background: BLUE, bottom: '2.5rem' }} aria-hidden="true" />
-            <div className="relative aspect-[4/5] sm:aspect-[5/6] overflow-hidden rounded-md">
+          <div className="relative mx-auto w-[88%] max-w-md lg:w-full lg:max-w-none pb-6 pt-12 lg:pt-4">
+            <div className="absolute inset-x-0 top-12 lg:top-4 bottom-6 translate-x-4 translate-y-4 rounded-sm" style={{ background: BLUE }} aria-hidden="true" />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-sm ring-[6px] ring-white shadow-2xl">
               <Image
                 src={HERO_TREATMENT_PHOTO.src}
                 alt={HERO_TREATMENT_PHOTO.alt}
@@ -114,29 +182,26 @@ export function HeroBold() {
                 priority
                 className="object-cover"
                 style={{ objectPosition: HERO_TREATMENT_PHOTO.position }}
-                sizes="(max-width: 1024px) 100vw, 45vw"
+                sizes="(max-width: 1024px) 90vw, 45vw"
               />
             </div>
-            {/* Sticker */}
-            <div
-              className="absolute -top-5 left-3 flex h-28 w-28 rotate-[-10deg] flex-col items-center justify-center rounded-full text-center shadow-xl"
-              style={{ background: '#FFD23F', color: INK }}
-            >
-              <div className={`${display.className} text-5xl leading-none`}>{GOOGLE_RATING_DISPLAY}</div>
-              <div className="text-xs font-bold leading-tight">★★★★★
-                <br />
-                בגוגל
-              </div>
+            {/* Tape strips */}
+            <div className="absolute top-9 lg:top-1 right-6 h-7 w-24 rotate-[8deg] opacity-80 shadow-sm" style={{ background: '#FFD23F' }} aria-hidden="true" />
+            <div className="absolute bottom-3 left-4 h-7 w-24 rotate-[-12deg] opacity-80 shadow-sm" style={{ background: '#FFD23F' }} aria-hidden="true" />
+            <div className="absolute top-0 lg:-top-8 -left-8 sm:-left-12 rotate-[-8deg]">
+              <SpinBadge />
             </div>
-            <div className="absolute bottom-14 right-[-6px] rounded-md px-3 py-2 shadow-lg" style={{ background: INK, color: PAPER }}>
-              <div className="text-xs opacity-80">תור פנוי תוך</div>
-              <div className={`${display.className} text-3xl leading-none`}>24–48 שעות</div>
+            <div className="absolute bottom-16 -right-5 rotate-[-3deg] px-4 py-2.5 shadow-xl" style={{ background: INK, color: PAPER }}>
+              <div className="text-xs" style={{ color: 'rgba(243,238,229,0.8)' }}>תור פנוי תוך</div>
+              <div className={`${display.className} text-[2.1rem] leading-none`}>24–48 שעות</div>
             </div>
           </div>
         </div>
       </div>
-      <div className="relative pb-8 pt-2">
-        <Ribbon bg={INK} fg={PAPER} star="#FFD23F" />
+
+      <div className="relative h-48 sm:h-52 mt-4">
+        <Ribbon bg="#FFD23F" fg={INK} star={BLUE} tilt={4} reverse className="absolute inset-x-0 top-10" />
+        <Ribbon bg={INK} fg={PAPER} star="#FFD23F" tilt={-4} className="absolute inset-x-0 top-10" />
       </div>
     </section>
   )

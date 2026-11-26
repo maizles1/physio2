@@ -1087,3 +1087,8 @@ section .lead-form-card .lf-note { color: #6b7280 !important; }
 @media (prefers-reduced-motion: reduce) {
   .hero-word, .hero-shift, .hero-marquee { animation: none; }
 }
+
+/* Homepage hero: slow spin for the round review badge */
+@keyframes hero-spin { to { transform: rotate(360deg); } }
+.hero-spin { animation: hero-spin 22s linear infinite; transform-origin: 50% 50%; }
+@media (prefers-reduced-motion: reduce) { .hero-spin { animation: none; } }
