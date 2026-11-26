@@ -17,8 +17,8 @@ export default function HeroCtas({ tone = 'dark' }: { tone?: 'dark' | 'light' })
         section="hero"
         className={
           tone === 'light'
-            ? 'inline-flex items-center justify-center gap-2 rounded-xl bg-[#2A3080] px-7 py-3.5 text-base font-bold text-white shadow-md hover:bg-[#1f2566] transition-colors'
-            : 'inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-base font-bold text-[#2A3080] shadow-lg hover:bg-gray-100 transition-colors'
+            ? 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#2A3080] px-7 py-3.5 text-base font-bold text-white shadow-md hover:bg-[#1f2566] transition-colors'
+            : 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-white px-7 py-3.5 text-base font-bold text-[#2A3080] shadow-lg hover:bg-gray-100 transition-colors'
         }
       >
         <Phone className="h-5 w-5" aria-hidden="true" />
@@ -31,7 +31,7 @@ export default function HeroCtas({ tone = 'dark' }: { tone?: 'dark' | 'light' })
         section="hero"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-7 py-3.5 text-base font-bold text-white shadow-md hover:bg-[#1ebe57] transition-colors"
+        className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#25D366] px-7 py-3.5 text-base font-bold text-white shadow-md hover:bg-[#1ebe57] transition-colors"
       >
         <MessageCircle className="h-5 w-5" aria-hidden="true" />
         כתבו ב-WhatsApp

@@ -208,3 +208,63 @@ export function HeroReviews() {
     </section>
   )
 }
+
+/**
+ * 3b. Moving headline over a photo of the clinical director treating.
+ * Swap HERO_TREATMENT_PHOTO for the owner's own photo when it arrives.
+ */
+export const HERO_TREATMENT_PHOTO = {
+  src: '/images/services/knee-pain/service-image.jpg',
+  alt: 'פיזיותרפיסט בודק ברך של מטופל בקליניקה באשדוד',
+  position: '35% 25%',
+}
+
+export function HeroRotatingPhoto() {
+  return (
+    <section className="hero-shift relative overflow-hidden text-white">
+      <div className="absolute inset-x-0 top-0 h-[60%] lg:inset-y-0 lg:left-0 lg:right-auto lg:h-auto lg:w-1/2">
+        <Image
+          src={HERO_TREATMENT_PHOTO.src}
+          alt={HERO_TREATMENT_PHOTO.alt}
+          fill
+          priority
+          className="object-cover"
+          style={{ objectPosition: HERO_TREATMENT_PHOTO.position }}
+          sizes="(max-width: 1024px) 100vw, 50vw"
+        />
+        <div
+          className="absolute inset-0 lg:hidden"
+          style={{ background: 'linear-gradient(to top, #1f2670 0%, rgba(31,38,112,0.55) 40%, rgba(31,38,112,0) 75%)' }}
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 hidden lg:block"
+          style={{ background: 'linear-gradient(to left, #1f2670 0%, rgba(31,38,112,0) 45%)' }}
+          aria-hidden="true"
+        />
+      </div>
+      <div className="container mx-auto px-4 relative pt-[52vw] sm:pt-72 pb-16 lg:py-24">
+        <div className="lg:mr-0 lg:w-1/2 lg:pl-10 text-center lg:text-right">
+          <h1 className="text-base sm:text-lg font-bold mb-3 inline-block rounded-full bg-black/30 backdrop-blur-sm px-4 py-1.5 text-white">
+            מכון פיזיותרפיה פרטי באשדוד
+          </h1>
+          <div className="text-[2.4rem] sm:text-6xl font-black leading-tight mb-4" style={{ textShadow: '0 2px 18px rgba(0,0,0,0.35)' }}>
+            <div>לחזור</div>
+            <div className="min-h-[2.5em] sm:min-h-[1.25em] flex items-center justify-center lg:justify-start">
+              <RotatingWord />
+            </div>
+            <div>בלי כאב.</div>
+          </div>
+          <div className="mx-auto lg:mx-0 max-w-xl text-base sm:text-lg leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.92)' }}>{SUMMARY}</div>
+          <div className="mx-auto lg:mx-0 max-w-md lg:max-w-none">
+            <HeroCtas />
+          </div>
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2">
+            <Stars />
+            <strong className="text-sm" style={{ color: '#ffffff' }}>{GOOGLE_RATING_DISPLAY} בגוגל · תור תוך 24–48 שעות</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
