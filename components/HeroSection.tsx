@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Phone, MessageCircle } from 'lucide-react'
 import MeuhedetContactLink from '@/components/MeuhedetContactLink'
 import HeroLeadLink from '@/components/home/HeroLeadLink'
@@ -8,6 +9,8 @@ const PAGE = 'home'
 const whatsappHref = `https://wa.me/972508838982?text=${encodeURIComponent('שלום, אשמח לתאם אבחון')}`
 
 export default function HeroSection({ visual = 'body' }: { visual?: HeroVisualKind }) {
+  const fullbleed = visual === 'fullbleed'
+  const textFirst = visual === 'chips' || visual === 'stats'
   return (
     <section
       className="relative text-white overflow-hidden"
@@ -18,11 +21,28 @@ export default function HeroSection({ visual = 'body' }: { visual?: HeroVisualKi
           <circle key={r} cx="320" cy="320" r={r} stroke="#ffffff" strokeWidth="2" />
         ))}
       </svg>
+      {fullbleed && (
+        <>
+          <Image
+            src="/images/blog/post-surgery-physiotherapy.png"
+            alt="פיזיותרפיסטית מלווה מטופל בתרגול שיקומי בקליניקה"
+            fill
+            priority
+            className="object-cover object-[70%_center]"
+            sizes="100vw"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to top, #1b2063 45%, rgba(27,32,99,0.7) 62%, rgba(27,32,99,0.05) 85%)' }}
+            aria-hidden="true"
+          />
+        </>
+      )}
 
-      <div className="container mx-auto px-4 relative z-10 pt-5 pb-20 sm:pt-12 sm:pb-24 lg:pt-14 lg:pb-28">
+      <div className={`container mx-auto px-4 relative z-10 ${fullbleed ? 'pt-60 sm:pt-80 lg:pt-56' : 'pt-5 sm:pt-12 lg:pt-14'} pb-20 sm:pb-24 lg:pb-28`}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
           {/* Text */}
-          <div className="order-2 lg:order-1">
+          <div className={textFirst ? 'order-1' : 'order-2 lg:order-1'}>
             <p className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/25 px-3.5 py-1 text-sm font-semibold text-white mb-3">
               פיזיותרפיה.פלוס · מרכז כלניות, אשדוד
             </p>
@@ -63,9 +83,11 @@ export default function HeroSection({ visual = 'body' }: { visual?: HeroVisualKi
             <HeroLeadLink />
           </div>
 
-          <div className="order-1 lg:order-2">
-            <HeroVisual kind={visual} />
-          </div>
+          {!fullbleed && (
+            <div className={textFirst ? 'order-2' : 'order-1 lg:order-2'}>
+              <HeroVisual kind={visual} />
+            </div>
+          )}
         </div>
       </div>
     </section>

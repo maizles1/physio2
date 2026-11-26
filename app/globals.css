@@ -1051,3 +1051,13 @@ section .lead-form-card .lf-note { color: #6b7280 !important; }
 @media (prefers-reduced-motion: reduce) {
   .hero-pulse { animation: none; }
 }
+
+/* Homepage hero logo option: rings spreading out from the logo */
+@keyframes hero-ring {
+  0% { transform: scale(0.7); opacity: 0.7; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+.hero-ring { animation: hero-ring 3.6s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-ring { animation: none; opacity: 0.25; }
+}
