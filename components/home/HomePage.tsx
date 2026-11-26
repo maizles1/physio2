@@ -23,11 +23,19 @@ const CTASection = dynamic(() => import('@/components/CTASection'))
 
 
 /** Homepage body, shared by the homepage and the draft previews. */
-export default function HomePage({ visual = 'body', hero }: { visual?: HeroVisualKind; hero?: React.ReactNode }) {
+export default function HomePage({
+  visual = 'body',
+  hero,
+  highlights = true,
+}: {
+  visual?: HeroVisualKind
+  hero?: React.ReactNode
+  highlights?: boolean
+}) {
   return (
     <>
       {hero ?? <HeroSection visual={visual} />}
-      <HomeHighlights />
+      {highlights && <HomeHighlights />}
       <HomePainPicker />
       <TestimonialsPreview />
       <HomeSteps />

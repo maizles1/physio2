@@ -9,7 +9,7 @@ export default function HeroGallery() {
   return (
     <div className="bg-gray-100">
       <div className="container mx-auto px-4 py-6 text-center">
-        <h1 className="text-2xl font-bold text-[#2A3080] mb-1">סבב 2: חמישה עיצובים חדשים</h1>
+        <h1 className="text-2xl font-bold text-[#2A3080] mb-1">שני קונספטים חדשים (למעלה) + הסבבים הקודמים</h1>
         <div className="text-gray-700">גללו למטה. כל עיצוב מסומן במספר. מתחת לכל אחד יש קישור לכל דף הבית איתו.</div>
       </div>
       {heroRound2.map(({ key, name, text, Hero }, i) => (

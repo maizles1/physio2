@@ -11,6 +11,7 @@ export function generateStaticParams() {
 
 export default async function Page({ params }: { params: Promise<{ v: string }> }) {
   const { v } = await params
-  const { Hero } = heroRound2.find((o) => o.key === v) ?? heroRound2[0]
-  return <HomePage hero={<Hero />} />
+  const option = heroRound2.find((o) => o.key === v) ?? heroRound2[0]
+  const { Hero } = option
+  return <HomePage hero={<Hero />} highlights={!('highlights' in option && option.highlights === false)} />
 }

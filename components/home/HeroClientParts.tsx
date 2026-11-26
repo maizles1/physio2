@@ -8,7 +8,7 @@ import { homeWhatsappHref } from '@/components/home/HeroCtas'
 const WORDS = ['לרוץ', 'לעבודה', 'לישון טוב', 'להתאמן', 'להרים את הילדים', 'לשחק כדורגל']
 
 /** Headline word that changes every few seconds ("לחזור ___ בלי כאב"). */
-export function RotatingWord() {
+export function RotatingWord({ color = '#FBBF24', className = '' }: { color?: string; className?: string } = {}) {
   const [i, setI] = useState(0)
   useEffect(() => {
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -16,7 +16,7 @@ export function RotatingWord() {
     return () => window.clearInterval(t)
   }, [])
   return (
-    <strong key={i} className="hero-word inline-block font-extrabold" style={{ color: '#FBBF24' }}>
+    <strong key={i} className={`hero-word inline-block font-extrabold ${className}`} style={{ color }}>
       {WORDS[i]}
     </strong>
   )
