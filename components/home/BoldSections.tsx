@@ -219,7 +219,7 @@ export function BoldAbout() {
     <BoldSection surface="paper">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
         <div>
-          <BoldHeading surface="paper" index="04" label="אודות הקליניקה" title={<>שיקום ברמה<br />אולימפית.</>} />
+          <BoldHeading surface="paper" index="04" label="אודות הקליניקה" title={<>מודדים,<br />לא מנחשים.</>} />
           <p className="m-0! mb-4!" style={{ color: s.sub, fontSize: '1.05rem' }}>
             פיזיותרפיה.פלוס הוא מכון פיזיותרפיה פרטי באשדוד, בניהולו הקליני של אנדריי מייזלס (M.Sc), לשעבר פיזיותרפיסט נבחרת
             ישראל בג׳ודו. הצוות מלווה שיקום אורתופדי, פציעות ספורט ושיקום אקטיבי, לפי שיטת עבודה אחת.

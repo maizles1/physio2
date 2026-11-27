@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { Phone, MessageCircle, ArrowLeft, MapPin } from 'lucide-react'
 import MeuhedetContactLink from '@/components/MeuhedetContactLink'
 import { homeWhatsappHref } from '@/components/home/HeroCtas'
-import { RotatingWord } from '@/components/home/HeroClientParts'
 import { HERO_TREATMENT_PHOTO } from '@/components/home/HeroDesigns'
 import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
 import { GOOGLE_RATING_DISPLAY } from '@/config/google-business.config'
@@ -165,27 +164,25 @@ function TagRow({ t, center = false }: { t: Palette; center?: boolean }) {
 }
 
 function Headline({ t, size, inline = false }: { t: Palette; size: string; inline?: boolean }) {
-  const word = (
+  const olympic = (
     <div className="relative inline-block">
-      <RotatingWord color={t.accent} className="font-bold! whitespace-nowrap" />
+      <div style={{ color: t.accent }}>אולימפית.</div>
       <Scribble color={t.scribble} />
     </div>
   )
   if (inline) {
     return (
-      <div className={`${display.className} leading-[0.84] ${size}`} style={{ color: t.fg }}>
-        <div>
-          לחזור <span className="inline-block min-w-[2.6em]">{word}</span>
-        </div>
-        <div>בלי כאב.</div>
+      <div className={`${display.className} leading-[0.86] ${size}`} style={{ color: t.fg }}>
+        <div>שיקום ברמה</div>
+        <div>{olympic}</div>
       </div>
     )
   }
   return (
-    <div className={`${display.className} leading-[0.84] ${size}`} style={{ color: t.fg }}>
-      <div>לחזור</div>
-      <div className="min-h-[0.92em]">{word}</div>
-      <div>בלי כאב.</div>
+    <div className={`${display.className} leading-[0.86] ${size}`} style={{ color: t.fg }}>
+      <div>שיקום</div>
+      <div>ברמה</div>
+      <div>{olympic}</div>
     </div>
   )
 }
