@@ -5,18 +5,18 @@ import { MessageCircle } from 'lucide-react'
 import MeuhedetContactLink from '@/components/MeuhedetContactLink'
 import { homeWhatsappHref } from '@/components/home/HeroCtas'
 
-const WORDS = ['לרוץ', 'לעבודה', 'לישון טוב', 'להתאמן', 'להרים את הילדים', 'לשחק כדורגל']
+const WORDS = ['לרוץ', 'להתאמן', 'לישון', 'לעבוד', 'לתפקד']
 
 /** Headline word that changes every few seconds ("לחזור ___ בלי כאב"). */
 export function RotatingWord({ color = '#FBBF24', className = '' }: { color?: string; className?: string } = {}) {
   const [i, setI] = useState(0)
   useEffect(() => {
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const t = window.setInterval(() => setI((n) => (n + 1) % WORDS.length), 2200)
+    const t = window.setInterval(() => setI((n) => (n + 1) % WORDS.length), 3000)
     return () => window.clearInterval(t)
   }, [])
   return (
-    <strong key={i} className={`hero-word inline-block font-extrabold ${className}`} style={{ color }}>
+    <strong key={i} className={`hero-word inline-block whitespace-nowrap font-extrabold ${className}`} style={{ color }}>
       {WORDS[i]}
     </strong>
   )
