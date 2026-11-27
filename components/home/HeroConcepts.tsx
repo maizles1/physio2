@@ -14,9 +14,45 @@ import { GOOGLE_RATING_DISPLAY } from '@/config/google-business.config'
 const display = Karantina({ subsets: ['hebrew'], weight: ['700'], display: 'swap' })
 
 const INK = '#14161F'
-const BLUE = '#1E78B8'
 const PAPER = '#F3EEE5'
 const YELLOW = '#FFD23F'
+export type BoldTheme = 'paper' | 'ink' | 'blue'
+export type BoldLayout = 'split' | 'poster' | 'stats'
+
+type Palette = {
+  bg: string
+  fg: string
+  sub: string
+  accent: string
+  scribble: string
+  offset: string
+  stripBg: string
+  stripFg: string
+  stripStar: string
+  btnShadow: string
+  rule: string
+  grainBlend: 'multiply' | 'screen'
+  grainOpacity: number
+}
+
+const THEMES: Record<BoldTheme, Palette> = {
+  paper: {
+    bg: '#F3EEE5', fg: '#14161F', sub: '#3b3f4c', accent: '#1E78B8', scribble: '#FFD23F', offset: '#1E78B8',
+    stripBg: '#14161F', stripFg: '#F3EEE5', stripStar: '#FFD23F', btnShadow: '#14161F', rule: 'rgba(20,22,31,0.25)',
+    grainBlend: 'multiply', grainOpacity: 0.18,
+  },
+  ink: {
+    bg: '#14161F', fg: '#F3EEE5', sub: 'rgba(243,238,229,0.78)', accent: '#FFD23F', scribble: '#1E78B8', offset: '#FFD23F',
+    stripBg: '#FFD23F', stripFg: '#14161F', stripStar: '#1E78B8', btnShadow: '#FFD23F', rule: 'rgba(243,238,229,0.25)',
+    grainBlend: 'screen', grainOpacity: 0.07,
+  },
+  blue: {
+    bg: '#1E78B8', fg: '#FFFFFF', sub: 'rgba(255,255,255,0.88)', accent: '#FFD23F', scribble: '#14161F', offset: '#14161F',
+    stripBg: '#14161F', stripFg: '#F3EEE5', stripStar: '#FFD23F', btnShadow: '#14161F', rule: 'rgba(255,255,255,0.3)',
+    grainBlend: 'multiply', grainOpacity: 0.12,
+  },
+}
+
 const AREAS = ['כאבי גב', 'צוואר', 'כתף', 'ברך', 'פציעות ספורט', 'שיקום אחרי ניתוח', 'ורטיגו', 'מפרק הלסת']
 
 function CallLink({ className, children }: { className: string; children: React.ReactNode }) {
@@ -44,20 +80,20 @@ function WhatsAppLink({ className, children }: { className: string; children: Re
 }
 
 /** Static strip of treatment areas. No motion, so it is calm for vertigo patients and readable by search engines. */
-function AreasStrip() {
+function AreasStrip({ t }: { t: Palette }) {
   return (
-    <div className="relative mt-10 lg:mt-14 py-3.5" style={{ background: INK }}>
+    <div className="relative mt-10 lg:mt-14 py-3.5" style={{ background: t.stripBg }}>
       <div className="container mx-auto px-5">
         <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 list-none m-0! p-0!" aria-label="תחומי טיפול">
           {AREAS.map((area, i) => (
             <li
               key={area}
               className={`${display.className} flex items-center gap-5 text-[1.6rem] sm:text-[1.9rem] leading-none m-0!`}
-              style={{ color: PAPER }}
+              style={{ color: t.stripFg }}
             >
               {area}
               {i < AREAS.length - 1 && (
-                <span style={{ color: YELLOW }} aria-hidden="true">
+                <span style={{ color: t.stripStar }} aria-hidden="true">
                   ✦
                 </span>
               )}
@@ -101,10 +137,10 @@ function RatingBadge() {
 }
 
 /** Yellow hand-drawn stroke under a word. */
-function Scribble() {
+function Scribble({ color = YELLOW }: { color?: string }) {
   return (
     <svg className="absolute -bottom-1 right-0 h-[0.22em] w-full" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M4 16 C 70 4, 140 22, 210 10 S 290 8, 296 14" fill="none" stroke={YELLOW} strokeWidth="9" strokeLinecap="round" />
+      <path d="M4 16 C 70 4, 140 22, 210 10 S 290 8, 296 14" fill="none" stroke={color} strokeWidth="9" strokeLinecap="round" />
     </svg>
   )
 }
@@ -112,102 +148,211 @@ function Scribble() {
 const PAPER_GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E\")"
 
-/** Paper background, giant condensed type, taped photo, static rating badge and treatment areas strip. */
-export function HeroBold() {
+function TagRow({ t, center = false }: { t: Palette; center?: boolean }) {
   return (
-    <section className="relative overflow-hidden" style={{ background: PAPER }}>
-      <div className="pointer-events-none absolute inset-0 opacity-[0.18] mix-blend-multiply" style={{ backgroundImage: PAPER_GRAIN }} aria-hidden="true" />
-      <div className="container mx-auto px-5 relative pt-5 sm:pt-10 lg:pt-14">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-center">
-          <div>
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2.5">
-              <div className="flex items-center gap-2.5">
-                <div className="h-[3px] w-8" style={{ background: BLUE }} />
-                <h1 className="font-bold tracking-wide m-0!" style={{ color: INK, fontSize: '0.95rem', lineHeight: 1.3 }}>
-                  מכון פיזיותרפיה פרטי באשדוד
-                </h1>
-              </div>
-              <span className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: '#4b5060' }}>
-                <MapPin className="h-3.5 w-3.5" style={{ color: BLUE }} aria-hidden="true" />
-                מרכז כלניות, יקינטון 3
-              </span>
-            </div>
+    <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 mb-2.5 ${center ? 'justify-center' : ''}`}>
+      <div className="flex items-center gap-2.5">
+        <div className="h-[3px] w-8" style={{ background: t.accent }} />
+        <h1 className="font-bold tracking-wide m-0!" style={{ color: t.fg, fontSize: '0.95rem', lineHeight: 1.3 }}>
+          מכון פיזיותרפיה פרטי באשדוד
+        </h1>
+      </div>
+      <span className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: t.sub }}>
+        <MapPin className="h-3.5 w-3.5" style={{ color: t.accent }} aria-hidden="true" />
+        מרכז כלניות, יקינטון 3
+      </span>
+    </div>
+  )
+}
 
-            <div className={`${display.className} leading-[0.84] text-[4.5rem] sm:text-[7rem] lg:text-[9rem]`} style={{ color: INK }}>
-              <div>לחזור</div>
-              <div className="min-h-[0.92em]">
-                <div className="relative inline-block">
-                  <RotatingWord color={BLUE} className="font-bold! whitespace-nowrap" />
-                  <Scribble />
-                </div>
-              </div>
-              <div>בלי כאב.</div>
-            </div>
-
-            <p className="mt-5 max-w-lg text-[1rem] sm:text-[1.05rem] leading-relaxed" style={{ color: '#3b3f4c' }}>
-              <strong style={{ color: INK }}>הניסיון של נבחרת ישראל בג׳ודו, בקליניקה באשדוד.</strong> צוות פיזיותרפיסטים בניהולו
-              הקליני של אנדריי מייזלס (M.Sc), במרכז כלניות, יקינטון 3, אשדוד. אבחון מבוסס מדידות כוח אובייקטיביות ותוכנית שיקום
-              אקטיבית לכאבי גב, צוואר, כתף וברך, פציעות ספורט, ורטיגו ומפרק הלסת.
-            </p>
-
-            <div className="mt-5 flex flex-col sm:flex-row gap-3">
-              <WhatsAppLink className="group inline-flex items-center justify-between gap-4 whitespace-nowrap rounded-md bg-[#25D366] px-6 py-3.5 text-lg font-bold text-white shadow-[5px_5px_0_#14161F] hover:shadow-[2px_2px_0_#14161F] hover:translate-x-[-3px] hover:translate-y-[3px] transition-all">
-                <div className="flex items-center gap-2">
-                  <MessageCircle className="h-5 w-5" aria-hidden="true" />
-                  כתבו לנו ב-WhatsApp
-                </div>
-                <ArrowLeft className="h-5 w-5 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
-              </WhatsAppLink>
-              <CallLink className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border-2 border-[#14161F] px-6 py-3.5 text-lg font-bold hover:bg-white transition-colors">
-                <Phone className="h-5 w-5" style={{ color: INK }} aria-hidden="true" />
-                <div style={{ color: INK }}>{seoConfig.contact.phone}</div>
-              </CallLink>
-            </div>
-
-            <ol className="mt-6 grid grid-cols-3 border-t-2 pr-0! mb-0! list-none" style={{ borderColor: INK }}>
-              {['אבחון ומדידות', 'טיפול ושיקום', 'חזרה לפעילות'].map((step, i) => (
-                <li key={step} className={`mb-0! pt-2 ${i > 0 ? 'border-r pr-3' : ''}`} style={{ borderColor: 'rgba(20,22,31,0.25)' }}>
-                  <div className={`${display.className} text-3xl leading-none`} style={{ color: BLUE }}>
-                    0{i + 1}
-                  </div>
-                  <div className="text-sm font-bold" style={{ color: INK }}>
-                    {step}
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <div className="relative mx-auto w-[88%] max-w-md lg:w-full lg:max-w-none pb-6 pt-10 lg:pt-4">
-            <div className="absolute inset-x-0 top-10 lg:top-4 bottom-6 translate-x-4 translate-y-4 rounded-sm" style={{ background: BLUE }} aria-hidden="true" />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-sm ring-[6px] ring-white shadow-2xl">
-              <Image
-                src={HERO_TREATMENT_PHOTO.src}
-                alt={HERO_TREATMENT_PHOTO.alt}
-                fill
-                priority
-                className="object-cover"
-                style={{ objectPosition: HERO_TREATMENT_PHOTO.position }}
-                sizes="(max-width: 1024px) 90vw, 45vw"
-              />
-            </div>
-            {/* Tape strips */}
-            <div className="absolute top-7 lg:top-1 right-6 h-7 w-24 rotate-[8deg] opacity-80 shadow-sm" style={{ background: YELLOW }} aria-hidden="true" />
-            <div className="absolute bottom-3 left-4 h-7 w-24 rotate-[-12deg] opacity-80 shadow-sm" style={{ background: YELLOW }} aria-hidden="true" />
-            <div className="absolute -top-2 lg:-top-8 -left-5 sm:-left-10 rotate-[-8deg]">
-              <RatingBadge />
-            </div>
-            <div className="absolute bottom-14 -right-4 rotate-[-3deg] px-4 py-2.5 shadow-xl" style={{ background: INK, color: PAPER }}>
-              <div className="text-xs" style={{ color: 'rgba(243,238,229,0.8)' }}>
-                תור פנוי תוך
-              </div>
-              <div className={`${display.className} text-[2rem] leading-none`}>24–48 שעות</div>
-            </div>
-          </div>
+function Headline({ t, size, inline = false }: { t: Palette; size: string; inline?: boolean }) {
+  const word = (
+    <div className="relative inline-block">
+      <RotatingWord color={t.accent} className="font-bold! whitespace-nowrap" />
+      <Scribble color={t.scribble} />
+    </div>
+  )
+  if (inline) {
+    return (
+      <div className={`${display.className} leading-[0.84] ${size}`} style={{ color: t.fg }}>
+        <div>
+          לחזור <span className="inline-block min-w-[2.6em]">{word}</span>
         </div>
+        <div>בלי כאב.</div>
+      </div>
+    )
+  }
+  return (
+    <div className={`${display.className} leading-[0.84] ${size}`} style={{ color: t.fg }}>
+      <div>לחזור</div>
+      <div className="min-h-[0.92em]">{word}</div>
+      <div>בלי כאב.</div>
+    </div>
+  )
+}
+
+function Intro({ t, className = '' }: { t: Palette; className?: string }) {
+  return (
+    <p className={`max-w-lg text-[1rem] sm:text-[1.05rem] leading-relaxed ${className}`} style={{ color: t.sub }}>
+      <strong style={{ color: t.fg }}>הניסיון של נבחרת ישראל בג׳ודו, בקליניקה באשדוד.</strong> צוות פיזיותרפיסטים בניהולו
+      הקליני של אנדריי מייזלס (M.Sc), במרכז כלניות, יקינטון 3, אשדוד. אבחון מבוסס מדידות כוח אובייקטיביות ותוכנית שיקום
+      אקטיבית לכאבי גב, צוואר, כתף וברך, פציעות ספורט, ורטיגו ומפרק הלסת.
+    </p>
+  )
+}
+
+function Buttons({ t, center = false }: { t: Palette; center?: boolean }) {
+  return (
+    <div className={`mt-5 flex flex-col sm:flex-row gap-3 ${center ? 'sm:justify-center' : ''}`}>
+      <WhatsAppLink className="group inline-flex items-center justify-between gap-4 whitespace-nowrap rounded-md bg-[#25D366] px-6 py-3.5 text-lg font-bold text-white hover:translate-x-[-3px] hover:translate-y-[3px] transition-all">
+        <div className="flex items-center gap-2">
+          <MessageCircle className="h-5 w-5" aria-hidden="true" />
+          כתבו לנו ב-WhatsApp
+        </div>
+        <ArrowLeft className="h-5 w-5 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
+      </WhatsAppLink>
+      <CallLink className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border-2 px-6 py-3.5 text-lg font-bold hover:opacity-80 transition-opacity">
+        <Phone className="h-5 w-5" style={{ color: t.fg }} aria-hidden="true" />
+        <div style={{ color: t.fg }}>{seoConfig.contact.phone}</div>
+      </CallLink>
+      {/* Hard offset shadow and border colour follow the theme */}
+      <style>{`.hero-bold-${t.btnShadow.slice(1)} a[href^="https://wa.me"]{box-shadow:5px 5px 0 ${t.btnShadow}} .hero-bold-${t.btnShadow.slice(1)} a[href^="tel:"]{border-color:${t.fg}}`}</style>
+    </div>
+  )
+}
+
+function Steps({ t }: { t: Palette }) {
+  return (
+    <ol className="mt-6 grid grid-cols-3 border-t-2 pr-0! mb-0! list-none" style={{ borderColor: t.fg }}>
+      {['אבחון ומדידות', 'טיפול ושיקום', 'חזרה לפעילות'].map((step, i) => (
+        <li key={step} className={`mb-0! pt-2 ${i > 0 ? 'border-r pr-3' : ''}`} style={{ borderColor: t.rule }}>
+          <div className={`${display.className} text-3xl leading-none`} style={{ color: t.accent }}>
+            0{i + 1}
+          </div>
+          <div className="text-sm font-bold" style={{ color: t.fg }}>
+            {step}
+          </div>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
+function TapedPhoto({ t, aspect = 'aspect-[4/5]', className = '' }: { t: Palette; aspect?: string; className?: string }) {
+  return (
+    <div className={`relative pb-6 pt-10 lg:pt-4 ${className}`}>
+      <div className="absolute inset-x-0 top-10 lg:top-4 bottom-6 translate-x-4 translate-y-4 rounded-sm" style={{ background: t.offset }} aria-hidden="true" />
+      <div className={`relative ${aspect} overflow-hidden rounded-sm ring-[6px] ring-white shadow-2xl`}>
+        <Image
+          src={HERO_TREATMENT_PHOTO.src}
+          alt={HERO_TREATMENT_PHOTO.alt}
+          fill
+          priority
+          className="object-cover"
+          style={{ objectPosition: HERO_TREATMENT_PHOTO.position }}
+          sizes="(max-width: 1024px) 90vw, 45vw"
+        />
+      </div>
+      <div className="absolute top-7 lg:top-1 right-6 h-7 w-24 rotate-[8deg] opacity-80 shadow-sm" style={{ background: YELLOW }} aria-hidden="true" />
+      <div className="absolute bottom-3 left-4 h-7 w-24 rotate-[-12deg] opacity-80 shadow-sm" style={{ background: YELLOW }} aria-hidden="true" />
+      <div className="absolute -top-2 lg:-top-8 -left-5 sm:-left-10 rotate-[-8deg]">
+        <RatingBadge />
+      </div>
+      <div className="absolute bottom-14 -right-4 rotate-[-3deg] px-4 py-2.5 shadow-xl" style={{ background: INK, color: PAPER }}>
+        <div className="text-xs" style={{ color: 'rgba(243,238,229,0.8)' }}>
+          תור פנוי תוך
+        </div>
+        <div className={`${display.className} text-[2rem] leading-none`}>24–48 שעות</div>
+      </div>
+    </div>
+  )
+}
+
+/** Big numbers instead of a photo. */
+function StatsColumn({ t }: { t: Palette }) {
+  const stats = [
+    { n: GOOGLE_RATING_DISPLAY, l: 'דירוג המטופלים בגוגל', star: true },
+    { n: '24–48', l: 'שעות עד תור פנוי' },
+    { n: '5000+', l: 'מטופלים בקליניקה' },
+  ]
+  return (
+    <ul className="list-none m-0! p-0! grid grid-cols-1 gap-0">
+      {stats.map((st, i) => (
+        <li key={st.l} className="m-0! flex items-end justify-between gap-4 border-t-2 py-3" style={{ borderColor: i === 0 ? t.fg : t.rule }}>
+          <div className={`${display.className} text-[5.5rem] sm:text-[7rem] leading-[0.8]`} style={{ color: i === 0 ? t.accent : t.fg }}>
+            {st.n}
+          </div>
+          <div className="pb-2 text-left">
+            {st.star && (
+              <div className="text-sm tracking-[0.2em]" style={{ color: YELLOW }} aria-hidden="true">
+                ★★★★★
+              </div>
+            )}
+            <div className="text-sm font-bold" style={{ color: t.sub }}>
+              {st.l}
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+/** Athletic and bold hero. `theme` picks colours, `layout` picks the arrangement. */
+export function HeroBold({ theme = 'paper', layout = 'split' }: { theme?: BoldTheme; layout?: BoldLayout } = {}) {
+  const t = THEMES[theme]
+  return (
+    <section className={`relative overflow-hidden hero-bold-${t.btnShadow.slice(1)}`} style={{ background: t.bg }}>
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{ backgroundImage: PAPER_GRAIN, mixBlendMode: t.grainBlend, opacity: t.grainOpacity }}
+        aria-hidden="true"
+      />
+      <div className="container mx-auto px-5 relative pt-5 sm:pt-10 lg:pt-14">
+        {layout === 'split' && (
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-center">
+            <div>
+              <TagRow t={t} />
+              <Headline t={t} size="text-[4.5rem] sm:text-[7rem] lg:text-[9rem]" />
+              <Intro t={t} className="mt-5" />
+              <Buttons t={t} />
+              <Steps t={t} />
+            </div>
+            <TapedPhoto t={t} className="mx-auto w-[88%] max-w-md lg:w-full lg:max-w-none" />
+          </div>
+        )}
+
+        {layout === 'poster' && (
+          <div>
+            <TagRow t={t} center />
+            <div className="text-center">
+              <Headline t={t} size="text-[4.6rem] sm:text-[7.5rem] lg:text-[10rem]" inline />
+            </div>
+            <div className="mt-6 grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-8 lg:gap-14 items-center">
+              <div className="order-2 lg:order-1">
+                <Intro t={t} />
+                <Buttons t={t} />
+                <Steps t={t} />
+              </div>
+              <TapedPhoto t={t} aspect="aspect-[16/11]" className="order-1 lg:order-2 mx-auto w-[92%] lg:w-full" />
+            </div>
+          </div>
+        )}
+
+        {layout === 'stats' && (
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-16 items-center">
+            <div>
+              <TagRow t={t} />
+              <Headline t={t} size="text-[4.5rem] sm:text-[7rem] lg:text-[9rem]" />
+              <Intro t={t} className="mt-5" />
+              <Buttons t={t} />
+            </div>
+            <StatsColumn t={t} />
+          </div>
+        )}
       </div>
 
-      <AreasStrip />
+      <AreasStrip t={t} />
     </section>
   )
 }
