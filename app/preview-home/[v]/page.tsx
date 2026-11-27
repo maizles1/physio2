@@ -13,5 +13,6 @@ export default async function Page({ params }: { params: Promise<{ v: string }> 
   const { v } = await params
   const option = heroRound2.find((o) => o.key === v) ?? heroRound2[0]
   const { Hero } = option
+  if (!Hero) return <HomePage />
   return <HomePage hero={<Hero />} highlights={!('highlights' in option && option.highlights === false)} />
 }

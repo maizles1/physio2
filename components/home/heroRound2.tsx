@@ -3,6 +3,7 @@ import { HeroBold } from '@/components/home/HeroConcepts'
 import { HeroDark, HeroFinder, HeroLight, HeroReviews, HeroRotating, HeroRotatingPhoto } from '@/components/home/HeroDesigns'
 
 export const heroRound2 = [
+  { key: 'final', name: 'הבחירה שלך: פוסטר שחור + כל העמוד באותו סגנון', text: 'דף הבית המלא בעיצוב החדש.', Hero: null, highlights: false },
   { key: 'bold', name: 'נייר + תמונה בצד', text: 'העיצוב שאישרת: רקע נייר, אותיות ענקיות ותמונה מודבקת בצד.', Hero: () => <HeroBold />, highlights: false },
   { key: 'bold-ink', name: 'שחור-צהוב', text: 'אותו מבנה, על רקע שחור עם הדגשות צהובות. הכי "ספורט".', Hero: () => <HeroBold theme="ink" />, highlights: false },
   { key: 'bold-blue-poster', name: 'פוסטר כחול', text: 'רקע בכחול של הלוגו, כותרת ענקית לכל הרוחב ותמונה רחבה מתחתיה.', Hero: () => <HeroBold theme="blue" layout="poster" />, highlights: false },

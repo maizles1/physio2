@@ -2,7 +2,6 @@
 // globals.css forces white text on <p>/<span>/<h*> inside sections with "text-white" or with
 // certain brand hex colours in their inline style, so this section sets neither.
 import Image from 'next/image'
-import { Karantina } from 'next/font/google'
 import { Phone, MessageCircle, ArrowLeft, MapPin } from 'lucide-react'
 import MeuhedetContactLink from '@/components/MeuhedetContactLink'
 import { homeWhatsappHref } from '@/components/home/HeroCtas'
@@ -11,7 +10,7 @@ import { HERO_TREATMENT_PHOTO } from '@/components/home/HeroDesigns'
 import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
 import { GOOGLE_RATING_DISPLAY } from '@/config/google-business.config'
 
-const display = Karantina({ subsets: ['hebrew'], weight: ['700'], display: 'swap' })
+import { display } from '@/components/home/boldTheme'
 
 const INK = '#14161F'
 const PAPER = '#F3EEE5'
