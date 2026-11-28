@@ -5,11 +5,17 @@ import Image from 'next/image'
 import { Phone, MessageCircle, ArrowLeft, MapPin } from 'lucide-react'
 import MeuhedetContactLink from '@/components/MeuhedetContactLink'
 import { homeWhatsappHref } from '@/components/home/HeroCtas'
-import { HERO_TREATMENT_PHOTO } from '@/components/home/HeroDesigns'
 import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
 import { GOOGLE_RATING_DISPLAY } from '@/config/google-business.config'
 
 import { display } from '@/components/home/boldTheme'
+
+/** Andrey treating a patient's knee. Used in the hero. */
+export const HERO_TREATMENT_PHOTO = {
+  src: '/images/services/knee-pain/service-image.jpg',
+  alt: 'אנדריי מייזלס, פיזיותרפיסט (M.Sc), בודק ברך של מטופל בקליניקה באשדוד',
+  position: '35% 25%',
+}
 
 const INK = '#14161F'
 const PAPER = '#F3EEE5'
@@ -184,17 +190,17 @@ function Headline({ t, fontSize, inline = false, center = false }: { t: Palette;
         <span className="font-bold tracking-wide" style={{ color: t.fg, fontSize: '0.95rem', lineHeight: 1.3, fontFamily: 'var(--font-sans)' }}>
           מכון פיזיותרפיה פרטי באשדוד
         </span>
-      </span>
+      </span>{' '}
       <span className={`${display.className} block`} style={{ fontSize, lineHeight: 0.86 }}>
         {inline ? (
           <>
-            <span className="block">שיקום ברמה</span>
+            <span className="block">שיקום ברמה</span>{' '}
             <span className="block">{olympic}</span>
           </>
         ) : (
           <>
-            <span className="block">שיקום</span>
-            <span className="block">ברמה</span>
+            <span className="block">שיקום</span>{' '}
+            <span className="block">ברמה</span>{' '}
             <span className="block">{olympic}</span>
           </>
         )}

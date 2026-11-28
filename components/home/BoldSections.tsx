@@ -56,7 +56,7 @@ export function BoldJudo() {
     <BoldSection surface="ink">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div>
-          <BoldHeading surface="ink" index="01" label="נבחרת ישראל בג׳ודו" title={<>מהמזרן של הנבחרת<br />לקליניקה באשדוד.</>} />
+          <BoldHeading surface="ink" index="01" label="נבחרת ישראל בג׳ודו" title={<>מהמזרן של הנבחרת <br />לקליניקה באשדוד.</>} />
           <p className="m-0! mb-4!" style={{ color: PAPER, fontSize: '1.1rem', lineHeight: 1.7 }}>
             <strong style={{ color: YELLOW }}>אנדריי מייזלס (M.Sc), המנהל הקליני שלנו, היה פיזיותרפיסט נבחרת ישראל בג׳ודו</strong> וליווה את
             הספורטאים גם באליפות העולם בדוחא, 2023.
@@ -342,7 +342,7 @@ export function BoldAbout() {
     <BoldSection surface="paper">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
         <div>
-          <BoldHeading surface="paper" index="05" label="אודות הקליניקה" title={<>מודדים,<br />לא מנחשים.</>} />
+          <BoldHeading surface="paper" index="05" label="אודות הקליניקה" title={<>מודדים, <br />לא מנחשים.</>} />
           <p className="m-0! mb-4!" style={{ color: s.sub, fontSize: '1.05rem' }}>
             פיזיותרפיה.פלוס הוא מכון פיזיותרפיה פרטי באשדוד, בניהולו הקליני של אנדריי מייזלס (M.Sc), לשעבר פיזיותרפיסט נבחרת
             ישראל בג׳ודו. הצוות מלווה שיקום אורתופדי, פציעות ספורט ושיקום אקטיבי, לפי שיטת עבודה אחת.
@@ -489,7 +489,7 @@ export function BoldContact() {
     <BoldSection surface="ink" id="lead-form" className="scroll-mt-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div>
-          <BoldHeading surface="ink" index="08" label="קביעת תור" title={<>מתחילים<br />לזוז.</>} />
+          <BoldHeading surface="ink" index="08" label="קביעת תור" title={<>מתחילים <br />לזוז.</>} />
           <div className="max-w-md text-[1.05rem] leading-relaxed mb-6" style={{ color: s.sub }}>
             כתבו לנו בוואטסאפ או התקשרו, ונמצא תור תוך {withRanges('24–48')} שעות. לא נוח לדבר? השאירו פרטים בטופס ונחזור אליכם.
           </div>
