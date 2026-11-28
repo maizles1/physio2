@@ -1,25 +1,5 @@
-import HeroSection from '@/components/HeroSection'
-import dynamic from 'next/dynamic'
 import { Metadata } from 'next'
-import { ImageSkeleton } from '@/components/LoadingSkeleton'
-
-// Lazy load heavy components below the fold
-const VideosSection = dynamic(() => import('@/components/VideosSection'), {
-  loading: () => (
-    <section className="section-spacing bg-white">
-      <div className="container">
-        <ImageSkeleton className="w-full" aspectRatio="16/9" />
-      </div>
-    </section>
-  ),
-})
-
-const InsuranceSection = dynamic(() => import('@/components/InsuranceSection'))
-const ServicesPreview = dynamic(() => import('@/components/ServicesPreview'))
-const AboutPreview = dynamic(() => import('@/components/AboutPreview'))
-const TestimonialsPreview = dynamic(() => import('@/components/TestimonialsPreview'))
-const FAQSection = dynamic(() => import('@/components/FAQSection'))
-const CTASection = dynamic(() => import('@/components/CTASection'))
+import HomePage from '@/components/home/HomePage'
 
 export const metadata: Metadata = {
   title: 'פיזיותרפיסט פרטי באשדוד | פיזיותרפיה.פלוס - אנדריי מייזלס',
@@ -51,10 +31,10 @@ export const metadata: Metadata = {
     url: 'https://physio-plus.co.il',
     images: [
       {
-        url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
+        url: 'https://physio-plus.co.il/images/og/home-og.jpg',
         width: 1200,
         height: 630,
-        alt: 'פיזיותרפיה.פלוס - פיזיותרפיסט פרטי באשדוד',
+        alt: 'אנדריי מייזלס, פיזיותרפיסט (M.Sc), בודק ברך של מטופל - פיזיותרפיה.פלוס, מכון פיזיותרפיה פרטי באשדוד',
       },
     ],
   },
@@ -70,16 +50,5 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  return (
-    <>
-      <HeroSection />
-      <VideosSection />
-      <TestimonialsPreview />
-      <InsuranceSection />
-      <ServicesPreview />
-      <AboutPreview />
-      <FAQSection />
-      <CTASection />
-    </>
-  )
+  return <HomePage />
 }

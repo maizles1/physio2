@@ -33,6 +33,33 @@ export default function Header() {
     }
   }, [])
 
+  // Hide the header while scrolling down so the page uses the whole screen;
+  // bring it back as soon as the visitor scrolls up a little.
+  const [headerHidden, setHeaderHidden] = useState(false)
+  useEffect(() => {
+    let lastY = window.scrollY
+    let ticking = false
+    const update = () => {
+      const y = window.scrollY
+      const delta = y - lastY
+      if (y < 120) setHeaderHidden(false)
+      else if (delta > 8) setHeaderHidden(true)
+      else if (delta < -8) setHeaderHidden(false)
+      if (Math.abs(delta) > 8 || y < 120) lastY = y
+      ticking = false
+    }
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true
+        window.requestAnimationFrame(update)
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+  // Never hide while a menu is open.
+  const hideHeader = headerHidden && !mobileMenuOpen && !activeDropdown
+
   // While the phone menu is open, stop the page behind it from scrolling.
   useEffect(() => {
     if (!mobileMenuOpen) return
@@ -87,7 +114,9 @@ export default function Header() {
   const navigation = [...primaryNavigation, bookingNavItem]
 
   return (
-    <header className={`bg-white shadow-md sticky top-0 border-b border-gray-200 z-50 ${mobileMenuOpen ? 'z-[60]' : ''}`}>
+    <header
+      className={`bg-white shadow-md sticky top-0 border-b border-gray-200 z-50 transition-[transform,visibility] duration-300 ${mobileMenuOpen ? 'z-[60]' : ''} ${hideHeader ? '-translate-y-full invisible' : 'translate-y-0'}`}
+    >
       {/* Top Bar - Contact Info */}
       <div className="hidden md:block text-white py-2.5 bg-primary-gradient">
         <div className="container mx-auto px-4">

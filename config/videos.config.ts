@@ -24,6 +24,8 @@ export interface VideoConfig {
   title: string
   description: string
   youtubeUrl: string // קישור YouTube - כל סוג יעבוד!
+  /** תאריך העלאה אמיתי ביוטיוב (ISO, למשל 2024-05-12). בלעדיו לא נשלחים לגוגל נתוני VideoObject לסרטון. */
+  uploadDate?: string
 }
 
 // קריאת משתני סביבה - עם fallback ל-PLACEHOLDER אם לא הוגדרו
