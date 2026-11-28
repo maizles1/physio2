@@ -215,7 +215,7 @@ export function HeroReviews() {
  */
 export const HERO_TREATMENT_PHOTO = {
   src: '/images/services/knee-pain/service-image.jpg',
-  alt: 'פיזיותרפיסט בודק ברך של מטופל בקליניקה באשדוד',
+  alt: 'אנדריי מייזלס, פיזיותרפיסט (M.Sc), בודק ברך של מטופל בקליניקה באשדוד',
   position: '35% 25%',
 }
 

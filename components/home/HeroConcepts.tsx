@@ -151,6 +151,15 @@ function Scribble({ color = YELLOW }: { color?: string }) {
 const PAPER_GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E\")"
 
+/** Clinical director's name, right under the main headline. */
+function LedBy({ t, center = false }: { t: Palette; center?: boolean }) {
+  return (
+    <div className={`mt-4 text-[1.05rem] sm:text-lg font-bold leading-snug ${center ? 'text-center' : ''}`} style={{ color: t.fg }}>
+      בהובלת <span style={{ color: t.accent }}>אנדריי מייזלס (M.Sc)</span>, לשעבר פיזיותרפיסט נבחרת ישראל בג׳ודו
+    </div>
+  )
+}
+
 function AddressRow({ t, center = false }: { t: Palette; center?: boolean }) {
   return (
     <div className={`mt-3 flex items-center gap-1 text-xs font-medium ${center ? 'justify-center' : ''}`} style={{ color: t.sub }}>
@@ -197,9 +206,9 @@ function Headline({ t, fontSize, inline = false, center = false }: { t: Palette;
 function Intro({ t, className = '' }: { t: Palette; className?: string }) {
   return (
     <p className={`max-w-lg text-[1rem] sm:text-[1.05rem] leading-relaxed ${className}`} style={{ color: t.sub }}>
-      <strong style={{ color: t.fg }}>הניסיון של נבחרת ישראל בג׳ודו, בקליניקה באשדוד.</strong> צוות פיזיותרפיסטים בניהולו
-      הקליני של אנדריי מייזלס (M.Sc), במרכז כלניות, יקינטון 3, אשדוד. אבחון מבוסס מדידות כוח אובייקטיביות ותוכנית שיקום
-      אקטיבית לכאבי גב, צוואר, כתף וברך, פציעות ספורט, ורטיגו ומפרק הלסת.
+      <strong style={{ color: t.fg }}>צוות פיזיותרפיסטים שעובד בשיטה אחת, בניהולו הקליני.</strong> אבחון מבוסס מדידות כוח
+      אובייקטיביות ותוכנית שיקום אקטיבית לכאבי גב, צוואר, כתף וברך, פציעות ספורט, ורטיגו ומפרק הלסת, במרכז כלניות,
+      יקינטון 3, אשדוד.
     </p>
   )
 }
@@ -259,7 +268,9 @@ function TapedPhoto({ t, aspect = 'aspect-[4/5]', className = '' }: { t: Palette
         />
       </div>
       <div className="absolute top-7 lg:top-1 right-6 h-7 w-24 rotate-[8deg] opacity-80 shadow-sm" style={{ background: YELLOW }} aria-hidden="true" />
-      <div className="absolute bottom-3 left-4 h-7 w-24 rotate-[-12deg] opacity-80 shadow-sm" style={{ background: YELLOW }} aria-hidden="true" />
+      <div className="absolute bottom-2 left-3 rotate-[-6deg] px-3 py-1.5 shadow-md" style={{ background: YELLOW, color: INK }}>
+        <div className={`${display.className} text-[1.5rem] leading-none`}>אנדריי מייזלס בטיפול</div>
+      </div>
       <div className="absolute -top-2 lg:-top-8 -left-5 sm:-left-10 rotate-[-8deg]">
         <RatingBadge />
       </div>
@@ -320,6 +331,7 @@ export function HeroBold({ theme = 'paper', layout = 'split' }: { theme?: BoldTh
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-center">
             <div>
               <Headline t={t} fontSize="clamp(4.5rem, 14vw, 9rem)" />
+              <LedBy t={t} />
               <AddressRow t={t} />
               <Intro t={t} className="mt-4" />
               <Buttons t={t} />
@@ -333,6 +345,7 @@ export function HeroBold({ theme = 'paper', layout = 'split' }: { theme?: BoldTh
           <div>
             <div className="text-center">
               <Headline t={t} fontSize="clamp(4.4rem, 15vw, 10rem)" inline center />
+              <LedBy t={t} center />
               <AddressRow t={t} center />
             </div>
             {/* Phones: text and buttons first so WhatsApp is on the first screen, photo after */}
@@ -351,6 +364,7 @@ export function HeroBold({ theme = 'paper', layout = 'split' }: { theme?: BoldTh
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-16 items-center">
             <div>
               <Headline t={t} fontSize="clamp(4.5rem, 14vw, 9rem)" />
+              <LedBy t={t} />
               <AddressRow t={t} />
               <Intro t={t} className="mt-4" />
               <Buttons t={t} />
