@@ -30,6 +30,92 @@ function withRanges(text: string) {
   )
 }
 
+/* ---------------------------------- 01: Israel national judo team ---------------------------------- */
+
+const judoPhotos = [
+  {
+    src: '/images/carousel/clinic-5.jpg',
+    alt: 'אנדריי מייזלס באליפות העולם בג׳ודו, דוחא 2023',
+    caption: 'אליפות העולם, דוחא 2023',
+  },
+  {
+    src: '/images/carousel/clinic-1.jpg',
+    alt: 'אנדריי מייזלס עם ג׳ודוקא מנבחרת ישראל אחרי זכייה במדליה',
+    caption: 'עם נבחרת ישראל',
+  },
+  {
+    src: '/images/carousel/clinic-2.jpg',
+    alt: 'אנדריי מייזלס עם ספורטאי נבחרת ישראל באליפות העולם בג׳ודו',
+    caption: 'על המזרן',
+  },
+]
+
+export function BoldJudo() {
+  const s = SURFACES.ink
+  return (
+    <BoldSection surface="ink">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div>
+          <BoldHeading surface="ink" index="01" label="נבחרת ישראל בג׳ודו" title={<>מהמזרן של הנבחרת<br />לקליניקה באשדוד.</>} />
+          <p className="m-0! mb-4!" style={{ color: PAPER, fontSize: '1.1rem', lineHeight: 1.7 }}>
+            <strong style={{ color: YELLOW }}>אנדריי מייזלס (M.Sc), המנהל הקליני שלנו, היה פיזיותרפיסט נבחרת ישראל בג׳ודו</strong> וליווה את
+            הספורטאים גם באליפות העולם בדוחא, 2023.
+          </p>
+          <p className="m-0! mb-6!" style={{ color: s.sub, fontSize: '1.05rem', lineHeight: 1.7 }}>
+            את אותה שיטת עבודה הוא הביא לקליניקה: אבחון מדויק, מדידות כוח במקום ניחוש, ותוכנית שמחזירה לתפקוד מלא. זה מתאים
+            לספורטאים, וזה מתאים גם למי שפשוט רוצה לחזור לשגרה בלי כאב.
+          </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3 list-none m-0! p-0! mb-7!">
+            {['אבחון מדויק כבר במפגש הראשון', 'מדידות כוח אובייקטיביות', 'חזרה מדורגת לפעילות'].map((item) => (
+              <li key={item} className="m-0! border-r-4 pr-3 py-1 text-[0.95rem] font-bold leading-snug" style={{ borderColor: YELLOW, color: PAPER }}>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <MeuhedetContactLink
+            page="home"
+            type="whatsapp"
+            href={homeWhatsappHref('שלום, אשמח לתאם אבחון')}
+            section="judo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-[#25D366] px-6 py-4 text-lg font-extrabold text-[#14161F] shadow-[5px_5px_0_#FFD23F]"
+          >
+            <MessageCircle className="h-5 w-5" aria-hidden="true" />
+            רוצים את אותו טיפול? כתבו לנו
+          </MeuhedetContactLink>
+        </div>
+
+        {/* Taped photo collage */}
+        <div className="relative mx-auto w-full max-w-lg pt-4 pb-8">
+          <figure className="relative m-0! w-[92%] mr-auto rotate-[-2deg]">
+            <div className="relative aspect-[4/3] overflow-hidden border-[6px] border-white shadow-2xl">
+              <Image src={judoPhotos[0].src} alt={judoPhotos[0].alt} fill className="object-cover" sizes="(max-width: 1024px) 90vw, 40vw" />
+            </div>
+            <figcaption className={`${display.className} absolute -bottom-4 right-4 px-3 py-1 text-[1.4rem] leading-none rotate-[2deg]`} style={{ background: YELLOW, color: INK }}>
+              {judoPhotos[0].caption}
+            </figcaption>
+            <div className="absolute -top-3 left-8 h-6 w-20 rotate-[-8deg] opacity-85" style={{ background: YELLOW }} aria-hidden="true" />
+          </figure>
+          <div className="mt-8 grid grid-cols-2 gap-5">
+            {judoPhotos.slice(1).map((ph, i) => (
+              <figure key={ph.src} className={`relative m-0! ${i === 0 ? 'rotate-[3deg]' : 'rotate-[-3deg] mt-6'}`}>
+                <div className="relative aspect-[3/4] overflow-hidden border-[5px] border-white shadow-xl">
+                  <Image src={ph.src} alt={ph.alt} fill className="object-cover" sizes="(max-width: 1024px) 45vw, 20vw" />
+                </div>
+                <figcaption className="mt-2 text-sm font-bold" style={{ color: PAPER }}>
+                  {ph.caption}
+                </figcaption>
+                <div className={`absolute -top-3 ${i === 0 ? 'right-6 rotate-[6deg]' : 'left-6 rotate-[-6deg]'} h-5 w-14 opacity-85`} style={{ background: YELLOW }} aria-hidden="true" />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    </BoldSection>
+  )
+}
+
 /* ---------------------------------- 01: what hurts ---------------------------------- */
 
 const painAreas = [
@@ -46,7 +132,7 @@ const painAreas = [
 export function BoldPainPicker() {
   return (
     <BoldSection surface="paper">
-      <BoldHeading surface="paper" index="01" label="במה אנחנו מטפלים" title="מה כואב לך?" />
+      <BoldHeading surface="paper" index="02" label="במה אנחנו מטפלים" title="מה כואב לך?" />
       <ul className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 list-none m-0! p-0!">
         {painAreas.map((p) => (
           <li key={p.href} className="m-0!">
@@ -98,7 +184,7 @@ export function BoldReviews() {
     <BoldSection surface="ink">
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
         <div className="[&>div]:mb-0!">
-          <BoldHeading surface="ink" index="02" label="ביקורות בגוגל" title="מה אומרים עלינו" />
+          <BoldHeading surface="ink" index="03" label="ביקורות בגוגל" title="מה אומרים עלינו" />
         </div>
         <div className="flex items-end gap-4">
           <div className={`${display.className} leading-[0.8]`} style={{ color: YELLOW, fontSize: 'clamp(5rem, 18vw, 8rem)' }}>
@@ -191,7 +277,7 @@ const funds: { title: string; text: string; logo: string; link: string; href?: s
 export function BoldInsurance() {
   return (
     <BoldSection surface="yellow">
-      <BoldHeading surface="yellow" index="03" label="קופות וביטוחים" title="עם מי אנחנו עובדים" />
+      <BoldHeading surface="yellow" index="04" label="קופות וביטוחים" title="עם מי אנחנו עובדים" />
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 list-none m-0! p-0!">
         {funds.map((f) => (
           <li key={f.title} className="m-0! flex flex-col border-2 bg-white p-5" style={{ borderColor: INK, boxShadow: `5px 5px 0 ${INK}` }}>
@@ -256,7 +342,7 @@ export function BoldAbout() {
     <BoldSection surface="paper">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
         <div>
-          <BoldHeading surface="paper" index="04" label="אודות הקליניקה" title={<>מודדים,<br />לא מנחשים.</>} />
+          <BoldHeading surface="paper" index="05" label="אודות הקליניקה" title={<>מודדים,<br />לא מנחשים.</>} />
           <p className="m-0! mb-4!" style={{ color: s.sub, fontSize: '1.05rem' }}>
             פיזיותרפיה.פלוס הוא מכון פיזיותרפיה פרטי באשדוד, בניהולו הקליני של אנדריי מייזלס (M.Sc), לשעבר פיזיותרפיסט נבחרת
             ישראל בג׳ודו. הצוות מלווה שיקום אורתופדי, פציעות ספורט ושיקום אקטיבי, לפי שיטת עבודה אחת.
@@ -364,7 +450,7 @@ export function BoldFAQ() {
     <BoldSection surface="paper">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="max-w-3xl">
-        <BoldHeading surface="paper" index="06" label="שאלות נפוצות" title="לפני שמגיעים" />
+        <BoldHeading surface="paper" index="07" label="שאלות נפוצות" title="לפני שמגיעים" />
         <div className="border-t-2" style={{ borderColor: INK }}>
           {faqs.map((f) => (
             <details key={f.question} className="group border-b-2" style={{ borderColor: INK }}>
@@ -403,7 +489,7 @@ export function BoldContact() {
     <BoldSection surface="ink" id="lead-form" className="scroll-mt-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div>
-          <BoldHeading surface="ink" index="07" label="קביעת תור" title={<>מתחילים<br />לזוז.</>} />
+          <BoldHeading surface="ink" index="08" label="קביעת תור" title={<>מתחילים<br />לזוז.</>} />
           <div className="max-w-md text-[1.05rem] leading-relaxed mb-6" style={{ color: s.sub }}>
             כתבו לנו בוואטסאפ או התקשרו, ונמצא תור תוך {withRanges('24–48')} שעות. לא נוח לדבר? השאירו פרטים בטופס ונחזור אליכם.
           </div>

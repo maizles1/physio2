@@ -46,7 +46,7 @@ export default function BoldVideos() {
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       ))}
       <BoldSection surface="ink">
-        <BoldHeading surface="ink" index="05" label="סרטונים" title="תראו בעצמכם" />
+        <BoldHeading surface="ink" index="06" label="סרטונים" title="תראו בעצמכם" />
         <ul className="-mx-5 px-5 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 list-none my-0! lg:mx-0 lg:px-0 lg:grid lg:grid-cols-4 lg:overflow-visible">
           {videos.map((v, i) => (
             <li key={v.id} className="m-0! w-[70%] sm:w-[42%] lg:w-auto flex-shrink-0 snap-start">

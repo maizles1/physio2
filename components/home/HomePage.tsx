@@ -4,7 +4,7 @@ import { HomeHighlights, HomePainPicker, HomeSteps } from '@/components/home/Hom
 import dynamic from 'next/dynamic'
 import { ImageSkeleton } from '@/components/LoadingSkeleton'
 import { HeroBold } from '@/components/home/HeroConcepts'
-import { BoldAbout, BoldContact, BoldFAQ, BoldInsurance, BoldPainPicker, BoldReviews } from '@/components/home/BoldSections'
+import { BoldAbout, BoldContact, BoldFAQ, BoldInsurance, BoldJudo, BoldPainPicker, BoldReviews } from '@/components/home/BoldSections'
 
 const BoldVideos = dynamic(() => import('@/components/home/BoldVideos'), {
   loading: () => <section className="min-h-[640px] sm:min-h-[600px]" style={{ background: '#14161F' }} aria-hidden="true" />,
@@ -47,6 +47,7 @@ export default function HomePage({
     return (
       <>
         <HeroBold theme="ink" layout="poster" />
+        <BoldJudo />
         <BoldPainPicker />
         <BoldReviews />
         <BoldInsurance />
