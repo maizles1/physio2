@@ -11,6 +11,25 @@ import { GOOGLE_RATING_DISPLAY, getReviewUrl } from '@/config/google-business.co
 import { TEAM_PHYSIO, isTeamPhysioConfigured } from '@/config/team.config'
 import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
 
+/** Cut long text at a word boundary. */
+function truncateWords(text: string, max: number) {
+  if (text.length <= max) return text
+  return `${text.slice(0, max).replace(/\s+\S*$/, '')}…`
+}
+
+/** Keep number ranges (24–48, 60-75) in reading order inside Hebrew text. */
+function withRanges(text: string) {
+  return text.split(/(\d+[–-]\d+)/).map((part, i) =>
+    /^\d+[–-]\d+$/.test(part) ? (
+      <span key={i} dir="ltr" className="inline-block">
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  )
+}
+
 /* ---------------------------------- 01: what hurts ---------------------------------- */
 
 const painAreas = [
@@ -46,9 +65,12 @@ export function BoldPainPicker() {
                 />
               </div>
               <div className="flex items-center justify-between gap-2 px-3 py-2.5" style={{ background: INK }}>
-                <div className={`${display.className} text-[1.6rem] sm:text-[1.9rem] leading-none`} style={{ color: PAPER }}>
+                <h3
+                  className={`${display.className} m-0!`}
+                  style={{ color: PAPER, fontSize: 'clamp(1.6rem, 5vw, 1.9rem)', lineHeight: 1, fontWeight: 700, letterSpacing: 0 }}
+                >
                   {p.title}
-                </div>
+                </h3>
                 <ArrowLeft className="h-5 w-5 flex-shrink-0 transition-transform group-hover:-translate-x-1" style={{ color: YELLOW }} aria-hidden="true" />
               </div>
             </Link>
@@ -100,13 +122,13 @@ export function BoldReviews() {
               ״
             </div>
             <div className="text-[0.95rem] leading-relaxed" style={{ color: INK }}>
-              {r.text.length > 170 ? `${r.text.slice(0, 170)}…` : r.text}
+              {truncateWords(r.text, 170)}
             </div>
             <div className="mt-4 border-t-2 pt-3 flex items-center justify-between gap-2" style={{ borderColor: INK }}>
               <div className="font-bold" style={{ color: INK }}>
                 {r.authorName}
               </div>
-              <div className="text-xs tracking-[0.15em]" style={{ color: '#E2A400' }} aria-label={`${r.rating} מתוך 5 כוכבים`}>
+              <div className="text-xs tracking-[0.15em]" style={{ color: '#B47B00' }} aria-label={`${r.rating} מתוך 5 כוכבים`}>
                 {'★'.repeat(r.rating)}
               </div>
             </div>
@@ -135,7 +157,7 @@ export function BoldReviews() {
 
 /* ---------------------------------- 03: funds & insurers ---------------------------------- */
 
-const funds = [
+const funds: { title: string; text: string; logo: string; link: string; href?: string; whatsapp?: string }[] = [
   {
     title: 'מאוחדת',
     text: 'ספק רשמי של מאוחדת לפיזיותרפיה ופציעות ספורט.',
@@ -154,15 +176,15 @@ const funds = [
     title: 'כללית',
     text: 'מבוטחי כללית יכולים לקבל החזרים לפי תנאי הביטוח המשלים.',
     logo: '/images/insurance/Clalit-Logo.png',
-    href: '/contact',
-    link: 'לבירור זכאות',
+    whatsapp: 'שלום, אשמח לברר זכאות להחזר מכללית',
+    link: 'בירור זכאות בוואטסאפ',
   },
   {
     title: 'ביטוחים פרטיים',
     text: 'ביטוחים פרטיים ומשלימים כוללים לרוב החזר על פיזיותרפיה.',
     logo: '/images/insurance/private-insurance-logo.svg',
-    href: '/contact',
-    link: 'לבירור זכאות',
+    whatsapp: 'שלום, אשמח לברר זכאות להחזר מביטוח פרטי',
+    link: 'בירור זכאות בוואטסאפ',
   },
 ]
 
@@ -182,10 +204,25 @@ export function BoldInsurance() {
             <div className="text-[0.95rem] leading-relaxed mb-4 flex-1" style={{ color: '#3b3f4c' }}>
               {f.text}
             </div>
-            <Link href={f.href} className="inline-flex items-center gap-1.5 font-bold" style={{ color: INK }}>
-              {f.link}
-              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            </Link>
+            {f.whatsapp ? (
+              <MeuhedetContactLink
+                page="home"
+                type="whatsapp"
+                href={homeWhatsappHref(f.whatsapp)}
+                section="insurance"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-bold text-[#14161F]"
+              >
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                {f.link}
+              </MeuhedetContactLink>
+            ) : (
+              <Link href={f.href ?? '/contact'} className="inline-flex items-center gap-1.5 font-bold" style={{ color: INK }}>
+                {f.link}
+                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            )}
           </li>
         ))}
       </ul>
@@ -267,9 +304,12 @@ export function BoldAbout() {
                     aria-hidden="true"
                   />
                 </div>
-                <div className={`${display.className} mt-4 text-[1.8rem] leading-none`} style={{ color: INK }}>
+                <h3
+                  className={`${display.className} mt-4! mb-0!`}
+                  style={{ color: INK, fontSize: '1.8rem', lineHeight: 1, fontWeight: 700, letterSpacing: 0 }}
+                >
                   {m.name}
-                </div>
+                </h3>
                 <div className="mt-1 text-sm leading-snug" style={{ color: s.sub }}>
                   {m.role}
                 </div>
@@ -286,9 +326,9 @@ export function BoldAbout() {
 
 const faqs = [
   {
-    question: 'מהי פיזיותרפיה ומתי כדאי לפנות?',
+    question: 'איך מגיעים לקליניקה באשדוד והאם יש חניה?',
     answer:
-      'פיזיותרפיה היא מקצוע רפואי המתמקד בשיקום ושיפור התפקוד הגופני באמצעות תרגילים, טיפולים ידניים ושימוש בטכנולוגיות מתקדמות. מומלץ לפנות לפיזיותרפיסט במקרים של כאבים כרוניים, פציעות ספורט, שיקום לאחר ניתוחים, בעיות יציבה, בעיות במפרקים, וקשיי תנועה. הפיזיותרפיסט מסייע בשיפור התפקוד, הפחתת כאב, ושיקום מפציעות ומחלות.',
+      'הקליניקה של פיזיותרפיה.פלוס נמצאת במרכז כלניות, רחוב יקינטון 3 באשדוד, עם חניה סמוכה למרכז. כדאי להגיע בבגדים נוחים לתנועה ולהביא מסמכים רפואיים או בדיקות הדמיה, אם יש.',
   },
   {
     question: 'האם צריך הפניה מרופא לקבלת טיפול?',
@@ -307,7 +347,8 @@ const faqs = [
   },
   {
     question: 'כיצד אפשר לקבל החזרים?',
-    answer: 'החזרים מכללית, ועובדים עם מבוטחי מאוחדת שיא. שאר הקופות באופן פרטי. החזרים מהביטוחים הפרטיים, תלוי ביטוח של המטופל.',
+    answer:
+      'אנחנו ספק של מאוחדת (למבוטחי מאוחדת שיא) וספק מוכר של משרד הביטחון. מבוטחי כללית ובעלי ביטוחים פרטיים יכולים לקבל החזרים לפי תנאי הביטוח המשלים או הפוליסה. מבוטחי שאר הקופות מטופלים באופן פרטי.',
   },
 ]
 
@@ -328,9 +369,9 @@ export function BoldFAQ() {
           {faqs.map((f) => (
             <details key={f.question} className="group border-b-2" style={{ borderColor: INK }}>
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 [&::-webkit-details-marker]:hidden">
-                <div className="text-lg font-bold" style={{ color: INK }}>
+                <h3 className="m-0!" style={{ color: INK, fontSize: '1.125rem', lineHeight: 1.4, fontWeight: 700, letterSpacing: 0 }}>
                   {f.question}
-                </div>
+                </h3>
                 <div
                   className="flex h-9 w-9 flex-shrink-0 items-center justify-center transition-transform group-open:rotate-45"
                   style={{ background: INK }}
@@ -340,7 +381,7 @@ export function BoldFAQ() {
                 </div>
               </summary>
               <p className="m-0! pb-5!" style={{ color: s.sub, fontSize: '1rem' }}>
-                {f.answer}
+                {withRanges(f.answer)}
               </p>
             </details>
           ))}
@@ -364,7 +405,7 @@ export function BoldContact() {
         <div>
           <BoldHeading surface="ink" index="07" label="קביעת תור" title={<>מתחילים<br />לזוז.</>} />
           <div className="max-w-md text-[1.05rem] leading-relaxed mb-6" style={{ color: s.sub }}>
-            כתבו לנו בוואטסאפ או התקשרו, ונמצא תור תוך 24–48 שעות. לא נוח לדבר? השאירו פרטים בטופס ונחזור אליכם.
+            כתבו לנו בוואטסאפ או התקשרו, ונמצא תור תוך {withRanges('24–48')} שעות. לא נוח לדבר? השאירו פרטים בטופס ונחזור אליכם.
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
             <MeuhedetContactLink
@@ -374,7 +415,7 @@ export function BoldContact() {
               section="cta_section"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-[#25D366] px-6 py-4 text-lg font-bold text-white"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-[#25D366] px-6 py-4 text-lg font-extrabold text-[#14161F]"
             >
               <MessageCircle className="h-5 w-5" aria-hidden="true" />
               כתבו לנו ב-WhatsApp
@@ -391,7 +432,14 @@ export function BoldContact() {
             </MeuhedetContactLink>
           </div>
           <div className="mt-6 text-sm" style={{ color: s.sub }}>
-            יקינטון 3, מרכז כלניות, אשדוד · א׳–ה׳ 08:00–20:00 · ו׳ 08:00–14:00
+            יקינטון 3, מרכז כלניות, אשדוד · א׳–ה׳{' '}
+            <span dir="ltr" className="inline-block">
+              08:00–20:00
+            </span>{' '}
+            · ו׳{' '}
+            <span dir="ltr" className="inline-block">
+              08:00–14:00
+            </span>
           </div>
         </div>
         <div style={{ boxShadow: `8px 8px 0 ${YELLOW}` }}>

@@ -28,6 +28,8 @@ type Palette = {
   stripFg: string
   stripStar: string
   btnShadow: string
+  waShadowClass: string
+  callBorderClass: string
   rule: string
   grainBlend: 'multiply' | 'screen'
   grainOpacity: number
@@ -37,16 +39,19 @@ const THEMES: Record<BoldTheme, Palette> = {
   paper: {
     bg: '#F3EEE5', fg: '#14161F', sub: '#3b3f4c', accent: '#1E78B8', scribble: '#FFD23F', offset: '#1E78B8',
     stripBg: '#14161F', stripFg: '#F3EEE5', stripStar: '#FFD23F', btnShadow: '#14161F', rule: 'rgba(20,22,31,0.25)',
+    waShadowClass: 'shadow-[5px_5px_0_#14161F]', callBorderClass: 'border-[#14161F]',
     grainBlend: 'multiply', grainOpacity: 0.18,
   },
   ink: {
     bg: '#14161F', fg: '#F3EEE5', sub: 'rgba(243,238,229,0.78)', accent: '#FFD23F', scribble: '#1E78B8', offset: '#FFD23F',
     stripBg: '#FFD23F', stripFg: '#14161F', stripStar: '#1E78B8', btnShadow: '#FFD23F', rule: 'rgba(243,238,229,0.25)',
+    waShadowClass: 'shadow-[5px_5px_0_#FFD23F]', callBorderClass: 'border-[#F3EEE5]',
     grainBlend: 'screen', grainOpacity: 0.07,
   },
   blue: {
     bg: '#1E78B8', fg: '#FFFFFF', sub: 'rgba(255,255,255,0.88)', accent: '#FFD23F', scribble: '#14161F', offset: '#14161F',
     stripBg: '#14161F', stripFg: '#F3EEE5', stripStar: '#FFD23F', btnShadow: '#14161F', rule: 'rgba(255,255,255,0.3)',
+    waShadowClass: 'shadow-[5px_5px_0_#14161F]', callBorderClass: 'border-white',
     grainBlend: 'multiply', grainOpacity: 0.12,
   },
 }
@@ -105,32 +110,32 @@ function AreasStrip({ t }: { t: Palette }) {
 
 /** Static round Google rating badge, slightly tilted. */
 function RatingBadge() {
-  const ring = 'ביקורות מטופלים בגוגל · ביקורות מטופלים בגוגל · '
   return (
     <div
-      className="relative h-28 w-28 sm:h-34 sm:w-34"
-      style={{ color: INK }}
+      className="flex h-28 w-28 sm:h-32 sm:w-32 flex-col items-center justify-center rounded-full border-[3px] text-center shadow-xl"
+      style={{ background: YELLOW, borderColor: INK, color: INK }}
       role="img"
       aria-label={`דירוג ${GOOGLE_RATING_DISPLAY} מתוך 5 בביקורות מטופלים בגוגל`}
     >
-      <div className="absolute inset-0 rounded-full shadow-xl" style={{ background: YELLOW }} />
-      {/* Letters placed one by one around the circle, reading right to left */}
-      <div className="absolute inset-0" aria-hidden="true">
-        {Array.from(ring).map((ch, i, arr) => (
-          <div
-            key={i}
-            className="absolute left-1/2 top-0 h-1/2 origin-bottom text-[10px] sm:text-[11px] font-bold leading-none"
-            style={{ transform: `translateX(-50%) rotate(${(-360 / arr.length) * i}deg)`, paddingTop: '6px', color: INK }}
-          >
-            {ch}
-          </div>
-        ))}
+      <div className={`${display.className} text-[2.8rem] sm:text-[3.1rem] leading-[0.8]`} aria-hidden="true">
+        {GOOGLE_RATING_DISPLAY}
       </div>
-      <div className="absolute inset-0 flex flex-col items-center justify-center" aria-hidden="true">
-        <div className={`${display.className} text-[2.8rem] sm:text-[3.1rem] leading-[0.8]`}>{GOOGLE_RATING_DISPLAY}</div>
-        <div className="text-[10px] sm:text-[11px] tracking-[0.2em]">★★★★★</div>
+      <div className="mt-1 text-[11px] tracking-[0.15em]" aria-hidden="true">
+        ★★★★★
+      </div>
+      <div className="text-[11px] font-bold leading-tight" aria-hidden="true">
+        ביקורות בגוגל
       </div>
     </div>
+  )
+}
+
+/** A number range such as 24–48, kept in reading order inside Hebrew text. */
+function Range({ children }: { children: string }) {
+  return (
+    <span dir="ltr" className="inline-block">
+      {children}
+    </span>
   )
 }
 
@@ -146,44 +151,46 @@ function Scribble({ color = YELLOW }: { color?: string }) {
 const PAPER_GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E\")"
 
-function TagRow({ t, center = false }: { t: Palette; center?: boolean }) {
+function AddressRow({ t, center = false }: { t: Palette; center?: boolean }) {
   return (
-    <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 mb-2.5 ${center ? 'justify-center' : ''}`}>
-      <div className="flex items-center gap-2.5">
-        <div className="h-[3px] w-8" style={{ background: t.accent }} />
-        <h1 className="font-bold tracking-wide m-0!" style={{ color: t.fg, fontSize: '0.95rem', lineHeight: 1.3 }}>
-          מכון פיזיותרפיה פרטי באשדוד
-        </h1>
-      </div>
-      <span className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: t.sub }}>
-        <MapPin className="h-3.5 w-3.5" style={{ color: t.accent }} aria-hidden="true" />
-        מרכז כלניות, יקינטון 3
-      </span>
+    <div className={`mt-3 flex items-center gap-1 text-xs font-medium ${center ? 'justify-center' : ''}`} style={{ color: t.sub }}>
+      <MapPin className="h-3.5 w-3.5" style={{ color: t.accent }} aria-hidden="true" />
+      מרכז כלניות, יקינטון 3, אשדוד
     </div>
   )
 }
 
-function Headline({ t, size, inline = false }: { t: Palette; size: string; inline?: boolean }) {
+/** The page's <h1>: small keyword line + giant "שיקום ברמה אולימפית." */
+function Headline({ t, fontSize, inline = false, center = false }: { t: Palette; fontSize: string; inline?: boolean; center?: boolean }) {
   const olympic = (
-    <div className="relative inline-block">
-      <div style={{ color: t.accent }}>אולימפית.</div>
+    <span className="relative inline-block">
+      <span style={{ color: t.accent }}>אולימפית.</span>
       <Scribble color={t.scribble} />
-    </div>
+    </span>
   )
-  if (inline) {
-    return (
-      <div className={`${display.className} leading-[0.86] ${size}`} style={{ color: t.fg }}>
-        <div>שיקום ברמה</div>
-        <div>{olympic}</div>
-      </div>
-    )
-  }
   return (
-    <div className={`${display.className} leading-[0.86] ${size}`} style={{ color: t.fg }}>
-      <div>שיקום</div>
-      <div>ברמה</div>
-      <div>{olympic}</div>
-    </div>
+    <h1 className="m-0!" style={{ color: t.fg, fontSize: 'inherit', lineHeight: 1, fontWeight: 700, letterSpacing: 0 }}>
+      <span className={`flex items-center gap-2.5 mb-2.5 ${center ? 'justify-center' : ''}`}>
+        <span className="h-[3px] w-8" style={{ background: t.accent }} aria-hidden="true" />
+        <span className="font-bold tracking-wide" style={{ color: t.fg, fontSize: '0.95rem', lineHeight: 1.3, fontFamily: 'var(--font-sans)' }}>
+          מכון פיזיותרפיה פרטי באשדוד
+        </span>
+      </span>
+      <span className={`${display.className} block`} style={{ fontSize, lineHeight: 0.86 }}>
+        {inline ? (
+          <>
+            <span className="block">שיקום ברמה</span>
+            <span className="block">{olympic}</span>
+          </>
+        ) : (
+          <>
+            <span className="block">שיקום</span>
+            <span className="block">ברמה</span>
+            <span className="block">{olympic}</span>
+          </>
+        )}
+      </span>
+    </h1>
   )
 }
 
@@ -200,19 +207,21 @@ function Intro({ t, className = '' }: { t: Palette; className?: string }) {
 function Buttons({ t, center = false }: { t: Palette; center?: boolean }) {
   return (
     <div className={`mt-5 flex flex-col sm:flex-row gap-3 ${center ? 'sm:justify-center' : ''}`}>
-      <WhatsAppLink className="group inline-flex items-center justify-between gap-4 whitespace-nowrap rounded-md bg-[#25D366] px-6 py-3.5 text-lg font-bold text-white hover:translate-x-[-3px] hover:translate-y-[3px] transition-all">
-        <div className="flex items-center gap-2">
+      <WhatsAppLink
+        className={`group inline-flex items-center justify-between gap-4 whitespace-nowrap rounded-md bg-[#25D366] px-6 py-3.5 text-lg font-extrabold text-[#14161F] ${t.waShadowClass} hover:translate-x-[-3px] hover:translate-y-[3px] transition-all`}
+      >
+        <span className="flex items-center gap-2">
           <MessageCircle className="h-5 w-5" aria-hidden="true" />
           כתבו לנו ב-WhatsApp
-        </div>
+        </span>
         <ArrowLeft className="h-5 w-5 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
       </WhatsAppLink>
-      <CallLink className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border-2 px-6 py-3.5 text-lg font-bold hover:opacity-80 transition-opacity">
+      <CallLink
+        className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border-2 ${t.callBorderClass} px-6 py-3.5 text-lg font-bold hover:opacity-80 transition-opacity`}
+      >
         <Phone className="h-5 w-5" style={{ color: t.fg }} aria-hidden="true" />
-        <div style={{ color: t.fg }}>{seoConfig.contact.phone}</div>
+        <span style={{ color: t.fg }}>{seoConfig.contact.phone}</span>
       </CallLink>
-      {/* Hard offset shadow and border colour follow the theme */}
-      <style>{`.hero-bold-${t.btnShadow.slice(1)} a[href^="https://wa.me"]{box-shadow:5px 5px 0 ${t.btnShadow}} .hero-bold-${t.btnShadow.slice(1)} a[href^="tel:"]{border-color:${t.fg}}`}</style>
     </div>
   )
 }
@@ -258,7 +267,9 @@ function TapedPhoto({ t, aspect = 'aspect-[4/5]', className = '' }: { t: Palette
         <div className="text-xs" style={{ color: 'rgba(243,238,229,0.8)' }}>
           תור פנוי תוך
         </div>
-        <div className={`${display.className} text-[2rem] leading-none`}>24–48 שעות</div>
+        <div className={`${display.className} text-[2rem] leading-none`}>
+          <Range>24–48</Range> שעות
+        </div>
       </div>
     </div>
   )
@@ -266,9 +277,9 @@ function TapedPhoto({ t, aspect = 'aspect-[4/5]', className = '' }: { t: Palette
 
 /** Big numbers instead of a photo. */
 function StatsColumn({ t }: { t: Palette }) {
-  const stats = [
+  const stats: { n: React.ReactNode; l: string; star?: boolean }[] = [
     { n: GOOGLE_RATING_DISPLAY, l: 'דירוג המטופלים בגוגל', star: true },
-    { n: '24–48', l: 'שעות עד תור פנוי' },
+    { n: <Range>24–48</Range>, l: 'שעות עד תור פנוי' },
     { n: '5000+', l: 'מטופלים בקליניקה' },
   ]
   return (
@@ -298,19 +309,19 @@ function StatsColumn({ t }: { t: Palette }) {
 export function HeroBold({ theme = 'paper', layout = 'split' }: { theme?: BoldTheme; layout?: BoldLayout } = {}) {
   const t = THEMES[theme]
   return (
-    <section className={`relative overflow-hidden hero-bold-${t.btnShadow.slice(1)}`} style={{ background: t.bg }}>
+    <section className="relative overflow-hidden" style={{ background: t.bg }}>
       <div
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 hidden sm:block"
         style={{ backgroundImage: PAPER_GRAIN, mixBlendMode: t.grainBlend, opacity: t.grainOpacity }}
         aria-hidden="true"
       />
-      <div className="container mx-auto px-5 relative pt-5 sm:pt-10 lg:pt-14">
+      <div className={`container mx-auto px-5 relative ${layout === 'poster' ? 'pt-3' : 'pt-5'} sm:pt-10 lg:pt-14`}>
         {layout === 'split' && (
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-center">
             <div>
-              <TagRow t={t} />
-              <Headline t={t} size="text-[4.5rem] sm:text-[7rem] lg:text-[9rem]" />
-              <Intro t={t} className="mt-5" />
+              <Headline t={t} fontSize="clamp(4.5rem, 14vw, 9rem)" />
+              <AddressRow t={t} />
+              <Intro t={t} className="mt-4" />
               <Buttons t={t} />
               <Steps t={t} />
             </div>
@@ -320,17 +331,18 @@ export function HeroBold({ theme = 'paper', layout = 'split' }: { theme?: BoldTh
 
         {layout === 'poster' && (
           <div>
-            <TagRow t={t} center />
             <div className="text-center">
-              <Headline t={t} size="text-[4.6rem] sm:text-[7.5rem] lg:text-[10rem]" inline />
+              <Headline t={t} fontSize="clamp(4.4rem, 15vw, 10rem)" inline center />
+              <AddressRow t={t} center />
             </div>
-            <div className="mt-6 grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-8 lg:gap-14 items-center">
-              <div className="order-2 lg:order-1">
+            {/* Phones: text and buttons first so WhatsApp is on the first screen, photo after */}
+            <div className="mt-5 lg:mt-6 grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-6 lg:gap-14 items-center">
+              <div>
                 <Intro t={t} />
                 <Buttons t={t} />
                 <Steps t={t} />
               </div>
-              <TapedPhoto t={t} aspect="aspect-[16/11]" className="order-1 lg:order-2 mx-auto w-[92%] lg:w-full" />
+              <TapedPhoto t={t} aspect="aspect-[16/10] sm:aspect-[16/11]" className="mx-auto w-[92%] lg:w-full" />
             </div>
           </div>
         )}
@@ -338,9 +350,9 @@ export function HeroBold({ theme = 'paper', layout = 'split' }: { theme?: BoldTh
         {layout === 'stats' && (
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-16 items-center">
             <div>
-              <TagRow t={t} />
-              <Headline t={t} size="text-[4.5rem] sm:text-[7rem] lg:text-[9rem]" />
-              <Intro t={t} className="mt-5" />
+              <Headline t={t} fontSize="clamp(4.5rem, 14vw, 9rem)" />
+              <AddressRow t={t} />
+              <Intro t={t} className="mt-4" />
               <Buttons t={t} />
             </div>
             <StatsColumn t={t} />

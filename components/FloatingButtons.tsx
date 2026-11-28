@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { gtag } from './GoogleAnalytics'
 import { seoConfig, getContactPhoneTel } from '@/config/seo.config'
 
@@ -8,6 +10,21 @@ export default function FloatingButtons() {
   const phoneTel = getContactPhoneTel()
   const whatsappNumber = '972508838982'
   const whatsappMessage = encodeURIComponent('שלום, אני מעוניין/ת לקבוע תור')
+
+  // On the homepage the hero already shows WhatsApp and phone buttons, so the floating
+  // ones appear only after the visitor scrolls past it. Other pages are unchanged.
+  const pathname = usePathname()
+  const isHome = pathname === '/'
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    if (!isHome) return
+    const onScroll = () => setScrolled(window.scrollY > 400)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [isHome])
+  const hidden = isHome && !scrolled
+  const visibility = hidden ? ' invisible opacity-0 translate-y-4 pointer-events-none' : ''
 
   const handleWhatsAppClick = () => {
     gtag.event('whatsapp_click', 'engagement', 'floating_button')
@@ -21,7 +38,9 @@ export default function FloatingButtons() {
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleWhatsAppClick}
-        className="floating-cta fixed bottom-6 right-6 z-[10000] bg-[#25D366] hover:bg-[#20BA5A] text-white p-4 sm:p-5 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center group"
+        className={`floating-cta fixed bottom-6 right-6 z-[10000] bg-[#25D366] hover:bg-[#20BA5A] text-white p-4 sm:p-5 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center group${visibility}`}
+        aria-hidden={hidden || undefined}
+        tabIndex={hidden ? -1 : undefined}
         aria-label="שלח הודעת WhatsApp"
       >
         <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -34,7 +53,9 @@ export default function FloatingButtons() {
       <a
         href={`tel:${phoneTel}`}
         onClick={() => gtag.clickToCall(phoneNumber)}
-        className="floating-cta fixed bottom-6 left-6 z-[10000] bg-[#2080C0] hover:bg-[#004080] text-white p-4 sm:p-5 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center group"
+        className={`floating-cta fixed bottom-6 left-6 z-[10000] bg-[#2080C0] hover:bg-[#004080] text-white p-4 sm:p-5 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center group${visibility}`}
+        aria-hidden={hidden || undefined}
+        tabIndex={hidden ? -1 : undefined}
         aria-label={`התקשר אלינו: ${phoneNumber}`}
       >
         <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

@@ -31,10 +31,10 @@ export const metadata: Metadata = {
     url: 'https://physio-plus.co.il',
     images: [
       {
-        url: 'https://physio-plus.co.il/images/logo/clinic-logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'פיזיותרפיה.פלוס - פיזיותרפיסט פרטי באשדוד',
+        url: 'https://physio-plus.co.il/images/blog/post-surgery-physiotherapy.png',
+        width: 2816,
+        height: 1536,
+        alt: 'פיזיותרפיסטית מלווה מטופל בתרגול שיקומי - פיזיותרפיה.פלוס, מכון פיזיותרפיה פרטי באשדוד',
       },
     ],
   },

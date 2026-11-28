@@ -38,7 +38,7 @@ export function BoldSection({
     <section id={id} className={`relative overflow-hidden py-14 sm:py-20 ${className}`} style={{ background: s.bg }}>
       {surface !== 'ink' && (
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.16] mix-blend-multiply"
+          className="pointer-events-none absolute inset-0 hidden sm:block opacity-[0.16] mix-blend-multiply"
           style={{ backgroundImage: PAPER_GRAIN }}
           aria-hidden="true"
         />

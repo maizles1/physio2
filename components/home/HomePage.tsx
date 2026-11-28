@@ -6,7 +6,9 @@ import { ImageSkeleton } from '@/components/LoadingSkeleton'
 import { HeroBold } from '@/components/home/HeroConcepts'
 import { BoldAbout, BoldContact, BoldFAQ, BoldInsurance, BoldPainPicker, BoldReviews } from '@/components/home/BoldSections'
 
-const BoldVideos = dynamic(() => import('@/components/home/BoldVideos'))
+const BoldVideos = dynamic(() => import('@/components/home/BoldVideos'), {
+  loading: () => <section className="min-h-[640px] sm:min-h-[600px]" style={{ background: '#14161F' }} aria-hidden="true" />,
+})
 
 // Lazy load heavy components below the fold
 const VideosSection = dynamic(() => import('@/components/VideosSection'), {

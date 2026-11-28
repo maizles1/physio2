@@ -24,7 +24,8 @@ const videos = [...videosConfig]
   .map((v) => ({ ...v, id: getVideoId(v.youtubeUrl) }))
   .filter((v): v is typeof v & { id: string } => !!v.id && v.id !== 'PLACEHOLDER')
 
-const videoSchemas = videos.map((v) => ({
+// Google requires a real upload date for VideoObject; videos without one are left out rather than given a made-up date.
+const videoSchemas = videos.filter((v) => !!v.uploadDate).map((v) => ({
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
   name: v.title,
@@ -32,6 +33,7 @@ const videoSchemas = videos.map((v) => ({
   thumbnailUrl: `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`,
   contentUrl: `https://www.youtube.com/watch?v=${v.id}`,
   embedUrl: `https://www.youtube.com/embed/${v.id}`,
+  uploadDate: v.uploadDate,
   publisher: { '@type': 'Organization', '@id': 'https://physio-plus.co.il/#organization', name: 'פיזיותרפיה.פלוס' },
 }))
 
@@ -45,7 +47,7 @@ export default function BoldVideos() {
       ))}
       <BoldSection surface="ink">
         <BoldHeading surface="ink" index="05" label="סרטונים" title="תראו בעצמכם" />
-        <ul className="-mx-5 px-5 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 list-none m-0! lg:mx-0 lg:px-0 lg:grid lg:grid-cols-4 lg:overflow-visible">
+        <ul className="-mx-5 px-5 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 list-none my-0! lg:mx-0 lg:px-0 lg:grid lg:grid-cols-4 lg:overflow-visible">
           {videos.map((v, i) => (
             <li key={v.id} className="m-0! w-[70%] sm:w-[42%] lg:w-auto flex-shrink-0 snap-start">
               <button
